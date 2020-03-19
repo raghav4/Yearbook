@@ -1,50 +1,135 @@
 import React from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import { MDBInput } from 'mdbreact';
 
 const UserInfo = () => {
   return (
     <>
-      <div className="row">
-        <div className="col">
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-6 mt-3">
           <div class="jumbotron">
-            <h2 class="h1-responsive">Hello, Raghav!</h2>
-            <p class="alert alert-success text-md-justify">
+            <h2 class="h1-responsive">Hello, Raghav! 👋🏻</h2>
+            <p class="alert alert-success text-justify-center">
               Please update some of your information which will be listed on
               your profile and yearbook after the compilation is done. <br />
               Also, Please add those contact details where people can reach out
-              to you in future.
+              to you in future. Good Luck! 😄
             </p>
             <form>
               <div className="form-group">
                 <div className="row">
                   <div className="col">
-                    <label htmlFor="formGroupExampleInput">First Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="formGroupExampleInput"
-                    />
-                  </div>
-                  <div className="col">
-                    <label htmlFor="formGroupExampleInput">Default input</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="formGroupExampleInput"
-                    />
+                    <form>
+                      <div class="form-row">
+                        <div class="col-md-12">
+                          <div class="md-form form-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="inputAddress2MD"
+                              placeholder="👧🏻/👦🏻 Your Name"
+                            />
+                            <label for="inputAddress2MD"></label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="md-form form-group">
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="inputEmail4MD"
+                              placeholder="📧 Email"
+                            />
+                            <label for="inputEmail4MD"></label>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="md-form form-group">
+                            <input
+                              type="tel"
+                              class="form-control"
+                              id="inputPassword4MD"
+                              placeholder="📱 Phone Number"
+                            />
+                            <label for="inputPassword4MD">{/*Password*/}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="md-form form-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="inputAddressMD"
+                              placeholder="linkedin url"
+                            />
+                            <label for="inputAddressMD">{/*Address*/}</label>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="md-form form-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="inputAddressMD"
+                              placeholder="facebook url"
+                            />
+                            <label for="inputAddressMD">{/*Address*/}</label>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="md-form form-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="inputAddress2MD"
+                              placeholder="Apartment, studio, or floor"
+                            />
+                            <label for="inputAddress2MD"></label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="md-form form-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="inputCityMD"
+                              placeholder="New York City"
+                            />
+                            <label for="inputCityMD"></label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="md-form form-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="inputZipMD"
+                              placeholder="11206-1117"
+                            />
+                            <label for="inputZipMD"></label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="md-form form-group">
+                        <MDBInput label="Example label" outline />
+                        <textarea
+                          className="form-control pl-2"
+                          id="exampleFormControlTextarea1"
+                          rows="5"
+                          outline
+                        />
+                        <label for="inputAddress2MD"></label>
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-md">
+                        Sign in
+                      </button>
+                    </form>
                   </div>
                 </div>
-                <h2 className="h2-responsive">Answer about yourself!</h2>
-                <label htmlFor="exampleFormControlTextarea1">
-                  <h4 class="h4-responsive">
-                    What are your plans after graduating?
-                  </h4>
-                </label>
-                <textarea
-                  className="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="5"
-                />
               </div>
             </form>
           </div>

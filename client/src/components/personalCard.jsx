@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PhoneIcon from '@material-ui/icons/Phone';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import FacebookIcon from '@material-ui/icons/Facebook';
 class PersonalCard extends Component {
   state = {};
   render() {
@@ -30,24 +34,36 @@ class PersonalCard extends Component {
                   Voluptatibus, ex, recusandae. Facere modi sunt, quod
                   quibusdam.
                 </p>
-                <a
-                  type="button "
-                  className="button btn-peach-gradient btn-small btn-fb"
-                >
-                  <i className="fab fa-facebook-f"></i>
+                {/* <div class="card">
+                  <div class="card-body bg-info text-white"> */}
+                <a type="button" className="button float-center">
+                  {' '}
+                  <PhoneIcon />
+                  +912372947497
                 </a>
-                <a type="button" className="btn-floating btn-small btn-tw">
-                  <i className="fab fa-twitter"></i>
+                <br />
+                <a type="button" className="button">
+                  {' '}
+                  <WhatsAppIcon />
+                  +919999817289
                 </a>
-                <a
-                  type="button"
-                  className="btn-floating btn-small btn-dribbble"
-                >
-                  <i className="fab fa-dribbble"></i>
+                <br />
+                <a type="button" className="button float-center">
+                  {' '}
+                  <MailOutlineIcon />
+                  raghavsyt@gmail.com
+                </a>
+                <br />
+                <a type="button" className="button float-center">
+                  {' '}
+                  <FacebookIcon />
+                  raghavsyt@gmail.com
                 </a>
               </div>
             </div>
           </div>
+          {/* </div>
+          </div> */}
         </div>
       </React.Fragment>
     );
