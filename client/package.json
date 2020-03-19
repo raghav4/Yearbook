@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-free": "^5.12.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^10.0.1",
     "@testing-library/user-event": "^7.1.2",
     "font-awesome": "^4.7.0",
     "materialize-css": "^1.0.0",
