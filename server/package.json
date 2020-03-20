@@ -11,6 +11,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "googleapis": "^39.2.0",
+    "joi-objectid": "^3.0.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.3",
     "morgan": "^1.9.1",
@@ -18,9 +19,16 @@
     "winston": "^3.2.1",
     "winston-mongodb": "^5.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon"
   },
   "keywords": [],
   "author": "",

@@ -19,25 +19,20 @@ const userSchema = new mongoose.Schema({
   },
   whatsappNo: {
     type: String,
-    default: '+919876543210',
     min: 10,
   },
   facebook: {
     type: String,
-    default: 'https://facebook.com/',
   },
   linkedin: {
     type: String,
-    default: 'https://linkedin.com/in/',
   },
   phoneNumber: {
     type: String,
-    default: '+919876543210',
     min: 10,
   },
   email: {
     type: String,
-    default: 'youremail@email.com',
   },
 });
 
@@ -59,5 +54,22 @@ function validateUser(user) {
   return schema.validate(user);
 }
 
+function validateUserPut(user) {
+  const schema = Joi.object({
+    name: Joi.string(),
+    department: Joi.string(),
+    section: Joi.string(),
+    whatsappNo: Joi.string().min(10),
+    facebook: Joi.string().uri(),
+    linkedin: Joi.string().uri(),
+    phoneNumber: Joi.string().min(10),
+    email: Joi.string().email(),
+    dp: Joi.string().uri(),
+  });
+
+  return schema.validate(user);
+}
+
 exports.User = User;
 exports.validate = validateUser;
+exports.putValidate = validateUserPut;

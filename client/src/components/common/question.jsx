@@ -6,8 +6,8 @@ class Question extends Component {
       <>
         <div className="row">
           <div className="col">
-            <div class="card bg-primary">
-              <div class="card-body text-left text-white mb-2">
+            <div className="card bg-primary">
+              <div className="card-body text-left text-white mb-2">
                 <b>What are your best memories in college</b>
                 <br />
                 This is some text within a panel body.
@@ -17,8 +17,8 @@ class Question extends Component {
         </div>
         {/* <div className="row">
           <div className="col">
-            <div class="card">
-              <div class="card-body text-left">
+            <div className="card">
+              <div className="card-body text-left">
                 <b>What are your best memories in college?</b>
                 <br />
                 This is some text within a panel body.

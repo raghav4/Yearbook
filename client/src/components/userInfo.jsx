@@ -4,11 +4,11 @@ import { MDBInput } from 'mdbreact';
 const UserInfo = () => {
   return (
     <>
-      <div className="row d-flex justify-content-center">
+      <div className="d-flex justify-content-center">
         <div className="col-md-6 mt-3">
-          <div class="jumbotron">
-            <h2 class="h1-responsive">Hello, Raghav! 👋🏻</h2>
-            <p class="alert alert-success text-justify-center">
+          <div className="jumbotron ml-3 mr-3">
+            <h2 className="h1-responsive text-center">Hello, Raghav! 👋🏻</h2>
+            <p className="alert alert-success text-justify-center">
               Please update some of your information which will be listed on
               your profile and yearbook after the compilation is done. <br />
               Also, Please add those contact details where people can reach out
@@ -19,23 +19,23 @@ const UserInfo = () => {
                 <div className="row">
                   <div className="col">
                     <form>
-                      <div class="form-row">
-                        <div class="col-md-12">
-                          <div class="md-form form-group">
+                      <div className="form-row">
+                        <div className="col-md-12">
+                          <div className="md-form form-group">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="inputAddress2MD"
                               placeholder="👧🏻/👦🏻 Your Name"
                             />
                             <label for="inputAddress2MD"></label>
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="md-form form-group">
+                        <div className="col-md-6">
+                          <div className="md-form form-group">
                             <input
                               type="email"
-                              class="form-control"
+                              className="form-control"
                               id="inputEmail4MD"
                               placeholder="📧 Email"
                             />
@@ -43,11 +43,11 @@ const UserInfo = () => {
                           </div>
                         </div>
 
-                        <div class="col-md-6">
-                          <div class="md-form form-group">
+                        <div className="col-md-6">
+                          <div className="md-form form-group">
                             <input
                               type="tel"
-                              class="form-control"
+                              className="form-control"
                               id="inputPassword4MD"
                               placeholder="📱 Phone Number"
                             />
@@ -55,34 +55,34 @@ const UserInfo = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="md-form form-group">
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="md-form form-group">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="inputAddressMD"
                               placeholder="linkedin url"
                             />
                             <label for="inputAddressMD">{/*Address*/}</label>
                           </div>
                         </div>
-                        <div class="col-md-12">
-                          <div class="md-form form-group">
+                        <div className="col-md-12">
+                          <div className="md-form form-group">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="inputAddressMD"
                               placeholder="facebook url"
                             />
                             <label for="inputAddressMD">{/*Address*/}</label>
                           </div>
                         </div>
-                        <div class="col-md-12">
-                          <div class="md-form form-group">
+                        <div className="col-md-12">
+                          <div className="md-form form-group">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="inputAddress2MD"
                               placeholder="Apartment, studio, or floor"
                             />
@@ -90,23 +90,23 @@ const UserInfo = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="form-row">
-                        <div class="col-md-6">
-                          <div class="md-form form-group">
+                      <div className="form-row">
+                        <div className="col-md-6">
+                          <div className="md-form form-group">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="inputCityMD"
                               placeholder="New York City"
                             />
                             <label for="inputCityMD"></label>
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="md-form form-group">
+                        <div className="col-md-6">
+                          <div className="md-form form-group">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="inputZipMD"
                               placeholder="11206-1117"
                             />
@@ -114,7 +114,7 @@ const UserInfo = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="md-form form-group">
+                      <div className="md-form form-group">
                         <MDBInput label="Example label" outline />
                         <textarea
                           className="form-control pl-2"
@@ -124,7 +124,7 @@ const UserInfo = () => {
                         />
                         <label for="inputAddress2MD"></label>
                       </div>
-                      <button type="submit" class="btn btn-primary btn-md">
+                      <button type="submit" className="btn btn-primary btn-md">
                         Sign in
                       </button>
                     </form>

@@ -1,10 +1,10 @@
-const morgan = require('morgan');
-const winston = require('winston');
-require('winston-mongodb');
-require('express-async-errors');
+const morgan = require('morgan')
+const winston = require('winston')
+require('winston-mongodb')
+require('express-async-errors')
 
-module.exports = function(app) {
-  app.use(morgan('tiny'));
+module.exports = function (app) {
+  app.use(morgan('tiny'))
   // winston.handleExceptions(
   //   new winston.transports.Console({
   //     colorize: true,
@@ -25,4 +25,4 @@ module.exports = function(app) {
   //   db: 'mongodb://localhost/yearbook',
   //   level: 'info',
   // });
-};
+}

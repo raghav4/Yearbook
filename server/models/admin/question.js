@@ -4,8 +4,6 @@ const Joi = require('@hapi/joi');
 const questionSchema = new mongoose.Schema({
   question: {
     type: String,
-    min: 2,
-    required: true,
   },
 });
 
