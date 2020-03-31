@@ -15,11 +15,11 @@ function App() {
     <div className="App">
       <Navbar />
       {/* <LeaderBoard /> */}
-      <CreateUser />
+      {/* <CreateUser /> */}
       {/* <Admin /> */}
       {/* <PollsList /> */}
       {/* <Profile /> */}
-      {/* <UserInfo /> */}
+      <UserInfo />
     </div>
   );
 }
