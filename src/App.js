@@ -8,15 +8,15 @@ import UserInfo from './components/userInfo';
 import Admin from './components/admin/admin';
 import PollsList from './components/listPolls';
 import CreateUser from './components/admin/user';
-import LeaderBoard from './components/leaderboard';
+import PeopleCards from './components/peopleCards';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      {/* <LeaderBoard /> */}
+      <PeopleCards />
       {/* <CreateUser /> */}
-      <Admin />
+      {/* <Admin /> */}
       {/* <PollsList /> */}
       {/* <Profile /> */}
       {/* <UserInfo /> */}
