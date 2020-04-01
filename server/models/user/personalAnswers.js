@@ -5,10 +5,12 @@ Joi.objectId = require('joi-objectid')(Joi);
 const answerSchema = new mongoose.Schema({
   questionId: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'Question',
     required: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   answer: {

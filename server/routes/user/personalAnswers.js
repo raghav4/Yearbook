@@ -8,7 +8,7 @@ router.get('/:id', async (req, res) => {
   // Get all the answers with the given user id,
   const answers = await Answer.find({
     userId: req.params.id,
-  });
+  }).populate('questionId userId');
   return res.status(200).send(answers);
 });
 
