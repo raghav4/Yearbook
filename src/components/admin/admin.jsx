@@ -1,12 +1,14 @@
+/* eslint-disable arrow-parens */
 import React, { Component } from 'react';
 import { MDBBtn } from 'mdbreact';
-import ListQuestions from './listQuestions';
 import FlipMove from 'react-flip-move';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { Alert } from '@material-ui/lab';
+import ListQuestions from './listQuestions';
 
 class Admin extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     questions: [
       {
@@ -33,9 +35,8 @@ class Admin extends Component {
   };
 
   handleAdd = questionData => {
-    questionData = questionData.trim();
     let inputValidationAlert;
-    if (!questionData) {
+    if (!questionData.trim()) {
       inputValidationAlert = {
         apply: true,
         message: 'Nothing to add',
@@ -64,18 +65,19 @@ class Admin extends Component {
   handleChange = e => {
     this.setState({ inputValue: e.target.value });
   };
-  handleKeyPress = e => {
-    const code = e.keyCode || e.which;
-    if (code === 13) {
-      this.handleAdd(e.target.value);
-      return;
-    }
-  };
+
+  // handleKeyPress = e => {
+  //   const code = e.keyCode || e.which;
+  //   if (code === 13) {
+  //     this.handleAdd(e.target.value);
+  //   }
+  // };
+
   render() {
+    const { questions, inputValue, inputValidationAlert } = this.state;
     return (
       <div className="mb-4">
         <h3 className="h3-responsive text-center mt-4 mb-3">User Questions</h3>
-
         <div className=" d-flex justify-content-center">
           <div className="col-md-6">
             <div className="card ml-2 mr-2 mb-3">
@@ -89,15 +91,15 @@ class Admin extends Component {
                     onChange={this.handleChange}
                     // onKeyPress={this.handleKeyPress.bind(this)}
                   />
-                  {this.state.inputValidationAlert.apply && (
+                  {inputValidationAlert.apply && (
                     <Alert
                       severity="error"
                       style={{ fontFamily: 'Sofia Pro Medium' }}
                     >
-                      {this.state.inputValidationAlert.message}
+                      {inputValidationAlert.message}
                     </Alert>
                   )}
-                  <div class="invalid-feedback">
+                  <div className="invalid-feedback">
                     Please provide a valid city.
                   </div>
                 </div>
@@ -105,18 +107,18 @@ class Admin extends Component {
                   <MDBBtn
                     className="float-right"
                     gradient="green"
-                    onClick={() => this.handleAdd(this.state.inputValue)}
+                    onClick={() => this.handleAdd(inputValue)}
                   >
                     Add Question
                   </MDBBtn>
                 </div>
               </div>
-              {/* <label for="form1">Example label</label> */}
             </div>
           </div>
         </div>
+
         <FlipMove>
-          {this.state.questions.map(question => (
+          {questions.map(question => (
             <ListQuestions
               key={question.id}
               onDelete={this.handleDelete}

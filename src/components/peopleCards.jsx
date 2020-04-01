@@ -1,124 +1,132 @@
-import React from 'react';
+/* eslint-disable arrow-parens */
+import React, { Component } from 'react';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FlipMove from 'react-flip-move';
+import Select from './common/select';
+import PeopleCard from './common/peopleCard';
 
-const PeopleCards = () => {
-  return (
-    <>
-      <div className="ml-5 mr-5 mt-5 mb-5 active-cyan-3 active-cyan-4">
-        {/* <p className="p-responsive mt-3 mb-2 text-left">
-          <SearchIcon className="mr-1" />
-          Search People
-        </p> */}
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Search People"
-          aria-label="Search"
-        />
-        {/* <p className="p-responsive mt-3 mb-2 text-left">
+class PeopleCards extends Component {
+  // eslint-disable-next-line react/state-in-constructor
+  state = {
+    // eslint-disable-next-line react/no-unused-state
+    options: [
+      { id: 1, name: 'CSE' },
+      { id: 2, name: 'IT' },
+      { id: 3, name: 'MAE' },
+      { id: 4, name: 'ECE' },
+      { id: 5, name: 'EEE' },
+    ],
+    sections: [{ name: 'A' }, { name: 'B' }, { name: 'C' }],
+    // eslint-disable-next-line react/no-unused-state
+    persons: [
+      {
+        name: 'Mike',
+        dp:
+          'https://www.usanetwork.com/sites/usanetwork/files/suits_cast_mike.jpg',
+        bio: "Hello I'm Mike, I work at Pearson Spector Litt LLC",
+        id: 1,
+      },
+      {
+        name: 'Harvey Specter',
+        dp:
+          'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
+        bio: "I don't get lucky, I make my own luck",
+        id: 2,
+      },
+      {
+        name: 'Rachel Zane',
+        dp:
+          'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
+        bio: 'Entire World knows about me!!',
+        id: 3,
+      },
+      {
+        name: 'Donna Paulsen',
+        dp:
+          'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_donna_s8.jpg',
+        bio:
+          "I'm sorry I don't have a photographic memory but my brain is too busy being awesome.",
+        id: 4,
+      },
+      {
+        name: 'Louis Litt',
+        dp:
+          'https://pmctvline2.files.wordpress.com/2020/02/rick-hoffman-billions.jpg?w=620',
+        bio: "“It's not a scarf, it's one of the world's finest pashminas!”",
+        id: 5,
+      },
+    ],
+    people: [],
+  };
+
+  UNSAFE_componentWillMount() {
+    this.setState({ people: this.state.persons });
+  }
+
+  filterPeople = e => {
+    let updatedPeople = this.state.persons;
+
+    updatedPeople = updatedPeople.filter(
+      person =>
+        person.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+    );
+    this.setState({ people: updatedPeople });
+  };
+
+  render() {
+    const { options, sections, persons, people } = this.state;
+
+    return (
+      <>
+        <div className="ml-5 mr-5 mt-5 mb-5 active-cyan-3 active-cyan-4">
+          <Input
+            className="form-control"
+            type="text"
+            placeholder="Search People"
+            aria-label="Search"
+            onChange={this.filterPeople}
+            style={{ fontFamily: 'Sofia Pro Medium' }}
+            startAdornment={
+              // eslint-disable-next-line react/jsx-wrap-multilines
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            }
+          />
+          {/* <p className="p-responsive mt-3 mb-2 text-left">
           <FilterListIcon className="mr-1" />
           Filter People
         </p> */}
-        <div className="row mt-3 mb-2">
-          <div className="col">
-            {/* TODO: Remove the duplicacy of the code */}
-            <select className="custom-select custom-select-md">
-              <option value="" disabled selected>
-                Choose the Department
-              </option>
-              <option value="1">ALL</option>
-              <option value="2">CSE</option>
-              <option value="3">Option 3</option>
-            </select>
-          </div>
-          <div className="col">
-            <select className="custom-select custom-select-md">
-              <option value="" disabled selected>
-                Choose the Section
-              </option>
-              <option value="1">ALL</option>
-              <option value="2">A</option>
-              <option value="3">B</option>
-              <option value="3">C</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div className="card-deck ml-4 mr-4 mt-5 mb-5">
-        <div className="card mb-4">
-          <div className="view overlay">
-            <a href="#!">
-              <div className="mask rgba-white-slight" />
-            </a>
-          </div>
-          <div className="card-body">
-            <h4 className="card-title text-center">John Doe</h4>
-            <div className="view overlay mb-3">
-              {/* <img
-                className="rounded-circle col-md-6"
-                alt="50x50"
-                src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
-                data-holder-rendered="true"
-              /> */}
-              <img
-                className="card-img-top img-fluid z-depth-1"
-                src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                alt="Card  cap"
-              />
-              {/* <a href="#!">
-                <div className="mask rgba-white-slight"></div>
-              </a> */}
+          <div className="row mt-3 mb-2">
+            <div className="col">
+              <Select selectTitle="Choose the Department" options={options} />
             </div>
-            <p className="card-text">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut,
-              quibusdam. Illum, earum nostrum animi minus eos suscipit tempore
-              similique accusantium consequatur beatae corrupti voluptatum,
-              consectetur maxime provident alias culpa quia.
-            </p>
-            {/* <button type="button" className="btn btn-light-blue btn-md">
-              Read more
-            </button> */}
+            <div className="col">
+              <Select selectTitle="Choose the Section" options={sections} />
+            </div>
           </div>
         </div>
-        <div className="card mb-4">
-          <div className="view overlay">
-            <a href="#!">
-              <div className="mask rgba-white-slight" />
-            </a>
-          </div>
-          <div className="card-body">
-            <h4 className="card-title">Card title</h4>
-            <p className="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <button type="button" className="btn btn-light-blue btn-md">
-              Read more
-            </button>
-          </div>
+        <div className="card-deck ml-4 mr-4 mt-5 mb-5 row row-cols-1 row-cols-md-3">
+          {/* <FlipMove> */}
+          {/* Card Deck!! */}
+          {people.map(person => (
+            <div className="col mb-4" key={person.id}>
+              <PeopleCard
+                key={person.id}
+                personName={person.name}
+                personImageUrl={person.dp}
+                personBio={person.bio}
+              />
+            </div>
+          ))}
+          {/* </FlipMove> */}
         </div>
-        <div className="card mb-4">
-          <div className="view overlay">
-            <a href="#!">
-              <div className="mask rgba-white-slight" />
-            </a>
-          </div>
-
-          <div className="card-body">
-            <h4 className="card-title">Card title</h4>
-            <p className="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <button type="button" className="btn btn-light-blue btn-md">
-              Read more
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+      </>
+    );
+  }
+}
 
 export default PeopleCards;
