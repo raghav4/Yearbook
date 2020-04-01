@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import Skeleton from '@material-ui/lab/Skeleton';
+
+// import EditIcon from '@material-ui/icons/Edit';
 class ListQuestions extends Component {
   state = {};
 
@@ -11,13 +13,23 @@ class ListQuestions extends Component {
           <div className="col-md-6">
             <div className="card bg-white ml-2 mr-2 mb-3">
               <div className="card-body text-left">
-                You were the first person I met in the college, we have had a
-                good time together. Sahi banda he tu, chill he, chidh jaldi
-                jaata hai 😜
+                {this.props.question.questionData || (
+                  <Skeleton variant="text" animation="wave" />
+                )}
+                {/* <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" /> */}
                 <div className="float-right">
-                  <a type="button">
+                  <button
+                    style={{
+                      border: 'none',
+                      background: 'none',
+                      padding: '0',
+                      outline: 'none',
+                    }}
+                    onClick={() => this.props.onDelete(this.props.question.id)}
+                  >
                     <DeleteIcon />
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

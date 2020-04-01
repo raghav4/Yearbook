@@ -16,10 +16,10 @@ function App() {
       <Navbar />
       {/* <LeaderBoard /> */}
       {/* <CreateUser /> */}
-      {/* <Admin /> */}
+      <Admin />
       {/* <PollsList /> */}
       {/* <Profile /> */}
-      <UserInfo />
+      {/* <UserInfo /> */}
     </div>
   );
 }
