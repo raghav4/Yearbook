@@ -64,7 +64,13 @@ class Admin extends Component {
   handleChange = e => {
     this.setState({ inputValue: e.target.value });
   };
-
+  handleKeyPress = e => {
+    const code = e.keyCode || e.which;
+    if (code === 13) {
+      this.handleAdd(e.target.value);
+      return;
+    }
+  };
   render() {
     return (
       <div className="mb-4">
@@ -81,6 +87,7 @@ class Admin extends Component {
                     id="form1"
                     className="form-control"
                     onChange={this.handleChange}
+                    // onKeyPress={this.handleKeyPress.bind(this)}
                   />
                   {this.state.inputValidationAlert.apply && (
                     <Alert
