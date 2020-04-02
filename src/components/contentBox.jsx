@@ -1,37 +1,36 @@
 import React from 'react';
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardHeader,
+  MDBBtn,
+  MDBContainer,
+} from 'mdbreact';
 import FlipMove from 'react-flip-move';
 import Question from '../components/common/question';
 
 const Box = () => {
   return (
-    <React.Fragment>
-      <div className="">
-        <div className="col">
-          {/* <div className="jumbotron"> */}
-          {/* <h2 className="h1-responsive">Hello, world!</h2> */}
-          <h3 className="h3-responsive text-left">
-            {' '}
-            <i className="fas fa-pen-square" /> &nbsp;Answers about yourself
-          </h3>
-          {/* <hr className="my-1" /> */}
-          <FlipMove>
-            <Question />
-            <Question />
-            <Question />
-          </FlipMove>
-          <br />
-          <h3 className="h3-responsive text-left">
-            <i className="fa fa-list-alt" />
-            &nbsp; What Others have written for you
-          </h3>
-          {/* <hr className="my-1" /> */}
-          <Question />
-          <br />
-          <Question />
+    <>
+      <div className="d-flex justify-content-center">
+        <div className="mt-3 mr-5 mb-3 ml-5">
+          <MDBContainer>
+            <MDBCard className="mt-3 mb-3">
+              <MDBCardHeader color="elegant-color lighten-1">
+                Q. What is that one thing you'll miss the most?
+              </MDBCardHeader>
+              <MDBCardBody>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quisquam voluptatum
+                eveniet quis. Voluptas eius, laudantium reprehenderit repellendus dolor praesentium
+                non illo ab dignissimos sapiente doloribus odit neque, consectetur dolore?
+              </MDBCardBody>
+            </MDBCard>
+          </MDBContainer>
         </div>
-        {/* </div> */}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -20,8 +20,6 @@ const PollsList = () => {
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
               </MDBCardHeader>
               <MDBCardBody>
-                {/* <MDBCardTitle>Special title treatment</MDBCardTitle> */}
-                {/* <MDBCardText> */}
                 <div className="md-form active-pink active-pink-2 mb-3 mt-0">
                   <input
                     className="form-control"
@@ -37,10 +35,7 @@ const PollsList = () => {
                     id="materialGroupExample1"
                     name="groupOfMaterialRadios"
                   />
-                  <label
-                    className="form-check-label"
-                    for="materialGroupExample1"
-                  >
+                  <label className="form-check-label" for="materialGroupExample1">
                     <p>Inverness McKenzie</p>
                   </label>
                 </div>
@@ -51,10 +46,7 @@ const PollsList = () => {
                     id="materialGroupExample2"
                     name="groupOfMaterialRadios"
                   />
-                  <label
-                    className="form-check-label"
-                    for="materialGroupExample2"
-                  >
+                  <label className="form-check-label" for="materialGroupExample2">
                     <p>Dominic L. Ement</p>
                   </label>
                 </div>
@@ -65,10 +57,7 @@ const PollsList = () => {
                     id="materialGroupExample3"
                     name="groupOfMaterialRadios"
                   />
-                  <label
-                    className="form-check-label"
-                    for="materialGroupExample3"
-                  >
+                  <label className="form-check-label" for="materialGroupExample3">
                     <p>Malcolm Function</p>
                   </label>
                 </div>

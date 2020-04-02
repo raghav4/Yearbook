@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from './components/common/navbar';
 import Box from './components/contentBox';
 import Profile from './components/profile';
@@ -12,15 +13,16 @@ import PeopleCards from './components/peopleCards';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Navbar />
-      <PeopleCards />
-      {/* <CreateUser /> */}
-      {/* <Admin /> */}
-      {/* <PollsList /> */}
-      {/* <Profile /> */}
-      {/* <UserInfo /> */}
-    </div>
+      <main className="container">
+        <Switch>
+          <Route path="/write" component={PeopleCards} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/" component={UserInfo} exact />
+        </Switch>
+      </main>
+    </>
   );
 }
 

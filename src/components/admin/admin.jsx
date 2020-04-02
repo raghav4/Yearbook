@@ -34,44 +34,38 @@ class Admin extends Component {
     },
   };
 
-  handleAdd = questionData => {
-    let inputValidationAlert;
-    if (!questionData.trim()) {
-      inputValidationAlert = {
+  handleAdd = (questionData) => {
+    let updatedInputValidation = {
+      apply: false,
+      message: '',
+    };
+    if (questionData.trim() === '') {
+      updatedInputValidation = {
         apply: true,
         message: 'Nothing to add',
       };
-      this.setState({ inputValidationAlert });
-      return;
-    }
-    if (this.state.inputValidationAlert.apply) {
-      inputValidationAlert = {
-        apply: false,
-        message: '',
-      };
+      return this.setState({ inputValidationAlert: updatedInputValidation });
     }
     const questions = [
       ...this.state.questions,
       { id: this.state.questions.length + 1, questionData },
     ];
-    this.setState({ questions, inputValidationAlert });
+    this.setState({ questions, inputValidationAlert: updatedInputValidation, inputValue: '' });
   };
 
-  handleDelete = questionId => {
-    const questions = this.state.questions.filter(q => q.id !== questionId);
+  handleDelete = (questionId) => {
+    const questions = this.state.questions.filter((q) => q.id !== questionId);
     this.setState({ questions });
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ inputValue: e.target.value });
   };
 
-  // handleKeyPress = e => {
-  //   const code = e.keyCode || e.which;
-  //   if (code === 13) {
-  //     this.handleAdd(e.target.value);
-  //   }
-  // };
+  handleKeyPress = (e) => {
+    const code = e.keyCode || e.which;
+    if (code === 13) return this.handleAdd(e.target.value);
+  };
 
   render() {
     const { questions, inputValue, inputValidationAlert } = this.state;
@@ -88,20 +82,16 @@ class Admin extends Component {
                     type="text"
                     id="form1"
                     className="form-control"
+                    value={this.state.inputValue}
                     onChange={this.handleChange}
-                    // onKeyPress={this.handleKeyPress.bind(this)}
+                    onKeyPress={this.handleKeyPress}
                   />
                   {inputValidationAlert.apply && (
-                    <Alert
-                      severity="error"
-                      style={{ fontFamily: 'Sofia Pro Medium' }}
-                    >
+                    <Alert severity="error" style={{ fontFamily: 'Sofia Pro Medium' }}>
                       {inputValidationAlert.message}
                     </Alert>
                   )}
-                  <div className="invalid-feedback">
-                    Please provide a valid city.
-                  </div>
+                  <div className="invalid-feedback">Please provide a valid city.</div>
                 </div>
                 <div className="float-left">
                   <MDBBtn
@@ -118,12 +108,8 @@ class Admin extends Component {
         </div>
 
         <FlipMove>
-          {questions.map(question => (
-            <ListQuestions
-              key={question.id}
-              onDelete={this.handleDelete}
-              question={question}
-            />
+          {questions.map((question) => (
+            <ListQuestions key={question.id} onDelete={this.handleDelete} question={question} />
           ))}
         </FlipMove>
       </div>

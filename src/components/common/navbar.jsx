@@ -1,13 +1,13 @@
 import React from 'react';
-import { LinearProgress } from '@material-ui/core';
+import { NavLink, Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark default-color">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           Yearbook
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -19,10 +19,7 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div
-          className="collapse navbar-collapse"
-          id="navbarSupportedContent-333"
-        >
+        <div className="collapse navbar-collapse" id="navbarSupportedContent-333">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <a className="nav-link" href="#">
@@ -31,9 +28,9 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Write
-              </a>
+              <NavLink className="nav-link" to="/write">
+                Write For Others
+              </NavLink>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
@@ -77,16 +74,10 @@ const Navbar = () => {
                 <i className="fab fa-google-plus-g"></i>
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                id="navbarDropdownMenuLink-333"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
+            <li className="nav-item">
+              <NavLink className="nav-link " to="/profile">
                 <i className="fas fa-user"></i>
-              </a>
+              </NavLink>
               <div
                 className="dropdown-menu dropdown-menu-right dropdown-default"
                 aria-labelledby="navbarDropdownMenuLink-333"
@@ -105,7 +96,6 @@ const Navbar = () => {
           </ul>
         </div>
       </nav>
-      {/* <LinearProgress /> */}
     </>
   );
 };

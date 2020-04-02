@@ -3,12 +3,13 @@ import PersonalCard from './personalCard';
 import Box from './contentBox';
 class Profile extends Component {
   state = {};
+
   render() {
     return (
       <>
-        <PersonalCard />
-        <br />
-        <Box />
+        <div className="row">
+          <Box />
+        </div>
       </>
     );
   }

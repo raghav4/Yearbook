@@ -60,6 +60,8 @@ class PeopleCards extends Component {
       },
     ],
     people: [],
+    modal8: false,
+    modal9: false,
   };
 
   UNSAFE_componentWillMount() {
@@ -74,6 +76,14 @@ class PeopleCards extends Component {
         person.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
     );
     this.setState({ people: updatedPeople });
+  };
+
+  triggerModal = e => {
+    console.log(e.id);
+    // const modalNumber = `Modal ${e}`;
+    // this.setState({
+    //   [modalNumber]: !this.state[modalNumber],
+    // });
   };
 
   render() {
@@ -116,9 +126,11 @@ class PeopleCards extends Component {
             <div className="col mb-4" key={person.id}>
               <PeopleCard
                 key={person.id}
+                person={person}
                 personName={person.name}
                 personImageUrl={person.dp}
                 personBio={person.bio}
+                triggerModal={this.triggerModal}
               />
             </div>
           ))}

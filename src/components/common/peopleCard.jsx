@@ -1,7 +1,13 @@
 import React from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-const PeopleCard = ({ personName, personImageUrl, personBio }) => {
+const PeopleCard = ({
+  personName,
+  personImageUrl,
+  personBio,
+  triggerModal,
+  person,
+}) => {
   return (
     <>
       <div className="card mb-4 card-body">
@@ -23,6 +29,7 @@ const PeopleCard = ({ personName, personImageUrl, personBio }) => {
             />
           )) || <Skeleton variant="rect" width={360} height={118} />}
         </div>
+        <span className="badge badge-primary">CSE B</span>
         <p className="card-text">
           {personBio || (
             <>
@@ -35,6 +42,14 @@ const PeopleCard = ({ personName, personImageUrl, personBio }) => {
             </>
           )}
         </p>
+        <button
+          type="button"
+          className="btn btn-deep-purple"
+          onClick={() => triggerModal(person.id)}
+        >
+          <i className="fas fa-plus-circle mr-2" />
+          Write
+        </button>
       </div>
     </>
   );
