@@ -18,8 +18,8 @@ const Box = () => {
         <div className="mt-3 mr-5 mb-3 ml-5">
           <MDBContainer>
             <MDBCard className="mt-3 mb-3">
-              <MDBCardHeader color="elegant-color lighten-1">
-                Q. What is that one thing you'll miss the most?
+              <MDBCardHeader color="special-color-dark lighten-1">
+                What is that one thing you'll miss the most?
               </MDBCardHeader>
               <MDBCardBody>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quisquam voluptatum

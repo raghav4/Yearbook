@@ -1,103 +1,99 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import {
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBNavLink,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+  MDBIcon,
+} from 'mdbreact';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-  return (
-    <>
-      <nav className="navbar navbar-expand-lg navbar-dark default-color">
-        <Link className="navbar-brand" to="/">
-          Yearbook
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent-333"
-          aria-controls="navbarSupportedContent-333"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent-333">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Home
-                <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/write">
-                Write For Others
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Polls
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                id="navbarDropdownMenuLink-333"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <div
-                className="dropdown-menu dropdown-default"
-                aria-labelledby="navbarDropdownMenuLink-333"
-              >
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </div>
-            </li>
-          </ul>
-          <ul className="navbar-nav ml-auto nav-flex-icons">
-            <li className="nav-item">
-              <a className="nav-link waves-effect waves-light">
-                <i className="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link waves-effect waves-light">
-                <i className="fab fa-google-plus-g"></i>
-              </a>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link " to="/profile">
-                <i className="fas fa-user"></i>
-              </NavLink>
-              <div
-                className="dropdown-menu dropdown-menu-right dropdown-default"
-                aria-labelledby="navbarDropdownMenuLink-333"
-              >
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </>
-  );
-};
+class Navbar extends Component {
+  state = {
+    isOpen: false,
+  };
+
+  toggleCollapse = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  render() {
+    return (
+      <>
+        <MDBNavbar color="special-color-dark" dark expand="md">
+          <MDBNavbarBrand>
+            <strong className="white-text">Yearbook</strong>
+          </MDBNavbarBrand>
+          <MDBNavbarToggler onClick={this.toggleCollapse} />
+          <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+            <MDBNavbarNav left>
+              <MDBNavItem>
+                <MDBNavLink to="/">Home</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/write">Write For Others</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="#!">Polls</MDBNavLink>
+              </MDBNavItem>
+              {/* <MDBNavItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle nav caret>
+                    <div className="d-none d-md-inline">Dropdown</div>
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default">
+                    <MDBDropdownItem href="#!">Action</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavItem> */}
+            </MDBNavbarNav>
+            <MDBNavbarNav right>
+              {/* <MDBNavItem>
+                <MDBNavLink className="waves-effect waves-light" to="#!">
+                  <MDBIcon fab icon="twitter" />
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink className="waves-effect waves-light" to="#!">
+                  <MDBIcon fab icon="google-plus-g" />
+                </MDBNavLink>
+              </MDBNavItem> */}
+              <MDBNavItem>
+                <MDBNavLink className="waves-effect waves-light" to="/profile">
+                  Profile
+                  {/* <MDBIcon icon="user" className="ml-2" /> */}
+                </MDBNavLink>
+              </MDBNavItem>
+              {/* <MDBNavItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle nav caret>
+                    <MDBIcon icon="user" />
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default">
+                    <MDBDropdownItem href="#!">Action</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                    <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavItem> */}
+            </MDBNavbarNav>
+          </MDBCollapse>
+        </MDBNavbar>
+      </>
+    );
+  }
+}
 
 export default Navbar;

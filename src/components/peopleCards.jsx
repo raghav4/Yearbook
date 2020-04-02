@@ -24,37 +24,31 @@ class PeopleCards extends Component {
     persons: [
       {
         name: 'Mike',
-        dp:
-          'https://www.usanetwork.com/sites/usanetwork/files/suits_cast_mike.jpg',
+        dp: 'https://www.usanetwork.com/sites/usanetwork/files/suits_cast_mike.jpg',
         bio: "Hello I'm Mike, I work at Pearson Spector Litt LLC",
         id: 1,
       },
       {
         name: 'Harvey Specter',
-        dp:
-          'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
+        dp: 'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
         bio: "I don't get lucky, I make my own luck",
         id: 2,
       },
       {
         name: 'Rachel Zane',
-        dp:
-          'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
+        dp: 'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
         bio: 'Entire World knows about me!!',
         id: 3,
       },
       {
         name: 'Donna Paulsen',
-        dp:
-          'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_donna_s8.jpg',
-        bio:
-          "I'm sorry I don't have a photographic memory but my brain is too busy being awesome.",
+        dp: 'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_donna_s8.jpg',
+        bio: "I'm sorry I don't have a photographic memory but my brain is too busy being awesome.",
         id: 4,
       },
       {
         name: 'Louis Litt',
-        dp:
-          'https://pmctvline2.files.wordpress.com/2020/02/rick-hoffman-billions.jpg?w=620',
+        dp: 'https://pmctvline2.files.wordpress.com/2020/02/rick-hoffman-billions.jpg?w=620',
         bio: "“It's not a scarf, it's one of the world's finest pashminas!”",
         id: 5,
       },
@@ -68,18 +62,17 @@ class PeopleCards extends Component {
     this.setState({ people: this.state.persons });
   }
 
-  filterPeople = e => {
+  filterPeople = (e) => {
     let updatedPeople = this.state.persons;
 
     updatedPeople = updatedPeople.filter(
-      person =>
-        person.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+      (person) => person.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1,
     );
     this.setState({ people: updatedPeople });
   };
 
-  triggerModal = e => {
-    console.log(e.id);
+  triggerModal = (e) => {
+    console.log(e);
     // const modalNumber = `Modal ${e}`;
     // this.setState({
     //   [modalNumber]: !this.state[modalNumber],
@@ -122,7 +115,7 @@ class PeopleCards extends Component {
         <div className="card-deck ml-4 mr-4 mt-5 mb-5 row row-cols-1 row-cols-md-3">
           {/* <FlipMove> */}
           {/* Card Deck!! */}
-          {people.map(person => (
+          {people.map((person) => (
             <div className="col mb-4" key={person.id}>
               <PeopleCard
                 key={person.id}
