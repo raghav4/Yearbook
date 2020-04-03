@@ -10,16 +10,17 @@ import Admin from './components/admin/admin';
 import PollsList from './components/listPolls';
 import CreateUser from './components/admin/user';
 import PeopleCards from './components/peopleCards';
+import LoginForm from './components/common/loginForm';
 
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="container">
         <Switch>
           <Route path="/write" component={PeopleCards} />
           <Route path="/profile" component={Profile} />
-          <Route path="/" component={UserInfo} exact />
+          <Route path="/" component={LoginForm} exact />
         </Switch>
       </main>
     </>

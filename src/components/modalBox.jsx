@@ -17,8 +17,13 @@ const ModalBox = ({ toggleOpen, toggelModal, triggerModal, personName }) => {
         >{`You're writing for : ${personName}`}</MDBModalHeader>
         <MDBModalBody>
           <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1">Basic textarea</label>
-            <textarea className="form-control" id="exampleFormControlTextarea1" rows="5" />
+            <label htmlFor="exampleFormControlTextarea1">Be Good :)</label>
+            <textarea
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="5"
+              placeholder={`Put up Whatever you've for ${personName}, your memories together, etc`}
+            />
           </div>
         </MDBModalBody>
         <MDBModalFooter>
@@ -26,7 +31,7 @@ const ModalBox = ({ toggleOpen, toggelModal, triggerModal, personName }) => {
             <MDBBtn color="secondary" onClick={() => triggerModal(1)}>
               close
             </MDBBtn>
-            <MDBBtn color="primary">Submit</MDBBtn>
+            <MDBBtn color="default">{`Update`}</MDBBtn>
           </div>
         </MDBModalFooter>
       </MDBModal>

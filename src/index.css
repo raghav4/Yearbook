@@ -6,6 +6,9 @@ body {
   font-family: 'Sofia Pro Medium' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('./assets/backgrounds/bg.svg') !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 code {
