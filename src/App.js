@@ -15,7 +15,7 @@ import LoginForm from './components/common/loginForm';
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <main className="container">
         <Switch>
           <Route path="/write" component={PeopleCards} />

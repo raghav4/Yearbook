@@ -26,13 +26,13 @@ class PeopleCard extends Component {
                 src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                 data-holder-rendered="true"
               /> */}
-            {(this.props.personImageUrl && (
+            {(!this.props.personImageUrl && (
               <img
                 className="card-img-top img-fluid z-depth-1"
                 src={this.props.personImageUrl}
                 alt="Card  cap"
               />
-            )) || <Skeleton variant="rect" width={360} height={118} />}
+            )) || <Skeleton variant="rect" width={360} height={150} />}
           </div>
           {/* <span className="badge badge-primary">CSE B</span> */}
           <p className="card-text">

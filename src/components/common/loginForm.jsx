@@ -14,40 +14,43 @@ const LoginForm = () => {
   return (
     <>
       <div className="d-flex justify-content-center mt-5 mb-5 ml-4 mr-4">
-        <div class="card mb-3">
-          <div class="card-header bg-dark text-white">Header</div>
-          <div class="card-body">
-            {/* <h5 class="card-title">Primary Panel title</h5> */}
-            <p class="card-text">
+        <div className="card mb-3">
+          <div className="card-header bg-dark text-white">Header</div>
+          <div className="card-body">
+            {/* <h5 className="card-title">Primary Panel title</h5> */}
+            <p className="card-text">
               {/* Some quick example text to build on the panel title and make up the bulk of the
               panel's content. */}
-              <form class="text-center border border-light p-5" action="#!">
-                <p class="h4 mb-4">Sign in</p>
+              <form className="text-center border border-light p-5" action="#!">
+                <p className="h4 mb-4">Sign in</p>
 
                 <input
-                  type="email"
+                  type="tel"
                   id="defaultLoginFormEmail"
-                  class="form-control mb-4"
+                  className="form-control mb-4"
                   placeholder="Phone"
                 />
                 {/* <input
                   type="OTP"
                   id="defaultLoginFormPassword"
-                  class="form-control mb-4"
+                  className="form-control mb-4"
                   placeholder="OTP"
                 /> */}
 
-                <div class="d-flex justify-content-around">
+                <div className="d-flex justify-content-around">
                   <div>
-                    <div class="custom-control custom-checkbox">
+                    <div className="custom-control custom-checkbox">
                       <input
                         type="checkbox"
-                        class="custom-control-input"
+                        className="custom-control-input"
                         id="defaultLoginFormRemember"
                       />
-                      <label class="custom-control-label" for="defaultLoginFormRemember">
+                      <button className="btn btn-light-green btn-block my-4" type="submit">
+                        Sign in
+                      </button>
+                      {/* <label className="custom-control-label" for="defaultLoginFormRemember">
                         Remember me
-                      </label>
+                      </label> */}
                     </div>
                   </div>
                   {/* <div>
@@ -55,9 +58,9 @@ const LoginForm = () => {
                   </div> */}
                 </div>
 
-                <button class="btn peach-gradient btn-block my-4" type="submit">
+                {/* <button className="btn btn-light-green btn-block my-4" type="submit">
                   Sign in
-                </button>
+                </button> */}
 
                 {/* <p>
                   Not a member?
@@ -65,17 +68,17 @@ const LoginForm = () => {
                 </p>
                 <p>or sign in with:</p>
 
-                <a href="#" class="mx-2" role="button">
-                  <i class="fab fa-facebook-f light-blue-text"></i>
+                <a href="#" className="mx-2" role="button">
+                  <i className="fab fa-facebook-f light-blue-text"></i>
                 </a>
-                <a href="#" class="mx-2" role="button">
-                  <i class="fab fa-twitter light-blue-text"></i>
+                <a href="#" className="mx-2" role="button">
+                  <i className="fab fa-twitter light-blue-text"></i>
                 </a>
-                <a href="#" class="mx-2" role="button">
-                  <i class="fab fa-linkedin-in light-blue-text"></i>
+                <a href="#" className="mx-2" role="button">
+                  <i className="fab fa-linkedin-in light-blue-text"></i>
                 </a>
-                <a href="#" class="mx-2" role="button">
-                  <i class="fab fa-github light-blue-text"></i>
+                <a href="#" className="mx-2" role="button">
+                  <i className="fab fa-github light-blue-text"></i>
                 </a> */}
               </form>
             </p>

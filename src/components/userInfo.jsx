@@ -31,7 +31,7 @@ class UserInfo extends Component {
                                 id="inputAddress2MD"
                                 placeholder="👧🏻/👦🏻 Your Name"
                               />
-                              <label for="inputAddress2MD"></label>
+                              <label htmlFor="inputAddress2MD"></label>
                             </div>
                           </div>
                           <div className="col-md-6">
@@ -42,7 +42,7 @@ class UserInfo extends Component {
                                 id="inputEmail4MD"
                                 placeholder="📧 Email"
                               />
-                              <label for="inputEmail4MD"></label>
+                              <label htmlFor="inputEmail4MD"></label>
                             </div>
                           </div>
 
@@ -54,7 +54,7 @@ class UserInfo extends Component {
                                 id="inputPassword4MD"
                                 placeholder="📱 Phone Number"
                               />
-                              <label for="inputPassword4MD">{/*Password*/}</label>
+                              <label htmlFor="inputPassword4MD">{/*Password*/}</label>
                             </div>
                           </div>
                         </div>
@@ -67,7 +67,7 @@ class UserInfo extends Component {
                                 id="inputAddressMD"
                                 placeholder="linkedin url"
                               />
-                              <label for="inputAddressMD">{/*Address*/}</label>
+                              <label htmlFor="inputAddressMD">{/*Address*/}</label>
                             </div>
                           </div>
                           <div className="col-md-12">
@@ -78,7 +78,7 @@ class UserInfo extends Component {
                                 id="inputAddressMD"
                                 placeholder="facebook url"
                               />
-                              <label for="inputAddressMD">{/*Address*/}</label>
+                              <label htmlFor="inputAddressMD">{/*Address*/}</label>
                             </div>
                           </div>
                           <div className="col-md-12">
@@ -89,7 +89,7 @@ class UserInfo extends Component {
                                 id="inputAddress2MD"
                                 placeholder="Apartment, studio, or floor"
                               />
-                              <label for="inputAddress2MD"></label>
+                              <label htmlFor="inputAddress2MD"></label>
                             </div>
                           </div>
                         </div>
@@ -102,7 +102,7 @@ class UserInfo extends Component {
                                 id="inputCityMD"
                                 placeholder="New York City"
                               />
-                              <label for="inputCityMD"></label>
+                              <label htmlFor="inputCityMD"></label>
                             </div>
                           </div>
                           <div className="col-md-6">
@@ -113,7 +113,7 @@ class UserInfo extends Component {
                                 id="inputZipMD"
                                 placeholder="11206-1117"
                               />
-                              <label for="inputZipMD"></label>
+                              <label htmlFor="inputZipMD"></label>
                             </div>
                           </div>
                         </div>
@@ -125,7 +125,7 @@ class UserInfo extends Component {
                             rows="5"
                             outline
                           />
-                          <label for="inputAddress2MD"></label>
+                          <label htmlFor="inputAddress2MD"></label>
                         </div>
                         <button type="submit" className="btn btn-primary btn-md">
                           Sign in

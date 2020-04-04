@@ -35,7 +35,7 @@ const PollsList = () => {
                     id="materialGroupExample1"
                     name="groupOfMaterialRadios"
                   />
-                  <label className="form-check-label" for="materialGroupExample1">
+                  <label className="form-check-label" htmlFor="materialGroupExample1">
                     <p>Inverness McKenzie</p>
                   </label>
                 </div>
@@ -46,7 +46,7 @@ const PollsList = () => {
                     id="materialGroupExample2"
                     name="groupOfMaterialRadios"
                   />
-                  <label className="form-check-label" for="materialGroupExample2">
+                  <label className="form-check-label" htmlFor="materialGroupExample2">
                     <p>Dominic L. Ement</p>
                   </label>
                 </div>
@@ -57,7 +57,7 @@ const PollsList = () => {
                     id="materialGroupExample3"
                     name="groupOfMaterialRadios"
                   />
-                  <label className="form-check-label" for="materialGroupExample3">
+                  <label className="form-check-label" htmlFor="materialGroupExample3">
                     <p>Malcolm Function</p>
                   </label>
                 </div>

@@ -20,27 +20,25 @@ class CreateUser extends Component {
           <div className="col-md-6 mb-3">
             <MDBContainer>
               <MDBCard style={{ width: 'auto', marginTop: '2rem' }}>
-                <MDBCardHeader color="elegant-color lighten-1">
-                  Add a Student
-                </MDBCardHeader>
+                <MDBCardHeader color="elegant-color lighten-1">Add a Student</MDBCardHeader>
                 <MDBCardBody>
                   {/* <MDBCardTitle>Special title treatment</MDBCardTitle> */}
                   {/* <MDBCardText> */}
                   <div className="md-form form-group">
                     <MDBInput label="Name" outline />
-                    <label for="inputAddress2MD"></label>
+                    <label htmlFor="inputAddress2MD"></label>
                   </div>
                   <div className="md-form form-group">
                     <MDBInput label="Department" outline />
-                    <label for="inputAddress2MD"></label>
+                    <label htmlFor="inputAddress2MD"></label>
                   </div>
                   <div className="md-form form-group">
                     <MDBInput label="Section" outline />
-                    <label for="inputAddress2MD"></label>
+                    <label htmlFor="inputAddress2MD"></label>
                   </div>
                   <div className="md-form form-group">
                     <MDBInput label="Phone Number" outline />
-                    <label for="inputAddress2MD"></label>
+                    <label htmlFor="inputAddress2MD"></label>
                   </div>
                 </MDBCardBody>
                 <MDBBtn color="default">Submit</MDBBtn>
