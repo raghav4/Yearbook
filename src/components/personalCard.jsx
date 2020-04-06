@@ -1,66 +1,117 @@
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Fab from '@material-ui/core/Fab';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import Box from './contentBox';
+
 class PersonalCard extends Component {
   state = {};
 
   render() {
     return (
       <>
-        <div className="row-md-1">
-          <div className="col-sm-3 float-right">
-            <div className="card card-cascade mt-5 mb-3 ml-3 mr-3">
-              <div className="view view-cascade overlay">
-                <img
-                  className="card-img-top"
-                  src="https://mdbootstrap.com/img/Photos/Others/men.jpg"
-                  alt="Card cap"
-                />
-                <a>
-                  <div className="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <div className="card-body card-body-cascade text-center">
-                <h4 className="card-title">
-                  <strong>Raghav Sharma</strong>
-                </h4>
-                <span className="badge badge-pill badge-dark">CSE - B</span>
-                <p className="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex,
-                  recusandae. Facere modi sunt, quod quibusdam.
-                </p>
-              </div>
-              <div className="card mt-3">
-                <div className="card-body bg-primary text-white">
-                  <a className="button float-center">
-                    {' '}
-                    <PhoneIcon />
-                    +912372947497
-                  </a>
-                  <br />
-                  <a className="button">
-                    {' '}
-                    {/* <Fab color="secondary" aria-label="edit"> */}
-                    <WhatsAppIcon />
-                    {/* </Fab> */}
-                    +919999817289
-                  </a>
-                  <br />
-                  <a className="button float-center">
-                    {' '}
-                    <MailOutlineIcon />
-                    raghavsyt@gmail.com
-                  </a>
-                  <br />
-                  <a className="button float-center">
-                    {' '}
-                    <FacebookIcon />
-                    raghavsyt@gmail.com
-                  </a>
+        <div className="card mb-4 mx-auto" style={{ width: '20rem' }}>
+          {/* <Dropzone
+            onDrop={(acceptedFiles) => {
+              fileName = acceptedFiles;
+              console.log(acceptedFiles);
+            }}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <section>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <p
+                    style={{
+                      flex: '1',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: '20px',
+                      borderWidth: '2px',
+                      borderRadius: '2px',
+                      borderColor: '#eeeeee',
+                      borderStyle: 'dashed',
+                      marginTop: '15px',
+                      marginLeft: '10px',
+                      marginRight: '10px',
+                      marginBottom: '15px',
+                      backgroundColor: '#f2f2f2',
+                      outline: 'none',
+                    }}
+                  >
+                    Drag 'n' drop some files here, or click to select files
+                  </p>
                 </div>
+              </section>
+            )}
+          </Dropzone> */}
+          {/* <LinearProgress variant="determinate" value="completed" /> */}
+          {(
+            <img
+              className="card-img-top"
+              src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+              alt="Card cap"
+            />
+          ) || <Skeleton variant="rect" width={320} height={220} animation="wave" />}
+
+          <div className="card-body">
+            <h4 className="card-title text-center">
+              <p>{'John Doe' || <Skeleton variant="text" animation="wave" width={200} />}</p>
+            </h4>
+            <h6 className="h6-responsive text-center">
+              <span className="badge badge-primary">CSE - B</span>
+            </h6>
+            <p className="card-text">
+              Some quick example text to build on the card title and make up the bulk of the card's
+              content.
+            </p>
+            <hr />
+            <p className="text-center">Contact Info</p>
+            <div className="row">
+              <div className="row">
+                <div className="col ml-5">
+                  <MailOutlineIcon />
+                </div>
+                <div className="col pl-1">raghavsyt@gmail.com</div>
+              </div>
+              <div className="row">
+                <div className="col ml-5">
+                  <PhoneIcon />
+                </div>
+                <div className="col pl-1">+919898899909</div>
+              </div>
+              <div className="row">
+                <div className="col ml-5">
+                  <FacebookIcon />
+                </div>
+                <div className="col pl-1">raghav</div>
+              </div>
+              <div className="row">
+                <div className="col ml-5">
+                  <WhatsAppIcon />
+                </div>
+                <div className="col pl-1">+9898899909</div>
+              </div>
+              <div className="row">
+                <div className="col ml-5">
+                  <LinkedInIcon />
+                </div>
+                <div className="col pl-1">raghavsharma</div>
+              </div>
+              <div className="row">
+                <div className="col ml-5">
+                  <InstagramIcon />
+                </div>
+                <div className="col pl-1">raghav</div>
               </div>
             </div>
           </div>

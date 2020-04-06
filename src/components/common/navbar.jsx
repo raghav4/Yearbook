@@ -7,10 +7,6 @@ import {
   MDBNavLink,
   MDBNavbarToggler,
   MDBCollapse,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
   MDBIcon,
 } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -30,7 +26,7 @@ class Navbar extends Component {
       <>
         <MDBNavbar color="special-color-dark" dark expand="md">
           <MDBNavbarBrand>
-            <strong className="white-text">Yearbook</strong>
+            <strong className="white-text">YearBook</strong>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse} />
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
@@ -39,7 +35,7 @@ class Navbar extends Component {
                 <MDBNavLink to="/">Home</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="/write">Write For Others</MDBNavLink>
+                <MDBNavLink to="/write">Writes</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="#!">Polls</MDBNavLink>

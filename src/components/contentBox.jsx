@@ -15,7 +15,7 @@ const Box = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="mt-3 mr-5 mb-3 ml-5">
+        <div className="mr-5 mb-3 ml-5">
           <MDBContainer>
             <MDBCard className="mt-3 mb-3">
               <MDBCardHeader color="special-color-dark lighten-1">

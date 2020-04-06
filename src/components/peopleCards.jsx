@@ -5,6 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FlipMove from 'react-flip-move';
+import axios from 'axios';
 import Select from './common/select';
 import PeopleCard from './common/peopleCard';
 
@@ -57,6 +58,10 @@ class PeopleCards extends Component {
     modal8: false,
     modal9: false,
   };
+  async componentDidMount() {
+    const { data } = await axios.get('http://localhost:3000/api/user');
+    console.log(data);
+  }
 
   UNSAFE_componentWillMount() {
     this.setState({ people: this.state.persons });

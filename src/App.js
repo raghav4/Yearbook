@@ -16,13 +16,13 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="container">
-        <Switch>
-          <Route path="/write" component={PeopleCards} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/" component={LoginForm} exact />
-        </Switch>
-      </main>
+      {/* <main className="container"> */}
+      <Switch>
+        <Route path="/write" component={PeopleCards} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/" component={UserInfo} exact />
+      </Switch>
+      {/* </main> */}
     </>
   );
 }
