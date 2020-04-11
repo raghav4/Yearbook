@@ -9,11 +9,11 @@ import {
   MDBContainer,
 } from 'mdbreact';
 
-const PollsList = () => {
+const PollCard = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="col-md-6 mb-3">
+        <div className="">
           <MDBContainer>
             <MDBCard style={{ width: 'auto', marginTop: '2rem' }}>
               <MDBCardHeader color="elegant-color lighten-1">
@@ -71,4 +71,4 @@ const PollsList = () => {
   );
 };
 
-export default PollsList;
+export default PollCard;

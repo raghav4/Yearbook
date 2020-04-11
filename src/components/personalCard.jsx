@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Dropzone from 'react-dropzone';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -19,41 +18,6 @@ class PersonalCard extends Component {
     return (
       <>
         <div className="card mb-4 mx-auto" style={{ width: '20rem' }}>
-          {/* <Dropzone
-            onDrop={(acceptedFiles) => {
-              fileName = acceptedFiles;
-              console.log(acceptedFiles);
-            }}
-          >
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <p
-                    style={{
-                      flex: '1',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      padding: '20px',
-                      borderWidth: '2px',
-                      borderRadius: '2px',
-                      borderColor: '#eeeeee',
-                      borderStyle: 'dashed',
-                      marginTop: '15px',
-                      marginLeft: '10px',
-                      marginRight: '10px',
-                      marginBottom: '15px',
-                      backgroundColor: '#f2f2f2',
-                      outline: 'none',
-                    }}
-                  >
-                    Drag 'n' drop some files here, or click to select files
-                  </p>
-                </div>
-              </section>
-            )}
-          </Dropzone> */}
           {/* <LinearProgress variant="determinate" value="completed" /> */}
           {(
             <img

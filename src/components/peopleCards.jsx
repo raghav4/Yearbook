@@ -13,54 +13,36 @@ class PeopleCards extends Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
     // eslint-disable-next-line react/no-unused-state
-    options: [
-      { id: 1, name: 'CSE' },
-      { id: 2, name: 'IT' },
-      { id: 3, name: 'MAE' },
-      { id: 4, name: 'ECE' },
-      { id: 5, name: 'EEE' },
-    ],
-    sections: [{ name: 'A' }, { name: 'B' }, { name: 'C' }],
+    departments: [],
+    sections: [],
     // eslint-disable-next-line react/no-unused-state
-    persons: [
-      {
-        name: 'Mike',
-        dp: 'https://www.usanetwork.com/sites/usanetwork/files/suits_cast_mike.jpg',
-        bio: "Hello I'm Mike, I work at Pearson Spector Litt LLC",
-        id: 1,
-      },
-      {
-        name: 'Harvey Specter',
-        dp: 'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
-        bio: "I don't get lucky, I make my own luck",
-        id: 2,
-      },
-      {
-        name: 'Rachel Zane',
-        dp: 'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_harvey_s8.jpg',
-        bio: 'Entire World knows about me!!',
-        id: 3,
-      },
-      {
-        name: 'Donna Paulsen',
-        dp: 'https://www.usanetwork.com/sites/usanetwork/files/2018/07/suits_cast_donna_s8.jpg',
-        bio: "I'm sorry I don't have a photographic memory but my brain is too busy being awesome.",
-        id: 4,
-      },
-      {
-        name: 'Louis Litt',
-        dp: 'https://pmctvline2.files.wordpress.com/2020/02/rick-hoffman-billions.jpg?w=620',
-        bio: "“It's not a scarf, it's one of the world's finest pashminas!”",
-        id: 5,
-      },
-    ],
+    persons: [],
     people: [],
     modal8: false,
     modal9: false,
   };
   async componentDidMount() {
-    const { data } = await axios.get('http://localhost:3000/api/user');
-    console.log(data);
+    const { data: persons } = await axios.get('http://localhost:3000/api/user');
+    let departments = persons.map((e) => {
+      return e.department;
+    });
+    let sections = persons.map((e) => {
+      return e.section;
+    });
+    departments = [...new Set(departments)];
+    sections.sort();
+    sections = ['ALL', ...new Set(sections)];
+    console.log(sections);
+    persons.sort((a, b) => {
+      const keyA = a.section,
+        keyB = b.section;
+      return keyA > keyB;
+    });
+    this.setState({ persons });
+    this.setState({ people: persons });
+    this.setState({ sections });
+    this.setState({ departments });
+    // console.log(departments);
   }
 
   UNSAFE_componentWillMount() {
@@ -75,9 +57,15 @@ class PeopleCards extends Component {
     );
     this.setState({ people: updatedPeople });
   };
-
+  handleSectionSelect = (e) => {
+    e.persist();
+    console.log(e.target.value);
+    if (e.target.value === 'ALL') return this.setState({ people: this.state.persons });
+    const persons = this.state.persons.filter((person) => person.section === e.target.value[0]);
+    this.setState({ people: persons });
+  };
   triggerModal = (e) => {
-    console.log(e);
+    // console.log(e);
     // const modalNumber = `Modal ${e}`;
     // this.setState({
     //   [modalNumber]: !this.state[modalNumber],
@@ -85,7 +73,7 @@ class PeopleCards extends Component {
   };
 
   render() {
-    const { options, sections, persons, people } = this.state;
+    const { departments, sections, persons, people } = this.state;
 
     return (
       <>
@@ -110,29 +98,36 @@ class PeopleCards extends Component {
         </p> */}
           <div className="row mt-3 mb-2">
             <div className="col">
-              <Select selectTitle="Choose the Department" options={options} />
+              <Select
+                selectTitle="Choose the Department"
+                options={departments}
+                handleSelectInput={this.handleSelectInput}
+              />
             </div>
             <div className="col">
-              <Select selectTitle="Choose the Section" options={sections} />
+              <Select
+                selectTitle="Choose the Section"
+                options={sections}
+                handleSelectInput={this.handleSectionSelect}
+              />
             </div>
           </div>
         </div>
-        <div className="card-deck ml-4 mr-4 mt-5 mb-5 row row-cols-1 row-cols-md-3">
-          {/* <FlipMove> */}
-          {/* Card Deck!! */}
+        <div className="ml-4 mr-4 mt-5 mb-5 row row-cols-1 row-cols-md-3">
           {people.map((person) => (
-            <div className="col mb-4" key={person.id}>
-              <PeopleCard
-                key={person.id}
-                person={person}
-                personName={person.name}
-                personImageUrl={person.dp}
-                personBio={person.bio}
-                triggerModal={this.triggerModal}
-              />
-            </div>
+            <FlipMove>
+              <div className="card-deck col mb-4" key={person._id}>
+                <PeopleCard
+                  key={person.id}
+                  person={person}
+                  personName={person.name}
+                  personImageUrl={person.dp}
+                  personBio={person.bio}
+                  triggerModal={this.triggerModal}
+                />
+              </div>
+            </FlipMove>
           ))}
-          {/* </FlipMove> */}
         </div>
       </>
     );

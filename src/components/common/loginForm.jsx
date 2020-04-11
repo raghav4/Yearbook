@@ -17,7 +17,6 @@ const LoginForm = () => {
         <div className="card mb-3">
           <div className="card-header bg-dark text-white">Header</div>
           <div className="card-body">
-            {/* <h5 className="card-title">Primary Panel title</h5> */}
             <p className="card-text">
               {/* Some quick example text to build on the panel title and make up the bulk of the
               panel's content. */}

@@ -38,7 +38,7 @@ class Navbar extends Component {
                 <MDBNavLink to="/write">Writes</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="#!">Polls</MDBNavLink>
+                <MDBNavLink to="/polls">Polls</MDBNavLink>
               </MDBNavItem>
               {/* <MDBNavItem>
                 <MDBDropdown>

@@ -7,22 +7,23 @@ import Box from './components/contentBox';
 import Profile from './components/profile';
 import UserInfo from './components/userInfo';
 import Admin from './components/admin/admin';
-import PollsList from './components/listPolls';
 import CreateUser from './components/admin/user';
 import PeopleCards from './components/peopleCards';
 import LoginForm from './components/common/loginForm';
+import ListPolls from './components/polls';
+import Auth from './components/auth';
 
 function App() {
   return (
     <>
+      {/* <Auth /> */}
       <Navbar />
-      {/* <main className="container"> */}
       <Switch>
         <Route path="/write" component={PeopleCards} />
         <Route path="/profile" component={Profile} />
+        <Route path="/polls" component={ListPolls} />
         <Route path="/" component={UserInfo} exact />
       </Switch>
-      {/* </main> */}
     </>
   );
 }

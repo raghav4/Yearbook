@@ -1,16 +1,16 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const Select = ({ selectTitle, options }) => {
+const Select = ({ selectTitle, options, handleSelectInput }) => {
   return (
     <>
-      <select className="custom-select custom-select-md">
-        <option value="" disabled selected>
+      <select className="custom-select custom-select-md" onChange={handleSelectInput}>
+        <option disabled value="" selected>
           {selectTitle}
         </option>
-        {options.map(option => (
-          <option key={option.id} value={option.id}>
-            {option.name}
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
           </option>
         ))}
       </select>
@@ -20,6 +20,7 @@ const Select = ({ selectTitle, options }) => {
 
 Select.propTypes = {
   selectTitle: propTypes.string,
-  options: propTypes.object.isRequired,
+  options: propTypes.array.isRequired,
+  handleSelectInput: propTypes.func,
 };
 export default Select;

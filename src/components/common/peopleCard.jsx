@@ -10,11 +10,19 @@ class PeopleCard extends Component {
     this.setState({ modalOpen: !this.state.modalOpen });
   };
   toggelModal = (nr) => {
-    console.log(nr);
+    // fix this in toggle box
+    // console.log(nr);
   };
   verifyValidImageUrl = (url) => {
     return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
   };
+  getBadgeClass() {
+    let classes = 'badge badge-';
+    // classes += this.props.person.section == 'A' ? 'primary' : 'warning';
+    let badgeClass = ['primary', 'success', 'warning'];
+    classes += badgeClass[this.props.person.section.charCodeAt(0) - 65];
+    return classes;
+  }
   render() {
     const { personName, personBio, personImageUrl, person } = this.props;
     return (
@@ -38,8 +46,12 @@ class PeopleCard extends Component {
               />
             )) || <Skeleton variant="rect" width={360} height={150} />}
           </div>
-          {/* <span className="badge badge-primary">CSE B</span> */}
-          <p className="card-text">
+          <div className="text-center">
+            <span className={this.getBadgeClass()}>
+              {person.department} - {person.section}
+            </span>
+          </div>
+          <p className="card-text text-center">
             {personBio || (
               <>
                 <Skeleton animation="wave" height={22} style={{ marginBottom: 6 }} />
@@ -50,7 +62,7 @@ class PeopleCard extends Component {
           <button
             type="button"
             className="btn btn-deep-purple"
-            onClick={() => this.triggerModal(person.id)}
+            onClick={() => this.triggerModal(person._id)}
           >
             <i className="fas fa-plus-circle mr-2" />
             Write
