@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-// import EditIcon from '@material-ui/icons/Edit';
-class ListQuestions extends Component {
+class QuestionContent extends Component {
   state = {};
 
   render() {
@@ -14,11 +13,7 @@ class ListQuestions extends Component {
           <div className="col-md-6">
             <div className="card bg-white ml-2 mr-2 mb-3">
               <div className="card-body text-left">
-                {question.questionData || (
-                  <Skeleton variant="text" animation="wave" />
-                )}
-                {/* <Skeleton variant="text" animation="wave" />
-                <Skeleton variant="text" animation="wave" /> */}
+                {question.questionData || <Skeleton variant="text" animation="wave" />}
                 <div className="float-right">
                   <button
                     type="button"
@@ -35,9 +30,6 @@ class ListQuestions extends Component {
                 </div>
               </div>
             </div>
-            {/* <MDBBtn className="float-right" gradient="purple">
-                Add Question
-              </MDBBtn> */}
           </div>
         </div>
       </>
@@ -45,4 +37,4 @@ class ListQuestions extends Component {
   }
 }
 
-export default ListQuestions;
+export default QuestionContent;
