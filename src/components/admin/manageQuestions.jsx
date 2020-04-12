@@ -34,8 +34,8 @@ class ManageQuestions extends Component {
       return this.setState({ inputValidationAlert: updatedInputValidation });
     }
     const questions = [
-      ...this.state.questions,
       { id: this.state.questions.length + 1, questionData },
+      ...this.state.questions,
     ];
     this.setState({ questions, inputValidationAlert: updatedInputValidation, inputValue: '' });
   };

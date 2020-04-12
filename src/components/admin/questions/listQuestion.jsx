@@ -54,7 +54,7 @@ class ListQuestions extends Component {
                 <div className="float-left">
                   <MDBBtn
                     className="float-right"
-                    gradient="green"
+                    color="default"
                     onClick={() => handleAdd(inputValue)}
                   >
                     {buttonTitle}

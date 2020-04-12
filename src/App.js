@@ -9,10 +9,22 @@ import PeopleCards from './components/peopleCards';
 import ListPolls from './components/polls';
 import Profile from './components/profile';
 import UserInfo from './components/userInfo';
+import AdminNavBar from './components/admin/navbar';
+import ManageQuestions from './components/admin/manageQuestions';
+import ManagePolls from './components/admin/managePolls';
+import AddUser from './components/admin/addUser';
 
 function App() {
   return (
     <>
+      {/* <AdminNavBar />
+      <Switch>
+        <Route path="/questions" component={ManageQuestions} />
+        <Route path="/polls/manage" component={ManagePolls} />
+        <Route path="/users/add" component={AddUser} />
+        <Route path="/users/remove" component={AddUser} />
+        <Route path="/" component={UserInfo} exact />
+      </Switch> */}
       <Navbar />
       <Switch>
         <Route path="/write" component={PeopleCards} />
