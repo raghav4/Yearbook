@@ -115,7 +115,7 @@ class PeopleCards extends Component {
         </div>
         <div className="ml-4 mr-4 mt-5 mb-5 row row-cols-1 row-cols-md-3">
           {people.map((person) => (
-            <FlipMove>
+            <FlipMove duration={420}>
               <div className="card-deck col mb-4" key={person._id}>
                 <PeopleCard
                   key={person.id}
