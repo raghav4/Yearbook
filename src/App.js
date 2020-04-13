@@ -4,17 +4,27 @@ import './App.css';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import AddUser from './components/admin/addUser';
+import ManagePolls from './components/admin/managePolls';
+import ManageQuestions from './components/admin/manageQuestions';
+import AdminNavBar from './components/admin/navbar';
 import Navbar from './components/common/navbar';
 import PeopleCards from './components/peopleCards';
 import ListPolls from './components/pollsList';
 import Profile from './components/profile';
 import UserInfo from './components/userInfo';
-import ManagePolls from './components/admin/managePolls';
-import Alert from './components/common/alert';
 
 function App() {
   return (
     <>
+      {/* <AdminNavBar />
+      <Switch>
+        <Route path="/questions" component={ManageQuestions} />
+        <Route path="/polls/manage" component={ManagePolls} />
+        <Route path="/users/add" component={AddUser} />
+        <Route path="/users/remove" component={AddUser} />
+        <Route path="/" component={UserInfo} exact />
+      </Switch> */}
       <Navbar />
       <Switch>
         <Route path="/write" component={PeopleCards} />

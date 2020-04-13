@@ -23,8 +23,8 @@ class ManageQuestions extends Component {
   };
   handleAdd = (questionData) => {
     const questions = [
-      ...this.state.questions,
       { id: this.state.questions.length + 1, questionData },
+      ...this.state.questions,
     ];
     this.setState({ questions });
   };

@@ -10,7 +10,7 @@ import {
   MDBContainer,
 } from 'mdbreact';
 
-class CreateUser extends Component {
+class AddUser extends Component {
   state = {};
 
   render() {
@@ -20,7 +20,9 @@ class CreateUser extends Component {
           <div className="col-md-6 mb-3">
             <MDBContainer>
               <MDBCard style={{ width: 'auto', marginTop: '2rem' }}>
-                <MDBCardHeader color="elegant-color lighten-1">Add a Student</MDBCardHeader>
+                <MDBCardHeader color="elegant-color lighten-1 text-center">
+                  Add a Student
+                </MDBCardHeader>
                 <MDBCardBody>
                   {/* <MDBCardTitle>Special title treatment</MDBCardTitle> */}
                   {/* <MDBCardText> */}
@@ -28,13 +30,35 @@ class CreateUser extends Component {
                     <MDBInput label="Name" outline />
                     <label htmlFor="inputAddress2MD"></label>
                   </div>
-                  <div className="md-form form-group">
+                  {/* <div className="md-form form-group">
                     <MDBInput label="Department" outline />
                     <label htmlFor="inputAddress2MD"></label>
-                  </div>
+                  </div> */}
                   <div className="md-form form-group">
+                    <select class="browser-default custom-select">
+                      <option disabled selected>
+                        Department
+                      </option>
+                      <option value="1">CSE</option>
+                      <option value="2">IT</option>
+                      <option value="3">ECE</option>
+                      <option value="3">EEE</option>
+                      <option value="3">MAE</option>
+                    </select>
+                  </div>
+                  {/* <div className="md-form form-group">
                     <MDBInput label="Section" outline />
                     <label htmlFor="inputAddress2MD"></label>
+                  </div> */}
+                  <div className="md-form form-group">
+                    <select class="browser-default custom-select">
+                      <option disabled selected>
+                        Section
+                      </option>
+                      <option value="1">A</option>
+                      <option value="2">B</option>
+                      <option value="3">C</option>
+                    </select>
                   </div>
                   <div className="md-form form-group">
                     <MDBInput label="Phone Number" outline />
@@ -51,4 +75,4 @@ class CreateUser extends Component {
   }
 }
 
-export default CreateUser;
+export default AddUser;
