@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PollCard from './pollCard';
+import PollCard from './card';
 import axios from 'axios';
 
 class ListPolls extends Component {

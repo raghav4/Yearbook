@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PersonalCard from './personalCard';
-import Box from './contentBox';
-import OthersWrite from './othersWrites';
+import PersonalCard from './profileCard/card';
+import Box from './questions/self';
+import OthersWrite from './questions/others';
 class Profile extends Component {
   state = {};
 
@@ -20,9 +20,6 @@ class Profile extends Component {
               <div className="row" style={{ backgroundColor: 'white' }}>
                 <PersonalCard />
               </div>
-              {/* <div className="row" style={{ backgroundColor: 'white' }}>
-                <PersonalCard />
-              </div> */}
             </div>
           </div>
         </div>

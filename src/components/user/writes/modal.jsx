@@ -8,10 +8,10 @@ import {
   MDBModalFooter,
 } from 'mdbreact';
 
-const ModalBox = ({ toggleOpen, toggelModal, triggerModal, personName }) => {
+const ModalBox = ({ toggleOpen, toggelModal, triggerModal, personName, person }) => {
   return (
     <MDBContainer>
-      <MDBModal isOpen={toggleOpen} toggle={toggelModal(1)} centered>
+      <MDBModal isOpen={toggleOpen} toggle={toggelModal(person._id)} centered>
         <MDBModalHeader
           toggle={toggelModal(1)}
         >{`You're writing for : ${personName}`}</MDBModalHeader>
@@ -28,7 +28,7 @@ const ModalBox = ({ toggleOpen, toggelModal, triggerModal, personName }) => {
         </MDBModalBody>
         <MDBModalFooter>
           <div className="row">
-            <MDBBtn color="secondary" onClick={() => triggerModal(1)}>
+            <MDBBtn color="secondary" onClick={() => triggerModal(person._id)}>
               close
             </MDBBtn>
             <MDBBtn color="default">{`Update`}</MDBBtn>

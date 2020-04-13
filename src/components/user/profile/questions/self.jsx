@@ -9,7 +9,6 @@ import {
   MDBContainer,
 } from 'mdbreact';
 import FlipMove from 'react-flip-move';
-import Question from '../components/common/question';
 
 const Box = () => {
   return (
