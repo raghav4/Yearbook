@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
-import ModalBox from '../modalBox';
+import ModalBox from './modal';
 class PeopleCard extends Component {
   state = {
     modalOpen: false,
     modalHeader: '',
   };
   triggerModal = (id) => {
+    console.log(id);
     this.setState({ modalOpen: !this.state.modalOpen });
   };
   toggelModal = (nr) => {
     // fix this in toggle box
     // console.log(nr);
-  };
-  verifyValidImageUrl = (url) => {
-    return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
   };
   getBadgeClass() {
     let classes = 'badge badge-';
@@ -32,12 +30,6 @@ class PeopleCard extends Component {
             {personName || <Skeleton variant="text" animation="wave" />}
           </h4>
           <div className="view overlay mb-3">
-            {/* <img
-                className="rounded-circle col-md-6"
-                alt="50x50"
-                src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
-                data-holder-rendered="true"
-              /> */}
             {(personImageUrl && (
               <img
                 className="card-img-top img-fluid z-depth-1"
@@ -72,6 +64,7 @@ class PeopleCard extends Component {
             toggelModal={this.toggelModal}
             triggerModal={this.triggerModal}
             personName={personName}
+            person={person}
           />
         </div>
       </>

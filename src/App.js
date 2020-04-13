@@ -3,16 +3,11 @@ import './App.css';
 
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-
-import AddUser from './components/admin/addUser';
-import ManagePolls from './components/admin/managePolls';
+import PeopleCards from './components/user/writes/peopleCards';
+import Profile from './components/user/profile/profile';
 import ManageQuestions from './components/admin/manageQuestions';
-import AdminNavBar from './components/admin/navbar';
-import Navbar from './components/common/navbar';
-import PeopleCards from './components/peopleCards';
-import ListPolls from './components/pollsList';
-import Profile from './components/profile';
-import UserInfo from './components/userInfo';
+import UserInfo from './components/user/details';
+import Navbar from './components/user/navbar';
 
 function App() {
   return (
@@ -28,7 +23,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/write" component={PeopleCards} />
-        <Route path="/profile " component={Profile} />
+        <Route path="/profile" component={Profile} />
         <Route path="/polls" component={ManageQuestions} />
         <Route path="/" component={UserInfo} exact />
       </Switch>

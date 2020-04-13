@@ -6,8 +6,8 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FlipMove from 'react-flip-move';
 import axios from 'axios';
-import Select from './common/select';
-import PeopleCard from './common/peopleCard';
+import Select from '../../common/select';
+import PeopleCard from './peopleCard';
 
 class PeopleCards extends Component {
   // eslint-disable-next-line react/state-in-constructor
