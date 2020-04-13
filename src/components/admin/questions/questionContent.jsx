@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Skeleton from '@material-ui/lab/Skeleton';
 
+// Change to Statless functional component
+
 class QuestionContent extends Component {
   state = {};
 

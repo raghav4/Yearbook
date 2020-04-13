@@ -5,8 +5,32 @@ import ListQuestions from './questions/listQuestion';
 class ManageQuestions extends Component {
   state = {
     questions: [],
+    inputValue: '',
+    inputValidationAlert: {
+      apply: false,
+      message: '',
+    },
   };
+  handleChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  };
+  handleKeyPress = (e) => {
+    const code = e.keyCode || e.which;
+    if (code === 13) return this.handleAdd(e.target.value);
+  };
+
   handleAdd = async (question) => {
+    let updatedInputValidation = {
+      apply: false,
+      message: '',
+    };
+    if (question.trim() === '') {
+      updatedInputValidation = {
+        apply: true,
+        message: 'Nothing to add',
+      };
+      return this.setState({ inputValidationAlert: updatedInputValidation });
+    }
     const questionObject = {
       question,
     };
@@ -18,8 +42,13 @@ class ManageQuestions extends Component {
       this.setState({ questions });
     } catch (err) {
       console.error(err.response.data);
+      updatedInputValidation = {
+        apply: true,
+        message: err.response.data,
+      };
+      return this.setState({ inputValidationAlert: updatedInputValidation });
     }
-    // const questions = [questionObject, ...this.state.questions];
+    this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
   };
 
   handleDelete = async (questionId) => {
@@ -41,7 +70,7 @@ class ManageQuestions extends Component {
   }
 
   render() {
-    const { questions } = this.state;
+    const { questions, inputValue, inputValidationAlert } = this.state;
     return (
       <>
         <ListQuestions
@@ -49,8 +78,12 @@ class ManageQuestions extends Component {
           pageHeading="User Questions"
           placeholder="Add a question"
           questions={questions}
+          inputValue={inputValue}
+          inputValidationAlert={inputValidationAlert}
           handleAdd={this.handleAdd}
           onDelete={this.handleDelete}
+          handleKeyPress={this.handleKeyPress}
+          handleChange={this.handleChange}
         />
       </>
     );
