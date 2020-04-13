@@ -13,7 +13,7 @@ class QuestionContent extends Component {
           <div className="col-md-6">
             <div className="card bg-white ml-2 mr-2 mb-3">
               <div className="card-body text-left">
-                {question.questionData || <Skeleton variant="text" animation="wave" />}
+                {question.question || <Skeleton variant="text" animation="wave" />}
                 <div className="float-right">
                   <button
                     type="button"
@@ -23,7 +23,7 @@ class QuestionContent extends Component {
                       padding: '0',
                       outline: 'none',
                     }}
-                    onClick={() => onDelete(question.id)}
+                    onClick={() => onDelete(question._id)}
                   >
                     <DeleteIcon />
                   </button>

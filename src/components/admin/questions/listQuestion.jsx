@@ -81,7 +81,7 @@ class ListQuestions extends Component {
 
         <FlipMove enterAnimation="elevator" leaveAnimation="accordionVertical">
           {questions.map((question) => (
-            <QuestionContent key={question.id} onDelete={onDelete} question={question} />
+            <QuestionContent key={question._id} onDelete={onDelete} question={question} />
           ))}
         </FlipMove>
       </div>
