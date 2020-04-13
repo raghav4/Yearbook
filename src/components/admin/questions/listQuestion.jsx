@@ -15,14 +15,28 @@ class ListQuestions extends Component {
       message: '',
     },
   };
-
+  handleSend = (inputValue) => {
+    let updatedInputValidation = {
+      apply: false,
+      message: '',
+    };
+    if (inputValue.trim() === '') {
+      updatedInputValidation = {
+        apply: true,
+        message: 'Nothing to add',
+      };
+      return this.setState({ inputValidationAlert: updatedInputValidation });
+    }
+    this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
+    this.props.handleAdd(inputValue);
+  };
   handleChange = (e) => {
     this.setState({ inputValue: e.target.value });
   };
 
   handleKeyPress = (e) => {
     const code = e.keyCode || e.which;
-    if (code === 13) return this.handleAdd(e.target.value);
+    if (code === 13) return this.props.handleAdd(e.target.value);
   };
 
   render() {
@@ -55,7 +69,7 @@ class ListQuestions extends Component {
                   <MDBBtn
                     className="float-right"
                     gradient="green"
-                    onClick={() => handleAdd(inputValue)}
+                    onClick={() => this.handleSend(inputValue)}
                   >
                     {buttonTitle}
                   </MDBBtn>

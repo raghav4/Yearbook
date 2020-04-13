@@ -22,22 +22,11 @@ class ManageQuestions extends Component {
     ],
   };
   handleAdd = (questionData) => {
-    let updatedInputValidation = {
-      apply: false,
-      message: '',
-    };
-    if (questionData.trim() === '') {
-      updatedInputValidation = {
-        apply: true,
-        message: 'Nothing to add',
-      };
-      return this.setState({ inputValidationAlert: updatedInputValidation });
-    }
     const questions = [
       ...this.state.questions,
       { id: this.state.questions.length + 1, questionData },
     ];
-    this.setState({ questions, inputValidationAlert: updatedInputValidation, inputValue: '' });
+    this.setState({ questions });
   };
 
   handleDelete = (questionId) => {
