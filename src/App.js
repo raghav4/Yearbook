@@ -4,15 +4,15 @@ import './App.css';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import AddUser from './components/admin/addUser';
+import ManagePolls from './components/admin/managePolls';
+import ManageQuestions from './components/admin/manageQuestions';
+import AdminNavBar from './components/admin/navbar';
 import Navbar from './components/common/navbar';
 import PeopleCards from './components/peopleCards';
 import ListPolls from './components/pollsList';
 import Profile from './components/profile';
 import UserInfo from './components/userInfo';
-import AdminNavBar from './components/admin/navbar';
-import ManageQuestions from './components/admin/manageQuestions';
-import ManagePolls from './components/admin/managePolls';
-import AddUser from './components/admin/addUser';
 
 function App() {
   return (
