@@ -29,7 +29,7 @@ function App() {
       <Switch>
         <Route path="/write" component={PeopleCards} />
         <Route path="/profile " component={Profile} />
-        <Route path="/polls" component={ManagePolls} />
+        <Route path="/polls" component={ManageQuestions} />
         <Route path="/" component={UserInfo} exact />
       </Switch>
     </>

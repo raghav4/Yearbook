@@ -1,40 +1,76 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import ListQuestions from './questions/listQuestion';
 
 class ManageQuestions extends Component {
   state = {
-    questions: [
-      {
-        id: 1,
-        questionData:
-          'Minima perspiciatis quibusdam deserunt impedit vero eos officiis aliquid eveniet dolorem!',
-      },
-      {
-        id: 2,
-        questionData:
-          'Volutpat sed cras ornare arcu dui vivamus. Vel quam elementum pulvinar etiam non quam lacus. Non tellus orci ac auctor augue mauris.',
-      },
-      {
-        id: 3,
-        questionData:
-          'Quis varius quam quisque id diam. Etiam dignissim diam quis enim lobortis. Nisi vitae suscipit tellus mauris a',
-      },
-    ],
+    questions: [],
+    inputValue: '',
+    inputValidationAlert: {
+      apply: false,
+      message: '',
+    },
   };
-  handleAdd = (questionData) => {
-    const questions = [
-      { id: this.state.questions.length + 1, questionData },
-      ...this.state.questions,
-    ];
-    this.setState({ questions });
+  handleChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  };
+  handleKeyPress = (e) => {
+    const code = e.keyCode || e.which;
+    if (code === 13) return this.handleAdd(e.target.value);
   };
 
-  handleDelete = (questionId) => {
-    const questions = this.state.questions.filter((q) => q.id !== questionId);
-    this.setState({ questions });
+  handleAdd = async (question) => {
+    let updatedInputValidation = {
+      apply: false,
+      message: '',
+    };
+    if (question.trim() === '') {
+      updatedInputValidation = {
+        apply: true,
+        message: 'Nothing to add',
+      };
+      return this.setState({ inputValidationAlert: updatedInputValidation });
+    }
+    const questionObject = {
+      question,
+    };
+    try {
+      const { data: questions } = await axios.post(
+        'http://localhost:3000/api/admin/questions',
+        questionObject,
+      );
+      this.setState({ questions });
+    } catch (err) {
+      console.error(err.response.data);
+      updatedInputValidation = {
+        apply: true,
+        message: err.response.data,
+      };
+      return this.setState({ inputValidationAlert: updatedInputValidation });
+    }
+    this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
   };
+
+  handleDelete = async (questionId) => {
+    try {
+      const { data: questions } = await axios.delete(
+        `http://localhost:3000/api/admin/questions/${questionId}`,
+      );
+      //const questions = this.state.questions.filter((q) => q.id !== questionId);
+      this.setState({ questions });
+    } catch (err) {
+      console.error(err.response.data);
+    }
+  };
+
+  async componentDidMount() {
+    const { data: questions } = await axios.get('http://localhost:3000/api/admin/questions');
+    // console.log(data);
+    this.setState({ questions });
+  }
+
   render() {
-    const { questions } = this.state;
+    const { questions, inputValue, inputValidationAlert } = this.state;
     return (
       <>
         <ListQuestions
@@ -42,8 +78,12 @@ class ManageQuestions extends Component {
           pageHeading="User Questions"
           placeholder="Add a question"
           questions={questions}
+          inputValue={inputValue}
+          inputValidationAlert={inputValidationAlert}
           handleAdd={this.handleAdd}
           onDelete={this.handleDelete}
+          handleKeyPress={this.handleKeyPress}
+          handleChange={this.handleChange}
         />
       </>
     );
