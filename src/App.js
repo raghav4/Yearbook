@@ -2,12 +2,13 @@
 import './App.css';
 
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import PeopleCards from './components/user/writes/peopleCards';
-import Profile from './components/user/profile/profile';
+import {Redirect, Route, Switch} from 'react-router-dom';
+
 import ManageQuestions from './components/admin/manageQuestions';
 import UserInfo from './components/user/details';
 import Navbar from './components/user/navbar';
+import Profile from './components/user/profile/profile';
+import PeopleCards from './components/user/writes/peopleCards';
 
 function App() {
   return (
