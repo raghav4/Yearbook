@@ -36,6 +36,7 @@ class ManagePolls extends Component {
     const questions = [
       { id: this.state.questions.length + 1, questionData },
       ...this.state.questions,
+      ,
     ];
     this.setState({ questions, inputValidationAlert: updatedInputValidation, inputValue: '' });
   };

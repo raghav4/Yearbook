@@ -6,7 +6,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/common/navbar';
 import PeopleCards from './components/peopleCards';
-import ListPolls from './components/polls';
+import ListPolls from './components/pollsList';
 import Profile from './components/profile';
 import UserInfo from './components/userInfo';
 import AdminNavBar from './components/admin/navbar';
@@ -29,7 +29,7 @@ function App() {
       <Switch>
         <Route path="/write" component={PeopleCards} />
         <Route path="/profile " component={Profile} />
-        <Route path="/polls" component={ListPolls} />
+        <Route path="/polls" component={ManagePolls} />
         <Route path="/" component={UserInfo} exact />
       </Switch>
     </>

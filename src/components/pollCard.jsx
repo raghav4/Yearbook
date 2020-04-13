@@ -9,15 +9,15 @@ import {
   MDBContainer,
 } from 'mdbreact';
 
-const PollCard = () => {
+const PollCard = ({ questionTitle, persons }) => {
   return (
     <>
       <div className="d-flex justify-content-center">
         <div className="">
           <MDBContainer>
             <MDBCard style={{ width: 'auto', marginTop: '2rem' }}>
-              <MDBCardHeader color="elegant-color lighten-1">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+              <MDBCardHeader color="elegant-color lighten-1 text-center">
+                {questionTitle}
               </MDBCardHeader>
               <MDBCardBody>
                 <div className="md-form active-pink active-pink-2 mb-3 mt-0">
@@ -28,40 +28,6 @@ const PollCard = () => {
                     aria-label="Search"
                   />
                 </div>
-                <div className="form-check">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="materialGroupExample1"
-                    name="groupOfMaterialRadios"
-                  />
-                  <label className="form-check-label" htmlFor="materialGroupExample1">
-                    <p>Inverness McKenzie</p>
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="materialGroupExample2"
-                    name="groupOfMaterialRadios"
-                  />
-                  <label className="form-check-label" htmlFor="materialGroupExample2">
-                    <p>Dominic L. Ement</p>
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    type="radio"
-                    className="form-check-input"
-                    id="materialGroupExample3"
-                    name="groupOfMaterialRadios"
-                  />
-                  <label className="form-check-label" htmlFor="materialGroupExample3">
-                    <p>Malcolm Function</p>
-                  </label>
-                </div>
-                {/* </MDBCardText> */}
               </MDBCardBody>
             </MDBCard>
           </MDBContainer>
