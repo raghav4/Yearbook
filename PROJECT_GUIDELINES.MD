@@ -16,14 +16,14 @@
   
 
 # Important points
-1. Branch name should follow this format: (type)/(ticket-number)
+1. Branch name should follow this format: (type)/(small-description)
 
 	| Type|Example|Commit Prefix
 	|----------------|--------------|-------
-	  **Feature**| feature/123| feat:
-	  **Bug**|bug/123| fix:
-	  **Hot Fix**|hotfix/123| fix:
-	  **Docs**|docs/123| docs:
+	  **Feature**| feature/small-description| feat:
+	  **Bug**|bug/small-description| fix:
+	  **Hot Fix**|hotfix/small-description| fix:
+	  **Docs**|docs/small-description| docs:
 
 2. Make sure to create new branch for every ticket.
 3. Prefix your commit messages with `fix:`, `feat:`, or `docs:`
