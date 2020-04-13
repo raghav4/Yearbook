@@ -2,7 +2,7 @@
 import './App.css';
 
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import ManageQuestions from './components/admin/manageQuestions';
 import UserInfo from './components/user/details';
