@@ -32,9 +32,6 @@ class Navbar extends Component {
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
               <MDBNavItem>
-                <MDBNavLink to="/login">LogIn</MDBNavLink>
-              </MDBNavItem>
-              <MDBNavItem>
                 <MDBNavLink to="/">Home</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -48,6 +45,11 @@ class Navbar extends Component {
               <MDBNavItem>
                 <MDBNavLink className="waves-effect waves-light" to="/profile">
                   Profile
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink className="waves-effect waves-light" to="/details">
+                  User Details
                 </MDBNavLink>
               </MDBNavItem>
             </MDBNavbarNav>

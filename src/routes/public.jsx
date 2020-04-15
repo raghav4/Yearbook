@@ -1,22 +1,19 @@
 import React from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-const PublicRoutes = () => {
+const PublicRoute = () => {
   return (
-    <>
-      <ul>
-        <li>
-          <Link to="/admin">Admin</Link>
-        </li>
-        <li>
-          <Link to="/user">User</Link>
-        </li>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
-    </>
+    <Route
+      render={() => {
+        if (localStorage.getItem('token')) {
+          console.log('ok');
+          return <Redirect to="/" />;
+        }
+        return <h1>Hello from public</h1>;
+        // return <h1>Hello World</h1>;
+      }}
+    />
   );
 };
 
-export default PublicRoutes;
+export default PublicRoute;

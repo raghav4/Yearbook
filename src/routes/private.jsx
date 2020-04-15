@@ -1,17 +1,21 @@
 import React from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
-import UserLogIn from './userLogin';
-import AdminLogIn from './adminLogin';
+import { Link, Switch, Route, Redirect } from 'react-router-dom';
+import PrivateLayout from '../layouts/private';
 
-const PrivateRoutes = () => {
+const PrivateRoute = ({ component, ...rest }) => {
   return (
-    <>
-      <Switch>
-        <Route path="/admin" component={AdminLogIn} />
-        <Route path="/user" component={UserLogIn} />
-      </Switch>
-    </>
+    <PrivateLayout>
+      <Route
+        render={() => {
+          if (!localStorage.getItem('token')) {
+            console.log('ok');
+            return <Redirect to="/login" />;
+          }
+          return component;
+        }}
+      />
+    </PrivateLayout>
   );
 };
 
-export default PrivateRoutes;
+export default PrivateRoute;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import LoginForm from '../components/common/loginForm';
 import PeopleCards from '../components/user/writes/peopleCards';
 import Profile from '../components/user/profile/profile';
@@ -7,24 +7,67 @@ import ListPolls from '../components/user/polls/list';
 import UserInfo from '../components/user/details';
 import NotFound from './404';
 import Navbar from '../components/user/navbar';
-import Footer from '../components/common/footer';
-
+import PrivateRoute from './private';
+import PublicRoute from './public';
+const Hello = () => {
+  return <h1>Hi bro</h1>;
+};
+const getPrivateRoutes = () => {
+  const routes = [
+    {
+      path: '/',
+      component: <h1>path component</h1>,
+    },
+    {
+      path: '/write',
+      component: UserInfo,
+    },
+    {
+      path: '/profile',
+      component: Profile,
+    },
+    {
+      path: '/polls',
+      component: ListPolls,
+    },
+    {
+      path: '/details',
+      component: UserInfo,
+    },
+  ];
+  return routes.map((route) => {
+    return <PrivateRoute path={route.path} component={route.component} />;
+  });
+};
+const getPublicRoutes = () => {
+  const routes = [
+    {
+      path: '/login',
+      component: LoginForm,
+    },
+  ];
+  return routes.map((route) => {
+    return <PublicRoute path={route.path} component={route.component} />;
+  });
+};
 const Routes = () => {
   return (
-    <>
-      <Navbar />
+    <BrowserRouter>
       <Switch>
         {/* Public Routes */}
-        <Route path="/login" component={LoginForm} />
+        {/* <PublicRoute path="/login" component={LoginForm} /> */}
+        {getPublicRoutes()}
         {/* Private Routes */}
-        <Route path="/write" component={PeopleCards} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/polls" component={ListPolls} />
-        <Route path="/not-found" component={NotFound} />
-        <Route path="/" exact component={UserInfo} />
-        <Redirect to="/not-found" />
+        {getPrivateRoutes()}
+        {/* <PrivateRoute path="/" component={<h1>changed</h1>} />
+        <PrivateRoute path="/write" component={UserInfo} />
+        <PrivateRoute path="/profile" component={Profile} />
+        <PrivateRoute path="/polls" component={ListPolls} />
+        <PrivateRoute path="/details" component={UserInfo} /> */}
+        <Route path="*" component={NotFound} />
+        {/* <Redirect to="/not-found" /> */}
       </Switch>
-    </>
+    </BrowserRouter>
   );
 };
 
