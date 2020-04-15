@@ -19,6 +19,7 @@
     "react-cookies": "^0.1.1",
     "react-dom": "^16.13.0",
     "react-dropzone": "^10.2.2",
+    "react-facebook-login": "^4.1.1",
     "react-firebaseui": "^4.1.0",
     "react-flip-move": "^3.0.4",
     "react-google-login": "^5.1.3",

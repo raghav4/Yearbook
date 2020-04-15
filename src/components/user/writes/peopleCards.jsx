@@ -1,28 +1,27 @@
 /* eslint-disable arrow-parens */
 import React, { Component } from 'react';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import SearchIcon from '@material-ui/icons/Search';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FlipMove from 'react-flip-move';
 import axios from 'axios';
+import FlipMove from 'react-flip-move';
+import Input from '@material-ui/core/Input';
+import SearchIcon from '@material-ui/icons/Search';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Select from '../../common/select';
 import PeopleCard from './peopleCard';
 
 class PeopleCards extends Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
-    // eslint-disable-next-line react/no-unused-state
+    ProgressBar: true,
     departments: [],
     sections: [],
-    // eslint-disable-next-line react/no-unused-state
     persons: [],
     people: [],
     modal8: false,
     modal9: false,
   };
   async componentDidMount() {
-    const { data: persons } = await axios.get('http://localhost:3000/api/user');
+    const { data: persons } = await axios.get('https://yb-server.herokuapp.com/api/user');
     let departments = persons.map((e) => {
       return e.department;
     });
@@ -38,11 +37,13 @@ class PeopleCards extends Component {
         keyB = b.section;
       return keyA > keyB;
     });
-    this.setState({ persons });
-    this.setState({ people: persons });
-    this.setState({ sections });
-    this.setState({ departments });
-    // console.log(departments);
+    this.setState({
+      persons,
+      sections,
+      departments,
+      people: persons,
+      ProgressBar: !this.state.ProgressBar,
+    });
   }
 
   UNSAFE_componentWillMount() {
@@ -56,6 +57,13 @@ class PeopleCards extends Component {
       (person) => person.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1,
     );
     this.setState({ people: updatedPeople });
+  };
+  handleDepartmentSelect = (e) => {
+    e.persist();
+    console.log(e.target.value);
+    // if (e.target.value === 'ALL') return this.setState({ people: this.state.persons });
+    // const persons = this.state.persons.filter((person) => person.department === e.target.value[0]);
+    // this.setState({ people: persons });
   };
   handleSectionSelect = (e) => {
     e.persist();
@@ -73,10 +81,13 @@ class PeopleCards extends Component {
   };
 
   render() {
-    const { departments, sections, persons, people } = this.state;
+    const { ProgressBar, departments, sections, persons, people } = this.state;
 
     return (
       <>
+        {ProgressBar && (
+          <LinearProgress variant="indeterminate" value="completed" color="primary" />
+        )}
         <div className="ml-5 mr-5 mt-5 mb-5 active-cyan-3 active-cyan-4">
           <Input
             className="form-control"
@@ -101,7 +112,7 @@ class PeopleCards extends Component {
               <Select
                 selectTitle="Choose the Department"
                 options={departments}
-                handleSelectInput={this.handleSelectInput}
+                // handleSelectInput={this.handleDepartmentSelect}
               />
             </div>
             <div className="col">
@@ -116,7 +127,7 @@ class PeopleCards extends Component {
         <div className="ml-4 mr-4 mt-5 mb-5 row row-cols-1 row-cols-md-3">
           {people.map((person) => (
             <FlipMove duration={420}>
-              <div className="card-deck col mb-4" key={person._id}>
+              <div className="col mb-4" key={person._id}>
                 <PeopleCard
                   key={person.id}
                   person={person}

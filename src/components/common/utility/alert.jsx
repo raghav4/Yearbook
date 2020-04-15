@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export default class AlertPopUp extends Component {
   constructor() {
     super();
-    this.HandleClick = this.HandleClick.bind(this);
+    // this.HandleClick = this.HandleClick.bind(this);
   }
 
   HandleClick() {
@@ -29,7 +29,7 @@ export default class AlertPopUp extends Component {
   render() {
     return (
       <div>
-        <button class="btn btn-success" onClick={this.HandleClick}>
+        <button class="btn btn-success" onClick={() => this.HandleClick()}>
           Show Success Alert
         </button>
       </div>

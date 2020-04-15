@@ -7,10 +7,8 @@ import {
   MDBNavLink,
   MDBNavbarToggler,
   MDBCollapse,
-  MDBIcon,
 } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
   state = {
@@ -26,11 +24,16 @@ class Navbar extends Component {
       <>
         <MDBNavbar color="special-color-dark" dark expand="md">
           <MDBNavbarBrand>
-            <strong className="white-text">YearBook</strong>
+            <NavLink to="/">
+              <strong className="white-text">YearBook</strong>
+            </NavLink>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse} />
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
+              <MDBNavItem>
+                <MDBNavLink to="/login">LogIn</MDBNavLink>
+              </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="/">Home</MDBNavLink>
               </MDBNavItem>

@@ -30,12 +30,12 @@ const SocialLogin = () => {
           data-auto-logout-link="false"
           data-use-continue-as="true"
         ></div>
-        <div
+        {/* <div
           className="g-signin2 mt-1"
           style={{ border: '5%' }}
           data-width="200"
           data-height="30"
-        ></div>
+        ></div> */}
       </div>
     </>
   );

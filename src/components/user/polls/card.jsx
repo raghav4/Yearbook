@@ -8,14 +8,15 @@ import {
   MDBBtn,
   MDBContainer,
 } from 'mdbreact';
+import RadioButton from '../../common/radio';
 
-const PollCard = ({ questionTitle, persons }) => {
+const PollCard = ({ questionTitle, persons, HandleClick }) => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="">
+        <div className="mb-4 card-body">
           <MDBContainer>
-            <MDBCard style={{ width: 'auto', marginTop: '2rem' }}>
+            <MDBCard style={{ width: '300px', marginTop: '2rem' }}>
               <MDBCardHeader color="elegant-color lighten-1 text-center">
                 {questionTitle}
               </MDBCardHeader>
@@ -28,6 +29,13 @@ const PollCard = ({ questionTitle, persons }) => {
                     aria-label="Search"
                   />
                 </div>
+                <ul>
+                  <RadioButton
+                    persons={persons}
+                    question={questionTitle}
+                    HandleClick={HandleClick}
+                  />
+                </ul>
               </MDBCardBody>
             </MDBCard>
           </MDBContainer>

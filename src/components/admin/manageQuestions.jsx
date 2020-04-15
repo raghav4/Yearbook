@@ -36,7 +36,7 @@ class ManageQuestions extends Component {
     };
     try {
       const { data: questions } = await axios.post(
-        'http://localhost:3000/api/admin/questions',
+        'https://yb-server.herokuapp.com/api/admin/questions',
         questionObject,
       );
       this.setState({ questions });
@@ -54,7 +54,7 @@ class ManageQuestions extends Component {
   handleDelete = async (questionId) => {
     try {
       const { data: questions } = await axios.delete(
-        `http://localhost:3000/api/admin/questions/${questionId}`,
+        `https://yb-server.herokuapp.com/api/admin/questions/${questionId}`,
       );
       //const questions = this.state.questions.filter((q) => q.id !== questionId);
       this.setState({ questions });
@@ -64,7 +64,9 @@ class ManageQuestions extends Component {
   };
 
   async componentDidMount() {
-    const { data: questions } = await axios.get('http://localhost:3000/api/admin/questions');
+    const { data: questions } = await axios.get(
+      'https://yb-server.herokuapp.com/api/admin/questions',
+    );
     // console.log(data);
     this.setState({ questions });
   }

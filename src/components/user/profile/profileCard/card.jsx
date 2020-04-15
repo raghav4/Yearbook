@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import PhoneIcon from '@material-ui/icons/Phone';
 import Fab from '@material-ui/core/Fab';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
