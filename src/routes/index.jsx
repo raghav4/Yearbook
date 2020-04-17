@@ -6,12 +6,9 @@ import Profile from '../components/user/profile/profile';
 import ListPolls from '../components/user/polls/list';
 import UserInfo from '../components/user/details';
 import NotFound from './404';
-import Navbar from '../components/user/navbar';
 import PrivateRoute from './private';
 import PublicRoute from './public';
-const Hello = () => {
-  return <h1>Hi bro</h1>;
-};
+
 const getPrivateRoutes = () => {
   const routes = [
     {
@@ -20,34 +17,34 @@ const getPrivateRoutes = () => {
     },
     {
       path: '/write',
-      component: UserInfo,
+      component: <PeopleCards />,
     },
     {
       path: '/profile',
-      component: Profile,
+      component: <Profile />,
     },
     {
       path: '/polls',
-      component: ListPolls,
+      component: <ListPolls />,
     },
     {
       path: '/details',
-      component: UserInfo,
+      component: <UserInfo />,
     },
   ];
   return routes.map((route) => {
-    return <PrivateRoute path={route.path} component={route.component} />;
+    return <PrivateRoute exact path={route.path} component={route.component} />;
   });
 };
 const getPublicRoutes = () => {
   const routes = [
     {
       path: '/login',
-      component: LoginForm,
+      component: <LoginForm />,
     },
   ];
   return routes.map((route) => {
-    return <PublicRoute path={route.path} component={route.component} />;
+    return <PublicRoute exact path={route.path} component={route.component} />;
   });
 };
 const Routes = () => {
