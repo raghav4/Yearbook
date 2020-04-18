@@ -7,6 +7,7 @@ import {
   MDBNavLink,
   MDBNavbarToggler,
   MDBCollapse,
+  MDBLink,
 } from 'mdbreact';
 import { NavLink } from 'react-router-dom';
 
@@ -51,6 +52,14 @@ class Navbar extends Component {
                 <MDBNavLink className="waves-effect waves-light" to="/details">
                   User Details
                 </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBLink
+                  className="waves-effect waves-light"
+                  onClick={() => delete localStorage.token}
+                >
+                  Log Out
+                </MDBLink>
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>

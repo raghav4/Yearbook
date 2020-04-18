@@ -1,16 +1,6 @@
 import React from 'react';
-import {
-  MDBCard,
-  MDBCardBody,
-  // MDBCardTitle,
-  // MDBCardText,
-  // MDBBtn,
-  MDBCardHeader,
-  MDBContainer,
-} from 'mdbreact';
-// import FlipMove from 'react-flip-move';
-
-const Box = () => {
+import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
+const Box = ({ answer }) => {
   return (
     <>
       <div className="d-flex justify-content-center">
@@ -18,13 +8,9 @@ const Box = () => {
           <MDBContainer>
             <MDBCard className="mt-3 mb-3">
               <MDBCardHeader color="special-color-dark lighten-1">
-                What is that one thing you'll miss the most?
+                {answer.questionId.question}
               </MDBCardHeader>
-              <MDBCardBody>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quisquam voluptatum
-                eveniet quis. Voluptas eius, laudantium reprehenderit repellendus dolor praesentium
-                non illo ab dignissimos sapiente doloribus odit neque, consectetur dolore?
-              </MDBCardBody>
+              <MDBCardBody>{answer.answer}</MDBCardBody>
             </MDBCard>
           </MDBContainer>
         </div>

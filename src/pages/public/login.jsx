@@ -1,54 +1,50 @@
 import React, { Component } from 'react';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   state = {
-    loggedIn: {
-      status: false,
-      role: '',
-    },
+    loggedIn: false,
   };
-  handleLogIn = () => {
-    //this.props.history.push('/login');
-    const loggedIn = {
-      status: !this.state.loggedIn.status,
-      role: 'User',
-    };
-    this.setState({ loggedIn });
-    localStorage.setItem('token', 4);
-  };
-  handleLogOut = () => {
-    const loggedIn = {
-      status: !this.state.loggedIn.status,
-      role: '',
-    };
-    this.setState({ loggedIn });
-    delete localStorage.token;
+  submitHandler = () => {
+    this.state.loggedIn === true ? delete localStorage.token : localStorage.setItem('token', 4);
+    this.setState({ loggedIn: !this.state.loggedIn });
+    window.location.reload();
   };
   render() {
     const { loggedIn } = this.state;
     return (
       <>
-        {!loggedIn.status && (
-          <div className="text-center">
-            <p className="text-center mt-5">Nobody is Logged in</p>
-            <button className="btn btn-primary btn-sm" onClick={() => this.handleLogIn()}>
-              Log In
-            </button>
+        <div className="d-flex justify-content-center">
+          <div className="jumbotron col-md-3 mx-5 my-5">
+            <MDBContainer>
+              <MDBRow>
+                <MDBCol>
+                  <form className="needs-validation">
+                    <p className="h4 text-center mb-4">Sign In</p>
+                    <p className="p-responsive text-center mx-3 text-gray">
+                      Enter your WhatsApp Number
+                    </p>
+                    {/* <small id="emailHelp" className="form-text text-muted">
+                      We'll never share your email with anyone else.
+                    </small> */}
+                    <MDBInput type="tel" label="Phone Number" outline required></MDBInput>
+
+                    <div className="text-center mt-4">
+                      <MDBBtn color="unique" type="button" onClick={this.submitHandler}>
+                        Continue
+                      </MDBBtn>
+                    </div>
+                    <p className="text-center mt-3 mr-2">
+                      Not a member?{'  '}
+                      <Link to="/signup">Register</Link>
+                    </p>
+                  </form>
+                </MDBCol>
+              </MDBRow>
+            </MDBContainer>
           </div>
-        )}
-        {loggedIn.status && (
-          <div className="text-center">
-            <p className="text-center mt-5">
-              Logged In as{' '}
-              <span className="text-center mt-5" style={{ color: 'red' }}>
-                {loggedIn.role}
-              </span>
-            </p>
-            <button className="btn btn-success btn-sm" onClick={() => this.handleLogOut()}>
-              Log Out
-            </button>
-          </div>
-        )}
+        </div>
       </>
     );
   }

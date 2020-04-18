@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
+import axios from 'axios';
 import PersonalCard from './profileCard/card';
 import Box from './questions/self';
 import OthersWrite from './questions/others';
-import axios from 'axios';
+
 class Profile extends Component {
-  state = {};
+  state = {
+    selfAnswers: [],
+  };
   async componentDidMount() {
-    const { data: messages } = await axios.get(
+    const { data: questions } = await axios.get(
       'https://yb-server.herokuapp.com/api/answer/5e956c060fda390017da67b7',
     );
-    console.log(messages);
+    const selfAnswers = _.map(questions, _.partialRight(_.pick, ['answer', 'questionId']));
+    this.setState({ selfAnswers });
   }
 
   render() {
@@ -19,7 +24,11 @@ class Profile extends Component {
           <div className="row">
             <div className="col-sm-8 order-2 order-lg-1" style={{ backgroundColor: 'white' }}>
               <h3 className="h3-responsive text-center">Answers about yourself</h3>
-              <Box />
+              <div className="card-group">
+                {this.state.selfAnswers.map((answer) => (
+                  <Box answer={answer} />
+                ))}
+              </div>
               <h3 className="h3-responsive text-center">Answers others have written for you</h3>
               <OthersWrite />
             </div>
