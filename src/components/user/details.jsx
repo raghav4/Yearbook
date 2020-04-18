@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { MDBInput } from 'mdbreact';
-import { LinearProgress } from '@material-ui/core';
-import Dropzone from 'react-dropzone';
+// import { MDBInput } from 'mdbreact';
+// import { LinearProgress } from '@material-ui/core';
+// import Dropzone from 'react-dropzone';
 import DropPicture from '../common/utility/imageDrop';
 
 class UserInfo extends Component {

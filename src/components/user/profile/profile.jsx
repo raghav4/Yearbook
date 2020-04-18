@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import PersonalCard from './profileCard/card';
 import Box from './questions/self';
 import OthersWrite from './questions/others';
+import axios from 'axios';
 class Profile extends Component {
   state = {};
+  async componentDidMount() {
+    const { data: messages } = await axios.get(
+      'https://yb-server.herokuapp.com/api/answer/5e956c060fda390017da67b7',
+    );
+    console.log(messages);
+  }
 
   render() {
     return (

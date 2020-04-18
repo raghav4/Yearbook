@@ -8,12 +8,13 @@ class LoginForm extends Component {
     },
   };
   handleLogIn = () => {
-    this.props.history.push('/login');
+    //this.props.history.push('/login');
     const loggedIn = {
       status: !this.state.loggedIn.status,
       role: 'User',
     };
     this.setState({ loggedIn });
+    localStorage.setItem('token', 4);
   };
   handleLogOut = () => {
     const loggedIn = {
@@ -21,6 +22,7 @@ class LoginForm extends Component {
       role: '',
     };
     this.setState({ loggedIn });
+    delete localStorage.token;
   };
   render() {
     const { loggedIn } = this.state;

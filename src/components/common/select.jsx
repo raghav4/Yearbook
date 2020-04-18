@@ -5,7 +5,7 @@ const Select = ({ selectTitle, options, handleSelectInput }) => {
   return (
     <>
       <select className="custom-select custom-select-md" onChange={handleSelectInput}>
-        <option disabled value="" selected>
+        <option disabled value="" defaultValue>
           {selectTitle}
         </option>
         {options.map((option) => (

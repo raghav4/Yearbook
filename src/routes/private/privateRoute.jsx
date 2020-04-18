@@ -8,7 +8,6 @@ const PrivateRoute = ({ component, ...rest }) => {
       <Route
         exact
         render={() => {
-          console.log(component);
           if (!localStorage.getItem('token')) {
             return <Redirect to="/login" />;
           }

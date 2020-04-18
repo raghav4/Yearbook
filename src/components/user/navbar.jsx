@@ -8,7 +8,7 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
 } from 'mdbreact';
-import { BrowserRouter as Router, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
   state = {

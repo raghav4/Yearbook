@@ -39,7 +39,7 @@ class ListPolls extends Component {
       <>
         {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
         <h2 className="h2-responsive text-center mt-5">Vote for the Polls</h2>
-        <div className="mx-4 mb-5 row row-cols-1 row-cols-md-3">
+        <div className="mx-4 mb-5 row row-cols-1 row-cols-md-4">
           {questions.map((question) => (
             <PollCard
               key={question._id}
