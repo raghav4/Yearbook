@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginForm from '../components/common/loginForm';
 import PeopleCards from '../components/user/writes/peopleCards';
 import Profile from '../components/user/profile/profile';
@@ -33,7 +33,7 @@ const getPrivateRoutes = () => {
     },
   ];
   return routes.map((route) => {
-    return <PrivateRoute exact path={route.path} component={route.component} />;
+    return <PrivateRoute exact key={route.path} path={route.path} component={route.component} />;
   });
 };
 const getPublicRoutes = () => {
@@ -44,7 +44,7 @@ const getPublicRoutes = () => {
     },
   ];
   return routes.map((route) => {
-    return <PublicRoute exact path={route.path} component={route.component} />;
+    return <PublicRoute exact key={route.path} path={route.path} component={route.component} />;
   });
 };
 const Routes = () => {
@@ -52,17 +52,10 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         {/* Public Routes */}
-        {/* <PublicRoute path="/login" component={LoginForm} /> */}
         {getPublicRoutes()}
         {/* Private Routes */}
         {getPrivateRoutes()}
-        {/* <PrivateRoute path="/" component={<h1>changed</h1>} />
-        <PrivateRoute path="/write" component={UserInfo} />
-        <PrivateRoute path="/profile" component={Profile} />
-        <PrivateRoute path="/polls" component={ListPolls} />
-        <PrivateRoute path="/details" component={UserInfo} /> */}
         <Route path="*" component={NotFound} />
-        {/* <Redirect to="/not-found" /> */}
       </Switch>
     </BrowserRouter>
   );

@@ -2,13 +2,13 @@ import React from 'react';
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
+  // MDBCardTitle,
+  // MDBCardText,
+  // MDBBtn,
   MDBCardHeader,
-  MDBBtn,
   MDBContainer,
 } from 'mdbreact';
-import FlipMove from 'react-flip-move';
+// import FlipMove from 'react-flip-move';
 
 const Box = () => {
   return (

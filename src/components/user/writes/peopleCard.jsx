@@ -2,27 +2,32 @@ import React, { Component } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
 import ModalBox from './modal';
 class PeopleCard extends Component {
-  state = {
-    modalOpen: false,
-    modalHeader: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalOpen: false,
+      modalHeader: '',
+      modalValue: 'baba this is placeholder',
+    };
+  }
   triggerModal = (id) => {
-    console.log(id);
+    //console.log(id);
     this.setState({ modalOpen: !this.state.modalOpen });
-  };
-  toggelModal = (nr) => {
-    // fix this in toggle box
-    // console.log(nr);
   };
   getBadgeClass() {
     let classes = 'badge badge-';
-    // classes += this.props.person.section == 'A' ? 'primary' : 'warning';
     let badgeClass = ['primary', 'success', 'warning'];
     classes += badgeClass[this.props.person.section.charCodeAt(0) - 65];
     return classes;
   }
+  submitModalMessage(e) {
+    console.log(e);
+    // this.setState({ modalValue: 'ok' });
+    // console.log(this.state.modalValue);
+  }
   render() {
     const { personName, personBio, personImageUrl, person } = this.props;
+    const { modalValue, modalOpen } = this.state;
     return (
       <>
         <div className="card mb-4 card-body" style={{ borderRadius: '3%' }}>
@@ -60,9 +65,10 @@ class PeopleCard extends Component {
             Write
           </button>
           <ModalBox
-            toggleOpen={this.state.modalOpen}
-            toggelModal={this.toggelModal}
             triggerModal={this.triggerModal}
+            submitModalMessage={this.submitModalMessage}
+            toggleOpen={modalOpen}
+            modalValue={modalValue}
             personName={personName}
             person={person}
           />

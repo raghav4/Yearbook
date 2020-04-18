@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { makeStyles } from '@material-ui/core/styles';
 import PhoneIcon from '@material-ui/icons/Phone';
-import Fab from '@material-ui/core/Fab';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import Box from '../questions/self';
 
 class PersonalCard extends Component {
   state = {};
