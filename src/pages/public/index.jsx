@@ -1,4 +1,5 @@
 import Login from './login';
 import SignUp from './signup';
+import ForgotPassword from './forgotPassword';
 
-export { Login, SignUp };
+export { Login, SignUp, ForgotPassword };
