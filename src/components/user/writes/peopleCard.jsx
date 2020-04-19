@@ -37,7 +37,8 @@ class PeopleCard extends Component {
           <div className="view overlay mb-3">
             {(personImageUrl && (
               <img
-                className="card-img-top img-fluid z-depth-1"
+                // style={{ width: '100%', height: '15vw', objectFit: 'cover' }}
+                className="img-thumbnail img-fluid z-depth-1"
                 src={personImageUrl}
                 alt="Card cap"
               />

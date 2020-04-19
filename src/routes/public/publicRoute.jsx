@@ -6,6 +6,7 @@ const PublicRoute = ({ component, ...rest }) => {
   return (
     <PublicLayout>
       <Route
+        exact
         render={() => {
           if (localStorage.getItem('token')) {
             return <Redirect to="/" />;
