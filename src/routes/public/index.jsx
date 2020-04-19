@@ -1,10 +1,11 @@
 import React from 'react';
-import { Login, SignUp, ForgotPassword } from '../../pages';
+import { Login, SignUp, ForgotPassword, LandingPage } from '../../pages';
 
 import PublicRoute from './publicRoute';
 
 const publicRoutes = () => {
   const routes = [
+    { path: '/', component: <LandingPage /> },
     { path: '/login', component: <Login /> },
     { path: '/signup', component: <SignUp /> },
     { path: '/reset', component: <ForgotPassword /> },

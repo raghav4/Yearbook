@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { MDBInput } from 'mdbreact';
+import { MDBInput } from 'mdbreact';
 // import { LinearProgress } from '@material-ui/core';
 // import Dropzone from 'react-dropzone';
 import DropPicture from '../common/utility/imageDrop';
@@ -13,12 +13,12 @@ class UserInfo extends Component {
           <div className="col-md-6 mt-5">
             <div className="jumbotron ml-3 mr-3">
               <h2 className="h1-responsive text-center">Hello, Raghav! 👋🏻</h2>
-              <p className="alert alert-success text-justify-center">
+              {/* <p className="alert alert-success text-justify-center">
                 Please update some of your information which will be listed on your profile and
                 yearbook after the compilation is done. <br />
                 Also, Please add those contact details where people can reach out to you in future.
                 Good Luck! 😄
-              </p>
+              </p> */}
               <form>
                 <div className="row">
                   <div className="col-md-12">
@@ -69,54 +69,30 @@ class UserInfo extends Component {
                   <div className="row">
                     <div className="col">
                       <form>
-                        <div className="form-row">
-                          <div className="col-md-12">
-                            <div className="md-form form-group">
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="inputAddress2MD"
-                                placeholder="👧🏻/👦🏻 Your Name"
-                              />
-                              <label htmlFor="inputAddress2MD"></label>
-                            </div>
+                        <div className="">
+                          <MDBInput type="text" label="Full Name" outline required></MDBInput>
+                          <MDBInput type="text" label="Email" outline required></MDBInput>
+
+                          {/* <div className="col-md-12">
+                            <MDBInput type="text" label="Full Name" outline required></MDBInput>
                           </div>
                           <div className="col-md-6">
-                            <div className="md-form form-group">
-                              <input
-                                type="email"
-                                className="form-control"
-                                id="inputEmail4MD"
-                                placeholder="📧 Email"
-                              />
-                              <label htmlFor="inputEmail4MD"></label>
-                            </div>
+                            <MDBInput type="text" label="Email" outline required></MDBInput>
                           </div>
 
                           <div className="col-md-6">
-                            <div className="md-form form-group">
-                              <input
-                                type="tel"
-                                className="form-control"
-                                id="inputPassword4MD"
-                                placeholder="📱 Phone Number"
-                              />
-                              <label htmlFor="inputPassword4MD">{/*Password*/}</label>
-                            </div>
+                            <MDBInput type="tel" label="Phone Number" outline required></MDBInput>
                           </div>
+                          <div className="col-md-6">
+                            <MDBInput type="text" label="Instagram" outline required></MDBInput>
+                          </div>
+
+                          <div className="col-md-6">
+                            <MDBInput type="tel" label="Facebook" outline required></MDBInput>
+                          </div>
+                           */}
                         </div>
                         <div className="row">
-                          <div className="col-md-12">
-                            <div className="md-form form-group">
-                              <input
-                                type="text"
-                                className="form-control"
-                                id="inputAddressMD"
-                                placeholder="linkedin url"
-                              />
-                              <label htmlFor="inputAddressMD">{/*Address*/}</label>
-                            </div>
-                          </div>
                           <div className="col-md-12">
                             <div className="md-form form-group">
                               <input
@@ -154,7 +130,9 @@ class UserInfo extends Component {
                             </div>
                           </div>
                         </div>
-                        <div className="md-form form-group">
+                        <MDBInput type="text" label="Update Your Bio" outline required></MDBInput>
+
+                        {/* <div className="md-form form-group">
                           <p className="p-responsive text-left" style={{ color: '#616161' }}>
                             Update your Bio
                           </p>
@@ -165,7 +143,7 @@ class UserInfo extends Component {
                             outline
                           />
                           <label htmlFor="inputAddress2MD"></label>
-                        </div>
+                        </div> */}
                         <div className="text-center">
                           <button type="submit" className="btn btn-primary">
                             Submit

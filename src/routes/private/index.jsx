@@ -9,7 +9,8 @@ import PrivateRoute from './privateRoute';
 
 const privateRoutes = () => {
   const routes = [
-    { path: '/', component: <h1>path component</h1> },
+    // TODO #22: Fix '/' route
+    { path: '/', component: <Profile /> },
     { path: '/write', component: <PeopleCards /> },
     { path: '/profile', component: <Profile /> },
     { path: '/polls', component: <ListPolls /> },
