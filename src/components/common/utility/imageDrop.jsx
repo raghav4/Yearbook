@@ -39,12 +39,12 @@ const DropPicture = (props) => {
         <input {...getInputProps()} />
         <p>Drag 'n' drop some files here, or click to select files</p>
         <em>(Only *.jpeg and *.png images will be accepted)</em>
-        {/* <aside>
+        <aside>
           <h4>Accepted files</h4>
           <ul>{acceptedFilesItems}</ul>
           <h4>Rejected files</h4>
           <ul>{rejectedFilesItems}</ul>
-        </aside> */}
+        </aside>
       </div>
     </section>
   );

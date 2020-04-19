@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MDBInput } from 'mdbreact';
 // import { LinearProgress } from '@material-ui/core';
 // import Dropzone from 'react-dropzone';
-import DropPicture from '../common/utility/imageDrop';
+import DropPicture from '../../../components/common/utility/imageDrop';
 
 class UserInfo extends Component {
   state = {};
@@ -12,12 +12,12 @@ class UserInfo extends Component {
         <div className="d-flex justify-content-center">
           <div className="col-md-6 mt-5">
             <div className="jumbotron ml-3 mr-3">
-              <h2 className="h1-responsive text-center">Hello, Raghav! 👋🏻</h2>
+              <h2 className="h1-responsive text-center">Hello, Raghav!</h2>
               {/* <p className="alert alert-success text-justify-center">
                 Please update some of your information which will be listed on your profile and
                 yearbook after the compilation is done. <br />
                 Also, Please add those contact details where people can reach out to you in future.
-                Good Luck! 😄
+                Good Luck!
               </p> */}
               <form>
                 <div className="row">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
-import RadioButton from '../../common/radio';
-import NoResults from '../../common/noResults';
+import RadioButton from '../../../components/common/radio';
+import NoResults from '../../../components/common/noResults';
 
 class PollCard extends Component {
   state = {

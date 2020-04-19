@@ -6,9 +6,9 @@ import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Select from '../../common/select';
+import Select from '../../../components/common/select';
 import PeopleCard from './peopleCard';
-import NoResults from '../../common/noResults';
+import NoResults from '../../../components/common/noResults';
 
 class PeopleCards extends Component {
   // eslint-disable-next-line react/state-in-constructor
