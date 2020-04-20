@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import cookie from 'react-cookies';
+// import cookie from 'react-cookies';
 
 export default class Facebook extends Component {
   state = {

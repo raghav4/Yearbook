@@ -1,4 +1,5 @@
 import React from 'react';
+import cookie from 'react-cookies';
 import { Route, Redirect } from 'react-router-dom';
 import { PrivateLayout } from '../../layouts';
 
@@ -8,10 +9,9 @@ const PrivateRoute = ({ component, ...rest }) => {
       <Route
         exact
         render={() => {
-          if (!localStorage.getItem('token')) {
+          if (!cookie.load('x-auth-token')) {
             return <Redirect to="/login" />;
           }
-          console.log(component);
           return component;
         }}
       />

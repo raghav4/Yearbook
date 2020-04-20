@@ -11,7 +11,6 @@ class PeopleCard extends Component {
     };
   }
   triggerModal = (id) => {
-    //console.log(id);
     this.setState({ modalOpen: !this.state.modalOpen });
   };
   getBadgeClass() {
@@ -21,7 +20,6 @@ class PeopleCard extends Component {
     return classes;
   }
   submitModalMessage(e) {
-    console.log(e);
     // this.setState({ modalValue: 'ok' });
     // console.log(this.state.modalValue);
   }

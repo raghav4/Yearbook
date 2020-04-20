@@ -58,7 +58,6 @@ class PeopleCards extends Component {
   handleDepartmentSelect = (e) => {
     e.persist();
     if (e.target.value === 'ALL') {
-      console.log(this.state.sectionSelect);
       return this.setState({ people: this.state.persons, sectionSelect: this.state.sectionSelect });
     }
     // TODO #21: the state will update with 'people' not with the 'persons'
@@ -72,7 +71,6 @@ class PeopleCards extends Component {
   handleSectionSelect = (e) => {
     e.persist();
     if (e.target.value === 'ALL') {
-      console.log(this.state.departmentSelect);
       return this.setState({
         people: this.state.persons,
         departmentSelect: this.state.departmentSelect,
@@ -82,7 +80,6 @@ class PeopleCards extends Component {
       (person) =>
         person.section === e.target.value && person.department === this.state.departmentSelect,
     );
-    console.log(persons);
     this.setState({ people: persons, sectionSelect: e.target.value });
   };
 

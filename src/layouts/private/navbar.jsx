@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cookie from 'react-cookies';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -56,7 +57,7 @@ class Navbar extends Component {
               <MDBNavItem>
                 <MDBLink
                   className="waves-effect waves-light"
-                  onClick={() => delete localStorage.token}
+                  onClick={() => cookie.remove('x-auth-token')}
                 >
                   Log Out
                 </MDBLink>
