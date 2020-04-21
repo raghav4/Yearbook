@@ -16,7 +16,9 @@ const LandingPage = () => {
           <div className=" header">
             <div className="container-lrg">
               <div className="flex col-12 spread">
-                <Link className="h4 h4-responsive text-white">Yearbook</Link>{' '}
+                <Link to="/" className="h4 h4-responsive text-white">
+                  Yearbook
+                </Link>{' '}
                 <Link to="mailto:demo@demo.com" className="text-white h4 h4-responsive mr0">
                   Contact
                 </Link>

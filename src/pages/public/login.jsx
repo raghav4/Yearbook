@@ -18,8 +18,8 @@ const Login = (props) => {
       });
       cookie.save('x-auth-token', headers['x-auth-token']);
       history.push('/');
-    } catch (ex) {
-      console.log(ex);
+    } catch ({ response }) {
+      console.log(response.data);
     }
   };
   return (

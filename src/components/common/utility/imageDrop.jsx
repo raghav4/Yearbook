@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
+import BackupIcon from '@material-ui/icons/Backup';
 
 const DropPicture = (props) => {
   const { acceptedFiles, rejectedFiles, getRootProps, getInputProps } = useDropzone({
@@ -37,6 +38,9 @@ const DropPicture = (props) => {
     >
       <div {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
+        <div className="text-center">
+          <BackupIcon fontSize="large" />
+        </div>
         <p>Drag 'n' drop some files here, or click to select files</p>
         <em>(Only *.jpeg and *.png images will be accepted)</em>
         <aside>
