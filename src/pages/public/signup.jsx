@@ -10,12 +10,12 @@ const SignUp = () => {
   const [phoneNumber, setphoneNumber] = useState('');
   const [password, setpassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('');
-  const [isLoading, setisLoading] = useState(false);
-  const [registerButton, setregisterButton] = useState('Register');
+  const [department, setdepartment] = useState(['CSE', 'IT', 'EEE', 'ECE', 'MAE']);
+  const [section, setsection] = useState(['A', 'B', 'C']);
+
+  // TODO #23: Get Department and section from the backend
 
   const handleVerification = async ({ name, email, password, phoneNumber }) => {
-    let user;
-    let flag = true;
     Swal.mixin({
       input: 'text',
       inputValidator: (value) => {
@@ -26,9 +26,7 @@ const SignUp = () => {
       confirmButtonText: 'Next &rarr;',
       showCancelButton: true,
       showCloseButton: true,
-      onClose: () => {
-        flag = false;
-      },
+      onClose: () => {},
       // progressSteps: ['1'],
     })
       .queue([
@@ -36,46 +34,46 @@ const SignUp = () => {
           title: 'Email Verification',
           html: `Enter the OTP sent to your Email`,
         },
-        // {
-        //   title: 'Phone Verification',
-        //   text: 'Enter the OTP sent to your mobile',
-        // },
       ])
       .then(async (result) => {
         if (result.value) {
           // const answers = JSON.stringify(result.value);
-          user = {
+          const user = {
             otp: result.value[0],
             name,
             email,
             phoneNumber,
             password,
+            department,
+            section,
           };
-        }
-        try {
-          if (!flag) return;
-          await axios.post('http://localhost:3000/api/admin/user/verify', user);
-          Swal.fire({
-            icon: 'success',
-            title: 'You can login now',
-            html: '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
-            showCloseButton: true,
-            showCancelButton: true,
-            showConfirmButton: false,
-            timer: 4500,
-          });
-        } catch ({ response }) {
-          Swal.fire({
-            icon: 'error',
-            title: `${response.data}`,
-            timer: 3500,
-          });
+          try {
+            // if (!flag) return;
+            const response = await axios.post('http://localhost:3000/api/admin/user/verify', user);
+            console.log('Hello there', response);
+            console.log('another string', response.data);
+            Swal.fire({
+              icon: 'success',
+              title: 'You can login now',
+              html: '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
+              showCloseButton: true,
+              showCancelButton: true,
+              showConfirmButton: false,
+              timer: 4500,
+            });
+          } catch ({ err }) {
+            console.log('got an error');
+            console.log(err.data);
+            Swal.fire({
+              icon: 'error',
+              title: `${err.data}`,
+              timer: 3500,
+            });
+          }
         }
       });
   };
   const submitHandler = async (event) => {
-    // setisLoading(true);
-    // setregisterButton('Loading');
     // event.preventDefault();
     // event.target.className += ' was-validated';
     if ({ password }.password !== { confirmPassword }.confirmPassword) {
@@ -87,8 +85,6 @@ const SignUp = () => {
         timer: 2500,
         timerProgressBar: true,
       });
-      setisLoading(false);
-      setregisterButton('Register');
       return;
     }
     const userObject = {
@@ -96,9 +92,12 @@ const SignUp = () => {
       email: { email }.email,
       phoneNumber: { phoneNumber }.phoneNumber,
       password: { password }.password,
+      department: { department }.department,
+      section: { section }.section,
     };
     try {
       await axios.post('http://localhost:3000/api/admin/user', userObject);
+
       handleVerification(userObject);
     } catch ({ response }) {
       let timerInterval;
@@ -112,15 +111,12 @@ const SignUp = () => {
           clearInterval(timerInterval);
         },
       });
-      setisLoading(false);
-      setregisterButton('Register');
-      console.log(response.data);
     }
   };
   return (
     <>
-      <div className="d-flex justify-content-center">
-        <div className="jumbotron col-md-5 mx-5 my-5" style={{ borderRadius: '5%' }}>
+      <div className="d-flex justify-content-center mb-5">
+        <div className="jumbotron col-md-5 mx-5 my-5" style={{ borderRadius: '6%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
@@ -150,6 +146,30 @@ const SignUp = () => {
                     outline
                     required
                   ></MDBInput>
+                  <div className="my-4">
+                    <select
+                      className="browser-default custom-select"
+                      onChange={(e) => setdepartment(e.target.value)}
+                    >
+                      <option>Choose your Department</option>
+                      <option value="CSE">CSE</option>
+                      <option value="IT">IT</option>
+                      <option value="ECE">ECE</option>
+                      <option value="EEE">EEE</option>
+                      <option value="MAE">MAE</option>
+                    </select>
+                  </div>
+                  <div>
+                    <select
+                      className="browser-default custom-select"
+                      onChange={(e) => setsection(e.target.value)}
+                    >
+                      <option>Choose your Section</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                    </select>
+                  </div>
                   <MDBInput
                     type="password"
                     label="Password"
@@ -166,14 +186,7 @@ const SignUp = () => {
                   ></MDBInput>
                   <div className="text-center mt-4">
                     <MDBBtn color="unique" type="button" onClick={(e) => submitHandler(e)}>
-                      {{ isLoading }.isLoading && (
-                        <span
-                          className="spinner-border spinner-border-sm mr-2"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                      )}
-                      {{ registerButton }.registerButton}
+                      Register
                     </MDBBtn>
                   </div>
                   <p className="text-center mt-3 mr-2">

@@ -25,9 +25,9 @@ class Profile extends Component {
             <div className="col-sm-8 order-2 order-lg-1" style={{ backgroundColor: 'white' }}>
               <h3 className="h3-responsive text-center">Answers about yourself</h3>
               <div className="card-group">
-                {this.state.selfAnswers.map((answer) => (
-                  <Box answer={answer} />
-                ))}
+                {/* {this.state.selfAnswers.map((answer) => ( */}
+                <Box />
+                {/* ))} */}
               </div>
               <h3 className="h3-responsive text-center">Answers others have written for you</h3>
               <OthersWrite />

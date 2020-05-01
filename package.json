@@ -11,7 +11,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
-    "firebase": "^7.14.0",
+    "firebase": "^7.14.1",
     "firebaseui": "^4.5.0",
     "mdbreact": "^4.25.4",
     "prop-types": "^15.7.2",
@@ -27,6 +27,7 @@
     "react-otp-input": "^1.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "styled-components": "^5.1.0",
     "sweetalert2": "^9.10.10"
   },
   "scripts": {

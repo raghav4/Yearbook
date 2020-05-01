@@ -11,7 +11,7 @@ const LandingPage = () => {
             <div
               className="bg-image"
               style={{ backgroundImage: `url(https://i.imgur.com/LoiHMJo.jpg)` }}
-            ></div>
+            />
           </div>
           <div className=" header">
             <div className="container-lrg">

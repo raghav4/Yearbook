@@ -1,14 +1,10 @@
-/* eslint-disable arrow-parens */
 import React, { Component } from 'react';
 import axios from 'axios';
 import FlipMove from 'react-flip-move';
-import Input from '@material-ui/core/Input';
+import { Input, LinearProgress, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Select from '../../../components/common/select';
 import PeopleCard from './peopleCard';
-import NoResults from '../../../components/common/noResults';
+import { NoResults, Select } from '../../../components';
 
 class PeopleCards extends Component {
   // eslint-disable-next-line react/state-in-constructor

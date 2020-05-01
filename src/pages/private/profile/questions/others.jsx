@@ -3,13 +3,25 @@ import React from 'react';
 const OthersWrite = () => {
   return (
     <>
-      <div className="card border-dark mr-5 mb-3 ml-5">
+      <div className="card mx-5 my-3">
         <div className="card-body text-dark">
-          <h6 className="card-title h6-responsive">Primary Panel title</h6>
+          <h6
+            className="card-title text-left h6-responsive mb-2"
+            style={{ textDecoration: 'underline' }}
+          >
+            Raghav Sharma
+          </h6>
           <p className="card-text">
-            Some quick example text to build on the panel title and make up the bulk of the panel's
-            content.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam excepturi a explicabo
+            quaerat exercitationem quo omnis pariatur illum aperiam, ipsa neque sunt illo, ipsum
+            modi, cumque libero deleniti fuga laboriosam! Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Nulla, quia eveniet voluptatibus soluta sit dolore adipisci doloribus
+            incidunt maiores exercitationem molestias possimus, numquam, repellendus nesciunt ipsum
+            amet delectus id cum.
           </p>
+          {/* <footer class="blockquote-footer text-right text-dark h6-responsive mb-2">
+            John Doe
+          </footer> */}
         </div>
       </div>
     </>

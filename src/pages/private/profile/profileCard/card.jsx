@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
-import PhoneIcon from '@material-ui/icons/Phone';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import { Phone, WhatsApp, MailOutline, Facebook, Instagram, LinkedIn } from '@material-ui/icons';
 
 class PersonalCard extends Component {
   state = {};
@@ -13,13 +8,20 @@ class PersonalCard extends Component {
   render() {
     return (
       <>
-        <div className="card mb-4 mx-auto" style={{ width: '20rem' }}>
-          {/* <LinearProgress variant="determinate" value="completed" /> */}
+        <div
+          className="card mb-4 mx-auto"
+          style={{
+            borderTopLeftRadius: '3%',
+            borderTopRightRadius: '3%',
+            width: '20rem',
+          }}
+        >
           {(
             <img
-              className="card-img-top"
+              className="card-img-top hoverable"
               src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
               alt="Card cap"
+              style={{ borderRadius: '5%' }}
             />
           ) || <Skeleton variant="rect" width={320} height={220} animation="wave" />}
 
@@ -39,37 +41,37 @@ class PersonalCard extends Component {
             <div className="row">
               <div className="row">
                 <div className="col ml-5">
-                  <MailOutlineIcon />
+                  <MailOutline />
                 </div>
                 <div className="col pl-1">raghavsyt@gmail.com</div>
               </div>
               <div className="row">
                 <div className="col ml-5">
-                  <PhoneIcon />
+                  <Phone />
                 </div>
                 <div className="col pl-1">+919898899909</div>
               </div>
               <div className="row">
                 <div className="col ml-5">
-                  <FacebookIcon />
+                  <Facebook />
                 </div>
                 <div className="col pl-1">raghav</div>
               </div>
               <div className="row">
                 <div className="col ml-5">
-                  <WhatsAppIcon />
+                  <WhatsApp />
                 </div>
                 <div className="col pl-1">+9898899909</div>
               </div>
               <div className="row">
                 <div className="col ml-5">
-                  <LinkedInIcon />
+                  <LinkedIn />
                 </div>
                 <div className="col pl-1">raghavsharma</div>
               </div>
               <div className="row">
                 <div className="col ml-5">
-                  <InstagramIcon />
+                  <Instagram />
                 </div>
                 <div className="col pl-1">raghav</div>
               </div>

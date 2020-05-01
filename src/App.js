@@ -1,10 +1,8 @@
-/* eslint-disable react/jsx-filename-extension */
-import './App.css';
-
 import React from 'react';
 import Routes from './routes';
 
 function App() {
+  // eslint-disable-next-line react/jsx-filename-extension
   return <Routes />;
 }
 

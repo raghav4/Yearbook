@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import cookie from 'react-cookies';
 import NotFound from './404';
-
 import publicRoutes from './public';
 import privateRoutes from './private';
 import Profile from '../pages/private/profile';
@@ -27,7 +26,6 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {/* #21. Since, public route doesn't have '/' any end point to '/' thus it is getting rendered in the exact*/}
         {publicRoutes()}
         {privateRoutes()}
         <Route exact path="/" component={getComponenet} />

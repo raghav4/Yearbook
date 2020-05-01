@@ -7,10 +7,15 @@ const Box = ({ answer }) => {
         <div className="mr-5 mb-3 ml-5">
           <MDBContainer>
             <MDBCard className="mt-3 mb-3">
-              <MDBCardHeader color="special-color-dark lighten-1">
-                {answer.questionId.question}
+              <MDBCardHeader color="special-color-dark lighten-1 text-center">
+                {' '}
+                Hi Sample question
               </MDBCardHeader>
-              <MDBCardBody>{answer.answer}</MDBCardBody>
+              <MDBCardBody>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur explicabo
+                magni delectus cum illum saepe magnam officia commodi tempore quisquam, reiciendis
+                voluptatum in temporibus omnis ipsa dolores doloribus dignissimos fugit.
+              </MDBCardBody>
             </MDBCard>
           </MDBContainer>
         </div>
