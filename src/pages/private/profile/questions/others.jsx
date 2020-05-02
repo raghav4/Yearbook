@@ -19,9 +19,6 @@ const OthersWrite = () => {
             incidunt maiores exercitationem molestias possimus, numquam, repellendus nesciunt ipsum
             amet delectus id cum.
           </p>
-          {/* <footer class="blockquote-footer text-right text-dark h6-responsive mb-2">
-            John Doe
-          </footer> */}
         </div>
       </div>
     </>

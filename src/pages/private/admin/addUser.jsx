@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCardHeader,
-  MDBBtn,
-  MDBInput,
-  MDBContainer,
-} from 'mdbreact';
+import { MDBCard, MDBCardBody, MDBCardHeader, MDBBtn, MDBInput, MDBContainer } from 'mdbreact';
 
 class AddUser extends Component {
   state = {};
@@ -35,8 +26,8 @@ class AddUser extends Component {
                     <label htmlFor="inputAddress2MD"></label>
                   </div> */}
                   <div className="md-form form-group">
-                    <select class="browser-default custom-select">
-                      <option disabled selected>
+                    <select className="browser-default custom-select">
+                      <option disabled defaultValue>
                         Department
                       </option>
                       <option value="1">CSE</option>
@@ -46,13 +37,9 @@ class AddUser extends Component {
                       <option value="3">MAE</option>
                     </select>
                   </div>
-                  {/* <div className="md-form form-group">
-                    <MDBInput label="Section" outline />
-                    <label htmlFor="inputAddress2MD"></label>
-                  </div> */}
                   <div className="md-form form-group">
-                    <select class="browser-default custom-select">
-                      <option disabled selected>
+                    <select className="browser-default custom-select">
+                      <option disabled defaultValue>
                         Section
                       </option>
                       <option value="1">A</option>

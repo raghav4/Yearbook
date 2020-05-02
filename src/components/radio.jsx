@@ -19,17 +19,6 @@ const RadioButton = ({ persons, question, HandleClick }) => {
           </div>
         ))}
       </fieldset>
-      {/* <div className="custom-control custom-radio">
-        <input
-          type="radio"
-          className="custom-control-input"
-          id={person._id}
-          name="defaultExampleRadios"
-        />
-        <label className="custom-control-label" htmlFor={person._id}>
-          {title}
-        </label>
-      </div> */}
     </>
   );
 };

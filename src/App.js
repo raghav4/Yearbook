@@ -1,9 +1,14 @@
 import React from 'react';
 import Routes from './routes';
+import { GlobalStyle } from './style';
 
 function App() {
-  // eslint-disable-next-line react/jsx-filename-extension
-  return <Routes />;
+  return (
+    <>
+      <GlobalStyle />
+      <Routes />
+    </>
+  );
 }
 
 export default App;

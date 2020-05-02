@@ -29,7 +29,7 @@ export default class AlertPopUp extends Component {
   render() {
     return (
       <div>
-        <button class="btn btn-success" onClick={() => this.HandleClick()}>
+        <button className="btn btn-success" onClick={() => this.HandleClick()}>
           Show Success Alert
         </button>
       </div>

@@ -18,7 +18,7 @@ const NotFound = () => {
               fill="#00B284"
               d="M275.7 207c-46.5 0-84.3-37.8-84.3-84.3s37.8-84.3 84.3-84.3S360 76.2 360 122.7 322.2 207 275.7 207z"
             />
-            <g id="Clouds" fill="#FFF" clip-path="url(#center-circle-clip)">
+            <g id="Clouds" fill="#FFF" clipPath="url(#center-circle-clip)">
               <path
                 id="cloud-right"
                 d="M348 137c-8.5 0-15.4 6.9-15.4 15.3v.4c-4.4 1.1-7.7 5.2-7.7 10 0 5.6 4.6 10.3 10.2 10.3h5.8c7.4-9.7 12.7-21.2 15.3-33.6-2.3-1.5-5.1-2.4-8.2-2.4z"
@@ -41,7 +41,7 @@ const NotFound = () => {
               opacity=".1"
             />
           </g>
-          <g id="Dave-clipper" clip-path="url(#center-circle-clip)">
+          <g id="Dave-clipper" clipPath="url(#center-circle-clip)">
             <g id="Dave">
               <path
                 id="Body"
@@ -125,16 +125,16 @@ const NotFound = () => {
               <g id="Eyes" fill="#263D52">
                 <circle
                   id="eyes-left"
-                  style={{ transformOrigin: '256.4px 114.3px;' }}
-                  class="blinking-eyes"
+                  style={{ transformOrigin: '256.4px 114.3px' }}
+                  className="blinking-eyes"
                   cx="256.4"
                   cy="114.3"
                   r="5.9"
                 />
                 <circle
                   id="eyes-right"
-                  style={{ transformOrigin: '294.3px 114.3px;' }}
-                  class="blinking-eyes"
+                  style={{ transformOrigin: '294.3px 114.3px' }}
+                  className="blinking-eyes"
                   cx="294.3"
                   cy="114.3"
                   r="5.9"
