@@ -1,5 +1,7 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
+
 const Box = ({ answer }) => {
   return (
     <>
@@ -12,6 +14,7 @@ const Box = ({ answer }) => {
                 Hi Sample question
               </MDBCardHeader>
               <MDBCardBody>
+                {answer}
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur explicabo
                 magni delectus cum illum saepe magnam officia commodi tempore quisquam, reiciendis
                 voluptatum in temporibus omnis ipsa dolores doloribus dignissimos fugit.
@@ -22,6 +25,10 @@ const Box = ({ answer }) => {
       </div>
     </>
   );
+};
+
+Box.propTypes = {
+  answer: propTypes.string.isRequired,
 };
 
 export default Box;

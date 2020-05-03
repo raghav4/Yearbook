@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
 import { RadioButton, NoResults } from '../../../components';
 
 class PollCard extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
-    personSearch: '',
     NoSearchResults: false,
     persons: this.props.persons,
     people: this.props.persons,
   };
+
   filterPeople = (e) => {
-    const people = this.state.persons.filter(
-      (person) => person.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1,
+    const { persons } = this.state;
+    const people = persons.filter(
+      (person) => person.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
     );
     const NoSearchResults = people.length ? false : true;
     this.setState({ people, NoSearchResults });
   };
+
   render() {
-    const { questionTitle, HandleClick } = this.props;
+    const { questionTitle, handleClick } = this.props;
     const { people: persons, NoSearchResults } = this.state;
     return (
       <>
@@ -42,10 +46,10 @@ class PollCard extends Component {
                     <RadioButton
                       persons={persons}
                       question={questionTitle}
-                      HandleClick={HandleClick}
+                      handleClick={handleClick}
                     />
                   </ul>
-                  {NoSearchResults === true && <NoResults />}
+                  {NoSearchResults === true && <NoResults fontSize="h3" />}
                 </MDBCardBody>
               </MDBCard>
             </MDBContainer>
@@ -55,5 +59,10 @@ class PollCard extends Component {
     );
   }
 }
+
+PollCard.propTypes = {
+  questionTitle: propTypes.string.isRequired,
+  handleClick: propTypes.func.isRequired,
+};
 
 export default PollCard;

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
+import propTypes from 'prop-types';
+import urlPropType from 'url-prop-type';
 import ModalBox from './modal';
+
 class PeopleCard extends Component {
   constructor(props) {
     super(props);
@@ -10,19 +13,18 @@ class PeopleCard extends Component {
       modalValue: 'baba this is placeholder',
     };
   }
-  triggerModal = (id) => {
-    this.setState({ modalOpen: !this.state.modalOpen });
-  };
+
   getBadgeClass() {
     let classes = 'badge badge-';
-    let badgeClass = ['primary', 'success', 'warning'];
+    const badgeClass = ['primary', 'success', 'warning'];
     classes += badgeClass[this.props.person.section.charCodeAt(0) - 65];
     return classes;
   }
-  submitModalMessage(e) {
-    // this.setState({ modalValue: 'ok' });
-    // console.log(this.state.modalValue);
-  }
+
+  triggerModal = (id) => {
+    this.setState({ modalOpen: !this.state.modalOpen });
+  };
+
   render() {
     const { personName, personBio, personImageUrl, person } = this.props;
     const { modalValue, modalOpen } = this.state;
@@ -35,7 +37,7 @@ class PeopleCard extends Component {
           <div className="view overlay mb-3">
             {(personImageUrl && (
               <img
-                // style={{ width: '100%', height: '15vw', objectFit: 'cover' }}
+                style={{ width: '100%', height: '15vw', objectFit: 'cover' }}
                 className="img-thumbnail img-fluid z-depth-1"
                 src={personImageUrl}
                 alt="Card cap"
@@ -65,7 +67,6 @@ class PeopleCard extends Component {
           </button>
           <ModalBox
             triggerModal={this.triggerModal}
-            submitModalMessage={this.submitModalMessage}
             toggleOpen={modalOpen}
             modalValue={modalValue}
             personName={personName}
@@ -76,5 +77,12 @@ class PeopleCard extends Component {
     );
   }
 }
+
+PeopleCard.propTypes = {
+  personName: propTypes.string.isRequired,
+  personBio: propTypes.string.isRequired,
+  personImageUrl: urlPropType.isRequired,
+  person: propTypes.objectOf(propTypes.any).isRequired,
+};
 
 export default PeopleCard;

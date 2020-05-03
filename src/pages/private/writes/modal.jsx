@@ -9,14 +9,17 @@ import {
 } from 'mdbreact';
 
 class ModalBox extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     localModalValue: this.props.modalValue,
   };
+
   handleModalValue = (e) => {
     // console.log('value is ', this.props.modalValue);
     // console.log(this.state.localModalValue, this.props.modalValue);
     this.setState({ localModalValue: e.target.value });
   };
+
   render() {
     const { submitModalMessage, toggleOpen, triggerModal, personName, person } = this.props;
     return (

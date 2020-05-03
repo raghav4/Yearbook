@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 import BackupIcon from '@material-ui/icons/Backup';
+import urlPropType from 'url-prop-type';
 
 const DropPicture = ({ defaultPicture }) => {
-  const { acceptedFiles, rejectedFiles, getRootProps, getInputProps } = useDropzone({
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: 'image/jpeg, image/png, image/heic, image/jpg',
   });
 
@@ -13,11 +14,6 @@ const DropPicture = ({ defaultPicture }) => {
     </li>
   ));
 
-  const rejectedFilesItems = rejectedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
   const customStyle = {
     flex: '1',
     display: 'flex',
@@ -42,7 +38,7 @@ const DropPicture = ({ defaultPicture }) => {
           <p className="text-center" style={{ textDecoration: 'underline' }}>
             Updload your profile picture
           </p>
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drag n drop some files here, or click to select files</p>
           <p className="text-center">
             <small>
               <mark>Only *.jpeg, *jpg, *heic and *.png images will be accepted</mark>
@@ -60,6 +56,10 @@ const DropPicture = ({ defaultPicture }) => {
       </div>
     </section>
   );
+};
+
+DropPicture.propTypes = {
+  defaultPicture: urlPropType.isRequired,
 };
 
 export default DropPicture;

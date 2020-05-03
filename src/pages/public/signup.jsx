@@ -48,10 +48,8 @@ const SignUp = () => {
             section,
           };
           try {
-            // if (!flag) return;
-            const response = await axios.post('http://localhost:3000/api/admin/user/verify', user);
-            console.log('Hello there', response);
-            console.log('another string', response.data);
+            await axios.post('http://localhost:3000/api/admin/user/verify', user);
+
             Swal.fire({
               icon: 'success',
               title: 'You can login now',
@@ -62,8 +60,6 @@ const SignUp = () => {
               timer: 4500,
             });
           } catch ({ err }) {
-            console.log('got an error');
-            console.log(err.data);
             Swal.fire({
               icon: 'error',
               title: `${err.data}`,
@@ -138,14 +134,14 @@ const SignUp = () => {
                     pattern="[1-9]{1}[0-9]{9}"
                     onChange={(e) => setphoneNumber(e.target.value)}
                     required
-                  ></MDBInput>
+                  />
                   <MDBInput
                     type="email"
                     label="Email"
                     onChange={(e) => setemail(e.target.value)}
                     outline
                     required
-                  ></MDBInput>
+                  />
                   <div className="my-4">
                     <select
                       className="browser-default custom-select"
@@ -176,14 +172,14 @@ const SignUp = () => {
                     onChange={(e) => setpassword(e.target.value)}
                     outline
                     required
-                  ></MDBInput>
+                  />
                   <MDBInput
                     type="password"
                     label="Confirm Password"
                     onChange={(e) => setconfirmPassword(e.target.value)}
                     outline
                     required
-                  ></MDBInput>
+                  />
                   <div className="text-center mt-4">
                     <MDBBtn color="unique" type="button" onClick={(e) => submitHandler(e)}>
                       Register

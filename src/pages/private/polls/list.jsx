@@ -1,38 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PollCard from './card';
+import { CustomAlert } from '../../../components';
 
 class ListPolls extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     ProgressBar: true,
     questions: [],
     persons: [],
   };
+
   async componentDidMount() {
     const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
     const { data: persons } = await axios.get('https://yb-server.herokuapp.com/api/user');
     this.setState({ questions, persons, ProgressBar: !this.state.ProgressBar });
   }
-  HandleClick(message) {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true,
-      onOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-      },
-    });
 
-    Toast.fire({
-      icon: 'success',
-      title: `Voted for ${message}`,
-    });
-  }
+  // handleClick = (message) => {
+  //   CustomAlert(message);
+  // };
+
   render() {
     const { ProgressBar, questions, persons } = this.state;
     return (
@@ -46,7 +36,7 @@ class ListPolls extends Component {
               questionTitle={question.question}
               question={question}
               persons={persons}
-              HandleClick={this.HandleClick}
+              handleClick={(message) => CustomAlert(message)}
             />
           ))}
         </div>

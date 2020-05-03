@@ -1,4 +1,4 @@
-# Yerbook
+# Yearbook
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4b51861c-b2bc-491d-ac10-ec0e47642f87/deploy-status)](https://app.netlify.com/sites/agitated-cori-7fbfe8/deploys)
 [![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)

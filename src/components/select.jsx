@@ -19,8 +19,8 @@ const Select = ({ selectTitle, options, handleSelectInput }) => {
 };
 
 Select.propTypes = {
-  selectTitle: propTypes.string,
-  options: propTypes.array.isRequired,
-  handleSelectInput: propTypes.func,
+  selectTitle: propTypes.string.isRequired,
+  options: propTypes.arrayOf(propTypes.string).isRequired,
+  handleSelectInput: propTypes.func.isRequired,
 };
 export default Select;

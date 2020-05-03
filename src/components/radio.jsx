@@ -1,6 +1,7 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
-const RadioButton = ({ persons, question, HandleClick }) => {
+const RadioButton = ({ persons, question, handleClick }) => {
   return (
     <>
       <fieldset id={question}>
@@ -12,7 +13,7 @@ const RadioButton = ({ persons, question, HandleClick }) => {
               value={person.name}
               name={question}
               id={person._id}
-              onClick={() => HandleClick(person.name)}
+              onClick={() => handleClick(person.name)}
             />
             <label htmlFor={person._id}>{person.name}</label>
             <br />
@@ -21,6 +22,12 @@ const RadioButton = ({ persons, question, HandleClick }) => {
       </fieldset>
     </>
   );
+};
+
+RadioButton.propTypes = {
+  persons: propTypes.objectOf(propTypes.object).isRequired,
+  question: propTypes.string.isRequired,
+  handleClick: propTypes.func.isRequired,
 };
 
 export default RadioButton;

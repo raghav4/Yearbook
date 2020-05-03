@@ -6,9 +6,11 @@ import Box from './questions/self';
 import OthersWrite from './questions/others';
 
 class Profile extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selfAnswers: [],
   };
+
   async componentDidMount() {
     const { data: questions } = await axios.get(
       'https://yb-server.herokuapp.com/api/answer/5e956c060fda390017da67b7',

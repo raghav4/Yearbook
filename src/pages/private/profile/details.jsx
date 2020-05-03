@@ -3,13 +3,10 @@ import { MDBInput } from 'mdbreact';
 import { DropPicture } from '../../../components';
 
 class UserInfo extends Component {
-  state = {
-    user: {
-      name: 'Raghav',
-    },
-  };
+  // eslint-disable-next-line react/state-in-constructor
+  state = {};
+
   render() {
-    const { user } = this.state;
     return (
       <>
         <div className="d-flex justify-content-center">
@@ -33,7 +30,7 @@ class UserInfo extends Component {
                           outline
                           disabled
                           required
-                        ></MDBInput>
+                        />
                         <MDBInput
                           type="text"
                           label="Phone Number"
@@ -41,7 +38,7 @@ class UserInfo extends Component {
                           outline
                           disabled
                           required
-                        ></MDBInput>
+                        />
                         <MDBInput
                           type="text"
                           label="Email"
@@ -49,7 +46,7 @@ class UserInfo extends Component {
                           outline
                           disabled
                           required
-                        ></MDBInput>
+                        />
                         <MDBInput
                           type="text"
                           label="Department"
@@ -57,26 +54,19 @@ class UserInfo extends Component {
                           outline
                           disabled
                           required
-                        ></MDBInput>
-                        <MDBInput
-                          type="text"
-                          label="Section"
-                          value="B"
-                          outline
-                          disabled
-                          required
-                        ></MDBInput>
-                        <MDBInput type="text" label="Your Bio" outline required></MDBInput>
+                        />
+                        <MDBInput type="text" label="Section" value="B" outline disabled required />
+                        <MDBInput type="text" label="Your Bio" outline required />
                       </div>
                       <p className="p-responsive text-center">Social Media</p>
                       <div className="row">
                         <div className="col">
-                          <MDBInput type="text" label="Contact Email" outline required></MDBInput>
-                          <MDBInput type="text" label="Facebook URL" outline required></MDBInput>
-                          <MDBInput type="text" label="LinkedIn URL" outline required></MDBInput>
-                          <MDBInput type="tel" label="WhatsApp Number" outline required></MDBInput>
-                          <MDBInput type="text" label="Instagram" outline required></MDBInput>
-                          <MDBInput type="text" label="Snapchat" outline required></MDBInput>
+                          <MDBInput type="text" label="Contact Email" outline required />
+                          <MDBInput type="text" label="Facebook URL" outline required />
+                          <MDBInput type="text" label="LinkedIn URL" outline required />
+                          <MDBInput type="tel" label="WhatsApp Number" outline required />
+                          <MDBInput type="text" label="Instagram" outline required />
+                          <MDBInput type="text" label="Snapchat" outline required />
                         </div>
                       </div>
                       <div className="text-center">

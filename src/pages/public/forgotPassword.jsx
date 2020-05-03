@@ -13,10 +13,10 @@ const ForgotPassword = () => {
                 <form className="needs-validation">
                   <p className="h4 text-center mb-4">Reset Password</p>
                   <p className="p-responsive text-center mx-3 text-gray">Enter your Phone/Email</p>
-                  {/* <small id="emailHelp" className="form-text text-muted">
-                  We'll never share your email with anyone else.
-                </small> */}
-                  <MDBInput type="tel" label="Phone Number/Email" outline required></MDBInput>
+                  <small id="emailHelp" className="form-text text-muted">
+                    We will never share your email with anyone else.
+                  </small>
+                  <MDBInput type="tel" label="Phone Number/Email" outline required />
 
                   <div className="text-center mt-4">
                     <MDBBtn color="unique" type="button">

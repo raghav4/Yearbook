@@ -18,6 +18,8 @@ class PeopleCards extends Component {
     persons: [],
     people: [],
   };
+
+  // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
     const { data: persons } = await axios.get('https://yb-server.herokuapp.com/api/user');
     let departments = persons.map((e) => {
@@ -40,17 +42,19 @@ class PeopleCards extends Component {
     this.state.persons.map((person) => console.log(person.department, person.section));
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     this.setState({ people: this.state.persons });
   }
 
   filterPeople = (e) => {
     const people = this.state.persons.filter(
-      (person) => person.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1,
+      (person) => person.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
     );
     const NoSearchResults = people.length ? false : true;
     this.setState({ people, NoSearchResults });
   };
+
   handleDepartmentSelect = (e) => {
     e.persist();
     if (e.target.value === 'ALL') {
@@ -64,6 +68,7 @@ class PeopleCards extends Component {
     // if(!persons.length)
     this.setState({ people: persons, departmentSelect: e.target.value });
   };
+
   handleSectionSelect = (e) => {
     e.persist();
     if (e.target.value === 'ALL') {
@@ -132,7 +137,7 @@ class PeopleCards extends Component {
             </FlipMove>
           ))}
         </div>
-        {NoSearchResults === true && <NoResults />}
+        {NoSearchResults === true && <NoResults fontSize="h1" />}
       </>
     );
   }
