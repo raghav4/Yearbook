@@ -1,20 +1,11 @@
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
   font-family: 'Sofia Pro Medium' !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* background-image: url('./assets/backgrounds/bg.svg') !important;
+  background-image: url('./assets/backgrounds/bg.svg') !important;
   background-repeat: no-repeat !important;
-  background-size: cover !important; */
+  background-size: cover !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 @font-face {
   font-family: 'Product Sans';
@@ -29,5 +20,5 @@ code {
   font-style: medium;
   font-weight: medium;
   src: local('Sofia Pro Medium'),
-    url('./assets/fonts/Sofia\ Pro\ Medium\ Az.woff') format('woff');
+    url('./assets/fonts/Sofia-Pro-Medium-Az.woff') format('woff');
 }

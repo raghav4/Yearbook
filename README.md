@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Yearbook
 
-## Available Scripts
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4b51861c-b2bc-491d-ac10-ec0e47642f87/deploy-status)](https://app.netlify.com/sites/agitated-cori-7fbfe8/deploys)
+[![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
+[![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/raghav4/yearbook/graphs/commit-activity)
+[![DeepScan grade](https://deepscan.io/api/teams/8189/projects/10344/branches/153804/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=8189&pid=10344&bid=153804)
+[![issues](https://img.shields.io/github/issues/raghav4/yearbook)](https://github.com/raghav4/Yearbook/issues)
+[![license](https://img.shields.io/github/license/raghav4/yearbook)](https://github.com/raghav4/Yearbook/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](#)
 
-In the project directory, you can run:
+## Prerequisites
 
-### `yarn start`
+You will need the following things properly installed on your computer in order
+to run this application properly.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/)
+- [Google Chrome](https://google.com/chrome/)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Installation
 
-### `yarn test`
+- Use `git clone https://github.com/raghav4/yearbook.git` for installation
+- `cd yearbook`
+- `yarn install` to install the dependencies
+- `yarn start` to start the application
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Running
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Visit your app at [http://localhost:3000](http://localhost:3000).
