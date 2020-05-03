@@ -11,7 +11,8 @@
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer in order to run this application properly.
+You will need the following things properly installed on your computer in order
+to run this application properly.
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/)
