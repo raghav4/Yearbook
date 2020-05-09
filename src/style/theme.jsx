@@ -6,7 +6,10 @@ const theme = {
     white: '#FFFFFF',
   },
   fonts: {
-    sofiaPro: 'Sofia Pro Medium',
+    sofiaProLight: 'Sofia Pro Light',
+    sofiaProRegular: 'Sofia Pro Regular',
+    sofiaProMedium: 'Sofia Pro Medium',
+    productSans: 'Product Sans',
   },
 };
 

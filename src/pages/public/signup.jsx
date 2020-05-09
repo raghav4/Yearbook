@@ -3,11 +3,12 @@ import Swal from 'sweetalert2';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { TimerAlert } from '../../components';
 
 const SignUp = () => {
   const [name, setname] = useState('');
   const [email, setemail] = useState('');
-  const [phoneNumber, setphoneNumber] = useState('');
+  const [phoneNo, setphoneNo] = useState('');
   const [password, setpassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('');
   const [department, setdepartment] = useState(['CSE', 'IT', 'EEE', 'ECE', 'MAE']);
@@ -15,7 +16,7 @@ const SignUp = () => {
 
   // TODO #23: Get Department and section from the backend
 
-  const handleVerification = async ({ name, email, password, phoneNumber }) => {
+  const handleVerification = async ({ name, email, password, phoneNo }) => {
     Swal.mixin({
       input: 'text',
       inputValidator: (value) => {
@@ -42,13 +43,13 @@ const SignUp = () => {
             otp: result.value[0],
             name,
             email,
-            phoneNumber,
+            phoneNo,
             password,
             department,
             section,
           };
           try {
-            await axios.post('http://localhost:3000/api/admin/user/verify', user);
+            await axios.post('http://localhost:5000/api/user/signup/verify', user);
 
             Swal.fire({
               icon: 'success',
@@ -60,11 +61,7 @@ const SignUp = () => {
               timer: 4500,
             });
           } catch ({ err }) {
-            Swal.fire({
-              icon: 'error',
-              title: `${err.data}`,
-              timer: 3500,
-            });
+            TimerAlert('Error', 'Something Failed', 'error');
           }
         }
       });
@@ -73,46 +70,29 @@ const SignUp = () => {
     // event.preventDefault();
     // event.target.className += ' was-validated';
     if ({ password }.password !== { confirmPassword }.confirmPassword) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Try Again',
-        text: 'Those passwords does not matches',
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-      });
+      TimerAlert('Try Again', `Password doesn't matches`, 'error');
       return;
     }
     const userObject = {
       name: { name }.name,
       email: { email }.email,
-      phoneNumber: { phoneNumber }.phoneNumber,
+      phoneNo: { phoneNo }.phoneNo,
       password: { password }.password,
       department: { department }.department,
       section: { section }.section,
     };
     try {
-      await axios.post('http://localhost:3000/api/admin/user', userObject);
+      await axios.post('http://localhost:5000/api/user/signup', userObject);
 
       handleVerification(userObject);
     } catch ({ response }) {
-      let timerInterval;
-      Swal.fire({
-        title: 'Error!',
-        icon: 'error',
-        html: `<b>${response.data}</>`,
-        timer: 3000,
-        timerProgressBar: true,
-        onClose: () => {
-          clearInterval(timerInterval);
-        },
-      });
+      TimerAlert('Error', 'Try again later', 'error');
     }
   };
   return (
     <>
       <div className="d-flex justify-content-center mb-5">
-        <div className="jumbotron col-md-5 mx-5 my-5" style={{ borderRadius: '6%' }}>
+        <div className="jumbotron col-md-5 mx-5 my-5" style={{ borderRadius: '3%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
@@ -132,7 +112,7 @@ const SignUp = () => {
                     label="Phone Number"
                     outline
                     pattern="[1-9]{1}[0-9]{9}"
-                    onChange={(e) => setphoneNumber(e.target.value)}
+                    onChange={(e) => setphoneNo(e.target.value)}
                     required
                   />
                   <MDBInput

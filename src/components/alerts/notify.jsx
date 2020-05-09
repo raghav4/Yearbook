@@ -1,11 +1,11 @@
 import Swal from 'sweetalert2';
 
-const CustomAlert = (message) => {
+const NotifyAlert = (message, position = 'top-end', icon = 'success') => {
   const Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position,
     showConfirmButton: false,
-    timer: 1500,
+    timer: 2500,
     timerProgressBar: true,
     onOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -14,8 +14,8 @@ const CustomAlert = (message) => {
   });
 
   Toast.fire({
-    icon: 'success',
+    icon,
     title: message,
   });
 };
-export default CustomAlert;
+export default NotifyAlert;

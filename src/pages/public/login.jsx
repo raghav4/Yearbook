@@ -4,22 +4,27 @@ import cookie from 'react-cookies';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import { PublicContext } from '../../contexts';
+import { NotifyAlert } from '../../components';
 
 const Login = (props) => {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
+  const [isLoading, setisLoading] = useState(false);
   const { history } = useContext(PublicContext);
 
   const submitHandler = async () => {
+    setisLoading(!isLoading);
     try {
-      const { headers } = await axios.post('http://localhost:3000/api/user/auth', {
+      const { headers } = await axios.post('http://localhost:5000/api/user/login', {
         email: { email }.email,
         password: { password }.password,
       });
       cookie.save('x-auth-token', headers['x-auth-token']);
+      setisLoading(!isLoading);
       history.push('/');
     } catch ({ response }) {
-      console.log(response.data);
+      NotifyAlert('Invalid Email or Password', 'top', 'error');
+      setisLoading(!isLoading);
     }
   };
   return (
@@ -40,18 +45,32 @@ const Login = (props) => {
                     onChange={(e) => setemail(e.target.value)}
                     outline
                     required
-                  ></MDBInput>
+                  />
+
                   <MDBInput
                     type="password"
                     label="Password"
                     onChange={(e) => setpassword(e.target.value)}
                     outline
                     required
-                  ></MDBInput>
+                  />
 
                   <div className="text-center mt-4">
-                    <MDBBtn color="unique" type="button" onClick={submitHandler}>
-                      Continue
+                    <MDBBtn
+                      color="unique"
+                      type="button"
+                      onClick={submitHandler}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        'Continue'
+                      )}
                     </MDBBtn>
                   </div>
                   <p className="text-center mt-3 mr-2">

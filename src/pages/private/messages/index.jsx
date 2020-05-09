@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FlipMove from 'react-flip-move';
+import cookies from 'react-cookies';
 import { Input, LinearProgress, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import PeopleCard from './peopleCard';
+import UserCard from './single';
 import { NoResults, Select } from '../../../components';
 
 class PeopleCards extends Component {
@@ -21,12 +22,14 @@ class PeopleCards extends Component {
 
   // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
-    const { data: persons } = await axios.get('https://yb-server.herokuapp.com/api/user');
+    const { data: persons } = await axios.get('http://localhost:5000/api/user/info/all', {
+      headers: { 'x-auth-token': cookies.load('x-auth-token') },
+    });
     let departments = persons.map((e) => {
-      return e.department;
+      return e.deptSection.department;
     });
     let sections = persons.map((e) => {
-      return e.section;
+      return e.deptSection.section;
     });
     departments.sort();
     departments = ['ALL', ...new Set(departments)];
@@ -39,7 +42,6 @@ class PeopleCards extends Component {
       people: persons,
       ProgressBar: !this.state.ProgressBar,
     });
-    this.state.persons.map((person) => console.log(person.department, person.section));
   }
 
   // eslint-disable-next-line camelcase
@@ -49,10 +51,11 @@ class PeopleCards extends Component {
 
   filterPeople = (e) => {
     const people = this.state.persons.filter(
-      (person) => person.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
+      (person) =>
+        person.credentials.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
     );
-    const NoSearchResults = people.length ? false : true;
-    this.setState({ people, NoSearchResults });
+
+    this.setState({ people, NoSearchResults: people.length });
   };
 
   handleDepartmentSelect = (e) => {
@@ -66,7 +69,7 @@ class PeopleCards extends Component {
         person.department === e.target.value && person.section === this.state.sectionSelect,
     );
     // if(!persons.length)
-    this.setState({ people: persons, departmentSelect: e.target.value });
+    return this.setState({ people: persons, departmentSelect: e.target.value });
   };
 
   handleSectionSelect = (e) => {
@@ -125,12 +128,12 @@ class PeopleCards extends Component {
           {people.map((person) => (
             <FlipMove duration={420} key={person._id}>
               <div className="col mb-4" key={person._id}>
-                <PeopleCard
-                  key={person.id}
+                <UserCard
                   person={person}
-                  personName={person.name}
-                  personImageUrl={person.dp}
-                  personBio={person.bio}
+                  key={person._id}
+                  personName={person.credentials.name}
+                  personImageUrl={person.info.profilePicture}
+                  personBio={person.info.bio}
                   triggerModal={this.triggerModal}
                 />
               </div>

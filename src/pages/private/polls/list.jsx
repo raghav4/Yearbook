@@ -3,7 +3,7 @@ import axios from 'axios';
 // import Swal from 'sweetalert2';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PollCard from './card';
-import { CustomAlert } from '../../../components';
+import { NotifyAlert } from '../../../components';
 
 class ListPolls extends Component {
   // eslint-disable-next-line react/state-in-constructor
@@ -36,7 +36,7 @@ class ListPolls extends Component {
               questionTitle={question.question}
               question={question}
               persons={persons}
-              handleClick={(message) => CustomAlert(message)}
+              handleClick={(message) => NotifyAlert(message)}
             />
           ))}
         </div>

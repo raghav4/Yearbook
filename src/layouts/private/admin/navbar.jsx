@@ -21,6 +21,7 @@ class AdminNavBar extends Component {
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
+
   render() {
     return (
       <>
@@ -40,7 +41,7 @@ class AdminNavBar extends Component {
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
-                    <div className="d-none d-md-inline"></div>
+                    <div className="d-none d-md-inline" />
                     Users
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
@@ -55,7 +56,7 @@ class AdminNavBar extends Component {
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
-                    <div className="d-none d-md-inline"></div>
+                    <div className="d-none d-md-inline" />
                     Polls
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">

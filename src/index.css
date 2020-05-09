@@ -1,11 +1,6 @@
 body {
-  margin: 0;
   font-family: 'Sofia Pro Medium' !important;
-  background-image: url('./assets/backgrounds/bg.svg') !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
 }
-
 
 @font-face {
   font-family: 'Product Sans';
@@ -20,5 +15,13 @@ body {
   font-style: medium;
   font-weight: medium;
   src: local('Sofia Pro Medium'),
-    url('./assets/fonts/Sofia-Pro-Medium-Az.woff') format('woff');
+    url('./assets/fonts/Sofia\ Pro\ Regular\ Az.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Wotfard Regular';
+  font-style: medium;
+  font-weight: medium;
+  src: local('Sofia Pro Medium'),
+    url('./assets/fonts/wotfard-regular-webfont.woff2') format('woff');
 }

@@ -27,6 +27,7 @@ const DropPicture = ({ defaultPicture }) => {
     backgroundColor: '#f2f2f2',
     transition: 'border .24s ease-in-out',
     outline: 'none',
+    cursor: 'pointer',
   };
 
   return (
