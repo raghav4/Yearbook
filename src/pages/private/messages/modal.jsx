@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import cookies from 'react-cookies';
 import propTypes from 'prop-types';
@@ -19,19 +19,17 @@ import { NotifyAlert } from '../../../components';
 const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
   const [ModalValue, setModalValue] = useState('');
 
-  // useEffect(() => {
-  //   const getUserMessage = async () => {
-  //     try {
-  //       const { data } = await axios.get(`http://localhost:5000/api/user/messages/${personId}`, {
-  //         headers: { 'x-auth-token': cookies.load('x-auth-token') },
-  //       });
-  //       setModalValue(data.message);
-  //     } catch (ex) {
-  //       console.log(ex.response);
-  //     }
-  //   };
-  //   getUserMessage();
-  // }, []);
+  useEffect(() => {
+    const getUserMessage = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:5000/api/user/messages/${personId}`, {
+          headers: { 'x-auth-token': cookies.load('x-auth-token') },
+        });
+        setModalValue(data.message);
+      } catch (ex) {}
+    };
+    getUserMessage();
+  }, [personId]);
 
   const handleSubmit = () => {
     const messageObject = {
@@ -69,13 +67,6 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
               onChange={(e) => setModalValue(e.target.value)}
               value={ModalValue}
             />
-            {/* <Editor
-              id={personId}
-              text={ModalValue}
-              placeholder={`Put up Whatever you've for ${personName}, your memories together, etc`}
-              onChange={(e) => console.log(e)}
-              options={{ toolbar: { buttons: ['bold', 'italic', 'underline'] } }}
-            /> */}
           </div>
         </MDBModalBody>
         <MDBModalFooter>

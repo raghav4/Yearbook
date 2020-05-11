@@ -7,6 +7,7 @@ import OthersWrite from './questions/others';
 
 const Profile = () => {
   const [answers, setAnswers] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     document.title = 'Profile';
@@ -18,7 +19,18 @@ const Profile = () => {
         setAnswers(data);
       } catch (ex) {}
     };
+
+    const fetchMessages = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:5000/api/user/messages', {
+          headers: { 'x-auth-token': cookies.load('x-auth-token') },
+        });
+        setMessages(data);
+      } catch (ex) {}
+    };
+
     fetchUserAnswers();
+    fetchMessages();
   }, []);
 
   return (
@@ -33,7 +45,9 @@ const Profile = () => {
               ))}
             </div>
             <h3 className="h3-responsive text-center">Answers others have written for you</h3>
-            <OthersWrite />
+            {messages.map((item) => (
+              <OthersWrite message={item.message} person={item.sentBy} key={item._id} />
+            ))}
           </div>
           <div className="col-sm-4 order-1 order-lg-2">
             <div className="row" style={{ backgroundColor: 'white' }}>
@@ -47,11 +61,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-//   async componentDidMount() {
-//     const { data: questions } = await axios.get(
-//       'https://yb-server.herokuapp.com/api/answer/5e956c060fda390017da67b7',
-//     );
-//     const selfAnswers = _.map(questions, _.partialRight(_.pick, ['answer', 'questionId']));
-//     this.setState({ selfAnswers });
-//   }

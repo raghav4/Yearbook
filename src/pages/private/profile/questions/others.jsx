@@ -1,6 +1,17 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import SplitText from 'react-pose-text';
 
-const OthersWrite = () => {
+const charPoses = {
+  exit: { opacity: 0, y: 20 },
+  enter: {
+    opacity: 1,
+    y: 0,
+    delay: ({ charIndex }) => charIndex * 20,
+  },
+};
+
+const OthersWrite = ({ person, message }) => {
   return (
     <>
       <div className="card mx-5 my-3">
@@ -9,20 +20,20 @@ const OthersWrite = () => {
             className="card-title text-left h6-responsive mb-2"
             style={{ textDecoration: 'underline' }}
           >
-            Raghav Sharma
+            <SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
+              {person}
+            </SplitText>
           </h6>
-          <p className="card-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam excepturi a explicabo
-            quaerat exercitationem quo omnis pariatur illum aperiam, ipsa neque sunt illo, ipsum
-            modi, cumque libero deleniti fuga laboriosam! Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Nulla, quia eveniet voluptatibus soluta sit dolore adipisci doloribus
-            incidunt maiores exercitationem molestias possimus, numquam, repellendus nesciunt ipsum
-            amet delectus id cum.
-          </p>
+          <p className="card-text">{message}</p>
         </div>
       </div>
     </>
   );
+};
+
+OthersWrite.propTypes = {
+  person: propTypes.string.isRequired,
+  message: propTypes.string.isRequired,
 };
 
 export default OthersWrite;

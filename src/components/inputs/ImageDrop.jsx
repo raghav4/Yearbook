@@ -1,66 +1,51 @@
-import React from 'react';
-import { useDropzone } from 'react-dropzone';
-import BackupIcon from '@material-ui/icons/Backup';
-import urlPropType from 'url-prop-type';
+// Previous file is here : http://p.ip.fi/1LJF
+import React, { useState } from 'react';
+import FormData from 'form-data';
+import axios from 'axios';
 
-const DropPicture = ({ defaultPicture }) => {
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    accept: 'image/jpeg, image/png, image/heic, image/jpg',
-  });
+const DropPicture = () => {
+  const [file, setFile] = useState(null);
 
-  const acceptedFilesItems = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} -{file.size} bytes
-    </li>
-  ));
+  const handleFileChange = ({ currentTarget: input }) => {
+    setFile(input.files[0]);
+  };
 
-  const customStyle = {
-    flex: '1',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '20px',
-    borderWidth: '2px',
-    borderRadius: '2px',
-    borderColor: '#eeeeee',
-    borderStyle: 'dashed',
-    backgroundColor: '#f2f2f2',
-    transition: 'border .24s ease-in-out',
-    outline: 'none',
-    cursor: 'pointer',
+  const handleUpload = async (e) => {
+    let formdata = new FormData();
+    formdata.append('image', file);
+    formdata.append('name', 'Raghav');
+
+    await axios.post('https://api.imgur.com/3/image', formdata, {
+      headers: {
+        Authorization: 'Client-ID 9aea24137cc5af8',
+      },
+    });
   };
 
   return (
-    <section className="container" style={customStyle}>
-      <div {...getRootProps({ className: 'dropzone' })}>
-        <input {...getInputProps()} />
-        <div className="text-center">
-          <BackupIcon className="mb-1" fontSize="large" />
-          <p className="text-center" style={{ textDecoration: 'underline' }}>
-            Updload your profile picture
-          </p>
-          <p>Drag n drop some files here, or click to select files</p>
-          <p className="text-center">
-            <small>
-              <mark>Only *.jpeg, *jpg, *heic and *.png images will be accepted</mark>
-            </small>
-          </p>
-        </div>
-        <aside>
-          <ul>{acceptedFilesItems}</ul>
-        </aside>
-        {defaultPicture && (
-          <div className="text-center">
-            <img src={defaultPicture} alt="user" width="90" height="84" />
-          </div>
-        )}
+    <div className="input-group">
+      <div className="input-group-prepend">
+        <span className="input-group-text" id="inputGroupFileAddon01">
+          Upload
+        </span>
       </div>
-    </section>
+      <div className="custom-file">
+        <input
+          type="file"
+          className="custom-file-input"
+          onChange={(e) => handleFileChange(e)}
+          id="inputGroupFile01"
+          aria-describedby="inputGroupFileAddon01"
+        />
+        <label className="custom-file-label" htmlFor="inputGroupFile01">
+          Choose file
+        </label>
+      </div>
+      <button className="btn btn-primary" type="button" onClick={(e) => handleUpload(e)}>
+        Upload
+      </button>
+    </div>
   );
-};
-
-DropPicture.propTypes = {
-  defaultPicture: urlPropType.isRequired,
 };
 
 export default DropPicture;
