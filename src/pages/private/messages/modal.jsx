@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import cookies from 'react-cookies';
 import propTypes from 'prop-types';
-// import Editor from 'react-medium-editor';
 import {
   MDBContainer,
   MDBBtn,
@@ -11,10 +10,7 @@ import {
   MDBModalHeader,
   MDBModalFooter,
 } from 'mdbreact';
-import { NotifyAlert } from '../../../components';
-
-// require('medium-editor/dist/css/medium-editor.css');
-// require('medium-editor/dist/css/themes/default.css');
+import { NotifyAlert, TimerAlert } from '../../../components';
 
 const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
   const [ModalValue, setModalValue] = useState('');
@@ -42,11 +38,10 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
           headers: { 'x-auth-token': cookies.load('x-auth-token') },
         });
         setModalValue(data.message);
-        NotifyAlert('Added Successfully', 'top');
+        TimerAlert('Message sent successfully');
         triggerModal(personId);
       } catch (ex) {
         NotifyAlert('Error', 'top', 'error');
-        console.log(ex.response);
       }
     };
     submitData();

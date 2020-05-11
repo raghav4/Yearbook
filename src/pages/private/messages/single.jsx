@@ -1,9 +1,18 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { makeStyles } from '@material-ui/core/styles';
+import CardMedia from '@material-ui/core/CardMedia';
 import propTypes from 'prop-types';
 import urlPropType from 'url-prop-type';
 import ModalBox from './modal';
+
+const useStyles = makeStyles(() => ({
+  media: {
+    height: 0,
+    paddingTop: '80%', // 16:9
+  },
+}));
 
 const UserCard = ({ person, personName, personBio, personImageUrl }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -17,17 +26,17 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
     fetchUserDetails();
   }, []);
 
-  const triggerModal = (id) => {
+  const triggerModal = () => {
     setModalOpen(!modalOpen);
   };
 
   const getBadgeClass = () => {
     let classes = 'badge badge-';
-    const badgeClass = ['primary', 'success', 'warning'];
+    const badgeClass = ['primary', 'success', 'danger'];
     classes += badgeClass[person.deptSection.section.charCodeAt(0) - 65];
     return classes;
   };
-
+  const classes = useStyles();
   return (
     <>
       <div className="card mb-4 card-body" style={{ borderRadius: '3%' }}>
@@ -36,12 +45,13 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
         </h4>
         <div className="view overlay mb-3">
           {(personImageUrl && (
-            <img
-              style={{ width: '100%', height: '15vw', objectFit: 'cover' }}
-              className="img-thumbnail img-fluid z-depth-1"
-              src={personImageUrl}
-              alt="Card cap"
-            />
+            // <img
+            //   style={{ width: '100%', height: '25vw', objectFit: 'cover' }}
+            //   className="img-thumbnail img-fluid z-depth-1"
+            //   src={personImageUrl}
+            //   alt="Card cap"
+            // />
+            <CardMedia className={classes.media} image={personImageUrl} title="Paella dish" />
           )) || <Skeleton variant="rect" width={360} height={150} />}
         </div>
         <div className="text-center">

@@ -34,7 +34,6 @@ const PersonalCard = () => {
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
-        console.log(data);
       } catch (ex) {
         console.log(ex.response);
       }
@@ -55,7 +54,7 @@ const PersonalCard = () => {
         <img
           className="card-img-top hoverable"
           src={info.profilePicture}
-          alt="Card cap"
+          alt="ProfilePicture"
           style={{ borderRadius: '5%' }}
         />
 

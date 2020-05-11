@@ -50,6 +50,7 @@ const DetailsSchema = () => {
       }),
     contactNo: Joi.string()
       .label('Contact Number')
+      .length(10)
       .regex(/^\d+$/)
       .error(() => {
         return {

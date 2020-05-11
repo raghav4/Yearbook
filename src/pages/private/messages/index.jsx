@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 import FlipMove from 'react-flip-move';
 import cookies from 'react-cookies';
 import { Input, LinearProgress, InputAdornment } from '@material-ui/core';
@@ -12,8 +13,8 @@ class PeopleCards extends Component {
   state = {
     ProgressBar: true,
     NoSearchResults: false,
-    departmentSelect: '',
-    sectionSelect: '',
+    departmentSelect: 'ALL',
+    sectionSelect: 'ALL',
     departments: [],
     sections: [],
     persons: [],
@@ -54,37 +55,59 @@ class PeopleCards extends Component {
       (person) =>
         person.credentials.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
     );
-
-    this.setState({ people, NoSearchResults: people.length });
+    this.setState({ people, NoSearchResults: !people.length });
   };
 
-  handleDepartmentSelect = (e) => {
-    e.persist();
-    if (e.target.value === 'ALL') {
-      return this.setState({ people: this.state.persons, sectionSelect: this.state.sectionSelect });
-    }
-    // TODO #21: the state will update with 'people' not with the 'persons'
-    const persons = this.state.persons.filter(
-      (person) =>
-        person.department === e.target.value && person.section === this.state.sectionSelect,
-    );
-    // if(!persons.length)
-    return this.setState({ people: persons, departmentSelect: e.target.value });
-  };
+  handleDepartmentSelect = ({ currentTarget: input }) => {
+    const { persons, sectionSelect } = this.state;
+    if (input.value === 'ALL') {
+      if (sectionSelect === 'ALL') return this.setState({ people: persons });
 
-  handleSectionSelect = (e) => {
-    e.persist();
-    if (e.target.value === 'ALL') {
       return this.setState({
-        people: this.state.persons,
-        departmentSelect: this.state.departmentSelect,
+        people: _.filter(persons, (e) => {
+          return e.deptSection.section === sectionSelect;
+        }),
+        departmentSelect: input.value,
       });
     }
-    const persons = this.state.persons.filter(
-      (person) =>
-        person.section === e.target.value && person.department === this.state.departmentSelect,
-    );
-    this.setState({ people: persons, sectionSelect: e.target.value });
+
+    return this.setState({
+      people: _.filter(persons, (e) => {
+        if (sectionSelect !== 'ALL') {
+          return (
+            e.deptSection.department === input.value && e.deptSection.section === sectionSelect
+          );
+        }
+        return e.deptSection.department === input.value;
+      }),
+      departmentSelect: input.value,
+    });
+  };
+
+  handleSectionSelect = ({ currentTarget: input }) => {
+    const { persons, departmentSelect } = this.state;
+    if (input.value === 'ALL') {
+      if (departmentSelect === 'ALL') return this.setState({ people: persons });
+
+      return this.setState({
+        people: _.filter(persons, (e) => {
+          return e.deptSection.department === departmentSelect;
+        }),
+        sectionSelect: input.value,
+      });
+    }
+
+    return this.setState({
+      people: _.filter(persons, (e) => {
+        if (departmentSelect !== 'ALL') {
+          return (
+            e.deptSection.section === input.value && e.deptSection.department === departmentSelect
+          );
+        }
+        return e.deptSection.section === input.value;
+      }),
+      sectionSelect: input.value,
+    });
   };
 
   render() {

@@ -20,7 +20,8 @@ const Select = ({ selectTitle, options, handleSelectInput }) => {
 
 Select.propTypes = {
   selectTitle: propTypes.string.isRequired,
-  options: propTypes.arrayOf(propTypes.string).isRequired,
   handleSelectInput: propTypes.func.isRequired,
+  options: propTypes.arrayOf(propTypes.string).isRequired,
 };
+
 export default Select;

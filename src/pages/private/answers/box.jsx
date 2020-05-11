@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import SplitText from 'react-pose-text';
-import axios from 'axios';
-import cookies from 'react-cookies';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,15 +8,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Tooltip from '@material-ui/core/Tooltip';
 import { NotifyAlert } from '../../../components';
 
-const AnswerBox = ({ question, questionId, userAnswers }) => {
-  const [currentAnswer, setCurrentAnswer] = useState('');
-  // useEffect(() => {
-  //   const isAnswered = _.filter(userAnswers, (answer) => answer.questionId._id === questionId);
-  //   if (isAnswered.length > 0) {
-  //     setCurrentAnswer(isAnswered[0].answer);
-  //   }
-  // }, []);
-
+const AnswerBox = ({ question, questionId, answer }) => {
   const charPoses = {
     exit: { opacity: 0, y: 20 },
     enter: {
@@ -28,23 +18,22 @@ const AnswerBox = ({ question, questionId, userAnswers }) => {
     },
   };
 
-  const handleAnswer = () => {
-    const postAnswer = async () => {
-      try {
-        const { data } = await axios.put(
-          'http://localhost:5000/api/user/answers',
-          { answer: currentAnswer, questionId },
-          {
-            headers: { 'x-auth-token': cookies.load('x-auth-token') },
-          },
-        );
-        console.log(data);
-      } catch (ex) {
-        console.log(ex.response);
-      }
-    };
-    postAnswer();
-  };
+  // const handleAnswer = () => {
+  //   const postAnswer = async () => {
+  //     try {
+  //       const { data } = await axios.put(
+  //         'http://localhost:5000/api/user/answers',
+  //         { answer: currentAnswer, questionId },
+  //         {
+  //           headers: { 'x-auth-token': cookies.load('x-auth-token') },
+  //         },
+  //       );
+  //     } catch (ex) {
+  //       console.log(ex.response);
+  //     }
+  //   };
+  //   postAnswer();
+  // };
 
   return (
     <>
@@ -64,19 +53,19 @@ const AnswerBox = ({ question, questionId, userAnswers }) => {
                 <textarea
                   placeholder="Write your answer here"
                   className="md-textarea form-control"
-                  onChange={(e) => setCurrentAnswer(e.target.value)}
-                  value={currentAnswer}
+                  // onChange={(e) => setCurrentAnswer(e.target.value)}
+                  value={answer}
                   rows="3"
                 />
               </div>
               <div className="text-center mt-1">
                 <Tooltip title="Delete Answer">
-                  <IconButton aria-label="delete" onClick={() => NotifyAlert(currentAnswer)}>
+                  <IconButton aria-label="delete" onClick={() => NotifyAlert(answer)}>
                     <DeleteIcon />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Add Answer">
-                  <IconButton aria-label="add" onClick={handleAnswer}>
+                  <IconButton aria-label="add">
                     <AddCircleIcon />
                   </IconButton>
                 </Tooltip>
@@ -95,7 +84,7 @@ AnswerBox.defaultProps = {
 AnswerBox.propTypes = {
   question: propTypes.string,
   questionId: propTypes.string.isRequired,
-  userAnswers: propTypes.instanceOf(Array).isRequired,
+  answer: propTypes.string.isRequired,
 };
 
 export default AnswerBox;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import Swal from 'sweetalert2';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PollCard from './card';
 import { NotifyAlert } from '../../../components';
