@@ -9,13 +9,21 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
   MDBLink,
+  MDBDropdown,
+  MDBIcon,
+  MDBDropdownItem,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
 } from 'mdbreact';
 import { NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
-  state = {
-    isOpen: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false,
+    };
+  }
 
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -24,7 +32,7 @@ class Navbar extends Component {
   render() {
     return (
       <>
-        <MDBNavbar color="default-color" dark expand="md">
+        <MDBNavbar color="unique-color-dark" dark expand="md">
           <MDBNavbarBrand>
             <NavLink to="/">
               <strong className="white-text">YearBook</strong>
@@ -45,17 +53,35 @@ class Navbar extends Component {
             </MDBNavbarNav>
             <MDBNavbarNav right>
               <MDBNavItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle nav caret>
+                    <MDBIcon icon="user" />
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default">
+                    <MDBDropdownItem>
+                      <NavLink to="/details">Update Details</NavLink>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <NavLink to="/answers">Self Answers</NavLink>
+                    </MDBDropdownItem>
+                    {/* <MDBDropdownItem>Something else here</MDBDropdownItem>
+                    <MDBDropdownItem>Something else here</MDBDropdownItem> */}
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavItem>
+              <MDBNavItem>
                 <MDBNavLink className="waves-effect waves-light" to="/profile">
                   Profile
                 </MDBNavLink>
               </MDBNavItem>
-              <MDBNavItem>
+              {/* <MDBNavItem>
                 <MDBNavLink className="waves-effect waves-light" to="/details">
                   User Details
                 </MDBNavLink>
-              </MDBNavItem>
+              </MDBNavItem> */}
               <MDBNavItem>
                 <MDBLink
+                  to=""
                   className="waves-effect waves-light"
                   onClick={() => cookie.remove('x-auth-token')}
                 >

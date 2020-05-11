@@ -16,7 +16,7 @@ class PollCard extends Component {
     const people = persons.filter(
       (person) => person.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
     );
-    const NoSearchResults = people.length ? false : true;
+    const NoSearchResults = people.length;
     this.setState({ people, NoSearchResults });
   };
 

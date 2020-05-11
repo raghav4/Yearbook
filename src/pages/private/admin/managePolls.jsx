@@ -3,6 +3,7 @@ import axios from 'axios';
 import ListQuestions from './questions/listQuestion';
 
 class ManagePolls extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     questions: [],
     inputValue: '',
@@ -11,12 +12,21 @@ class ManagePolls extends Component {
       message: '',
     },
   };
+
+  async componentDidMount() {
+    const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
+    // console.log(data);
+    this.setState({ questions });
+  }
+
   handleChange = (e) => {
-    this.setState({ inputValue: e.target.value });
+    const newLocal = e.currentTarget;
+    this.setState({ inputValue: newLocal.value });
   };
+
   handleKeyPress = (e) => {
     const code = e.keyCode || e.which;
-    if (code === 13) return this.handleAdd(e.target.value);
+    if (code === 13) return this.handleAdd(e.currentTarget.value);
   };
 
   handleAdd = async (question) => {
@@ -62,12 +72,6 @@ class ManagePolls extends Component {
       console.error(err.response.data);
     }
   };
-
-  async componentDidMount() {
-    const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
-    // console.log(data);
-    this.setState({ questions });
-  }
 
   render() {
     const { questions, inputValue, inputValidationAlert } = this.state;

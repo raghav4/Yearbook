@@ -1,4 +1,4 @@
-import SofiaProLight from './SofiaProLight.woff';
-import SofiaProMediumAz from './SofiaProMediumAz.woff';
+import SofiaProRegular from './Sofia Pro Regular Az.woff';
+import SofiaProMedium from './Sofia Pro Medium Az.woff';
 
-export { SofiaProLight, SofiaProMediumAz };
+export { SofiaProRegular, SofiaProMedium };

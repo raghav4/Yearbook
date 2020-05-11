@@ -1,27 +1,85 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import Joi from 'joi-browser';
 import cookie from 'react-cookies';
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { Link } from 'react-router-dom';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { PublicContext } from '../../contexts';
+import { Input, Emoji, NotifyAlert } from '../../components';
+import { LoginSchema } from '../../utils/schemas';
 
-const Login = (props) => {
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
+const apiEndPoint = 'http://localhost:5000';
+
+const Login = () => {
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [validationErrors, setValidationErrors] = useState({ email: '', password: '' });
+  const [Loading, setLoading] = useState(false);
   const { history } = useContext(PublicContext);
 
-  const submitHandler = async () => {
+  const validateForm = () => {
+    const { error } = Joi.validate(credentials, LoginSchema(), { abortEarly: false });
+    if (!error) return null;
+    const errors = {};
+    // eslint-disable-next-line no-restricted-syntax
+    for (const item of error.details) {
+      errors[item.path[0]] = item.message;
+    }
+    return errors;
+  };
+
+  const validateInputFields = ({ name, value }) => {
+    const obj = { [name]: value };
+    const fieldSchema = {
+      [name]: LoginSchema()[name],
+    };
+    const { error } = Joi.validate(obj, fieldSchema);
+
+    return error ? error.details[0].message : null;
+  };
+
+  const handleChange = ({ currentTarget: input }) => {
+    const errors = { ...validationErrors };
+
+    const errorMessage = validateInputFields(input);
+    if (errorMessage) {
+      errors[input.name] = errorMessage;
+    } else {
+      delete errors[input.name];
+    }
+
+    setCredentials({
+      ...credentials,
+      [input.name]: input.value,
+    });
+
+    setValidationErrors({
+      ...validationErrors,
+      [input.name]: errors[input.name],
+    });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    e.target.className += ' was-validated';
+    const errors = validateForm();
+    setValidationErrors(errors || {});
+    if (errors) return;
+
     try {
-      const { headers } = await axios.post('http://localhost:3000/api/user/auth', {
-        email: { email }.email,
-        password: { password }.password,
+      setLoading(true);
+      const { email, password } = credentials;
+      const { headers } = await axios.post(`${apiEndPoint}/api/user/login`, {
+        email,
+        password,
       });
       cookie.save('x-auth-token', headers['x-auth-token']);
       history.push('/');
     } catch ({ response }) {
-      console.log(response.data);
+      NotifyAlert('Server Down', 'top', 'error');
+      setLoading(false);
     }
   };
+
   return (
     <>
       <div className="d-flex justify-content-center">
@@ -29,29 +87,39 @@ const Login = (props) => {
           <MDBContainer>
             <MDBRow>
               <MDBCol>
-                <form className="needs-validation">
-                  <p className="h4 text-center mb-4">Sign In</p>
-                  {/* <small id="emailHelp" className="form-text text-muted">
-                      We'll never share your email with anyone else.
-                    </small> */}
-                  <MDBInput
-                    type="email"
+                <form className="needs-validation" onSubmit={submitHandler} noValidate>
+                  <p className="h4 text-center mb-4">
+                    Sign In <Emoji symbol="🔐" />
+                  </p>
+                  <Input
+                    name="email"
                     label="Email"
-                    onChange={(e) => setemail(e.target.value)}
-                    outline
-                    required
-                  ></MDBInput>
-                  <MDBInput
-                    type="password"
+                    value={credentials.email}
+                    handleChange={handleChange}
+                    error={validationErrors.email}
+                    feedback={validationErrors.email}
+                  />
+                  <Input
+                    name="password"
                     label="Password"
-                    onChange={(e) => setpassword(e.target.value)}
-                    outline
-                    required
-                  ></MDBInput>
+                    value={credentials.password}
+                    handleChange={handleChange}
+                    type="password"
+                    error={validationErrors.password}
+                    feedback={validationErrors.password}
+                  />
 
                   <div className="text-center mt-4">
-                    <MDBBtn color="unique" type="button" onClick={submitHandler}>
-                      Continue
+                    <MDBBtn color="unique" type="submit" disabled={validateForm()}>
+                      {Loading ? (
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        'Continue'
+                      )}
                     </MDBBtn>
                   </div>
                   <p className="text-center mt-3 mr-2">

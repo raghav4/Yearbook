@@ -4,8 +4,7 @@ import cookie from 'react-cookies';
 import NotFound from './404';
 import publicRoutes from './public';
 import privateRoutes from './private';
-import Profile from '../pages/private/profile';
-import { LandingPage } from '../pages';
+import { LandingPage, HomePage } from '../pages';
 import { PrivateLayout, PublicLayout } from '../layouts';
 
 const Routes = () => {
@@ -13,7 +12,7 @@ const Routes = () => {
     if (cookie.load('x-auth-token')) {
       return (
         <PrivateLayout>
-          <Profile />
+          <HomePage />
         </PrivateLayout>
       );
     }

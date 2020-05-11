@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { RequestStatus } from '../../components';
 
 const ForgotPassword = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleReset = async () => {
+    // Validate the User Input.
+    try {
+      // const { data } =
+      await axios.post('http://localhost:5000/api/user/reset', {
+        input: inputValue,
+      });
+    } catch (err) {
+      RequestStatus('Oops!', err.response.data, 'error');
+    }
+  };
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '5%' }}>
+        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '2%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
@@ -16,10 +31,16 @@ const ForgotPassword = () => {
                   <small id="emailHelp" className="form-text text-muted">
                     We will never share your email with anyone else.
                   </small>
-                  <MDBInput type="tel" label="Phone Number/Email" outline required />
+                  <MDBInput
+                    type="tel"
+                    label="Email or Phone Number"
+                    outline
+                    required
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
 
                   <div className="text-center mt-4">
-                    <MDBBtn color="unique" type="button">
+                    <MDBBtn color="unique" onClick={handleReset}>
                       Continue
                     </MDBBtn>
                   </div>

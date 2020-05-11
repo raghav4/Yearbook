@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
 
-const Box = ({ answer }) => {
+const Box = ({ question, answer }) => {
   return (
     <>
       <div className="d-flex justify-content-center">
@@ -10,15 +10,9 @@ const Box = ({ answer }) => {
           <MDBContainer>
             <MDBCard className="mt-3 mb-3">
               <MDBCardHeader color="special-color-dark lighten-1 text-center">
-                {' '}
-                Hi Sample question
+                {question}
               </MDBCardHeader>
-              <MDBCardBody>
-                {answer}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur explicabo
-                magni delectus cum illum saepe magnam officia commodi tempore quisquam, reiciendis
-                voluptatum in temporibus omnis ipsa dolores doloribus dignissimos fugit.
-              </MDBCardBody>
+              <MDBCardBody>{answer}</MDBCardBody>
             </MDBCard>
           </MDBContainer>
         </div>
@@ -28,6 +22,7 @@ const Box = ({ answer }) => {
 };
 
 Box.propTypes = {
+  question: propTypes.string.isRequired,
   answer: propTypes.string.isRequired,
 };
 
