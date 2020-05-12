@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBInput } from 'mdbreact';
-import { Alert } from '@material-ui/lab';
+// import { Alert } from '@material-ui/lab';
 import propTypes from 'prop-types';
 
 const Input = ({ name, label, value, handleChange, error, feedback, icon, type, isDisabled }) => {
@@ -14,15 +14,17 @@ const Input = ({ name, label, value, handleChange, error, feedback, icon, type, 
         name={name}
         label={label}
         disabled={isDisabled}
+        className={error ? 'form-control is-invalid' : ''}
         icon={icon}
         outline
         required
       >
-        {error && (
+        {/* {error && (
           <Alert severity="error" style={{ fontFamily: 'Sofia Pro Medium' }}>
             {feedback}
           </Alert>
-        )}
+        )} */}
+        <div className="invalid-feedback ml-3 pl-3">{feedback}</div>
       </MDBInput>
     </>
   );

@@ -45,12 +45,6 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
         </h4>
         <div className="view overlay mb-3">
           {(personImageUrl && (
-            // <img
-            //   style={{ width: '100%', height: '25vw', objectFit: 'cover' }}
-            //   className="img-thumbnail img-fluid z-depth-1"
-            //   src={personImageUrl}
-            //   alt="Card cap"
-            // />
             <CardMedia className={classes.media} image={personImageUrl} title="Paella dish" />
           )) || <Skeleton variant="rect" width={360} height={150} />}
         </div>
@@ -62,11 +56,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
         <p className="card-text text-center">
           {personBio || <Skeleton animation="wave" height={22} style={{ marginBottom: 6 }} />}
         </p>
-        <button
-          type="button"
-          className="btn btn-deep-purple"
-          onClick={() => triggerModal(person._id)}
-        >
+        <button type="button" className="btn btn-deep-purple" onClick={() => triggerModal()}>
           <i className="fas fa-plus-circle mr-2" />
           Write
         </button>
@@ -82,32 +72,6 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
     </>
   );
 };
-
-// class UserCard extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       modalHeader: '',
-//       modalValue: 'baba this is placeholder',
-//     };
-//   }
-
-// getBadgeClass() {
-//   let classes = 'badge badge-';
-//   const badgeClass = ['primary', 'success', 'warning'];
-//   classes += badgeClass[this.props.person.deptSection.section.charCodeAt(0) - 65];
-//   return classes;
-// }
-
-// triggerModal = (id) => {
-//   this.setState({ modalOpen: !this.state.modalOpen });
-// };
-
-//   render() {
-//     const  = this.props;
-//     const { modalValue, modalOpen } = this.state;
-//   }
-// }
 
 UserCard.propTypes = {
   personName: propTypes.string.isRequired,

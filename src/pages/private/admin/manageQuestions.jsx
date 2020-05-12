@@ -11,9 +11,18 @@ class ManageQuestions extends Component {
       message: '',
     },
   };
+
+  async componentDidMount() {
+    const { data: questions } = await axios.get(
+      'https://yb-server.herokuapp.com/api/admin/questions',
+    );
+    this.setState({ questions });
+  }
+
   handleChange = (e) => {
     this.setState({ inputValue: e.target.value });
   };
+
   handleKeyPress = (e) => {
     const code = e.keyCode || e.which;
     if (code === 13) return this.handleAdd(e.target.value);
@@ -58,18 +67,8 @@ class ManageQuestions extends Component {
       );
       //const questions = this.state.questions.filter((q) => q.id !== questionId);
       this.setState({ questions });
-    } catch (err) {
-      console.error(err.response.data);
-    }
+    } catch (err) {}
   };
-
-  async componentDidMount() {
-    const { data: questions } = await axios.get(
-      'https://yb-server.herokuapp.com/api/admin/questions',
-    );
-    // console.log(data);
-    this.setState({ questions });
-  }
 
   render() {
     const { questions, inputValue, inputValidationAlert } = this.state;

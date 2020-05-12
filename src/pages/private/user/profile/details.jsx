@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import cookies from 'react-cookies';
 import Joi from 'joi-browser';
-import { DropPicture, NotifyAlert, Input } from '../../../components';
-import { DetailsSchema } from '../../../utils/schemas';
+import { DropPicture, NotifyAlert, Input } from '../../../../components';
+import { DetailsSchema } from '../../../../utils/schemas';
+import http from '../../../../services/httpService';
+import config from '../../../../config.json';
 
 const UserInfo = () => {
   const [credentials, setCredentials] = useState({ name: '', phoneNo: '', email: '' });
@@ -33,23 +34,20 @@ const UserInfo = () => {
 
     const fetchUserDetails = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/user/info', {
+        const { data } = await http.get(`${config.apiEndPoint}/api/user/info`, {
           headers: { 'x-auth-token': cookies.load('x-auth-token') },
         });
         setCredentials({
-          ...credentials,
           name: data.credentials.name,
           phoneNo: data.credentials.phoneNo,
           email: data.credentials.email,
         });
         setDeptSection({
-          ...deptSection,
           department: data.deptSection.department,
           section: data.deptSection.section,
         });
         setInfo({ ...info, bio: data.info.bio, profilePicture: data.info.profilePicture });
         setSocialHandles({
-          ...socialHandles,
           contactEmail: data.socialHandles.contactEmail,
           contactNo: data.socialHandles.contactNo,
           instagram: data.socialHandles.instagram,
@@ -88,6 +86,11 @@ const UserInfo = () => {
   };
 
   const handleUpdate = async (e) => {
+    /* TODO #29:
+     * 1. form validation when the user needs the field to be empty after adding/updating it
+     * 2. form validation from the server side, i.e the user wants to delete a field
+     * 3. Do not let the user to update the field before validation, i.e restrict, handleUpdate()
+     */
     e.preventDefault();
     // const errors = validateForm();
     // setValidationErrors(errors || {});
@@ -99,13 +102,11 @@ const UserInfo = () => {
       socialHandles,
     };
     try {
-      await axios.put('http://localhost:5000/api/user/info', userObject, {
+      await http.put(`${config.apiEndPoint}/api/user/info`, userObject, {
         headers: { 'x-auth-token': cookies.load('x-auth-token') },
       });
       NotifyAlert('Successfully Updated Details');
-    } catch (ex) {
-      console.log(ex.response);
-    }
+    } catch (ex) {}
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -158,7 +159,8 @@ const UserInfo = () => {
           <form className="needs-validation" onSubmit={handleUpdate} noValidate>
             <div className="row">
               <div className="col-md-12">
-                <DropPicture defaultPicture={info.profilePicture} />
+                {/* <DropPicture defaultPicture={info.profilePicture} /> */}
+                <DropPicture />
               </div>
             </div>
             <div className="form-group">

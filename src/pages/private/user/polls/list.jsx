@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PollCard from './card';
-import { NotifyAlert } from '../../../components';
+import { NotifyAlert } from '../../../../components';
 
 class ListPolls extends Component {
   // eslint-disable-next-line react/state-in-constructor

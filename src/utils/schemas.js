@@ -20,6 +20,39 @@ const LoginSchema = () => {
   };
 };
 
+const SignUpSchema = () => {
+  return {
+    name: Joi.string().min(5).label('Name').required(),
+    phoneNo: Joi.string()
+      .length(10)
+      .regex(/^\d+$/)
+      .error(() => {
+        return {
+          message: 'Phone number should contain only numbers and must be of 10 numbers',
+        };
+      })
+      .required(),
+    email: Joi.string()
+      .email()
+      .error(() => {
+        return {
+          message: 'Please enter a valid Email ID',
+        };
+      })
+      .required(),
+    password: Joi.string()
+      .min(7)
+      .error(() => {
+        return {
+          message: 'Password should be atleast 7 characters long',
+        };
+      })
+      .required(),
+    department: Joi.string().min(2).max(3).required(),
+    section: Joi.string().length(1).required(),
+  };
+};
+
 const DetailsSchema = () => {
   return {
     contactEmail: Joi.string().email().label('Contact Email'),
@@ -62,4 +95,4 @@ const DetailsSchema = () => {
   };
 };
 
-export { LoginSchema, DetailsSchema };
+export { LoginSchema, SignUpSchema, DetailsSchema };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import cookie from 'react-cookies';
 import {
   MDBNavbar,
@@ -9,6 +9,7 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
   MDBLink,
+  // MDBFormInline,
   MDBDropdown,
   MDBIcon,
   MDBDropdownItem,
@@ -17,34 +18,27 @@ import {
 } from 'mdbreact';
 import { NavLink } from 'react-router-dom';
 
-class Navbar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isOpen: false,
-    };
-  }
+const Navbar = () => {
+  const [isOpen, setisOpen] = useState(false);
 
-  toggleCollapse = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+  const toggleCollapse = () => setisOpen(!isOpen);
 
-  render() {
-    return (
-      <>
+  return (
+    <>
+      <div className="menu">
         <MDBNavbar color="unique-color-dark" dark expand="md">
           <MDBNavbarBrand>
             <NavLink to="/">
               <strong className="white-text">YearBook</strong>
             </NavLink>
           </MDBNavbarBrand>
-          <MDBNavbarToggler onClick={this.toggleCollapse} />
-          <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+          <MDBNavbarToggler onClick={toggleCollapse} />
+          <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
             <MDBNavbarNav left>
               <MDBNavItem>
                 <MDBNavLink to="/">Home</MDBNavLink>
               </MDBNavItem>
-              <MDBNavItem>
+              <MDBNavItem active>
                 <MDBNavLink to="/write">Writes</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
@@ -52,6 +46,18 @@ class Navbar extends Component {
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>
+              {/* <MDBNavItem>
+                <MDBFormInline waves>
+                  <div className="md-form my-0">
+                    <input
+                      className="form-control mr-sm-2"
+                      type="text"
+                      placeholder="Search"
+                      aria-label="Search"
+                    />
+                  </div>
+                </MDBFormInline>
+              </MDBNavItem> */}
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
@@ -64,8 +70,6 @@ class Navbar extends Component {
                     <MDBDropdownItem>
                       <NavLink to="/answers">Self Answers</NavLink>
                     </MDBDropdownItem>
-                    {/* <MDBDropdownItem>Something else here</MDBDropdownItem>
-                    <MDBDropdownItem>Something else here</MDBDropdownItem> */}
                   </MDBDropdownMenu>
                 </MDBDropdown>
               </MDBNavItem>
@@ -74,11 +78,6 @@ class Navbar extends Component {
                   Profile
                 </MDBNavLink>
               </MDBNavItem>
-              {/* <MDBNavItem>
-                <MDBNavLink className="waves-effect waves-light" to="/details">
-                  User Details
-                </MDBNavLink>
-              </MDBNavItem> */}
               <MDBNavItem>
                 <MDBLink
                   to=""
@@ -91,9 +90,9 @@ class Navbar extends Component {
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>
-      </>
-    );
-  }
-}
+      </div>
+    </>
+  );
+};
 
 export default Navbar;

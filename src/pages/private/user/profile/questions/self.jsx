@@ -6,9 +6,9 @@ const Box = ({ question, answer }) => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="mr-5 mb-3 ml-5">
-          <MDBContainer>
-            <MDBCard className="mt-3 mb-3">
+        <div className="mb-2 mx-4">
+          <MDBContainer style={{ width: 'auto' }}>
+            <MDBCard className="mt-3 mb-1">
               <MDBCardHeader color="special-color-dark lighten-1 text-center">
                 {question}
               </MDBCardHeader>

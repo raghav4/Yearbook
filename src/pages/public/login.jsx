@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
 import Joi from 'joi-browser';
 import cookie from 'react-cookies';
 import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { PublicContext } from '../../contexts';
-import { Input, Emoji, NotifyAlert } from '../../components';
+import { Input, Emoji, TimerAlert } from '../../components';
 import { LoginSchema } from '../../utils/schemas';
-
-const apiEndPoint = 'http://localhost:5000';
+import http from '../../services/httpService';
+import config from '../../config.json';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -68,14 +67,20 @@ const Login = () => {
     try {
       setLoading(true);
       const { email, password } = credentials;
-      const { headers } = await axios.post(`${apiEndPoint}/api/user/login`, {
+      const { headers } = await http.post(`${config.apiEndPoint}/api/user/login`, {
         email,
         password,
       });
-      cookie.save('x-auth-token', headers['x-auth-token']);
+      const expires = new Date();
+      expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+
+      cookie.save('x-auth-token', headers['x-auth-token'], { expires });
       history.push('/');
-    } catch ({ response }) {
-      NotifyAlert('Server Down', 'top', 'error');
+      TimerAlert('', 'Welcome to the Yearbook', 'success');
+    } catch (ex) {
+      if (ex.response && (ex.response.status === 400 || ex.response.status === 401)) {
+        TimerAlert('Error', ex.response.data, 'error');
+      }
       setLoading(false);
     }
   };

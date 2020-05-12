@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import _ from 'lodash';
-import FlipMove from 'react-flip-move';
 import cookies from 'react-cookies';
-import { Input, LinearProgress, InputAdornment } from '@material-ui/core';
+import FlipMove from 'react-flip-move';
 import SearchIcon from '@material-ui/icons/Search';
+import { Input, LinearProgress, InputAdornment } from '@material-ui/core';
 import UserCard from './single';
-import { NoResults, Select } from '../../../components';
+import config from '../../../../config.json';
+import http from '../../../../services/httpService';
+import { NoResults, Select } from '../../../../components';
 
 class PeopleCards extends Component {
   // eslint-disable-next-line react/state-in-constructor
@@ -23,7 +24,7 @@ class PeopleCards extends Component {
 
   // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
-    const { data: persons } = await axios.get('http://localhost:5000/api/user/info/all', {
+    const { data: persons } = await http.get(`${config.apiEndPoint}/api/user/info/all`, {
       headers: { 'x-auth-token': cookies.load('x-auth-token') },
     });
     let departments = persons.map((e) => {

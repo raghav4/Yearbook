@@ -1,40 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
+import cookies from 'react-cookies';
 import SplitText from 'react-pose-text';
-import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Tooltip from '@material-ui/core/Tooltip';
-import { NotifyAlert } from '../../../components';
+import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
+import { NotifyAlert, TimerAlert } from '../../../../components';
+import http from '../../../../services/httpService';
+import { apiEndPoint } from '../../../../config.json';
 
-const AnswerBox = ({ question, questionId, answer }) => {
+const AnswerBox = ({ question, questionId, answer, answerId }) => {
+  const [CurrentAnswer, setCurrentAnswer] = useState(answer);
+
   const charPoses = {
     exit: { opacity: 0, y: 20 },
     enter: {
       opacity: 1,
       y: 0,
-      delay: ({ charIndex }) => charIndex * 20,
+      delay: ({ charIndex }) => charIndex * 10,
     },
   };
 
-  // const handleAnswer = () => {
-  //   const postAnswer = async () => {
-  //     try {
-  //       const { data } = await axios.put(
-  //         'http://localhost:5000/api/user/answers',
-  //         { answer: currentAnswer, questionId },
-  //         {
-  //           headers: { 'x-auth-token': cookies.load('x-auth-token') },
-  //         },
-  //       );
-  //     } catch (ex) {
-  //       console.log(ex.response);
-  //     }
-  //   };
-  //   postAnswer();
-  // };
+  const handleUpdate = async () => {
+    try {
+      await http.put(
+        `${apiEndPoint}/api/user/answers`,
+        {
+          answer: CurrentAnswer,
+          questionId,
+        },
+        {
+          headers: { 'x-auth-token': cookies.load('x-auth-token') },
+        },
+      );
+      TimerAlert('', 'Successfully updated answer', 'success');
+    } catch (ex) {}
+  };
 
+  const handleDelete = async () => {
+    try {
+      await http.delete(`${apiEndPoint}/api/user/answers/${answerId}`, {
+        headers: { 'x-auth-token': cookies.load('x-auth-token') },
+      });
+      TimerAlert('', 'Successfully Deleted answer', 'success');
+      setCurrentAnswer('');
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        // TODO #31: Check the status code
+        TimerAlert('Error', 'The answer has already been deleted', 'error');
+      }
+    }
+  };
   return (
     <>
       <div className="mx-4 my-4">
@@ -53,19 +71,19 @@ const AnswerBox = ({ question, questionId, answer }) => {
                 <textarea
                   placeholder="Write your answer here"
                   className="md-textarea form-control"
-                  // onChange={(e) => setCurrentAnswer(e.target.value)}
-                  value={answer}
+                  onChange={(e) => setCurrentAnswer(e.target.value)}
+                  value={CurrentAnswer}
                   rows="3"
                 />
               </div>
               <div className="text-center mt-1">
                 <Tooltip title="Delete Answer">
-                  <IconButton aria-label="delete" onClick={() => NotifyAlert(answer)}>
+                  <IconButton aria-label="delete" onClick={handleDelete}>
                     <DeleteIcon />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Add Answer">
-                  <IconButton aria-label="add">
+                  <IconButton aria-label="add" onClick={handleUpdate}>
                     <AddCircleIcon />
                   </IconButton>
                 </Tooltip>

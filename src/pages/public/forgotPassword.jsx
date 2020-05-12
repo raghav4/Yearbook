@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import http from '../../services/httpService';
+import config from '../../config.json';
 import { RequestStatus } from '../../components';
 
 const ForgotPassword = () => {
@@ -11,7 +12,7 @@ const ForgotPassword = () => {
     // Validate the User Input.
     try {
       // const { data } =
-      await axios.post('http://localhost:5000/api/user/reset', {
+      await http.post(`${config.apiEndPoint}/api/user/reset`, {
         input: inputValue,
       });
     } catch (err) {

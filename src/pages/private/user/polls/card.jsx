@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
-import { RadioButton, NoResults } from '../../../components';
+import { RadioButton, NoResults } from '../../../../components';
 
 class PollCard extends Component {
   // eslint-disable-next-line react/state-in-constructor

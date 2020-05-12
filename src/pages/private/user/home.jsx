@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import cookies from 'react-cookies';
 import { Link } from 'react-router-dom';
-import { Emoji } from '../../components';
+import { Emoji } from '../../../components';
+import http from '../../../services/httpService';
+import config from '../../../config.json';
 
 const HomePage = () => {
   const [User, setUser] = useState('');
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/user/info', {
+        const { data } = await http.get(`${config.apiEndPoint}/api/user/info`, {
           headers: { 'x-auth-token': cookies.load('x-auth-token') },
         });
         setUser(data.credentials.name);

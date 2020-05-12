@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Pagination } from '@material-ui/lab';
 import cookies from 'react-cookies';
 import AnswerBox from './box';
-import paginate from '../../../utils/paginate';
+import http from '../../../../services/httpService';
+import { apiEndPoint } from '../../../../config.json';
+import paginate from '../../../../utils/paginate';
 
 const SelfAnswers = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState([]); // Questions Answered by users
@@ -16,21 +17,28 @@ const SelfAnswers = () => {
   useEffect(() => {
     document.title = 'Self Questions';
     const fetchTotalQuestions = async () => {
-      const { data } = await axios.get('http://localhost:5000/api/admin/questions', {
+      const { data } = await http.get(`${apiEndPoint}/api/admin/questions`, {
         headers: { 'x-auth-token': cookies.load('x-auth-token') },
       });
       setTotalQuestionsList(data);
       setTotalQuestions(data.length);
     };
     const fetchAnsweredQuestions = async () => {
-      const { data } = await axios.get('http://localhost:5000/api/user/answers', {
+      const { data } = await http.get(`${apiEndPoint}/api/user/answers`, {
         headers: { 'x-auth-token': cookies.load('x-auth-token') },
       });
       setAnsweredQuestions(data);
     };
     fetchTotalQuestions();
     fetchAnsweredQuestions();
+    answeredQuestions.sort();
+    totalQuestionsList.sort();
   }, []);
+
+  const getAnswer = (questionId) => {
+    const result = answeredQuestions.find((e) => e.questionId._id === questionId);
+    return result ? { answer: result.answer, _id: result._id } : {};
+  };
 
   const getTotalAnswersClass = () => {
     let classes = 'text-center mt-2 mb-3 ';
@@ -61,7 +69,8 @@ const SelfAnswers = () => {
           <AnswerBox
             question={item.question}
             questionId={item._id}
-            userAnswers={answeredQuestions}
+            answer={getAnswer(item._id).answer}
+            answerId={getAnswer(item._id)._id}
             key={item._id}
           />
         ))}

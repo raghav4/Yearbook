@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import axios from 'axios';
+
 import cookies from 'react-cookies';
 import Box from './questions/self';
 import PersonalCard from './profileCard/card';
 import OthersWrite from './questions/others';
+import http from '../../../../services/httpService';
+import config from '../../../../config.json';
 // import { NoResults } from '../../../components';
 
 const Profile = () => {
@@ -18,7 +20,7 @@ const Profile = () => {
     document.title = 'Profile';
     const fetchUserAnswers = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/user/answers', {
+        const { data } = await http.get(`${config.apiEndPoint}/api/user/answers`, {
           headers: { 'x-auth-token': cookies.load('x-auth-token') },
         });
         setAnswers(data);
@@ -28,7 +30,7 @@ const Profile = () => {
 
     const fetchMessages = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/user/messages', {
+        const { data } = await http.get(`${config.apiEndPoint}/api/user/messages`, {
           headers: { 'x-auth-token': cookies.load('x-auth-token') },
         });
         setMessages(data);

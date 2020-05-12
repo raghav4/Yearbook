@@ -15,7 +15,6 @@ class ManagePolls extends Component {
 
   async componentDidMount() {
     const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
-    // console.log(data);
     this.setState({ questions });
   }
 

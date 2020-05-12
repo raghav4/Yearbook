@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import cookies from 'react-cookies';
-import axios from 'axios';
-import SocialHandle from '../../../../components/utils/socialHandle';
+import SocialHandle from '../../../../../components/utils/socialHandle';
+import http from '../../../../../services/httpService';
+import config from '../../../../../config.json';
 
 const PersonalCard = () => {
   const [Name, setName] = useState('');
@@ -19,7 +20,7 @@ const PersonalCard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/user/info', {
+        const { data } = await http.get(`${config.apiEndPoint}/api/user/info`, {
           headers: { 'x-auth-token': cookies.load('x-auth-token') },
         });
         setName(data.credentials.name);
@@ -34,9 +35,7 @@ const PersonalCard = () => {
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
-      } catch (ex) {
-        console.log(ex.response);
-      }
+      } catch (ex) {}
     };
     fetchUserData();
   }, []);

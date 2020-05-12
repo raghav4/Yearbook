@@ -5,6 +5,8 @@ const TimerAlert = (title, text = '', icon = 'success') => {
     icon,
     title,
     text,
+    toast: true,
+    position: 'top',
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: true,
