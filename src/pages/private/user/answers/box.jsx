@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import cookies from 'react-cookies';
 import SplitText from 'react-pose-text';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Tooltip from '@material-ui/core/Tooltip';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
-import { NotifyAlert, TimerAlert } from '../../../../components';
+import { TimerAlert } from '../../../../components';
+import { apiUrl } from '../../../../config.json';
 import http from '../../../../services/httpService';
-import { apiEndPoint } from '../../../../config.json';
 
 const AnswerBox = ({ question, questionId, answer, answerId }) => {
   const [CurrentAnswer, setCurrentAnswer] = useState(answer);
@@ -25,25 +24,17 @@ const AnswerBox = ({ question, questionId, answer, answerId }) => {
 
   const handleUpdate = async () => {
     try {
-      await http.put(
-        `${apiEndPoint}/api/user/answers`,
-        {
-          answer: CurrentAnswer,
-          questionId,
-        },
-        {
-          headers: { 'x-auth-token': cookies.load('x-auth-token') },
-        },
-      );
+      await http.put(`${apiUrl}/api/user/answers`, {
+        answer: CurrentAnswer,
+        questionId,
+      });
       TimerAlert('', 'Successfully updated answer', 'success');
     } catch (ex) {}
   };
 
   const handleDelete = async () => {
     try {
-      await http.delete(`${apiEndPoint}/api/user/answers/${answerId}`, {
-        headers: { 'x-auth-token': cookies.load('x-auth-token') },
-      });
+      await http.delete(`${apiUrl}/api/user/answers/${answerId}`);
       TimerAlert('', 'Successfully Deleted answer', 'success');
       setCurrentAnswer('');
     } catch (ex) {

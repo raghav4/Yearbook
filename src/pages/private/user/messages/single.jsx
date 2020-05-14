@@ -19,9 +19,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      // const { data } = await axios.put('http://localhost:5000/api/user/info', userObject, {
-      //   headers: { 'x-auth-token': cookies.load('x-auth-token') },
-      // });
+      // const { data } = await axios.put('http://localhost:5000/api/user/info', userObject);
     };
     fetchUserDetails();
   }, []);

@@ -7,7 +7,7 @@ const HTMLAlert = (title, html, timer = 4500, icon = 'success') => {
     html,
     showCloseButton: true,
     showCancelButton: true,
-    showConfirmButton: false,
+    showConfirmButton: true,
     timer,
   });
 };

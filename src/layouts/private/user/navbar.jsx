@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import cookie from 'react-cookies';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -8,8 +7,6 @@ import {
   MDBNavLink,
   MDBNavbarToggler,
   MDBCollapse,
-  MDBLink,
-  // MDBFormInline,
   MDBDropdown,
   MDBIcon,
   MDBDropdownItem,
@@ -79,13 +76,9 @@ const Navbar = () => {
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBLink
-                  to=""
-                  className="waves-effect waves-light"
-                  onClick={() => cookie.remove('x-auth-token')}
-                >
+                <MDBNavLink className="waves-effect waves-light" to="/logout">
                   Log Out
-                </MDBLink>
+                </MDBNavLink>
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>

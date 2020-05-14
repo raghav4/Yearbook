@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import http from '../../services/httpService';
-import config from '../../config.json';
+import { apiUrl } from '../../config.json';
 import { RequestStatus } from '../../components';
 
 const ForgotPassword = () => {
@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     // Validate the User Input.
     try {
       // const { data } =
-      await http.post(`${config.apiEndPoint}/api/user/reset`, {
+      await http.post(`${apiUrl}/api/user/reset`, {
         input: inputValue,
       });
     } catch (err) {

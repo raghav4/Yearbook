@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
-import cookies from 'react-cookies';
 import FlipMove from 'react-flip-move';
 import SearchIcon from '@material-ui/icons/Search';
 import { Input, LinearProgress, InputAdornment } from '@material-ui/core';
 import UserCard from './single';
-import config from '../../../../config.json';
+import { apiUrl } from '../../../../config.json';
 import http from '../../../../services/httpService';
 import { NoResults, Select } from '../../../../components';
 
@@ -24,9 +22,7 @@ class PeopleCards extends Component {
 
   // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
-    const { data: persons } = await http.get(`${config.apiEndPoint}/api/user/info/all`, {
-      headers: { 'x-auth-token': cookies.load('x-auth-token') },
-    });
+    const { data: persons } = await http.get(`${apiUrl}/api/user/info/all`);
     let departments = persons.map((e) => {
       return e.deptSection.department;
     });
@@ -65,7 +61,7 @@ class PeopleCards extends Component {
       if (sectionSelect === 'ALL') return this.setState({ people: persons });
 
       return this.setState({
-        people: _.filter(persons, (e) => {
+        people: persons.filter((e) => {
           return e.deptSection.section === sectionSelect;
         }),
         departmentSelect: input.value,
@@ -73,7 +69,7 @@ class PeopleCards extends Component {
     }
 
     return this.setState({
-      people: _.filter(persons, (e) => {
+      people: persons.filter((e) => {
         if (sectionSelect !== 'ALL') {
           return (
             e.deptSection.department === input.value && e.deptSection.section === sectionSelect
@@ -91,7 +87,7 @@ class PeopleCards extends Component {
       if (departmentSelect === 'ALL') return this.setState({ people: persons });
 
       return this.setState({
-        people: _.filter(persons, (e) => {
+        people: persons.filter((e) => {
           return e.deptSection.department === departmentSelect;
         }),
         sectionSelect: input.value,
@@ -99,7 +95,7 @@ class PeopleCards extends Component {
     }
 
     return this.setState({
-      people: _.filter(persons, (e) => {
+      people: persons.filter((e) => {
         if (departmentSelect !== 'ALL') {
           return (
             e.deptSection.section === input.value && e.deptSection.department === departmentSelect
@@ -150,7 +146,7 @@ class PeopleCards extends Component {
         </div>
         <div className="ml-4 mr-4 mt-5 mb-5 row row-cols-1 row-cols-md-3">
           {people.map((person) => (
-            <FlipMove duration={420} key={person._id}>
+            <FlipMove duration={500} staggerDurationBy={300} key={person._id}>
               <div className="col mb-4" key={person._id}>
                 <UserCard
                   person={person}

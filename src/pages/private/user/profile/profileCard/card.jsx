@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import cookies from 'react-cookies';
 import SocialHandle from '../../../../../components/utils/socialHandle';
 import http from '../../../../../services/httpService';
-import config from '../../../../../config.json';
+import { apiUrl } from '../../../../../config.json';
 
 const PersonalCard = () => {
   const [Name, setName] = useState('');
@@ -20,9 +19,7 @@ const PersonalCard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data } = await http.get(`${config.apiEndPoint}/api/user/info`, {
-          headers: { 'x-auth-token': cookies.load('x-auth-token') },
-        });
+        const { data } = await http.get(`${apiUrl}/api/user/info`);
         setName(data.credentials.name);
         setInfo({ ...info, bio: data.info.bio, profilePicture: data.info.profilePicture });
         setSocialHandles({

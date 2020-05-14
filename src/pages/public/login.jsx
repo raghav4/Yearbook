@@ -1,13 +1,11 @@
 import React, { useContext, useState } from 'react';
 import Joi from 'joi-browser';
-import cookie from 'react-cookies';
 import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { PublicContext } from '../../contexts';
 import { Input, Emoji, TimerAlert } from '../../components';
 import { LoginSchema } from '../../utils/schemas';
-import http from '../../services/httpService';
-import config from '../../config.json';
+import Auth from '../../services';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -63,23 +61,15 @@ const Login = () => {
     const errors = validateForm();
     setValidationErrors(errors || {});
     if (errors) return;
-
     try {
       setLoading(true);
       const { email, password } = credentials;
-      const { headers } = await http.post(`${config.apiEndPoint}/api/user/login`, {
-        email,
-        password,
-      });
-      const expires = new Date();
-      expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
-
-      cookie.save('x-auth-token', headers['x-auth-token'], { expires });
+      await Auth.Login(email, password);
       history.push('/');
       TimerAlert('', 'Welcome to the Yearbook', 'success');
     } catch (ex) {
       if (ex.response && (ex.response.status === 400 || ex.response.status === 401)) {
-        TimerAlert('Error', ex.response.data, 'error');
+        TimerAlert(' ', ex.response.data, 'error');
       }
       setLoading(false);
     }
@@ -104,6 +94,7 @@ const Login = () => {
                     error={validationErrors.email}
                     feedback={validationErrors.email}
                   />
+
                   <Input
                     name="password"
                     label="Password"

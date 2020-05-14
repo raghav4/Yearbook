@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
-import cookies from 'react-cookies';
 import AnswerBox from './box';
 import http from '../../../../services/httpService';
-import { apiEndPoint } from '../../../../config.json';
+import { apiUrl } from '../../../../config.json';
 import paginate from '../../../../utils/paginate';
 
 const SelfAnswers = () => {
@@ -17,16 +16,12 @@ const SelfAnswers = () => {
   useEffect(() => {
     document.title = 'Self Questions';
     const fetchTotalQuestions = async () => {
-      const { data } = await http.get(`${apiEndPoint}/api/admin/questions`, {
-        headers: { 'x-auth-token': cookies.load('x-auth-token') },
-      });
+      const { data } = await http.get(`${apiUrl}/api/admin/questions`);
       setTotalQuestionsList(data);
       setTotalQuestions(data.length);
     };
     const fetchAnsweredQuestions = async () => {
-      const { data } = await http.get(`${apiEndPoint}/api/user/answers`, {
-        headers: { 'x-auth-token': cookies.load('x-auth-token') },
-      });
+      const { data } = await http.get(`${apiUrl}/api/user/answers`);
       setAnsweredQuestions(data);
     };
     fetchTotalQuestions();

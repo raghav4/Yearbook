@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import cookies from 'react-cookies';
 import propTypes from 'prop-types';
 import {
   MDBContainer,
@@ -9,7 +8,7 @@ import {
   MDBModalHeader,
   MDBModalFooter,
 } from 'mdbreact';
-import config from '../../../../config.json';
+import { apiUrl } from '../../../../config.json';
 import http from '../../../../services/httpService';
 import { NotifyAlert, TimerAlert } from '../../../../components';
 
@@ -19,13 +18,11 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
   useEffect(() => {
     const getUserMessage = async () => {
       try {
-        const { data } = await http.get(`${config.apiEndPoint}/api/user/messages/${personId}`, {
-          headers: { 'x-auth-token': cookies.load('x-auth-token') },
-        });
+        const { data } = await http.get(`${apiUrl}/api/user/messages/${personId}`);
         setModalValue(data.message);
       } catch (ex) {
         if (ex.response && ex.response.status === 404) {
-          TimerAlert('Error', ex.response.data, 'error');
+          // TimerAlert('Error', ex.response.data, 'error');
         }
       }
     };
@@ -39,9 +36,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
     };
     const submitData = async () => {
       try {
-        const { data } = await http.put(`${config.apiEndPoint}/api/user/messages`, messageObject, {
-          headers: { 'x-auth-token': cookies.load('x-auth-token') },
-        });
+        const { data } = await http.put(`${apiUrl}/api/user/messages`, messageObject);
         setModalValue(data.message);
         TimerAlert('Message sent successfully');
         triggerModal(personId);

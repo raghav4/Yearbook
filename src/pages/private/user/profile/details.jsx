@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import cookies from 'react-cookies';
 import Joi from 'joi-browser';
 import { DropPicture, NotifyAlert, Input } from '../../../../components';
 import { DetailsSchema } from '../../../../utils/schemas';
 import http from '../../../../services/httpService';
-import config from '../../../../config.json';
+import { apiUrl } from '../../../../config.json';
 
 const UserInfo = () => {
   const [credentials, setCredentials] = useState({ name: '', phoneNo: '', email: '' });
@@ -34,9 +33,7 @@ const UserInfo = () => {
 
     const fetchUserDetails = async () => {
       try {
-        const { data } = await http.get(`${config.apiEndPoint}/api/user/info`, {
-          headers: { 'x-auth-token': cookies.load('x-auth-token') },
-        });
+        const { data } = await http.get(`${apiUrl}/api/user/info`);
         setCredentials({
           name: data.credentials.name,
           phoneNo: data.credentials.phoneNo,
@@ -102,9 +99,7 @@ const UserInfo = () => {
       socialHandles,
     };
     try {
-      await http.put(`${config.apiEndPoint}/api/user/info`, userObject, {
-        headers: { 'x-auth-token': cookies.load('x-auth-token') },
-      });
+      await http.put(`${apiUrl}/api/user/info`, userObject);
       NotifyAlert('Successfully Updated Details');
     } catch (ex) {}
   };

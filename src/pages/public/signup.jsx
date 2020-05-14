@@ -6,7 +6,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { TimerAlert, Input, ChainInput } from '../../components';
 import { SignUpSchema } from '../../utils/schemas';
 import http from '../../services/httpService';
-import config from '../../config.json';
+import { apiUrl } from '../../config.json';
 
 const SignUp = () => {
   const [credentials, setCredentials] = useState({
@@ -60,11 +60,12 @@ const SignUp = () => {
             email,
             phoneNo,
             password,
-            department,
-            section,
+            department: credentials.department,
+            section: credentials.section,
           };
           try {
-            await http.post(`${config.apiEndPoint}/api/user/signup/verify`, user);
+            console.log(user);
+            await http.post(`${apiUrl}/api/user/signup/verify`, user);
             ChainInput(
               'You can login now',
               '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
@@ -140,7 +141,7 @@ const SignUp = () => {
     };
     try {
       setLoading(true);
-      await http.post(`${config.apiEndPoint}/api/user/signup`, userObject);
+      await http.post(`${apiUrl}/api/user/signup`, userObject);
       handleVerification(userObject);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
-import cookies from 'react-cookies';
 import Box from './questions/self';
 import PersonalCard from './profileCard/card';
 import OthersWrite from './questions/others';
 import http from '../../../../services/httpService';
-import config from '../../../../config.json';
+import { apiUrl } from '../../../../config.json';
 // import { NoResults } from '../../../components';
 
 const Profile = () => {
@@ -20,9 +18,7 @@ const Profile = () => {
     document.title = 'Profile';
     const fetchUserAnswers = async () => {
       try {
-        const { data } = await http.get(`${config.apiEndPoint}/api/user/answers`, {
-          headers: { 'x-auth-token': cookies.load('x-auth-token') },
-        });
+        const { data } = await http.get(`${apiUrl}/api/user/answers`);
         setAnswers(data);
         if (!data.length) setAnswersStatus(true);
       } catch (ex) {}
@@ -30,9 +26,7 @@ const Profile = () => {
 
     const fetchMessages = async () => {
       try {
-        const { data } = await http.get(`${config.apiEndPoint}/api/user/messages`, {
-          headers: { 'x-auth-token': cookies.load('x-auth-token') },
-        });
+        const { data } = await http.get(`${apiUrl}/api/user/messages`);
         setMessages(data);
         if (!data.length) setMessagesStatus(true);
       } catch (ex) {}
