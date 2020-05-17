@@ -1,7 +1,9 @@
-import cookie from 'react-cookies';
 import jwtDecode from 'jwt-decode';
-import http from './httpService';
+import cookie from 'react-cookies';
+
 import { apiUrl } from '../config.json';
+
+import http from './httpService';
 
 const apiEndPoint = `${apiUrl}/api/user/login`;
 
