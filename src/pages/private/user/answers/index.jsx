@@ -26,8 +26,8 @@ const SelfAnswers = () => {
     };
     fetchTotalQuestions();
     fetchAnsweredQuestions();
-    answeredQuestions.sort();
-    totalQuestionsList.sort();
+    // answeredQuestions.sort();
+    // totalQuestionsList.sort();
   }, []);
 
   const getAnswer = (questionId) => {

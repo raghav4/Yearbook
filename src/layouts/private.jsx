@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import { Navbar, Footer } from './private/user';
 

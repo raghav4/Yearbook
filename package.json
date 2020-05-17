@@ -29,7 +29,8 @@
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
     "sweetalert2": "^9.10.12",
-    "url-prop-type": "^1.2.4"
+    "url-prop-type": "^1.2.4",
+    "vanta": "^0.5.15"
   },
   "scripts": {
     "start": "react-scripts start",

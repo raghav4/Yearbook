@@ -1,13 +1,15 @@
 import React, { useState, useCallback } from 'react';
+import urlPropType from 'url-prop-type';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import imageCompression from 'browser-image-compression';
 import BackupIcon from '@material-ui/icons/Backup';
 import { useDropzone } from 'react-dropzone';
 import { http } from '../../services';
 import { apiUrl } from '../../config.json';
+import { TimerAlert } from '../alerts';
 
-const DropPicture = () => {
-  const [Image, setImage] = useState('');
+const DropPicture = ({ defaultPicture }) => {
+  const [Image, setImage] = useState(defaultPicture);
   const [ImageName, setImageName] = useState('');
   const [ProgressBar, setProgressBar] = useState(false);
 
@@ -18,7 +20,7 @@ const DropPicture = () => {
     alignItems: 'center',
     padding: '20px',
     borderWidth: '2px',
-    borderRadius: '2px',
+    borderRadius: '3%',
     borderColor: '#eeeeee',
     borderStyle: 'dashed',
     backgroundColor: '#f2f2f2',
@@ -41,13 +43,20 @@ const DropPicture = () => {
       try {
         const compressedFile = await imageCompression(acceptedFiles[0], options);
         formData.append('file', compressedFile);
-        const { data } = await http.post(`${apiUrl}/api/pic`, formData, {
+        const { data } = await http.post(`${apiUrl}/api/user/info/pic`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
         setImage(data);
-      } catch (ex) {}
+      } catch (ex) {
+        if (
+          ex.response &&
+          (ex.response.status === 404 || ex.response.status === 400 || ex.response.status === 500)
+        ) {
+          TimerAlert('Error', ex.response.data, 'error');
+        }
+      }
       setProgressBar(false);
     };
     uploadImage();
@@ -68,7 +77,9 @@ const DropPicture = () => {
             <p className="text-center" style={{ textDecoration: 'underline' }}>
               Updload your profile picture
             </p>
-            <p>Drag n drop some files here, or click to select files</p>
+            <p>
+              <strong>Click to choose an image</strong> or Drag it here
+            </p>
             <p className="text-center">
               <small>
                 <mark>Only *.jpeg, *jpg, and *.png images will be accepted</mark>
@@ -78,7 +89,13 @@ const DropPicture = () => {
 
           <div className="text-center">
             {ProgressBar && <CircularProgress />}
-            <img src={Image} alt="user_image" width="90" height="84" />
+            <img
+              src={Image || defaultPicture}
+              className="hoverable"
+              alt="user_image"
+              width="160"
+              height="160"
+            />
           </div>
         </div>
       </section>

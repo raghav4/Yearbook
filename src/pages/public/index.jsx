@@ -1,6 +1,7 @@
-import Login from './login';
-import SignUp from './signup';
+import UserLogin from './user/login';
+import SignUp from './user/signup';
+import ForgotPassword from './user/forgotPassword';
 import LandingPage from './landing';
-import ForgotPassword from './forgotPassword';
+import AdminLogin from './admin/login';
 
-export { Login, SignUp, LandingPage, ForgotPassword };
+export { UserLogin, SignUp, LandingPage, ForgotPassword, AdminLogin };

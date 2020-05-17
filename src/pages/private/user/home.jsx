@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Emoji } from '../../../components';
 import http from '../../../services/httpService';
 import { apiUrl } from '../../../config.json';
+import { PrivateContext } from '../../../contexts';
 
 const HomePage = () => {
   const [User, setUser] = useState('');
+  const { isAdmin } = useContext(PrivateContext);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {

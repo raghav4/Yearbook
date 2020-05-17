@@ -1,6 +1,6 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import cookie from 'react-cookies';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NotFound from './404';
 import publicRoutes from './public';
 import privateRoutes from './private';
@@ -25,8 +25,8 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {publicRoutes()}
         {privateRoutes()}
+        {publicRoutes()}
         <Route exact path="/" component={getComponenet} />
         <Route path="*" component={NotFound} />
       </Switch>

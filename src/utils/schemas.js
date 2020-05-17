@@ -55,7 +55,7 @@ const SignUpSchema = () => {
 
 const DetailsSchema = () => {
   return {
-    contactEmail: Joi.string().email().label('Contact Email'),
+    contactEmail: Joi.string().email().allow('').trim().strict().label('Contact Email'),
     facebook: Joi.string()
       .uri()
       .label('Facebook')
@@ -95,4 +95,17 @@ const DetailsSchema = () => {
   };
 };
 
-export { LoginSchema, SignUpSchema, DetailsSchema };
+const NumberAccess = () => {
+  return {
+    phoneNumber: Joi.string()
+      .length(10)
+      .regex(/^\d+$/)
+      .error(() => {
+        return {
+          message: 'Please enter a valid Phone Number',
+        };
+      }),
+  };
+};
+
+export { LoginSchema, SignUpSchema, DetailsSchema, NumberAccess };

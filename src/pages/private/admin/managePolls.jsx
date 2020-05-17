@@ -1,34 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ListQuestions from './questions/listQuestion';
 
-class ManagePolls extends Component {
-  // eslint-disable-next-line react/state-in-constructor
-  state = {
-    questions: [],
-    inputValue: '',
-    inputValidationAlert: {
-      apply: false,
-      message: '',
-    },
+const ManagePolls = () => {
+  const [questions, setQuestions] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [inputValidationAlert, setInputValidationAlert] = useState({ apply: false, message: '' });
+
+  useEffect(() => {
+    // const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
+    // setState({ questions });
+  }, []);
+
+  const handleChange = ({ currentTarget: input }) => {
+    setInputValue(input.value);
   };
 
-  async componentDidMount() {
-    const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
-    this.setState({ questions });
-  }
-
-  handleChange = (e) => {
-    const newLocal = e.currentTarget;
-    this.setState({ inputValue: newLocal.value });
-  };
-
-  handleKeyPress = (e) => {
-    const code = e.keyCode || e.which;
-    if (code === 13) return this.handleAdd(e.currentTarget.value);
-  };
-
-  handleAdd = async (question) => {
+  const handleAdd = async (question) => {
     let updatedInputValidation = {
       apply: false,
       message: '',
@@ -38,59 +26,73 @@ class ManagePolls extends Component {
         apply: true,
         message: 'Nothing to add',
       };
-      return this.setState({ inputValidationAlert: updatedInputValidation });
+      return setState({ inputValidationAlert: updatedInputValidation });
     }
     const questionObject = {
       question,
     };
     try {
-      const { data: questions } = await axios.post(
+      const { data } = await axios.post(
         'https://yb-server.herokuapp.com/api/admin/polls',
         questionObject,
       );
-      this.setState({ questions });
+      setQuestions(data);
     } catch (err) {
-      console.error(err.response.data);
       updatedInputValidation = {
         apply: true,
         message: err.response.data,
       };
-      return this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
+      return setInputValidationAlert({ apply: true, message: err.response.data });
     }
-    this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
+    setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
   };
 
-  handleDelete = async (questionId) => {
+  const handleKeyPress = (e) => {
+    const code = e.keyCode || e.which;
+    if (code === 13) return handleAdd(e.currentTarget.value);
+  };
+
+  const handleDelete = async (questionId) => {
     try {
-      const { data: questions } = await axios.delete(
+      const { data } = await axios.delete(
         `https://yb-server.herokuapp.com/api/admin/polls/${questionId}`,
       );
-      //const questions = this.state.questions.filter((q) => q.id !== questionId);
-      this.setState({ questions });
+      setQuestions(data);
     } catch (err) {
       console.error(err.response.data);
     }
   };
 
-  render() {
-    const { questions, inputValue, inputValidationAlert } = this.state;
-    return (
-      <>
-        <ListQuestions
-          buttonTitle="Add"
-          pageHeading="Polls Questions"
-          placeholder="Add a Poll Question"
-          questions={questions}
-          inputValue={inputValue}
-          inputValidationAlert={inputValidationAlert}
-          handleAdd={this.handleAdd}
-          onDelete={this.handleDelete}
-          handleKeyPress={this.handleKeyPress}
-          handleChange={this.handleChange}
-        />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <ListQuestions
+        buttonTitle="Add"
+        pageHeading="Polls Questions"
+        placeholder="Add a Poll Question"
+        questions={questions}
+        inputValue={inputValue}
+        inputValidationAlert={inputValidationAlert}
+        handleAdd={handleAdd}
+        onDelete={handleDelete}
+        handleKeyPress={handleKeyPress}
+        handleChange={handleChange}
+      />
+    </>
+  );
+};
 
 export default ManagePolls;
+
+// import React, { Component } from 'react';
+// import axios from 'axios';
+
+// class ManagePolls extends Component {
+//   // eslint-disable-next-line react/state-in-constructor
+//   state = {
+//     questions: [],
+//     inputValue: '',
+//     inputValidationAlert: {
+//       apply: false,
+//       message: '',
+//     },
+//   };

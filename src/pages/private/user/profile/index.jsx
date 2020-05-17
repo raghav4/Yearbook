@@ -44,7 +44,7 @@ const Profile = () => {
       {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
       <div className="container-fluid mt-5">
         <div className="row">
-          <div className="col-sm-8 order-2 order-lg-1" style={{ backgroundColor: 'white' }}>
+          <div className="col-sm-8 order-2 order-lg-1">
             <h4 className="h4-responsive text-center">Answers about yourself</h4>
             <div className="card-group">
               {answers.map((item) => (
@@ -63,7 +63,7 @@ const Profile = () => {
             )} */}
           </div>
           <div className="col-sm-4 order-1 order-lg-2">
-            <div className="row" style={{ backgroundColor: 'white' }}>
+            <div className="row">
               <PersonalCard />
             </div>
           </div>

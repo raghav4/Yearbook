@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 import SocialHandle from '../../../../../components/utils/socialHandle';
 import http from '../../../../../services/httpService';
 import { apiUrl } from '../../../../../config.json';
+import { TimerAlert } from '../../../../../components';
 
 const PersonalCard = () => {
   const [Name, setName] = useState('');
@@ -16,14 +18,23 @@ const PersonalCard = () => {
     snapchat: '',
   });
 
+  const {
+    contactEmail,
+    contactNo,
+    whatsappNo,
+    instagram,
+    linkedin,
+    facebook,
+    snapchat,
+  } = socialHandles;
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const { data } = await http.get(`${apiUrl}/api/user/info`);
         setName(data.credentials.name);
-        setInfo({ ...info, bio: data.info.bio, profilePicture: data.info.profilePicture });
+        setInfo({ bio: data.info.bio, profilePicture: data.info.profilePicture });
         setSocialHandles({
-          ...socialHandles,
           contactEmail: data.socialHandles.contactEmail,
           contactNo: data.socialHandles.contactNo,
           instagram: data.socialHandles.instagram,
@@ -32,7 +43,11 @@ const PersonalCard = () => {
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
-      } catch (ex) {}
+      } catch (ex) {
+        if (ex.response && ex.response.status === 400) {
+          TimerAlert('Error', ex.response.data, 'error');
+        }
+      }
     };
     fetchUserData();
   }, []);
@@ -47,12 +62,14 @@ const PersonalCard = () => {
           width: '20rem',
         }}
       >
-        <img
-          className="card-img-top hoverable"
-          src={info.profilePicture}
-          alt="ProfilePicture"
-          style={{ borderRadius: '5%' }}
-        />
+        <Tooltip title="You can update the picture from update details section" placement="top">
+          <img
+            className="card-img-top hoverable"
+            src={info.profilePicture}
+            alt="ProfilePicture"
+            style={{ borderRadius: '5%' }}
+          />
+        </Tooltip>
 
         <div className="card-body">
           <h4 className="card-title text-center">
@@ -65,27 +82,25 @@ const PersonalCard = () => {
           <hr />
           <p className="text-center">Contact Info</p>
           <div>
-            <div className="row">
-              <SocialHandle
-                platform={socialHandles.contactEmail}
-                iconClass="fas fa-lg fa-envelope"
-              />
-              <SocialHandle
-                platform={socialHandles.contactNo}
-                iconClass="fas fa-lg fa-phone-square-alt"
-              />
-              <SocialHandle
-                platform={socialHandles.whatsappNo}
-                iconClass="fab fa-lg fa-whatsapp-square"
-              />
-              <SocialHandle platform={socialHandles.linkedin} iconClass="fab fa-lg fa-linkedin" />
-              <SocialHandle
-                platform={socialHandles.facebook}
-                iconClass="fab fa-lg fa-facebook-square"
-              />
-              <SocialHandle platform={socialHandles.instagram} iconClass="fab fa-instagram fa-lg" />
-              <SocialHandle platform={socialHandles.snapchat} iconClass="fab fa-snapchat fa-lg" />
-            </div>
+            <Tooltip title="You can add more details from update details section">
+              <div className="row">
+                {contactEmail && (
+                  <SocialHandle platform={contactEmail} iconClass="fas fa-lg fa-envelope" />
+                )}
+                {contactNo && (
+                  <SocialHandle platform={contactNo} iconClass="fas fa-lg fa-phone-square-alt" />
+                )}
+                {whatsappNo && (
+                  <SocialHandle platform={whatsappNo} iconClass="fab fa-lg fa-whatsapp" />
+                )}
+                {linkedin && <SocialHandle platform={linkedin} iconClass="fab fa-lg fa-linkedin" />}
+                {facebook && <SocialHandle platform={facebook} iconClass="fab fa-lg fa-facebook" />}
+                {instagram && (
+                  <SocialHandle platform={instagram} iconClass="fab fa-instagram fa-lg" />
+                )}
+                {snapchat && <SocialHandle platform={snapchat} iconClass="fab fa-snapchat fa-lg" />}
+              </div>
+            </Tooltip>
           </div>
         </div>
       </div>

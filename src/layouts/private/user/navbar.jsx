@@ -15,7 +15,7 @@ import {
 } from 'mdbreact';
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ value }) => {
   const [isOpen, setisOpen] = useState(false);
 
   const toggleCollapse = () => setisOpen(!isOpen);
@@ -43,18 +43,6 @@ const Navbar = () => {
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>
-              {/* <MDBNavItem>
-                <MDBFormInline waves>
-                  <div className="md-form my-0">
-                    <input
-                      className="form-control mr-sm-2"
-                      type="text"
-                      placeholder="Search"
-                      aria-label="Search"
-                    />
-                  </div>
-                </MDBFormInline>
-              </MDBNavItem> */}
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>

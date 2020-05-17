@@ -3,6 +3,7 @@ import axios from 'axios';
 import ListQuestions from './questions/listQuestion';
 
 class ManageQuestions extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     questions: [],
     inputValue: '',
@@ -65,7 +66,7 @@ class ManageQuestions extends Component {
       const { data: questions } = await axios.delete(
         `https://yb-server.herokuapp.com/api/admin/questions/${questionId}`,
       );
-      //const questions = this.state.questions.filter((q) => q.id !== questionId);
+      // const questions = this.state.questions.filter((q) => q.id !== questionId);
       this.setState({ questions });
     } catch (err) {}
   };

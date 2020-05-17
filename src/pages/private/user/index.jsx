@@ -4,5 +4,6 @@ import PeopleCards from './messages';
 import UserInfo from './profile/details';
 import SelfAnswers from './answers';
 import HomePage from './home';
+import LogOut from './logout';
 
-export { ListPolls, Profile, PeopleCards, UserInfo, SelfAnswers, HomePage };
+export { ListPolls, Profile, PeopleCards, UserInfo, SelfAnswers, HomePage, LogOut };

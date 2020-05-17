@@ -8,6 +8,7 @@ import {
   SelfAnswers,
   HomePage,
   LogOut,
+  GrantUserAccess,
 } from '../../pages';
 
 const privateRoutes = () => {
@@ -17,6 +18,7 @@ const privateRoutes = () => {
     { path: '/polls', component: <ListPolls /> },
     { path: '/details', component: <UserInfo /> },
     { path: '/answers', component: <SelfAnswers /> },
+    { path: '/add-user', component: <GrantUserAccess />, isAdmin: true },
     { path: '/logout', component: <LogOut /> },
     { path: '/', component: <HomePage /> }, // changed
   ];

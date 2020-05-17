@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Joi from 'joi-browser';
-import { DropPicture, NotifyAlert, Input } from '../../../../components';
+import { DropPicture, NotifyAlert, Input, TimerAlert } from '../../../../components';
 import { DetailsSchema } from '../../../../utils/schemas';
 import http from '../../../../services/httpService';
 import { apiUrl } from '../../../../config.json';
+import Swal from 'sweetalert2';
 
 const UserInfo = () => {
   const [credentials, setCredentials] = useState({ name: '', phoneNo: '', email: '' });
@@ -43,7 +44,7 @@ const UserInfo = () => {
           department: data.deptSection.department,
           section: data.deptSection.section,
         });
-        setInfo({ ...info, bio: data.info.bio, profilePicture: data.info.profilePicture });
+        setInfo({ bio: data.info.bio, profilePicture: data.info.profilePicture });
         setSocialHandles({
           contactEmail: data.socialHandles.contactEmail,
           contactNo: data.socialHandles.contactNo,
@@ -53,7 +54,11 @@ const UserInfo = () => {
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
-      } catch (ex) {}
+      } catch (ex) {
+        if (ex.response && ex.response.status === 404) {
+          TimerAlert('Error', ex.response.data, 'error');
+        }
+      }
     };
     fetchUserDetails();
   }, []);
@@ -94,14 +99,17 @@ const UserInfo = () => {
     // if (errors) return;
 
     const userObject = {
-      info,
-      deptSection,
+      info: { bio: info.bio },
       socialHandles,
     };
     try {
       await http.put(`${apiUrl}/api/user/info`, userObject);
       NotifyAlert('Successfully Updated Details');
-    } catch (ex) {}
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        Swal.fire(ex.response.data);
+      }
+    }
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -111,11 +119,10 @@ const UserInfo = () => {
     });
   };
 
-  const handleChangeInfo = (e) => {
-    setInfo({
-      ...info,
-      [e.target.name]: e.target.value,
-    });
+  const handleChangeInfo = ({ currentTarget: input }) => {
+    if (input.name === 'bio') {
+      setInfo({ profilePicture: info.profilePicture, bio: input.value });
+    }
   };
 
   const handleChangeDeptSection = (e) => {
@@ -154,8 +161,7 @@ const UserInfo = () => {
           <form className="needs-validation" onSubmit={handleUpdate} noValidate>
             <div className="row">
               <div className="col-md-12">
-                {/* <DropPicture defaultPicture={info.profilePicture} /> */}
-                <DropPicture />
+                <DropPicture defaultPicture={info.profilePicture} />
               </div>
             </div>
             <div className="form-group">
@@ -183,7 +189,7 @@ const UserInfo = () => {
                       label="Account Email"
                       value={credentials.email}
                       handleChange={handleChange}
-                      icon="envelope-open"
+                      icon="envelope"
                       isDisabled
                     />
                     <Input
@@ -244,6 +250,8 @@ const UserInfo = () => {
                         handleChange={handleSocialHandles}
                         error={ValidationErrors.whatsappNo}
                         feedback={ValidationErrors.whatsappNo}
+                        icon="whatsapp"
+                        IconBrand
                       />
                       <Input
                         name="facebook"
@@ -252,6 +260,8 @@ const UserInfo = () => {
                         handleChange={handleSocialHandles}
                         error={ValidationErrors.facebook}
                         feedback={ValidationErrors.facebook}
+                        icon="facebook"
+                        IconBrand
                       />
                       <Input
                         name="linkedin"
@@ -260,18 +270,24 @@ const UserInfo = () => {
                         handleChange={handleSocialHandles}
                         error={ValidationErrors.linkedin}
                         feedback={ValidationErrors.linkedin}
+                        icon="linkedin"
+                        IconBrand
                       />
                       <Input
                         name="instagram"
                         label="Instagram"
                         value={socialHandles.instagram}
                         handleChange={handleSocialHandles}
+                        icon="instagram"
+                        IconBrand
                       />
                       <Input
                         name="snapchat"
                         label="Snapchat"
                         value={socialHandles.snapchat}
                         handleChange={handleSocialHandles}
+                        icon="snapchat-ghost"
+                        IconBrand
                       />
                     </div>
                   </div>

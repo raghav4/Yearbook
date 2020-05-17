@@ -3,10 +3,10 @@ import Joi from 'joi-browser';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-import { TimerAlert, Input, ChainInput } from '../../components';
-import { SignUpSchema } from '../../utils/schemas';
-import http from '../../services/httpService';
-import { apiUrl } from '../../config.json';
+import { TimerAlert, Input } from '../../../components';
+import { SignUpSchema } from '../../../utils/schemas';
+import http from '../../../services/httpService';
+import { apiUrl } from '../../../config.json';
 
 const SignUp = () => {
   const [credentials, setCredentials] = useState({
@@ -64,14 +64,15 @@ const SignUp = () => {
             section: credentials.section,
           };
           try {
-            console.log(user);
             await http.post(`${apiUrl}/api/user/signup/verify`, user);
-            ChainInput(
-              'You can login now',
-              '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
-            );
+            Swal.fire({
+              icon: 'success',
+              title: 'Registeration Successfull',
+              text: 'You can login now',
+              html: '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
+            });
           } catch (ex) {
-            // TimerAlert('Error', 'Something Failed', 'error');
+            TimerAlert('Error', 'Something Failed', 'error');
           }
         }
       });

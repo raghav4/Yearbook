@@ -1,14 +1,15 @@
 import React from 'react';
-import { Login, SignUp, ForgotPassword, LandingPage } from '../../pages';
+import { UserLogin, SignUp, ForgotPassword, LandingPage, AdminLogin } from '../../pages';
 
 import PublicRoute from './publicRoute';
 
 const publicRoutes = () => {
   const routes = [
-    { path: '/login', component: <Login /> },
+    { path: '/login', component: <UserLogin /> },
     { path: '/signup', component: <SignUp /> },
     { path: '/reset', component: <ForgotPassword /> },
-    // { path: '/', component: <LandingPage /> },
+    { path: '/admin', component: <AdminLogin /> },
+    { path: '/', component: <LandingPage /> },
   ];
   return routes.map((route) => (
     <PublicRoute exact path={route.path} key={route.path} component={route.component} />

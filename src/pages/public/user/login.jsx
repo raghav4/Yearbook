@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react';
 import Joi from 'joi-browser';
 import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-import { PublicContext } from '../../contexts';
-import { Input, Emoji, TimerAlert } from '../../components';
-import { LoginSchema } from '../../utils/schemas';
-import Auth from '../../services';
+import { PublicContext } from '../../../contexts';
+import { Input, Emoji, TimerAlert } from '../../../components';
+import { LoginSchema } from '../../../utils/schemas';
+import Auth from '../../../services';
 
-const Login = () => {
+const UserLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [validationErrors, setValidationErrors] = useState({ email: '', password: '' });
   const [Loading, setLoading] = useState(false);
@@ -135,4 +135,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default UserLogin;

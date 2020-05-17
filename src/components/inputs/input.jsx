@@ -3,7 +3,18 @@ import { MDBInput } from 'mdbreact';
 // import { Alert } from '@material-ui/lab';
 import propTypes from 'prop-types';
 
-const Input = ({ name, label, value, handleChange, error, feedback, icon, type, isDisabled }) => {
+const Input = ({
+  name,
+  label,
+  value,
+  handleChange,
+  error,
+  feedback,
+  icon,
+  type,
+  IconBrand,
+  isDisabled,
+}) => {
   return (
     <>
       <MDBInput
@@ -16,6 +27,7 @@ const Input = ({ name, label, value, handleChange, error, feedback, icon, type, 
         disabled={isDisabled}
         className={error ? 'form-control is-invalid' : ''}
         icon={icon}
+        iconBrand={IconBrand}
         outline
         required
       >
@@ -36,6 +48,7 @@ Input.defaultProps = {
   feedback: '',
   error: false,
   isDisabled: false,
+  IconBrand: false,
 };
 
 Input.propTypes = {
@@ -48,6 +61,7 @@ Input.propTypes = {
   type: propTypes.string,
   error: propTypes.bool,
   isDisabled: propTypes.bool,
+  IconBrand: propTypes.bool,
 };
 
 export default Input;

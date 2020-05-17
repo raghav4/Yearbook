@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { Link } from 'react-router-dom';
-import http from '../../services/httpService';
-import { apiUrl } from '../../config.json';
-import { RequestStatus } from '../../components';
+import http from '../../../services/httpService';
+import { apiUrl } from '../../../config.json';
+import { RequestStatus } from '../../../components';
 
 const ForgotPassword = () => {
   const [inputValue, setInputValue] = useState('');

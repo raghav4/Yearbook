@@ -30,7 +30,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
 
   const getBadgeClass = () => {
     let classes = 'badge badge-';
-    const badgeClass = ['primary', 'success', 'danger'];
+    const badgeClass = ['primary', 'success', 'danger', 'default', 'info', 'secondary', 'dark'];
     classes += badgeClass[person.deptSection.section.charCodeAt(0) - 65];
     return classes;
   };
