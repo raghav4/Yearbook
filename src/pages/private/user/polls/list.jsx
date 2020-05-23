@@ -13,8 +13,12 @@ class ListPolls extends Component {
   };
 
   async componentDidMount() {
-    const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
-    const { data: persons } = await axios.get('https://yb-server.herokuapp.com/api/user');
+    const { data: questions } = await axios.get(
+      'https://yb-server.herokuapp.com/api/admin/polls',
+    );
+    const { data: persons } = await axios.get(
+      'https://yb-server.herokuapp.com/api/user',
+    );
     this.setState({ questions, persons, ProgressBar: !this.state.ProgressBar });
   }
 
@@ -26,7 +30,9 @@ class ListPolls extends Component {
     const { ProgressBar, questions, persons } = this.state;
     return (
       <>
-        {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
+        {ProgressBar && (
+          <LinearProgress variant="indeterminate" color="primary" />
+        )}
         <h2 className="h2-responsive text-center mt-5">Vote for the Polls</h2>
         <div className="mx-4 mb-5 row row-cols-1 row-cols-md-4">
           {questions.map((question) => (

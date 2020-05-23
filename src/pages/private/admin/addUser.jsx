@@ -10,7 +10,9 @@ const GrantUserAccess = () => {
 
   const registerUser = async (phoneNumber) => {
     try {
-      const { data } = await http.post(`${apiUrl}/api/admin/user/grant`, { phoneNumber });
+      const { data } = await http.post(`${apiUrl}/api/admin/user/grant`, {
+        phoneNumber,
+      });
       Swal.fire('Done', 'Successfully granted access to the number', 'success');
       setRegisteration(true);
     } catch (ex) {

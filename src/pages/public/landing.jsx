@@ -10,7 +10,9 @@ const LandingPage = () => {
           <div className="bg">
             <div
               className="bg-image"
-              style={{ backgroundImage: `url(https://i.imgur.com/LoiHMJo.jpg)` }}
+              style={{
+                backgroundImage: `url(https://i.imgur.com/LoiHMJo.jpg)`,
+              }}
             />
           </div>
           <div className=" header">
@@ -19,7 +21,10 @@ const LandingPage = () => {
                 <Link to="/" className="h4 h4-responsive text-white">
                   Yearbook
                 </Link>{' '}
-                <Link to="mailto:demo@demo.com" className="text-white h4 h4-responsive mr0">
+                <Link
+                  to="mailto:demo@demo.com"
+                  className="text-white h4 h4-responsive mr0"
+                >
                   Contact
                 </Link>
               </div>
@@ -28,7 +33,9 @@ const LandingPage = () => {
           <div className="section">
             <div className="container mb40">
               <div className="col-12 text-center">
-                <h1 className="heading-lrg text-white">Memories curated together</h1>
+                <h1 className="heading-lrg text-white">
+                  Memories curated together
+                </h1>
                 <h2 className="subheading text-white mt20">
                   Write for others, for self get everything in a PDF
                 </h2>

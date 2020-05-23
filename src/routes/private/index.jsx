@@ -6,24 +6,51 @@ import {
   PeopleCards,
   UserInfo,
   SelfAnswers,
-  HomePage,
   LogOut,
   GrantUserAccess,
+  ManageQuestions,
+  AdminProfile,
+  ManagePolls,
 } from '../../pages';
 
 const privateRoutes = () => {
   const routes = [
     { path: '/write', component: <PeopleCards /> },
-    { path: '/profile', component: <Profile /> },
-    { path: '/polls', component: <ListPolls /> },
-    { path: '/details', component: <UserInfo /> },
-    { path: '/answers', component: <SelfAnswers /> },
-    { path: '/add-user', component: <GrantUserAccess />, isAdmin: true },
+    {
+      path: '/profile',
+      component: <Profile />,
+      systemAdminComponent: <AdminProfile />,
+    },
+    {
+      path: '/polls',
+      component: <ListPolls />,
+      systemAdminComponent: <ManagePolls />,
+    },
+    {
+      path: '/details',
+      component: <UserInfo />,
+      systemAdminComponent: <AdminProfile />,
+    },
+    {
+      path: '/answers',
+      component: <SelfAnswers />,
+      systemAdminComponent: <ManageQuestions />,
+    },
+    { path: '/add-user', systemAdminComponent: <GrantUserAccess /> },
     { path: '/logout', component: <LogOut /> },
-    { path: '/', component: <HomePage /> }, // changed
   ];
+
+  const systemAdminRoutes = ['/add-user', '/profile', '/details'];
+
   return routes.map((route) => (
-    <PrivateRoute exact path={route.path} key={route.path} component={route.component} />
+    <PrivateRoute
+      exact
+      path={route.path}
+      key={route.path}
+      component={route.component}
+      systemAdminRoutes={systemAdminRoutes}
+      systemAdminComponent={route.systemAdminComponent}
+    />
   ));
 };
 

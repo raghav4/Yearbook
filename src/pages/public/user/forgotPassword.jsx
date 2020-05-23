@@ -22,13 +22,18 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '2%' }}>
+        <div
+          className="jumbotron col-md-3 mx-5 my-5"
+          style={{ borderRadius: '2%' }}
+        >
           <MDBContainer>
             <MDBRow>
               <MDBCol>
                 <form className="needs-validation">
                   <p className="h4 text-center mb-4">Reset Password</p>
-                  <p className="p-responsive text-center mx-3 text-gray">Enter your Phone/Email</p>
+                  <p className="p-responsive text-center mx-3 text-gray">
+                    Enter your Phone/Email
+                  </p>
                   <small id="emailHelp" className="form-text text-muted">
                     We will never share your email with anyone else.
                   </small>

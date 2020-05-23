@@ -33,7 +33,10 @@ const PersonalCard = () => {
       try {
         const { data } = await http.get(`${apiUrl}/api/user/info`);
         setName(data.credentials.name);
-        setInfo({ bio: data.info.bio, profilePicture: data.info.profilePicture });
+        setInfo({
+          bio: data.info.bio,
+          profilePicture: data.info.profilePicture,
+        });
         setSocialHandles({
           contactEmail: data.socialHandles.contactEmail,
           contactNo: data.socialHandles.contactNo,
@@ -62,7 +65,10 @@ const PersonalCard = () => {
           width: '20rem',
         }}
       >
-        <Tooltip title="You can update the picture from update details section" placement="top">
+        <Tooltip
+          title="You can update the picture from update details section"
+          placement="top"
+        >
           <img
             className="card-img-top hoverable"
             src={info.profilePicture}
@@ -85,20 +91,47 @@ const PersonalCard = () => {
             <Tooltip title="You can add more details from update details section">
               <div className="row">
                 {contactEmail && (
-                  <SocialHandle platform={contactEmail} iconClass="fas fa-lg fa-envelope" />
+                  <SocialHandle
+                    platform={contactEmail}
+                    iconClass="fas fa-lg fa-envelope"
+                  />
                 )}
                 {contactNo && (
-                  <SocialHandle platform={contactNo} iconClass="fas fa-lg fa-phone-square-alt" />
+                  <SocialHandle
+                    platform={contactNo}
+                    iconClass="fas fa-lg fa-phone-square-alt"
+                  />
                 )}
                 {whatsappNo && (
-                  <SocialHandle platform={whatsappNo} iconClass="fab fa-lg fa-whatsapp" />
+                  <SocialHandle
+                    platform={whatsappNo}
+                    iconClass="fab fa-lg fa-whatsapp"
+                  />
                 )}
-                {linkedin && <SocialHandle platform={linkedin} iconClass="fab fa-lg fa-linkedin" />}
-                {facebook && <SocialHandle platform={facebook} iconClass="fab fa-lg fa-facebook" />}
+                {linkedin && (
+                  <SocialHandle
+                    platform={linkedin}
+                    iconClass="fab fa-lg fa-linkedin"
+                  />
+                )}
+                {facebook && (
+                  <SocialHandle
+                    platform={facebook}
+                    iconClass="fab fa-lg fa-facebook"
+                  />
+                )}
                 {instagram && (
-                  <SocialHandle platform={instagram} iconClass="fab fa-instagram fa-lg" />
+                  <SocialHandle
+                    platform={instagram}
+                    iconClass="fab fa-instagram fa-lg"
+                  />
                 )}
-                {snapchat && <SocialHandle platform={snapchat} iconClass="fab fa-snapchat fa-lg" />}
+                {snapchat && (
+                  <SocialHandle
+                    platform={snapchat}
+                    iconClass="fab fa-snapchat fa-lg"
+                  />
+                )}
               </div>
             </Tooltip>
           </div>

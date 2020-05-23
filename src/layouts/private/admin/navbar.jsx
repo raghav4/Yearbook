@@ -12,6 +12,7 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
 } from 'mdbreact';
+import { NavLink } from 'react-router-dom';
 
 const AdminNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,8 +40,8 @@ const AdminNavBar = () => {
                   Add
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
-                  <MDBDropdownItem href="/polls/manage">Admin</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">User</MDBDropdownItem>
+                  <NavLink to="/polls/manage">Admin</NavLink>
+                  <NavLink to="/add-user">User</NavLink>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>

@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Joi from 'joi-browser';
-import { DropPicture, NotifyAlert, Input, TimerAlert } from '../../../../components';
+import {
+  DropPicture,
+  NotifyAlert,
+  Input,
+  TimerAlert,
+} from '../../../../components';
 import { DetailsSchema } from '../../../../utils/schemas';
 import http from '../../../../services/httpService';
 import { apiUrl } from '../../../../config.json';
 import Swal from 'sweetalert2';
 
 const UserInfo = () => {
-  const [credentials, setCredentials] = useState({ name: '', phoneNo: '', email: '' });
+  const [credentials, setCredentials] = useState({
+    name: '',
+    phoneNo: '',
+    email: '',
+  });
   const [info, setInfo] = useState({ bio: '', profilePicture: '' });
-  const [deptSection, setDeptSection] = useState({ department: '', section: '' });
+  const [deptSection, setDeptSection] = useState({
+    department: '',
+    section: '',
+  });
   const [ValidationErrors, setValidationErrors] = useState({
     bio: '',
     contactEmail: '',
@@ -44,7 +56,10 @@ const UserInfo = () => {
           department: data.deptSection.department,
           section: data.deptSection.section,
         });
-        setInfo({ bio: data.info.bio, profilePicture: data.info.profilePicture });
+        setInfo({
+          bio: data.info.bio,
+          profilePicture: data.info.profilePicture,
+        });
         setSocialHandles({
           contactEmail: data.socialHandles.contactEmail,
           contactNo: data.socialHandles.contactNo,
@@ -65,9 +80,13 @@ const UserInfo = () => {
 
   const validateForm = () => {
     const { contactEmail, facebook, linkedin } = socialHandles;
-    const { error } = Joi.validate({ contactEmail, facebook, linkedin }, DetailsSchema(), {
-      abortEarly: false,
-    });
+    const { error } = Joi.validate(
+      { contactEmail, facebook, linkedin },
+      DetailsSchema(),
+      {
+        abortEarly: false,
+      },
+    );
     if (!error) return null;
     const errors = {};
     // eslint-disable-next-line no-restricted-syntax
@@ -220,7 +239,9 @@ const UserInfo = () => {
                     icon="address-card"
                   />
 
-                  <p className="p-responsive text-center">Contact Details/ Social Media</p>
+                  <p className="p-responsive text-center">
+                    Contact Details/ Social Media
+                  </p>
                   <div className="row">
                     <div className="col">
                       <Input

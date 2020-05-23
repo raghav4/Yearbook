@@ -31,18 +31,23 @@ const SelfAnswers = () => {
   }, []);
 
   const getAnswer = (questionId) => {
-    const result = answeredQuestions.find((e) => e.questionId._id === questionId);
+    const result = answeredQuestions.find(
+      (e) => e.questionId._id === questionId,
+    );
     return result ? { answer: result.answer, _id: result._id } : {};
   };
 
   const getTotalAnswersClass = () => {
     let classes = 'text-center mt-2 mb-3 ';
-    const percentage = (answeredQuestions.length / totalQuestionsList.length) * 100;
+    const percentage =
+      (answeredQuestions.length / totalQuestionsList.length) * 100;
 
-    if ((percentage >= 0 && percentage <= 30) || Number.isNaN(percentage)) classes += 'red-text';
+    if ((percentage >= 0 && percentage <= 30) || Number.isNaN(percentage))
+      classes += 'red-text';
     else if (percentage >= 31 && percentage <= 60) classes += 'blue-grey-text';
     else if (percentage >= 61 && percentage <= 90) classes += 'purple-text';
-    else if (percentage >= 91 && percentage < 100) classes += 'deep-orange-text';
+    else if (percentage >= 91 && percentage < 100)
+      classes += 'deep-orange-text';
     else if (percentage === 100) classes += 'green-text';
 
     return classes;
@@ -70,7 +75,10 @@ const SelfAnswers = () => {
           />
         ))}
 
-        <div style={{ display: 'flex' }} className="my-4 text-center justify-content-center">
+        <div
+          style={{ display: 'flex' }}
+          className="my-4 text-center justify-content-center"
+        >
           <Pagination
             count={totalQuestions}
             color="primary"

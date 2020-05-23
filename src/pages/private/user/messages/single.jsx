@@ -30,7 +30,15 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
 
   const getBadgeClass = () => {
     let classes = 'badge badge-';
-    const badgeClass = ['primary', 'success', 'danger', 'default', 'info', 'secondary', 'dark'];
+    const badgeClass = [
+      'primary',
+      'success',
+      'danger',
+      'default',
+      'info',
+      'secondary',
+      'dark',
+    ];
     classes += badgeClass[person.deptSection.section.charCodeAt(0) - 65];
     return classes;
   };
@@ -43,7 +51,11 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
         </h4>
         <div className="view overlay mb-3">
           {(personImageUrl && (
-            <CardMedia className={classes.media} image={personImageUrl} title="Paella dish" />
+            <CardMedia
+              className={classes.media}
+              image={personImageUrl}
+              title="Paella dish"
+            />
           )) || <Skeleton variant="rect" width={360} height={150} />}
         </div>
         <div className="text-center">
@@ -52,9 +64,19 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
           </span>
         </div>
         <p className="card-text text-center">
-          {personBio || <Skeleton animation="wave" height={22} style={{ marginBottom: 6 }} />}
+          {personBio || (
+            <Skeleton
+              animation="wave"
+              height={22}
+              style={{ marginBottom: 6 }}
+            />
+          )}
         </p>
-        <button type="button" className="btn btn-deep-purple" onClick={() => triggerModal()}>
+        <button
+          type="button"
+          className="btn btn-deep-purple"
+          onClick={() => triggerModal()}
+        >
           <i className="fas fa-plus-circle mr-2" />
           Write
         </button>

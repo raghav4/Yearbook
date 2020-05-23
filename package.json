@@ -16,6 +16,7 @@
     "joi-browser": "^13.4.0",
     "jwt-decode": "^2.2.0",
     "mdbreact": "^4.26.0",
+    "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
     "raven-js": "^3.27.2",
     "react": "^16.13.1",
@@ -35,7 +36,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "npx prettier --write '**/*.jsx'"
   },
   "eslintConfig": {
     "extends": "react-app"

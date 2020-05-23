@@ -1,8 +1,9 @@
 import React from 'react';
 import { MDBBtn } from 'mdbreact';
+import propTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
 import { Alert } from '@material-ui/lab';
-import QuestionContent from './questionContent';
+import Question from './questionContent';
 
 const ListQuestions = ({
   inputValue,
@@ -30,21 +31,20 @@ const ListQuestions = ({
                   id="form1"
                   className="form-control"
                   value={inputValue}
-                  onChange={handleChange}
-                  onKeyPress={handleKeyPress}
+                  onChange={(e) => handleChange(e.target.value)}
+                  onKeyDown={handleKeyPress}
                 />
                 {inputValidationAlert.apply && (
-                  <Alert severity="error" style={{ fontFamily: 'Sofia Pro Medium' }}>
+                  <Alert
+                    severity="error"
+                    style={{ fontFamily: 'Sofia Pro Medium' }}
+                  >
                     {inputValidationAlert.message}
                   </Alert>
                 )}
               </div>
               <div className="float-left">
-                <MDBBtn
-                  className="float-right"
-                  gradient="green"
-                  onClick={() => handleAdd(inputValue)}
-                >
+                <MDBBtn color="default" onClick={() => handleAdd()}>
                   {buttonTitle}
                 </MDBBtn>
               </div>
@@ -53,13 +53,41 @@ const ListQuestions = ({
         </div>
       </div>
 
-      <FlipMove enterAnimation="elevator" leaveAnimation="accordionVertical">
-        {questions.map((question) => (
-          <QuestionContent key={question._id} onDelete={onDelete} question={question} />
+      <FlipMove
+        staggerDelayBy={50}
+        appearAnimation="accordionVertical"
+        enterAnimation="accordionVertical"
+        leaveAnimation="accordionVertical"
+      >
+        {questions.map((item) => (
+          // #TODO: #34 Prop Drilling with OnDelete
+          <div key={item._id}>
+            <Question
+              key={item._id}
+              onDelete={onDelete}
+              question={item.question}
+              id={item._id}
+            />
+          </div>
         ))}
       </FlipMove>
     </div>
   );
+};
+
+ListQuestions.propTypes = {
+  onDelete: propTypes.func.isRequired,
+  handleAdd: propTypes.func.isRequired,
+  handleChange: propTypes.func.isRequired,
+  handleKeyPress: propTypes.func.isRequired,
+  inputValue: propTypes.string.isRequired,
+  pageHeading: propTypes.string.isRequired,
+  placeholder: propTypes.string.isRequired,
+  buttonTitle: propTypes.string.isRequired,
+  questions: propTypes.arrayOf(propTypes.object).isRequired,
+  inputValidationAlert: propTypes.objectOf(
+    propTypes.oneOfType([propTypes.string, propTypes.bool]),
+  ).isRequired,
 };
 
 export default ListQuestions;

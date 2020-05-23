@@ -50,7 +50,9 @@ class PeopleCards extends Component {
   filterPeople = (e) => {
     const people = this.state.persons.filter(
       (person) =>
-        person.credentials.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
+        person.credentials.name
+          .toLowerCase()
+          .search(e.target.value.trim().toLowerCase()) !== -1,
     );
     this.setState({ people, NoSearchResults: !people.length });
   };
@@ -72,7 +74,8 @@ class PeopleCards extends Component {
       people: persons.filter((e) => {
         if (sectionSelect !== 'ALL') {
           return (
-            e.deptSection.department === input.value && e.deptSection.section === sectionSelect
+            e.deptSection.department === input.value &&
+            e.deptSection.section === sectionSelect
           );
         }
         return e.deptSection.department === input.value;
@@ -98,7 +101,8 @@ class PeopleCards extends Component {
       people: persons.filter((e) => {
         if (departmentSelect !== 'ALL') {
           return (
-            e.deptSection.section === input.value && e.deptSection.department === departmentSelect
+            e.deptSection.section === input.value &&
+            e.deptSection.department === departmentSelect
           );
         }
         return e.deptSection.section === input.value;
@@ -108,11 +112,19 @@ class PeopleCards extends Component {
   };
 
   render() {
-    const { ProgressBar, departments, sections, people, NoSearchResults } = this.state;
+    const {
+      ProgressBar,
+      departments,
+      sections,
+      people,
+      NoSearchResults,
+    } = this.state;
 
     return (
       <>
-        {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
+        {ProgressBar && (
+          <LinearProgress variant="indeterminate" color="primary" />
+        )}
         <div className="ml-5 mr-5 mt-5 mb-5 active-cyan-3 active-cyan-4">
           <Input
             className="form-control"

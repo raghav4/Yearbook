@@ -18,7 +18,13 @@ const SignUp = () => {
     section: '',
   });
   const [confirmPassword, setconfirmPassword] = useState('');
-  const [department, setdepartment] = useState(['CSE', 'IT', 'EEE', 'ECE', 'MAE']);
+  const [department, setdepartment] = useState([
+    'CSE',
+    'IT',
+    'EEE',
+    'ECE',
+    'MAE',
+  ]);
   const [section, setsection] = useState(['A', 'B', 'C']);
   const [Loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
@@ -69,7 +75,8 @@ const SignUp = () => {
               icon: 'success',
               title: 'Registeration Successfull',
               text: 'You can login now',
-              html: '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
+              html:
+                '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
             });
           } catch (ex) {
             TimerAlert('Error', 'Something Failed', 'error');
@@ -79,7 +86,9 @@ const SignUp = () => {
   };
 
   const validateForm = () => {
-    const { error } = Joi.validate(credentials, SignUpSchema(), { abortEarly: false });
+    const { error } = Joi.validate(credentials, SignUpSchema(), {
+      abortEarly: false,
+    });
     if (!error) return null;
     const errors = {};
     // eslint-disable-next-line no-restricted-syntax
@@ -155,11 +164,18 @@ const SignUp = () => {
   return (
     <>
       <div className="d-flex justify-content-center mb-5">
-        <div className="jumbotron col-md-5 mx-5 my-5" style={{ borderRadius: '3%' }}>
+        <div
+          className="jumbotron col-md-5 mx-5 my-5"
+          style={{ borderRadius: '3%' }}
+        >
           <MDBContainer>
             <MDBRow>
               <MDBCol>
-                <form className="needs-validation" onSubmit={submitHandler} noValidate>
+                <form
+                  className="needs-validation"
+                  onSubmit={submitHandler}
+                  noValidate
+                >
                   <p className="h4 text-center mb-4">Sign up</p>
                   <Input
                     name="name"
@@ -189,7 +205,10 @@ const SignUp = () => {
                     <select
                       className="browser-default custom-select"
                       onChange={(e) =>
-                        setCredentials({ ...credentials, department: e.target.value })
+                        setCredentials({
+                          ...credentials,
+                          department: e.target.value,
+                        })
                       }
                     >
                       <option>Choose your Department</option>
@@ -203,7 +222,12 @@ const SignUp = () => {
                   <div>
                     <select
                       className="browser-default custom-select"
-                      onChange={(e) => setCredentials({ ...credentials, section: e.target.value })}
+                      onChange={(e) =>
+                        setCredentials({
+                          ...credentials,
+                          section: e.target.value,
+                        })
+                      }
                     >
                       <option>Choose your Section</option>
                       <option value="A">A</option>
@@ -229,7 +253,11 @@ const SignUp = () => {
                   />
 
                   <div className="text-center mt-4">
-                    <MDBBtn color="unique" type="submit" disabled={validateForm()}>
+                    <MDBBtn
+                      color="unique"
+                      type="submit"
+                      disabled={validateForm()}
+                    >
                       {Loading ? (
                         <span
                           className="spinner-border spinner-border-sm"

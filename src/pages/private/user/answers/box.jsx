@@ -49,9 +49,16 @@ const AnswerBox = ({ question, questionId, answer, answerId }) => {
       <div className="mx-4 my-4">
         <MDBContainer>
           <MDBCard>
-            <MDBCardHeader color="unique-color-dark lighten-1" className="text-center">
+            <MDBCardHeader
+              color="unique-color-dark lighten-1"
+              className="text-center"
+            >
               <div className="text-center">
-                <SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
+                <SplitText
+                  initialPose="exit"
+                  pose="enter"
+                  charPoses={charPoses}
+                >
                   {question}
                 </SplitText>
               </div>

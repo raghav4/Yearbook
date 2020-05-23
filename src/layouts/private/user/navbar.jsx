@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -14,8 +14,12 @@ import {
   MDBDropdownToggle,
 } from 'mdbreact';
 import { NavLink } from 'react-router-dom';
+import { PrivateContext } from '../../../contexts';
 
-const Navbar = ({ value }) => {
+const Navbar = () => {
+  const value = useContext(PrivateContext);
+  // const { location } = NavContext;
+  console.log('path name is ', value);
   const [isOpen, setisOpen] = useState(false);
 
   const toggleCollapse = () => setisOpen(!isOpen);

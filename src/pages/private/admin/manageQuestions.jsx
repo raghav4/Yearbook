@@ -1,95 +1,103 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import http from '../../../services/httpService';
+import { apiUrl } from '../../../config.json';
 import ListQuestions from './questions/listQuestion';
+import { NotifyAlert } from '../../../components';
 
-class ManageQuestions extends Component {
-  // eslint-disable-next-line react/state-in-constructor
-  state = {
-    questions: [],
-    inputValue: '',
-    inputValidationAlert: {
-      apply: false,
-      message: '',
-    },
+const ManageQuestions = () => {
+  const [questions, setQuestions] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [inputValidationAlert, setInputValidationAlert] = useState({
+    apply: false,
+    message: '',
+  });
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const { data } = await http.get(`${apiUrl}/api/admin/questions`);
+        setQuestions(data);
+      } catch (ex) {
+        // if (ex.response && ex.response.status === 404) {
+        // }
+      }
+    };
+    fetchQuestions();
+  }, []);
+
+  const handleChange = (input) => {
+    if (input !== '') {
+      setInputValidationAlert({ apply: false, message: '' });
+    }
+    setInputValue(input);
   };
 
-  async componentDidMount() {
-    const { data: questions } = await axios.get(
-      'https://yb-server.herokuapp.com/api/admin/questions',
-    );
-    this.setState({ questions });
-  }
-
-  handleChange = (e) => {
-    this.setState({ inputValue: e.target.value });
-  };
-
-  handleKeyPress = (e) => {
-    const code = e.keyCode || e.which;
-    if (code === 13) return this.handleAdd(e.target.value);
-  };
-
-  handleAdd = async (question) => {
+  const handleAdd = async () => {
     let updatedInputValidation = {
       apply: false,
       message: '',
     };
-    if (question.trim() === '') {
+    if (inputValue.trim() === '') {
       updatedInputValidation = {
         apply: true,
         message: 'Nothing to add',
       };
-      return this.setState({ inputValidationAlert: updatedInputValidation });
+      return setInputValidationAlert(updatedInputValidation);
     }
-    const questionObject = {
-      question,
-    };
+
+    const originalQuestions = questions;
+    setQuestions([
+      { _id: 'fakeId', question: inputValue },
+      ...originalQuestions,
+    ]);
     try {
-      const { data: questions } = await axios.post(
-        'https://yb-server.herokuapp.com/api/admin/questions',
-        questionObject,
-      );
-      this.setState({ questions });
-    } catch (err) {
-      console.error(err.response.data);
+      const { data } = await http.post(`${apiUrl}/api/admin/questions`, {
+        question: inputValue,
+      });
+      NotifyAlert('Successfully added the question', 'top');
+      setQuestions([data, ...questions]);
+    } catch (ex) {
+      // if (ex.response && ex.response.status === 400)
+      setQuestions(originalQuestions);
       updatedInputValidation = {
         apply: true,
-        message: err.response.data,
+        message: ex.response.data,
       };
-      return this.setState({ inputValidationAlert: updatedInputValidation });
     }
-    this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
+    setInputValidationAlert(updatedInputValidation);
   };
 
-  handleDelete = async (questionId) => {
+  const handleDelete = async (questionId) => {
+    const originalQuestions = questions;
+    setQuestions(questions.filter((q) => q._id !== questionId));
     try {
-      const { data: questions } = await axios.delete(
-        `https://yb-server.herokuapp.com/api/admin/questions/${questionId}`,
-      );
-      // const questions = this.state.questions.filter((q) => q.id !== questionId);
-      this.setState({ questions });
-    } catch (err) {}
+      await http.delete(`${apiUrl}/api/admin/questions/${questionId}`);
+      NotifyAlert('Successfully deleted the question', 'top');
+    } catch (ex) {
+      setQuestions(originalQuestions);
+    }
   };
 
-  render() {
-    const { questions, inputValue, inputValidationAlert } = this.state;
-    return (
-      <>
-        <ListQuestions
-          buttonTitle="Add Question"
-          pageHeading="User Questions"
-          placeholder="Add a question"
-          questions={questions}
-          inputValue={inputValue}
-          inputValidationAlert={inputValidationAlert}
-          handleAdd={this.handleAdd}
-          onDelete={this.handleDelete}
-          handleKeyPress={this.handleKeyPress}
-          handleChange={this.handleChange}
-        />
-      </>
-    );
-  }
-}
+  const handleKeyPress = ({ keyCode }) => {
+    if (keyCode === 13) handleAdd();
+  };
+
+  return (
+    <>
+      <ListQuestions
+        buttonTitle="Add Question"
+        pageHeading="User Questions"
+        placeholder="Add a question"
+        questions={questions}
+        inputValue={inputValue}
+        inputValidationAlert={inputValidationAlert}
+        handleAdd={handleAdd}
+        handleChange={handleChange}
+        onDelete={handleDelete}
+        handleKeyPress={handleKeyPress}
+      />
+    </>
+  );
+};
 
 export default ManageQuestions;

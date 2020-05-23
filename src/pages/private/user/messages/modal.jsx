@@ -18,7 +18,9 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
   useEffect(() => {
     const getUserMessage = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/messages/${personId}`);
+        const { data } = await http.get(
+          `${apiUrl}/api/user/messages/${personId}`,
+        );
         setModalValue(data.message);
       } catch (ex) {
         if (ex.response && ex.response.status === 404) {
@@ -36,7 +38,10 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
     };
     const submitData = async () => {
       try {
-        const { data } = await http.put(`${apiUrl}/api/user/messages`, messageObject);
+        const { data } = await http.put(
+          `${apiUrl}/api/user/messages`,
+          messageObject,
+        );
         setModalValue(data.message);
         TimerAlert('Message sent successfully');
         triggerModal(personId);

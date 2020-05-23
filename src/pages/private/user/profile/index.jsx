@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Box from './questions/self';
 import PersonalCard from './profileCard/card';
 import OthersWrite from './questions/others';
-import http from '../../../../services/httpService';
+import { NoResults } from '../../../../components';
+import { PrivateContext } from '../../../../contexts';
 import { apiUrl } from '../../../../config.json';
-// import { NoResults } from '../../../components';
+import http from '../../../../services/httpService';
 
 const Profile = () => {
   const [answers, setAnswers] = useState([]);
@@ -13,6 +14,8 @@ const Profile = () => {
   const [AnswersStatus, setAnswersStatus] = useState(false);
   const [MessagesStatus, setMessagesStatus] = useState(false);
   const [ProgressBar, setProgressBar] = useState(true);
+
+  const { history } = useContext(PrivateContext);
 
   useEffect(() => {
     document.title = 'Profile';
@@ -41,26 +44,46 @@ const Profile = () => {
 
   return (
     <>
-      {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
+      {ProgressBar && (
+        <LinearProgress variant="indeterminate" color="primary" />
+      )}
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-sm-8 order-2 order-lg-1">
-            <h4 className="h4-responsive text-center">Answers about yourself</h4>
-            <div className="card-group">
+            <h4 className="h4-responsive text-center">
+              Answers about yourself
+            </h4>
+            <div className="card-group text-center">
               {answers.map((item) => (
-                <Box question={item.questionId.question} answer={item.answer} key={item._id} />
+                <Box
+                  question={item.questionId.question}
+                  answer={item.answer}
+                  key={item._id}
+                />
               ))}
-              {/* {AnswersStatus && (
-                <NoResults fontSize="h4" message="You haven't added any answers for yourself" />
-              )} */}
+              {AnswersStatus && (
+                <NoResults
+                  fontSize="h4"
+                  message="You haven't added any answers for yourself"
+                />
+              )}
             </div>
-            <h4 className="h4-responsive text-center">Answers others have written for you</h4>
+            <h4 className="h4-responsive text-center">
+              Answers others have written for you
+            </h4>
             {messages.map((item) => (
-              <OthersWrite message={item.message} person={item.sentBy} key={item._id} />
+              <OthersWrite
+                message={item.message}
+                person={item.sentBy}
+                key={item._id}
+              />
             ))}
-            {/* {MessagesStatus && (
-              <NoResults fontSize="h4" message="Looks like nobody has written for you yet" />
-            )} */}
+            {MessagesStatus && (
+              <NoResults
+                fontSize="h4"
+                message="Looks like nobody has written for you yet"
+              />
+            )}
           </div>
           <div className="col-sm-4 order-1 order-lg-2">
             <div className="row">

@@ -9,12 +9,17 @@ import Auth from '../../../services';
 
 const UserLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [validationErrors, setValidationErrors] = useState({ email: '', password: '' });
+  const [validationErrors, setValidationErrors] = useState({
+    email: '',
+    password: '',
+  });
   const [Loading, setLoading] = useState(false);
   const { history } = useContext(PublicContext);
 
   const validateForm = () => {
-    const { error } = Joi.validate(credentials, LoginSchema(), { abortEarly: false });
+    const { error } = Joi.validate(credentials, LoginSchema(), {
+      abortEarly: false,
+    });
     if (!error) return null;
     const errors = {};
     // eslint-disable-next-line no-restricted-syntax
@@ -68,7 +73,10 @@ const UserLogin = () => {
       history.push('/');
       TimerAlert('', 'Welcome to the Yearbook', 'success');
     } catch (ex) {
-      if (ex.response && (ex.response.status === 400 || ex.response.status === 401)) {
+      if (
+        ex.response &&
+        (ex.response.status === 400 || ex.response.status === 401)
+      ) {
         TimerAlert(' ', ex.response.data, 'error');
       }
       setLoading(false);
@@ -78,11 +86,18 @@ const UserLogin = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '5%' }}>
+        <div
+          className="jumbotron col-md-3 mx-5 my-5"
+          style={{ borderRadius: '5%' }}
+        >
           <MDBContainer>
             <MDBRow>
               <MDBCol>
-                <form className="needs-validation" onSubmit={submitHandler} noValidate>
+                <form
+                  className="needs-validation"
+                  onSubmit={submitHandler}
+                  noValidate
+                >
                   <p className="h4 text-center mb-4">
                     Sign In <Emoji symbol="🔐" />
                   </p>
@@ -106,7 +121,11 @@ const UserLogin = () => {
                   />
 
                   <div className="text-center mt-4">
-                    <MDBBtn color="unique" type="submit" disabled={validateForm()}>
+                    <MDBBtn
+                      color="unique"
+                      type="submit"
+                      disabled={validateForm()}
+                    >
                       {Loading ? (
                         <span
                           className="spinner-border spinner-border-sm"

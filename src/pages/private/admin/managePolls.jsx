@@ -5,7 +5,10 @@ import ListQuestions from './questions/listQuestion';
 const ManagePolls = () => {
   const [questions, setQuestions] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [inputValidationAlert, setInputValidationAlert] = useState({ apply: false, message: '' });
+  const [inputValidationAlert, setInputValidationAlert] = useState({
+    apply: false,
+    message: '',
+  });
 
   useEffect(() => {
     // const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
@@ -26,7 +29,7 @@ const ManagePolls = () => {
         apply: true,
         message: 'Nothing to add',
       };
-      return setState({ inputValidationAlert: updatedInputValidation });
+      return setInputValidationAlert(updatedInputValidation);
     }
     const questionObject = {
       question,
@@ -42,9 +45,13 @@ const ManagePolls = () => {
         apply: true,
         message: err.response.data,
       };
-      return setInputValidationAlert({ apply: true, message: err.response.data });
+      return setInputValidationAlert({
+        apply: true,
+        message: err.response.data,
+      });
     }
-    setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
+    setInputValidationAlert(updatedInputValidation);
+    return setInputValue('');
   };
 
   const handleKeyPress = (e) => {
@@ -82,17 +89,3 @@ const ManagePolls = () => {
 };
 
 export default ManagePolls;
-
-// import React, { Component } from 'react';
-// import axios from 'axios';
-
-// class ManagePolls extends Component {
-//   // eslint-disable-next-line react/state-in-constructor
-//   state = {
-//     questions: [],
-//     inputValue: '',
-//     inputValidationAlert: {
-//       apply: false,
-//       message: '',
-//     },
-//   };

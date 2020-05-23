@@ -20,7 +20,10 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const { data, headers } = await http.post(`${apiUrl}/api/admin/auth`, { username, password });
+      const { data, headers } = await http.post(`${apiUrl}/api/admin/auth`, {
+        username,
+        password,
+      });
       cookie.save('x-auth-token', headers['x-auth-token']);
       TimerAlert('Success', data, 'success');
       history.push('/');
@@ -38,13 +41,21 @@ const AdminLogin = () => {
   return (
     <>
       <div className="d-flex justify-content-center mt-5">
-        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '5%' }}>
+        <div
+          className="jumbotron col-md-3 mx-5 my-5"
+          style={{ borderRadius: '5%' }}
+        >
           <MDBContainer>
             <MDBRow>
               <MDBCol>
-                <form className="needs-validation" onSubmit={submitHandler} noValidate>
+                <form
+                  className="needs-validation"
+                  onSubmit={submitHandler}
+                  noValidate
+                >
                   <div className="text-center">
-                    <Emoji symbol="🔐" /> <Emoji symbol="👩🏻‍💻" /> <Emoji symbol="👨🏻‍💻" />
+                    <Emoji symbol="🔐" /> <Emoji symbol="👩🏻‍💻" />{' '}
+                    <Emoji symbol="👨🏻‍💻" />
                   </div>
                   <p className="h4 text-center mb-4">Login in as admin</p>
                   <Input
@@ -63,7 +74,11 @@ const AdminLogin = () => {
                   />
 
                   <div className="text-center mt-4">
-                    <MDBBtn color="deep-purple" type="submit" disabled={disabledButton()}>
+                    <MDBBtn
+                      color="deep-purple"
+                      type="submit"
+                      disabled={disabledButton()}
+                    >
                       {Loading ? (
                         <span
                           className="spinner-grow spinner-grow-sm"

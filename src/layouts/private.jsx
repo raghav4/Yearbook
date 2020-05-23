@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import { Navbar, Footer } from './private/user';
 
@@ -7,7 +7,9 @@ const PrivateLayout = ({ children }) => {
     <>
       <Navbar />
       {children}
-      <Footer />
+      <div className="mt-2">
+        <Footer />
+      </div>
     </>
   );
 };
