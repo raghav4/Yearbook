@@ -28,7 +28,8 @@ const SignUpSchema = () => {
       .regex(/^\d+$/)
       .error(() => {
         return {
-          message: 'Phone number should contain only numbers and must be of 10 numbers',
+          message:
+            'Phone number should contain only numbers and must be of 10 numbers',
         };
       })
       .required(),
@@ -55,7 +56,12 @@ const SignUpSchema = () => {
 
 const DetailsSchema = () => {
   return {
-    contactEmail: Joi.string().email().allow('').trim().strict().label('Contact Email'),
+    contactEmail: Joi.string()
+      .email()
+      .allow('')
+      .trim()
+      .strict()
+      .label('Contact Email'),
     facebook: Joi.string()
       .uri()
       .label('Facebook')
