@@ -20,13 +20,7 @@ const SignUp = () => {
     section: '',
   });
   const [confirmPassword, setconfirmPassword] = useState('');
-  const [department, setdepartment] = useState([
-    'CSE',
-    'IT',
-    'EEE',
-    'ECE',
-    'MAE',
-  ]);
+  const [department, setdepartment] = useState(['CSE', 'IT', 'EEE', 'ECE', 'MAE']);
   const [section, setsection] = useState(['A', 'B', 'C']);
   const [Loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
@@ -40,10 +34,7 @@ const SignUp = () => {
   const renderSignUp = () => {
     return (
       <div className="d-flex justify-content-center mb-5">
-        <div
-          className="jumbotron col-md-5 mx-5 my-5"
-          style={{ borderRadius: '3%' }}
-        >
+        <div className="jumbotron col-md-5 mx-5 my-5" style={{ borderRadius: '3%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
@@ -121,11 +112,7 @@ const SignUp = () => {
                   />
 
                   <div className="text-center mt-4">
-                    <MDBBtn
-                      color="unique"
-                      type="submit"
-                      disabled={validateForm()}
-                    >
+                    <MDBBtn color="unique" type="submit" disabled={validateForm()}>
                       {Loading ? (
                         <span
                           className="spinner-border spinner-border-sm"
@@ -153,18 +140,11 @@ const SignUp = () => {
   const renderPhoneVerify = () => {
     return (
       <div className="d-flex justify-content-center mt-5">
-        <div
-          className="jumbotron col-md-3 mx-5 my-5"
-          style={{ borderRadius: '2%' }}
-        >
+        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '2%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
-                <form
-                  className="needs-validation"
-                  onSubmit={verifyPhone}
-                  noValidate
-                >
+                <form className="needs-validation" onSubmit={verifyPhone} noValidate>
                   <p className="h4 text-center mb-4">
                     Verify your phone <Emoji label="phone" symbol="📱" />
                   </p>
@@ -238,8 +218,7 @@ const SignUp = () => {
               icon: 'success',
               title: 'Registeration Successfull',
               text: 'You can login now',
-              html:
-                '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
+              html: '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
             });
           } catch (ex) {
             TimerAlert('Error', 'Something Failed', 'error');

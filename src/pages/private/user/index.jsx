@@ -6,12 +6,4 @@ import SelfAnswers from './answers';
 import HomePage from './home';
 import LogOut from './logout';
 
-export {
-  ListPolls,
-  Profile,
-  PeopleCards,
-  UserInfo,
-  SelfAnswers,
-  HomePage,
-  LogOut,
-};
+export { ListPolls, Profile, PeopleCards, UserInfo, SelfAnswers, HomePage, LogOut };

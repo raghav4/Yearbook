@@ -54,11 +54,7 @@ const AnswerBox = ({ question, questionId, answer, answerId }) => {
               className="text-center"
             >
               <div className="text-center">
-                <SplitText
-                  initialPose="exit"
-                  pose="enter"
-                  charPoses={charPoses}
-                >
+                <SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
                   {question}
                 </SplitText>
               </div>

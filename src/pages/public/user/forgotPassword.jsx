@@ -22,10 +22,7 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div
-          className="jumbotron col-md-3 mx-5 my-5"
-          style={{ borderRadius: '2%' }}
-        >
+        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '2%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>

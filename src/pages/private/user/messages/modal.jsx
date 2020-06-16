@@ -18,9 +18,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
   useEffect(() => {
     const getUserMessage = async () => {
       try {
-        const { data } = await http.get(
-          `${apiUrl}/api/user/messages/${personId}`,
-        );
+        const { data } = await http.get(`${apiUrl}/api/user/messages/${personId}`);
         setModalValue(data.message);
       } catch (ex) {
         if (ex.response && ex.response.status === 404) {
