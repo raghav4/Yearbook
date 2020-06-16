@@ -9,6 +9,7 @@ const ListQuestions = ({
   inputValue,
   pageHeading,
   placeholder,
+  buttonColor,
   buttonTitle,
   questions,
   handleAdd,
@@ -35,16 +36,13 @@ const ListQuestions = ({
                   onKeyDown={handleKeyPress}
                 />
                 {inputValidationAlert.apply && (
-                  <Alert
-                    severity="error"
-                    style={{ fontFamily: 'Sofia Pro Medium' }}
-                  >
+                  <Alert severity="error" style={{ fontFamily: 'Sofia Pro Medium' }}>
                     {inputValidationAlert.message}
                   </Alert>
                 )}
               </div>
               <div className="float-left">
-                <MDBBtn color="default" onClick={() => handleAdd()}>
+                <MDBBtn color={buttonColor} onClick={() => handleAdd()}>
                   {buttonTitle}
                 </MDBBtn>
               </div>
@@ -65,7 +63,7 @@ const ListQuestions = ({
             <Question
               key={item._id}
               onDelete={onDelete}
-              question={item.question}
+              question={item.title}
               id={item._id}
             />
           </div>
@@ -75,7 +73,12 @@ const ListQuestions = ({
   );
 };
 
+ListQuestions.defaultProps = {
+  buttonColor: 'default',
+};
+
 ListQuestions.propTypes = {
+  buttonColor: propTypes.string,
   onDelete: propTypes.func.isRequired,
   handleAdd: propTypes.func.isRequired,
   handleChange: propTypes.func.isRequired,

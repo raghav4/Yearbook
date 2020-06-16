@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Box from './questions/self';
-import PersonalCard from './profileCard/card';
-import OthersWrite from './questions/others';
-import { NoResults } from '../../../../components';
+import PersonalCard from './profileCard/socialCard';
+import Message from './messages';
+import { NoResults, Emoji } from '../../../../components';
 import { PrivateContext } from '../../../../contexts';
 import { apiUrl } from '../../../../config.json';
 import http from '../../../../services/httpService';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const [answers, setAnswers] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [AnswersStatus, setAnswersStatus] = useState(false);
+  const [NoAnswers, setNoAnswers] = useState(false);
   const [MessagesStatus, setMessagesStatus] = useState(false);
   const [ProgressBar, setProgressBar] = useState(true);
 
@@ -22,8 +22,9 @@ const Profile = () => {
     const fetchUserAnswers = async () => {
       try {
         const { data } = await http.get(`${apiUrl}/api/user/answers`);
+        console.log(data);
         setAnswers(data);
-        if (!data.length) setAnswersStatus(true);
+        if (!data.length) setNoAnswers(true);
       } catch (ex) {}
     };
 
@@ -44,37 +45,41 @@ const Profile = () => {
 
   return (
     <>
-      {ProgressBar && (
-        <LinearProgress variant="indeterminate" color="primary" />
-      )}
+      {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-sm-8 order-2 order-lg-1">
+            <h4 className="h4-responsive text-center">Know Me Better 🔍</h4>
+
+            {NoAnswers ? (
+              <p className="mx-3 my-3 text-muted text-center">
+                You have not added any answer, try adding it from{' '}
+                <Link to="/answers">answers</Link> page
+              </p>
+            ) : (
+              <div className="card border-success mx-5 my-3">
+                {answers.map((item, index) => (
+                  <div className="card-body text-dark" key={item._id}>
+                    <h6
+                      className="card-title text-left h6-responsive mb-2"
+                      style={{ textDecoration: 'underline' }}
+                    >
+                      {index + 1}. {item.questionId.title}
+                    </h6>
+                    <p className="card-text">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <h4 className="h4-responsive text-center">
-              Answers about yourself
+              Messages <Emoji label="✉️" symbol="✉️" />
             </h4>
-            <div className="card-group text-center">
-              {answers.map((item) => (
-                <Box
-                  question={item.questionId.question}
-                  answer={item.answer}
-                  key={item._id}
-                />
-              ))}
-              {AnswersStatus && (
-                <NoResults
-                  fontSize="h4"
-                  message="You haven't added any answers for yourself"
-                />
-              )}
-            </div>
-            <h4 className="h4-responsive text-center">
-              Answers others have written for you
-            </h4>
-            {messages.map((item) => (
-              <OthersWrite
+            {messages.map((item, index) => (
+              <Message
                 message={item.message}
                 person={item.sentBy}
+                index={index}
                 key={item._id}
               />
             ))}

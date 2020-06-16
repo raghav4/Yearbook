@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import Joi from 'joi-browser';
-import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
-import { PublicContext } from '../../../contexts';
+import Joi from 'joi-browser';
+import cookie from 'react-cookies';
+import { Link } from 'react-router-dom';
 import { Input, Emoji, TimerAlert } from '../../../components';
 import { LoginSchema } from '../../../utils/schemas';
-import Auth from '../../../services';
+import { PublicContext } from '../../../contexts';
+import { apiUrl } from '../../../config.json';
+import { http } from '../../../services';
 
 const UserLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -68,8 +70,8 @@ const UserLogin = () => {
     if (errors) return;
     try {
       setLoading(true);
-      const { email, password } = credentials;
-      await Auth.Login(email, password);
+      const { headers } = await http.post(`${apiUrl}/api/user/login`, credentials);
+      cookie.save('x-auth-token', headers['x-auth-token']);
       history.push('/');
       TimerAlert('', 'Welcome to the Yearbook', 'success');
     } catch (ex) {
@@ -86,10 +88,7 @@ const UserLogin = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div
-          className="jumbotron col-md-3 mx-5 my-5"
-          style={{ borderRadius: '5%' }}
-        >
+        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '5%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
@@ -121,11 +120,7 @@ const UserLogin = () => {
                   />
 
                   <div className="text-center mt-4">
-                    <MDBBtn
-                      color="unique"
-                      type="submit"
-                      disabled={validateForm()}
-                    >
+                    <MDBBtn color="unique" type="submit" disabled={validateForm()}>
                       {Loading ? (
                         <span
                           className="spinner-border spinner-border-sm"

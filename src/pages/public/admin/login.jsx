@@ -41,10 +41,7 @@ const AdminLogin = () => {
   return (
     <>
       <div className="d-flex justify-content-center mt-5">
-        <div
-          className="jumbotron col-md-3 mx-5 my-5"
-          style={{ borderRadius: '5%' }}
-        >
+        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '5%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
@@ -54,8 +51,7 @@ const AdminLogin = () => {
                   noValidate
                 >
                   <div className="text-center">
-                    <Emoji symbol="🔐" /> <Emoji symbol="👩🏻‍💻" />{' '}
-                    <Emoji symbol="👨🏻‍💻" />
+                    <Emoji symbol="🔐" /> <Emoji symbol="👩🏻‍💻" /> <Emoji symbol="👨🏻‍💻" />
                   </div>
                   <p className="h4 text-center mb-4">Login in as admin</p>
                   <Input

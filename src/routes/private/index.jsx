@@ -11,6 +11,7 @@ import {
   ManageQuestions,
   AdminProfile,
   ManagePolls,
+  EmailNotifications,
 } from '../../pages';
 
 const privateRoutes = () => {
@@ -37,6 +38,7 @@ const privateRoutes = () => {
       systemAdminComponent: <ManageQuestions />,
     },
     { path: '/add-user', systemAdminComponent: <GrantUserAccess /> },
+    { path: '/email', systemAdminComponent: <EmailNotifications /> },
     { path: '/logout', component: <LogOut /> },
   ];
 

@@ -1,53 +1,50 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PollCard from './card';
+import http from '../../../../services/httpService';
+import { apiUrl, routes } from '../../../../config.json';
 import { NotifyAlert } from '../../../../components';
 
-class ListPolls extends Component {
-  // eslint-disable-next-line react/state-in-constructor
-  state = {
-    ProgressBar: true,
-    questions: [],
-    persons: [],
-  };
+const ListPolls = () => {
+  const [persons, setPersons] = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [ProgressBar, setProgressBar] = useState(true);
 
-  async componentDidMount() {
-    const { data: questions } = await axios.get(
-      'https://yb-server.herokuapp.com/api/admin/polls',
-    );
-    const { data: persons } = await axios.get(
-      'https://yb-server.herokuapp.com/api/user',
-    );
-    this.setState({ questions, persons, ProgressBar: !this.state.ProgressBar });
-  }
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const { data } = await http.get(`${apiUrl}/${routes.getPolls}`);
+        setQuestions(data);
+      } catch (ex) {}
+    };
+    const fetchStudents = async () => {
+      try {
+        const { data } = await http.get(`${apiUrl}/${routes.getClassStudents}`);
+        setPersons(data);
+      } catch (ex) {}
+    };
+    fetchQuestions();
+    fetchStudents();
+    setProgressBar(false);
+  }, []);
 
-  // handleClick = (message) => {
-  //   CustomAlert(message);
-  // };
-
-  render() {
-    const { ProgressBar, questions, persons } = this.state;
-    return (
-      <>
-        {ProgressBar && (
-          <LinearProgress variant="indeterminate" color="primary" />
-        )}
-        <h2 className="h2-responsive text-center mt-5">Vote for the Polls</h2>
-        <div className="mx-4 mb-5 row row-cols-1 row-cols-md-4">
-          {questions.map((question) => (
-            <PollCard
-              key={question._id}
-              questionTitle={question.question}
-              question={question}
-              persons={persons}
-              handleClick={(message) => NotifyAlert(message)}
-            />
-          ))}
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
+      <h2 className="h2-responsive text-center mt-5">Class Polls</h2>
+      <div className="mx-4 mb-5 row row-cols-1 row-cols-md-4">
+        {questions.map((question) => (
+          <PollCard
+            key={question._id}
+            questionTitle={question.title}
+            question={question}
+            persons={persons}
+            handleClick={(message) => NotifyAlert(`Voted for ${message}`)}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
 
 export default ListPolls;

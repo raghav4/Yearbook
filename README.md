@@ -29,3 +29,7 @@ to run this application properly.
 ## Running
 
 - Visit your app at [http://localhost:3000](http://localhost:3000).
+
+## Scripts
+
+- Use `npm run prettier` to prettify your files according to `.prettierrc`.

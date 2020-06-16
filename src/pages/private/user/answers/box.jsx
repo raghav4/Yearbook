@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import SplitText from 'react-pose-text';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
-import { TimerAlert } from '../../../../components';
 import { apiUrl } from '../../../../config.json';
+import { TimerAlert } from '../../../../components';
 import http from '../../../../services/httpService';
 
 const AnswerBox = ({ question, questionId, answer, answerId }) => {

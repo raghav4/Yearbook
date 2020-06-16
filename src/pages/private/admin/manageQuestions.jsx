@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import http from '../../../services/httpService';
-import { apiUrl } from '../../../config.json';
+import { apiUrl, routes } from '../../../config.json';
 import ListQuestions from './questions/listQuestion';
 import { NotifyAlert } from '../../../components';
 
 const ManageQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [NoQuestions, setNoQuestions] = useState(true);
   const [inputValidationAlert, setInputValidationAlert] = useState({
     apply: false,
     message: '',
@@ -17,10 +18,8 @@ const ManageQuestions = () => {
       try {
         const { data } = await http.get(`${apiUrl}/api/admin/questions`);
         setQuestions(data);
-      } catch (ex) {
-        // if (ex.response && ex.response.status === 404) {
-        // }
-      }
+        setNoQuestions(false);
+      } catch (ex) {}
     };
     fetchQuestions();
   }, []);
@@ -46,16 +45,13 @@ const ManageQuestions = () => {
     }
 
     const originalQuestions = questions;
-    setQuestions([
-      { _id: 'fakeId', question: inputValue },
-      ...originalQuestions,
-    ]);
     try {
       const { data } = await http.post(`${apiUrl}/api/admin/questions`, {
         question: inputValue,
       });
       NotifyAlert('Successfully added the question', 'top');
       setQuestions([data, ...questions]);
+      setNoQuestions(false);
     } catch (ex) {
       // if (ex.response && ex.response.status === 400)
       setQuestions(originalQuestions);
@@ -72,6 +68,7 @@ const ManageQuestions = () => {
     setQuestions(questions.filter((q) => q._id !== questionId));
     try {
       await http.delete(`${apiUrl}/api/admin/questions/${questionId}`);
+      setNoQuestions(true);
       NotifyAlert('Successfully deleted the question', 'top');
     } catch (ex) {
       setQuestions(originalQuestions);
@@ -86,16 +83,21 @@ const ManageQuestions = () => {
     <>
       <ListQuestions
         buttonTitle="Add Question"
-        pageHeading="User Questions"
+        pageHeading="Know Me Better Questions"
         placeholder="Add a question"
         questions={questions}
-        inputValue={inputValue}
-        inputValidationAlert={inputValidationAlert}
         handleAdd={handleAdd}
-        handleChange={handleChange}
+        inputValue={inputValue}
         onDelete={handleDelete}
+        handleChange={handleChange}
         handleKeyPress={handleKeyPress}
+        inputValidationAlert={inputValidationAlert}
       />
+      {NoQuestions && (
+        <p className="mx-3 my-3 text-muted text-center">
+          Looks like there are not questions, why not try adding some?
+        </p>
+      )}
     </>
   );
 };

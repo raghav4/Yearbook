@@ -19,7 +19,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      // const { data } = await axios.put('http://localhost:5000/api/user/info', userObject);
+      // const { data } = await axios.put('http://localhost:5000/api/user/self', userObject);
     };
     fetchUserDetails();
   }, []);
@@ -65,11 +65,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
         </div>
         <p className="card-text text-center">
           {personBio || (
-            <Skeleton
-              animation="wave"
-              height={22}
-              style={{ marginBottom: 6 }}
-            />
+            <Skeleton animation="wave" height={22} style={{ marginBottom: 6 }} />
           )}
         </p>
         <button

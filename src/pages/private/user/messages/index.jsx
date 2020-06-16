@@ -22,7 +22,7 @@ class PeopleCards extends Component {
 
   // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
-    const { data: persons } = await http.get(`${apiUrl}/api/user/info/all`);
+    const { data: persons } = await http.get(`${apiUrl}/api/user/self/all`);
     let departments = persons.map((e) => {
       return e.deptSection.department;
     });
@@ -122,9 +122,7 @@ class PeopleCards extends Component {
 
     return (
       <>
-        {ProgressBar && (
-          <LinearProgress variant="indeterminate" color="primary" />
-        )}
+        {ProgressBar && <LinearProgress variant="indeterminate" color="primary" />}
         <div className="ml-5 mr-5 mt-5 mb-5 active-cyan-3 active-cyan-4">
           <Input
             className="form-control"

@@ -19,7 +19,6 @@ import { PrivateContext } from '../../../contexts';
 const Navbar = () => {
   const value = useContext(PrivateContext);
   // const { location } = NavContext;
-  console.log('path name is ', value);
   const [isOpen, setisOpen] = useState(false);
 
   const toggleCollapse = () => setisOpen(!isOpen);
@@ -39,7 +38,7 @@ const Navbar = () => {
               <MDBNavItem>
                 <MDBNavLink to="/">Home</MDBNavLink>
               </MDBNavItem>
-              <MDBNavItem active>
+              <MDBNavItem>
                 <MDBNavLink to="/write">Writes</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>

@@ -41,13 +41,10 @@ const DropPicture = ({ defaultPicture }) => {
         useWebWorker: true,
       };
       try {
-        const compressedFile = await imageCompression(
-          acceptedFiles[0],
-          options,
-        );
+        const compressedFile = await imageCompression(acceptedFiles[0], options);
         formData.append('file', compressedFile);
         const { data } = await http.post(
-          `${apiUrl}/api/user/info/pic`,
+          `${apiUrl}/api/user/self/profilePicture`,
           formData,
           {
             headers: {
@@ -91,9 +88,7 @@ const DropPicture = ({ defaultPicture }) => {
             </p>
             <p className="text-center">
               <small>
-                <mark>
-                  Only *.jpeg, *jpg, and *.png images will be accepted
-                </mark>
+                <mark>Only *.jpeg, *jpg, and *.png images will be accepted</mark>
               </small>
             </p>
           </div>

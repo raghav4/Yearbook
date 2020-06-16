@@ -13,9 +13,7 @@ const PublicRoute = ({ component, ...rest }) => {
           if (cookie.load('x-auth-token')) {
             return <Redirect to="/" />;
           }
-          return (
-            <PublicProvider value={{ ...props }}>{component}</PublicProvider>
-          );
+          return <PublicProvider value={{ ...props }}>{component}</PublicProvider>;
         }}
       />
     </PublicLayout>

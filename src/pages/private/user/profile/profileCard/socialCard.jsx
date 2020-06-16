@@ -31,7 +31,7 @@ const PersonalCard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/info`);
+        const { data } = await http.get(`${apiUrl}/api/user/self`);
         setName(data.credentials.name);
         setInfo({
           bio: data.info.bio,

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Joi from 'joi-browser';
-import {
-  DropPicture,
-  NotifyAlert,
-  Input,
-  TimerAlert,
-} from '../../../../components';
+import { DropPicture, NotifyAlert, Input, TimerAlert } from '../../../../components';
 import { DetailsSchema } from '../../../../utils/schemas';
 import http from '../../../../services/httpService';
 import { apiUrl } from '../../../../config.json';
@@ -46,7 +41,7 @@ const UserInfo = () => {
 
     const fetchUserDetails = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/info`);
+        const { data } = await http.get(`${apiUrl}/api/user/self`);
         setCredentials({
           name: data.credentials.name,
           phoneNo: data.credentials.phoneNo,
@@ -122,7 +117,7 @@ const UserInfo = () => {
       socialHandles,
     };
     try {
-      await http.put(`${apiUrl}/api/user/info`, userObject);
+      await http.put(`${apiUrl}/api/user/self`, userObject);
       NotifyAlert('Successfully Updated Details');
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

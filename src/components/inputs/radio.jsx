@@ -10,12 +10,12 @@ const RadioButton = ({ persons, question, handleClick }) => {
             <input
               className="mr-1"
               type="radio"
-              value={person.name}
+              value={person.credentials.name}
               name={question}
               id={person._id}
-              onClick={() => handleClick(person.name)}
+              onClick={() => handleClick(person.credentials.name)}
             />
-            <label htmlFor={person._id}>{person.name}</label>
+            <label htmlFor={person._id}>{person.credentials.name}</label>
             <br />
           </div>
         ))}
@@ -25,7 +25,7 @@ const RadioButton = ({ persons, question, handleClick }) => {
 };
 
 RadioButton.propTypes = {
-  persons: propTypes.objectOf(propTypes.object).isRequired,
+  persons: propTypes.arrayOf(propTypes.object).isRequired,
   question: propTypes.string.isRequired,
   handleClick: propTypes.func.isRequired,
 };

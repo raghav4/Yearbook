@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import http from '../../../services/httpService';
+import { apiUrl } from '../../../config.json';
 import ListQuestions from './questions/listQuestion';
+import { NotifyAlert } from '../../../components';
 
 const ManagePolls = () => {
   const [questions, setQuestions] = useState([]);
@@ -9,80 +12,91 @@ const ManagePolls = () => {
     apply: false,
     message: '',
   });
-
+  // TODO: #36 Poll getting added after deleted token
   useEffect(() => {
-    // const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
-    // setState({ questions });
+    const fetchQuestions = async () => {
+      try {
+        const { data } = await http.get(`${apiUrl}/api/admin/polls`);
+        setQuestions(data);
+      } catch (ex) {
+        // if (ex.response && ex.response.status === 404) {
+        // }
+      }
+    };
+    fetchQuestions();
   }, []);
 
-  const handleChange = ({ currentTarget: input }) => {
-    setInputValue(input.value);
+  const handleChange = (input) => {
+    if (input !== '') {
+      setInputValidationAlert({ apply: false, message: '' });
+    }
+    setInputValue(input);
   };
 
-  const handleAdd = async (question) => {
+  const handleAdd = async () => {
     let updatedInputValidation = {
       apply: false,
       message: '',
     };
-    if (question.trim() === '') {
+    if (inputValue.trim() === '') {
       updatedInputValidation = {
         apply: true,
         message: 'Nothing to add',
       };
       return setInputValidationAlert(updatedInputValidation);
     }
-    const questionObject = {
-      question,
-    };
+
+    const originalQuestions = questions;
+    // setQuestions([
+    //   { _id: 'fakeId', question: inputValue },
+    //   ...originalQuestions,
+    // ]);
     try {
-      const { data } = await axios.post(
-        'https://yb-server.herokuapp.com/api/admin/polls',
-        questionObject,
-      );
-      setQuestions(data);
-    } catch (err) {
+      const { data } = await http.post(`${apiUrl}/api/admin/polls`, {
+        question: inputValue,
+      });
+      NotifyAlert('Successfully added the question', 'top');
+      setQuestions([data, ...questions]);
+    } catch (ex) {
+      // if (ex.response && ex.response.status === 400)
+      setQuestions(originalQuestions);
       updatedInputValidation = {
         apply: true,
-        message: err.response.data,
+        message: ex.response.data,
       };
-      return setInputValidationAlert({
-        apply: true,
-        message: err.response.data,
-      });
     }
     setInputValidationAlert(updatedInputValidation);
-    return setInputValue('');
-  };
-
-  const handleKeyPress = (e) => {
-    const code = e.keyCode || e.which;
-    if (code === 13) return handleAdd(e.currentTarget.value);
   };
 
   const handleDelete = async (questionId) => {
+    const originalQuestions = questions;
+    setQuestions(questions.filter((q) => q._id !== questionId));
     try {
-      const { data } = await axios.delete(
-        `https://yb-server.herokuapp.com/api/admin/polls/${questionId}`,
-      );
-      setQuestions(data);
-    } catch (err) {
-      console.error(err.response.data);
+      await http.delete(`${apiUrl}/api/admin/polls/${questionId}`);
+      NotifyAlert('Successfully deleted the question', 'top');
+    } catch (ex) {
+      setQuestions(originalQuestions);
     }
+  };
+
+  const handleKeyPress = ({ keyCode }) => {
+    if (keyCode === 13) handleAdd();
   };
 
   return (
     <>
       <ListQuestions
-        buttonTitle="Add"
-        pageHeading="Polls Questions"
-        placeholder="Add a Poll Question"
+        buttonTitle="Add Poll"
+        buttonColor="deep-purple"
+        placeholder="Add a Poll"
+        pageHeading="Poll Questions 📊"
         questions={questions}
-        inputValue={inputValue}
-        inputValidationAlert={inputValidationAlert}
         handleAdd={handleAdd}
+        inputValue={inputValue}
         onDelete={handleDelete}
-        handleKeyPress={handleKeyPress}
         handleChange={handleChange}
+        handleKeyPress={handleKeyPress}
+        inputValidationAlert={inputValidationAlert}
       />
     </>
   );
