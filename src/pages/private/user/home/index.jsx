@@ -1,22 +1,34 @@
 import React, { useEffect, useState, useContext } from 'react';
+import io from 'socket.io-client';
 import { Link } from 'react-router-dom';
-import { Emoji } from '../../../components';
-import http from '../../../services/httpService';
-import { apiUrl } from '../../../config.json';
-import { PrivateContext } from '../../../contexts';
+import MessageFeed from './messageFeed';
+import { Emoji } from '../../../../components';
+import { PrivateContext } from '../../../../contexts';
+import { apiUrl, endPoints } from '../../../../config.json';
+import http from '../../../../services/httpService';
+import ModalBox from '../messages/modal';
 
 const HomePage = () => {
   const [User, setUser] = useState('');
+  const [Messages, setMessages] = useState([]);
   const { history } = useContext(PrivateContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/self`);
+        const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
         setUser(data.credentials.name);
       } catch (ex) {}
     };
+    const fetchFeed = async () => {
+      try {
+        const { data } = await http.get(`${apiUrl}/${endPoints.messages.feed}`);
+        setMessages(data);
+        console.log(data);
+      } catch (ex) {}
+    };
     fetchUserData();
+    fetchFeed();
   }, []);
 
   return (
@@ -49,6 +61,13 @@ const HomePage = () => {
             </li>
           </ul>
         </div>
+        {Messages.map((item) => (
+          <MessageFeed
+            sentBy={item.sentBy.credentials.name}
+            sentTo={item.sendTo.credentials.name}
+            messageBody={item.message}
+          />
+        ))}
       </div>
     </>
   );

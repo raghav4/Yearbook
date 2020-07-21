@@ -5,5 +5,6 @@ import UserInfo from './profile/details';
 import SelfAnswers from './answers';
 import HomePage from './home';
 import LogOut from './logout';
+import ResetPassword from './resetPassword';
 
 export { ListPolls, Profile, PeopleCards, UserInfo, SelfAnswers, HomePage, LogOut };

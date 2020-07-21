@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBContainer } from 'mdbreact';
-import { apiUrl } from '../../../../config.json';
+import { apiUrl, endPoints } from '../../../../config.json';
 import { TimerAlert } from '../../../../components';
 import http from '../../../../services/httpService';
 
@@ -24,7 +24,7 @@ const AnswerBox = ({ question, questionId, answer, answerId }) => {
 
   const handleUpdate = async () => {
     try {
-      await http.put(`${apiUrl}/api/user/answers`, {
+      await http.put(`${apiUrl}/${endPoints.slamBook.upsertAnswer}`, {
         answer: CurrentAnswer,
         questionId,
       });
@@ -34,7 +34,9 @@ const AnswerBox = ({ question, questionId, answer, answerId }) => {
 
   const handleDelete = async () => {
     try {
-      await http.delete(`${apiUrl}/api/user/answers/${answerId}`);
+      await http.delete(
+        `${apiUrl}/${endPoints.slamBook.deleteQuestionById}/${answerId}`,
+      );
       TimerAlert('', 'Successfully Deleted answer', 'success');
       setCurrentAnswer('');
     } catch (ex) {

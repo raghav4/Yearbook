@@ -7,6 +7,7 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
+  MDBRating,
 } from 'mdbreact';
 import { apiUrl } from '../../../../config.json';
 import http from '../../../../services/httpService';
@@ -14,6 +15,23 @@ import { NotifyAlert, TimerAlert } from '../../../../components';
 
 const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
   const [ModalValue, setModalValue] = useState('');
+  const [basic] = useState([
+    {
+      tooltip: '1/5',
+    },
+    {
+      tooltip: '2/5',
+    },
+    {
+      tooltip: '3/5',
+    },
+    {
+      tooltip: '4/5',
+    },
+    {
+      tooltip: '5/5',
+    },
+  ]);
 
   useEffect(() => {
     const getUserMessage = async () => {
@@ -50,14 +68,22 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
     submitData();
   };
 
+  const handleDelete = () => {};
+
   return (
     <MDBContainer>
       <MDBModal isOpen={toggleOpen} centered>
-        <MDBModalHeader>{`You're writing for : ${personName}`}</MDBModalHeader>
+        <MDBModalHeader toggle={() => triggerModal(personId)}>
+          {`You're here for : ${personName}`}
+        </MDBModalHeader>
+
         <MDBModalBody>
           <div className="form-group">
-            <p className="text-center">Be Good :)</p>
+            <p className="text-center" style={{ fontFamily: 'Inter' }}>
+              Write a nice message for {personName} :)
+            </p>
             <textarea
+              style={{ fontFamily: 'Inter' }}
               className="form-control"
               id={personId}
               rows="5"
@@ -66,15 +92,27 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
               value={ModalValue}
             />
           </div>
+          <p className="text-center" style={{ fontFamily: 'Inter' }}>
+            Rate your friendship
+          </p>
+          <div className="row d-flex justify-content-center mb-1">
+            <MDBRating data={basic} getValue={(e) => console.log(e)} />
+          </div>
         </MDBModalBody>
         <MDBModalFooter>
-          <div className="row">
-            <MDBBtn color="danger" onClick={() => triggerModal(personId)}>
-              close
-            </MDBBtn>
-            <MDBBtn color="primary" onClick={() => handleSubmit()}>
+          <div>
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => handleDelete(personId)}
+            >
+              Delete
+            </button>
+            <button
+              className="btn btn-elegant btn-sm"
+              onClick={() => handleSubmit()}
+            >
               Submit
-            </MDBBtn>
+            </button>
           </div>
         </MDBModalFooter>
       </MDBModal>

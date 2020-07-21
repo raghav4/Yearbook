@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Joi from 'joi-browser';
-import { DropPicture, NotifyAlert, Input, TimerAlert } from '../../../../components';
-import { DetailsSchema } from '../../../../utils/schemas';
-import http from '../../../../services/httpService';
-import { apiUrl } from '../../../../config.json';
 import Swal from 'sweetalert2';
+import {
+  DropPicture,
+  NotifyAlert,
+  Input,
+  TimerAlert,
+  Emoji,
+} from '../../../../components';
+import { DetailsSchema } from '../../../../utils/schemas';
+import { apiUrl, endPoints } from '../../../../config.json';
+import http from '../../../../services/httpService';
 
 const UserInfo = () => {
   const [credentials, setCredentials] = useState({
     name: '',
-    phoneNo: '',
     email: '',
   });
   const [info, setInfo] = useState({ bio: '', profilePicture: '' });
@@ -41,7 +46,7 @@ const UserInfo = () => {
 
     const fetchUserDetails = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/self`);
+        const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
         setCredentials({
           name: data.credentials.name,
           phoneNo: data.credentials.phoneNo,
@@ -170,8 +175,13 @@ const UserInfo = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <div className="col-md-6 mt-5 jumbotron ml-3 mr-3">
-          <h3 className="h3-responsive text-center">Update your Profile</h3>
+        <div
+          className="col-md-6 mt-5 jumbotron ml-3 mr-3"
+          style={{ borderRadius: '7px' }}
+        >
+          <h4 className="h4-responsive text-center">
+            Update your Profile <Emoji label="🤔" symbol="🤔" />
+          </h4>
           <form className="needs-validation" onSubmit={handleUpdate} noValidate>
             <div className="row">
               <div className="col-md-12">
@@ -190,14 +200,7 @@ const UserInfo = () => {
                       icon="user"
                       isDisabled
                     />
-                    <Input
-                      name="phoneNo"
-                      label="Phone Number"
-                      value={credentials.phoneNo}
-                      handleChange={handleChange}
-                      icon="phone-alt"
-                      isDisabled
-                    />
+
                     <Input
                       name="email"
                       label="Account Email"
@@ -308,7 +311,7 @@ const UserInfo = () => {
                     </div>
                   </div>
                   <div className="text-center">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-elegant">
                       Submit
                     </button>
                   </div>

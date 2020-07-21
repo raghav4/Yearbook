@@ -51,6 +51,14 @@ only screen and (min-resolution: 2dppx) {
 }
 
 @font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'),
+    url(https://fonts.googleapis.com/css2?family=Inter&display=swap) format('woff');
+}
+
+@font-face {
   font-family: 'Sofia Pro Medium';
   font-style: medium;
   font-weight: medium;

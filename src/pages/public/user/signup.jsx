@@ -4,34 +4,46 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import { TimerAlert, Input, Emoji } from '../../../components';
-import { SignUpSchema } from '../../../utils/schemas';
+import { SignUpSchema, EmailAccess } from '../../../utils/schemas';
 import http from '../../../services/httpService';
-import { apiUrl } from '../../../config.json';
+import { apiUrl, routes } from '../../../config.json';
 
 const SignUp = () => {
-  const [phoneVerified, setphoneVerified] = useState(false);
-  const [phoneNumber, setphoneNumber] = useState('');
+  const [emailVerified, setEmailVerified] = useState(false);
   const [credentials, setCredentials] = useState({
     name: '',
-    email: '',
-    phoneNo: '',
     password: '',
     department: '',
     section: '',
   });
+
+  const [email, setEmail] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('');
   const [department, setdepartment] = useState(['CSE', 'IT', 'EEE', 'ECE', 'MAE']);
   const [section, setsection] = useState(['A', 'B', 'C']);
   const [Loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
     name: '',
-    email: '',
     password: '',
-    phoneNo: '',
     department: '',
     section: '',
   });
+
+  const [updatedChecked, setUpdatedChecked] = useState(false);
+
   const renderSignUp = () => {
+    if (!updatedChecked) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Important Note',
+        text: 'You can login now',
+        html:
+          'You cannot change your <b>name</b>, <b>department</b>, <b>section</b> later',
+      }).then(() => {
+        setUpdatedChecked(true);
+      });
+    }
+
     return (
       <div className="d-flex justify-content-center mb-5">
         <div className="jumbotron col-md-5 mx-5 my-5" style={{ borderRadius: '3%' }}>
@@ -50,14 +62,6 @@ const SignUp = () => {
                     value={credentials.name}
                     error={validationErrors.name}
                     feedback={validationErrors.name}
-                    handleChange={handleChange}
-                  />
-                  <Input
-                    name="email"
-                    label="Email"
-                    value={credentials.email}
-                    error={validationErrors.email}
-                    feedback={validationErrors.email}
                     handleChange={handleChange}
                   />
                   <div className="my-4">
@@ -137,40 +141,49 @@ const SignUp = () => {
     );
   };
 
-  const renderPhoneVerify = () => {
+  const renderEmail = () => {
     return (
       <div className="d-flex justify-content-center mt-5">
         <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '2%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
-                <form className="needs-validation" onSubmit={verifyPhone} noValidate>
+                <form
+                  className="needs-validation"
+                  onSubmit={verifySignUpAccess}
+                  noValidate
+                >
                   <p className="h4 text-center mb-4">
-                    Verify your phone <Emoji label="phone" symbol="📱" />
+                    Verify your Email <Emoji label="email" symbol="📧" />
                   </p>
-                  <MDBInput label="Phone Number" />
+
+                  <Input
+                    name="email"
+                    label=""
+                    value={email}
+                    // error={validationErrors.email}
+                    // feedback={validationErrors.email}
+                    handleChange={(e) => setEmail(e.target.value)}
+                  />
+
                   <button
                     type="button"
-                    className="btn btn-info btn-md btn-block"
-                    onClick={() => setphoneVerified(true)}
+                    className="btn btn-dark btn-md btn-block"
+                    onClick={verifySignUpAccess}
+                    disabled={validateEmailAccess()}
                   >
-                    Verify Phone
+                    {Loading ? (
+                      <span
+                        className="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      'Continue'
+                    )}
                   </button>
-                  {/* <MDBBtn color="deep-purple" type="submit">
-                      {Loading ? (
-                        <span
-                          className="spinner-grow spinner-grow-sm"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        'Continue'
-                      )}
-                    </MDBBtn> */}
 
-                  {/* <div className="text-center mt-4">
-
-                  </div> */}
+                  <div className="text-center mt-4"></div>
                 </form>
               </MDBCol>
             </MDBRow>
@@ -181,7 +194,7 @@ const SignUp = () => {
   };
   // TODO #23: Get Department and section from the backend
 
-  const handleVerification = async ({ name, email, password, phoneNo }) => {
+  const handleVerification = async () => {
     Swal.mixin({
       input: 'text',
       inputValidator: (value) => {
@@ -197,34 +210,39 @@ const SignUp = () => {
     })
       .queue([
         {
-          title: 'Email Verification',
+          title: 'Email Verification 📧',
           html: `Enter the OTP sent to your Email`,
         },
       ])
       .then(async (result) => {
         if (result.value) {
           const user = {
-            otp: result.value[0],
-            name,
             email,
-            phoneNo,
-            password,
-            department: credentials.department,
-            section: credentials.section,
+            otp: result.value[0],
           };
+
           try {
             await http.post(`${apiUrl}/api/user/signup/verify`, user);
-            Swal.fire({
-              icon: 'success',
-              title: 'Registeration Successfull',
-              text: 'You can login now',
-              html: '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
-            });
+            setEmailVerified(true);
           } catch (ex) {
             TimerAlert('Error', 'Something Failed', 'error');
           }
         }
       });
+  };
+
+  const validateEmailAccess = () => {
+    const { error } = Joi.validate(credentials.email, EmailAccess(), {
+      abortEarly: false,
+    });
+
+    if (!error) return null;
+    const errors = {};
+    // eslint-disable-next-line no-restricted-syntax
+    for (const item of error.details) {
+      errors[item.path[0]] = item.message;
+    }
+    return errors;
   };
 
   const validateForm = () => {
@@ -271,7 +289,19 @@ const SignUp = () => {
     });
   };
 
-  const verifyPhone = async () => {};
+  const verifySignUpAccess = async () => {
+    const { onboarding } = routes;
+    try {
+      const { data } = await http.post(
+        'http://localhost:5000/api/user/signup/validate',
+        {
+          email,
+        },
+      );
+      console.log(data);
+      handleVerification();
+    } catch (ex) {}
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -287,7 +317,7 @@ const SignUp = () => {
 
     const userObject = {
       name: credentials.name,
-      email: credentials.email,
+      email,
       phoneNo: credentials.phoneNo,
       password: credentials.password,
       department: credentials.department,
@@ -296,16 +326,21 @@ const SignUp = () => {
     try {
       setLoading(true);
       await http.post(`${apiUrl}/api/user/signup`, userObject);
-      handleVerification(userObject);
+      Swal.fire({
+        icon: 'success',
+        title: 'Registeration Successfull',
+        text: 'You can login now',
+        html: '<p>Go to the <a href="/login">Login</a> Page to continue</p>',
+      });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         TimerAlert('Error', ex.response.data, 'error');
       }
-      setLoading(false);
     }
+    setLoading(false);
   };
 
-  return <>{phoneVerified ? renderSignUp() : renderPhoneVerify()}</>;
+  return <>{emailVerified ? renderSignUp() : renderEmail()}</>;
 };
 
 export default SignUp;

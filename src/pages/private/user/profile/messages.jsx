@@ -19,7 +19,7 @@ const Message = ({ person, message, index }) => {
       'dark',
     ];
 
-    let classes = 'card mx-5 my-3 border-';
+    let classes = 'animated fadeIn slow card mx-5 my-3 border-';
     classes += borderColors[index % borderColors.length];
     return classes;
   };
@@ -34,26 +34,13 @@ const Message = ({ person, message, index }) => {
           >
             {person}
           </h6>
-          {/* <p className="p-responsive">Friendship Rating 🌟</p>
-          <Box component="fieldset" mb={1} borderColor="transparent">
-            <Rating
-              name="customized-empty"
-              defaultValue={3.5}
-              precision={0.5}
-              emptyIcon={<StarBorderIcon fontSize="inherit" readOnly />}
-            />
-            <Rating name="read-only" value={2.4} readOnly />
-          </Box> */}
-          <p className="h7-responsive">{message}</p>
-
+          <p className="h7-responsive" style={{ fontFamily: 'Product Sans' }}>
+            {message}
+          </p>
           <p>
             <Emoji label="🌟" symbol="🌟" />
-            <small>You are a friend to Shridhar with a rating of 3.5/5</small>
+            <small>{person} Rated your friendship 3.5/5</small>
           </p>
-          {/* <p className="purple-text">
-            {' '}
-            P.S -
-          </p> */}
         </div>
       </div>
     </>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import AnswerBox from './box';
+import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
-import { apiUrl } from '../../../../config.json';
-import paginate from '../../../../utils/paginate';
+import { paginate } from '../../../../utils';
 
 const SelfAnswers = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState([]); // Questions Answered by users
@@ -16,12 +16,16 @@ const SelfAnswers = () => {
   useEffect(() => {
     document.title = 'Self Questions';
     const fetchTotalQuestions = async () => {
-      const { data } = await http.get(`${apiUrl}/api/admin/questions`);
+      const { data } = await http.get(
+        `${apiUrl}/${endPoints.slamBook.allQuestions}`,
+      );
       setTotalQuestionsList(data);
       setTotalQuestions(data.length);
     };
     const fetchAnsweredQuestions = async () => {
-      const { data } = await http.get(`${apiUrl}/api/user/answers`);
+      const { data } = await http.get(
+        `${apiUrl}/${endPoints.slamBook.getUserAnswers}`,
+      );
       setAnsweredQuestions(data);
     };
     fetchTotalQuestions();
@@ -31,7 +35,9 @@ const SelfAnswers = () => {
   }, []);
 
   const getAnswer = (questionId) => {
+    console.log('Question ID is ', questionId);
     const result = answeredQuestions.find((e) => e.questionId._id === questionId);
+    console.log('Answer result is ', result);
     return result ? { answer: result.answer, _id: result._id } : {};
   };
 
@@ -58,7 +64,11 @@ const SelfAnswers = () => {
       <div className="mt-5">
         <h3 className="h3-responsive text-center my-3">Questions For You</h3>
         <p className={getTotalAnswersClass()}>
-          <small>{`You've answered ${answeredQuestions.length} answers out of ${totalQuestions} questions`}</small>
+          <small>
+            {answeredQuestions.length === totalQuestions
+              ? 'Yayy! You have answered all the questions! 🎉'
+              : `You've answered ${answeredQuestions.length} answers out of ${totalQuestions} questions`}
+          </small>
         </p>
 
         {paginate(totalQuestionsList, CurrentPage, postsPerPage).map((item) => (

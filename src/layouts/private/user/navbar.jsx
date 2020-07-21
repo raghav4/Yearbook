@@ -58,6 +58,9 @@ const Navbar = () => {
                     <MDBDropdownItem>
                       <NavLink to="/answers">Self Answers</NavLink>
                     </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <NavLink to="/reset">Reset Password</NavLink>
+                    </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
               </MDBNavItem>
