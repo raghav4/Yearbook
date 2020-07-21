@@ -9,9 +9,9 @@ import {
   LogOut,
   GrantUserAccess,
   ManageQuestions,
-  AdminProfile,
   ManagePolls,
   EmailNotifications,
+  ResetPassword,
 } from '../../pages';
 
 const privateRoutes = () => {
@@ -20,7 +20,6 @@ const privateRoutes = () => {
     {
       path: '/profile',
       component: <Profile />,
-      systemAdminComponent: <AdminProfile />,
     },
     {
       path: '/polls',
@@ -30,13 +29,13 @@ const privateRoutes = () => {
     {
       path: '/details',
       component: <UserInfo />,
-      systemAdminComponent: <AdminProfile />,
     },
     {
       path: '/answers',
       component: <SelfAnswers />,
       systemAdminComponent: <ManageQuestions />,
     },
+    { path: '/reset', component: <ResetPassword /> },
     { path: '/add-user', systemAdminComponent: <GrantUserAccess /> },
     { path: '/email', systemAdminComponent: <EmailNotifications /> },
     { path: '/logout', component: <LogOut /> },

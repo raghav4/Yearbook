@@ -3,8 +3,8 @@ import FlipMove from 'react-flip-move';
 import SearchIcon from '@material-ui/icons/Search';
 import { Input, LinearProgress, InputAdornment } from '@material-ui/core';
 import UserCard from './single';
-import { apiUrl } from '../../../../config.json';
 import http from '../../../../services/httpService';
+import { apiUrl, endPoints } from '../../../../config.json';
 import { NoResults, Select } from '../../../../components';
 
 class PeopleCards extends Component {
@@ -22,7 +22,8 @@ class PeopleCards extends Component {
 
   // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
-    const { data: persons } = await http.get(`${apiUrl}/api/user/self/all`);
+    const { data: persons } = await http.get(`${apiUrl}/${endPoints.user.allUsers}`);
+
     let departments = persons.map((e) => {
       return e.deptSection.department;
     });

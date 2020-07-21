@@ -14,6 +14,7 @@ const Input = ({
   type,
   IconBrand,
   isDisabled,
+  placeHolder,
 }) => {
   return (
     <>
@@ -28,6 +29,7 @@ const Input = ({
         className={error ? 'form-control is-invalid' : ''}
         icon={icon}
         iconBrand={IconBrand}
+        placeHolder={placeHolder}
         outline
         required
       >
@@ -46,6 +48,7 @@ Input.defaultProps = {
   type: 'text',
   icon: '',
   feedback: '',
+  placeHolder: '',
   error: false,
   isDisabled: false,
   IconBrand: false,
@@ -55,6 +58,7 @@ Input.propTypes = {
   name: propTypes.string.isRequired,
   label: propTypes.string.isRequired,
   value: propTypes.string.isRequired,
+  placeHolder: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
   feedback: propTypes.string,
   icon: propTypes.string,

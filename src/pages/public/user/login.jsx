@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Input, Emoji, TimerAlert } from '../../../components';
 import { LoginSchema } from '../../../utils/schemas';
 import { PublicContext } from '../../../contexts';
-import { apiUrl } from '../../../config.json';
+import { apiUrl, endPoints } from '../../../config.json';
 import { http } from '../../../services';
 
 const UserLogin = () => {
@@ -70,8 +70,16 @@ const UserLogin = () => {
     if (errors) return;
     try {
       setLoading(true);
-      const { headers } = await http.post(`${apiUrl}/api/user/login`, credentials);
-      cookie.save('x-auth-token', headers['x-auth-token']);
+      const { headers } = await http.post(
+        `${apiUrl}/${endPoints.user.onboarding.login}`,
+        credentials,
+      );
+      const expires = new Date();
+      expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+      cookie.save('x-auth-token', headers['x-auth-token'], {
+        path: '/',
+        expires,
+      });
       history.push('/');
       TimerAlert('', 'Welcome to the Yearbook', 'success');
     } catch (ex) {

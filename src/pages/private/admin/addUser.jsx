@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import Joi from 'joi-browser';
 import http from '../../../services/httpService';
 import { apiUrl } from '../../../config.json';
-import { NumberAccess } from '../../../utils/schemas';
+import { EmailAccess } from '../../../utils/schemas';
 
 const GrantUserAccess = () => {
   const [Registeration, setRegisteration] = useState(false);
@@ -31,7 +31,7 @@ const GrantUserAccess = () => {
       confirmButtonText: 'Register',
       showLoaderOnConfirm: true,
       inputValidator: (value) => {
-        const { error } = Joi.validate({ phoneNumber: value }, NumberAccess());
+        const { error } = Joi.validate({ phoneNumber: value }, EmailAccess());
         if (error) {
           return `${error.details[0].message}`;
         }

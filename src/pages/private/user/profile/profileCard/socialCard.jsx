@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import SocialHandle from '../../../../../components/utils/socialHandle';
 import http from '../../../../../services/httpService';
-import { apiUrl } from '../../../../../config.json';
+import { apiUrl, endPoints } from '../../../../../config.json';
 import { TimerAlert } from '../../../../../components';
 
 const PersonalCard = () => {
@@ -31,7 +31,7 @@ const PersonalCard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/self`);
+        const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
         setName(data.credentials.name);
         setInfo({
           bio: data.info.bio,
@@ -70,7 +70,7 @@ const PersonalCard = () => {
           placement="top"
         >
           <img
-            className="card-img-top hoverable"
+            className="card-img-top img-fluid hoverable animated fadeIn slow"
             src={info.profilePicture}
             alt="ProfilePicture"
             style={{ borderRadius: '5%' }}

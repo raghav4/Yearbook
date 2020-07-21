@@ -52,7 +52,8 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
         <div className="view overlay mb-3">
           {(personImageUrl && (
             <CardMedia
-              className={classes.media}
+              style={{ borderRadius: '8px' }}
+              className={`${classes.media} animated fadeIn slow`}
               image={personImageUrl}
               title="Paella dish"
             />
@@ -63,11 +64,11 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
             {person.deptSection.department} - {person.deptSection.section}
           </span>
         </div>
-        <p className="card-text text-center">
-          {personBio || (
-            <Skeleton animation="wave" height={22} style={{ marginBottom: 6 }} />
-          )}
-        </p>
+        {personBio ? (
+          <p className="card-text text-center">{personBio}</p>
+        ) : (
+          <p style={{ color: 'white' }}>.</p>
+        )}
         <button
           type="button"
           className="btn btn-deep-purple"

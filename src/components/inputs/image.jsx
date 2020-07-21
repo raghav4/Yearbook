@@ -20,7 +20,7 @@ const DropPicture = ({ defaultPicture }) => {
     alignItems: 'center',
     padding: '20px',
     borderWidth: '2px',
-    borderRadius: '3%',
+    borderRadius: '7px',
     borderColor: '#eeeeee',
     borderStyle: 'dashed',
     backgroundColor: '#f2f2f2',
@@ -43,15 +43,11 @@ const DropPicture = ({ defaultPicture }) => {
       try {
         const compressedFile = await imageCompression(acceptedFiles[0], options);
         formData.append('file', compressedFile);
-        const { data } = await http.post(
-          `${apiUrl}/api/user/self/profilePicture`,
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
+        const { data } = await http.post(`${apiUrl}/api/user/self/pic`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
           },
-        );
+        });
         setImage(data);
       } catch (ex) {
         if (
@@ -78,13 +74,13 @@ const DropPicture = ({ defaultPicture }) => {
       <section className="container" style={customStyle}>
         <div {...getRootProps({ className: 'dropzone' })}>
           <input {...getInputProps()} />
-          <div className="text-center">
+          <div className="text-center" style={{ fontFamily: 'Inter' }}>
             <BackupIcon className="mb-1" fontSize="large" />
-            <p className="text-center" style={{ textDecoration: 'underline' }}>
-              Updload your profile picture
-            </p>
+            <strong>
+              <p className="text-center">Upload your profile picture</p>
+            </strong>
             <p>
-              <strong>Click to choose an image</strong> or Drag it here
+              <strong>Click to choose an image or Drag it here </strong>
             </p>
             <p className="text-center">
               <small>
@@ -96,6 +92,7 @@ const DropPicture = ({ defaultPicture }) => {
           <div className="text-center">
             {ProgressBar && <CircularProgress />}
             <img
+              style={{ borderRadius: '10%' }}
               src={Image || defaultPicture}
               className="hoverable"
               alt="user_image"

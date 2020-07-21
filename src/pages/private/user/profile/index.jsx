@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { Link } from 'react-router-dom';
 import PersonalCard from './profileCard/socialCard';
 import Message from './messages';
 import { NoResults, Emoji } from '../../../../components';
 import { PrivateContext } from '../../../../contexts';
-import { apiUrl } from '../../../../config.json';
+import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
-import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const [answers, setAnswers] = useState([]);
@@ -21,7 +21,9 @@ const Profile = () => {
     document.title = 'Profile';
     const fetchUserAnswers = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/answers`);
+        const { data } = await http.get(
+          `${apiUrl}/${endPoints.slamBook.getUserAnswers}`,
+        );
         console.log(data);
         setAnswers(data);
         if (!data.length) setNoAnswers(true);
@@ -30,7 +32,9 @@ const Profile = () => {
 
     const fetchMessages = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/user/messages`);
+        const { data } = await http.get(
+          `${apiUrl}/${endPoints.messages.forLoggedInUser}`,
+        );
         setMessages(data);
         if (!data.length) setMessagesStatus(true);
       } catch (ex) {}
@@ -49,7 +53,9 @@ const Profile = () => {
       <div className="container-fluid mt-5">
         <div className="row">
           <div className="col-sm-8 order-2 order-lg-1">
-            <h4 className="h4-responsive text-center">Know Me Better 🔍</h4>
+            <h4 className="h4-responsive text-center animated fadeIn slow">
+              Know Me Better 🔍
+            </h4>
 
             {NoAnswers ? (
               <p className="mx-3 my-3 text-muted text-center">
@@ -59,7 +65,10 @@ const Profile = () => {
             ) : (
               <div className="card border-success mx-5 my-3">
                 {answers.map((item, index) => (
-                  <div className="card-body text-dark" key={item._id}>
+                  <div
+                    className="card-body text-dark animated fadeIn slow"
+                    key={item._id}
+                  >
                     <h6
                       className="card-title text-left h6-responsive mb-2"
                       style={{ textDecoration: 'underline' }}
@@ -72,7 +81,7 @@ const Profile = () => {
               </div>
             )}
 
-            <h4 className="h4-responsive text-center">
+            <h4 className="h4-responsive text-center animated fadeIn slow">
               Messages <Emoji label="✉️" symbol="✉️" />
             </h4>
             {messages.map((item, index) => (
@@ -84,10 +93,11 @@ const Profile = () => {
               />
             ))}
             {MessagesStatus && (
-              <NoResults
-                fontSize="h4"
-                message="Looks like nobody has written for you yet"
-              />
+              <p className="mx-3 my-3 text-muted text-center p-responsive">
+                Looks like nobody has written for you anything yet or you're early
+                here 😎why don't you <Link to="/write">start</Link> first?{' '}
+                <Emoji label="smile" symbol="😀" />
+              </p>
             )}
           </div>
           <div className="col-sm-4 order-1 order-lg-2">

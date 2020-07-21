@@ -23,24 +23,6 @@ const LoginSchema = () => {
 const SignUpSchema = () => {
   return {
     name: Joi.string().min(5).label('Name').required(),
-    phoneNo: Joi.string()
-      .length(10)
-      .regex(/^\d+$/)
-      .error(() => {
-        return {
-          message:
-            'Phone number should contain only numbers and must be of 10 numbers',
-        };
-      })
-      .required(),
-    email: Joi.string()
-      .email()
-      .error(() => {
-        return {
-          message: 'Please enter a valid Email ID',
-        };
-      })
-      .required(),
     password: Joi.string()
       .min(7)
       .error(() => {
@@ -101,17 +83,17 @@ const DetailsSchema = () => {
   };
 };
 
-const NumberAccess = () => {
+const EmailAccess = () => {
   return {
-    phoneNumber: Joi.string()
-      .length(10)
-      .regex(/^\d+$/)
+    email: Joi.string()
+      .email()
       .error(() => {
         return {
-          message: 'Please enter a valid Phone Number',
+          message: 'Please enter a valid Email',
         };
-      }),
+      })
+      .required(),
   };
 };
 
-export { LoginSchema, SignUpSchema, DetailsSchema, NumberAccess };
+export { LoginSchema, SignUpSchema, DetailsSchema, EmailAccess };
