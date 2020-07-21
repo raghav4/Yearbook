@@ -6,11 +6,7 @@ const NotFound = () => {
   return (
     <>
       <div style={{ marginTop: '60px' }}>
-        <svg
-          id="404-Dave"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 560 250"
-        >
+        <svg id="404-Dave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250">
           <defs>
             <clipPath id="center-circle-clip">
               <circle cx="275.667" cy="122.667" r="84.33" />
