@@ -8,17 +8,12 @@ const MessageFeed = ({ messageBody, sentBy, sentTo }) => {
         <div className="col-md-6">
           <div
             className="card ml-2 mr-2 mb-3"
-            style={{ backgroundColor: '#fafafa' }}
+            // style={{ backgroundColor: '#EBECF0' }}
           >
             <div className="text-left mt-2 ml-3">
               {sentBy} ► {sentTo}
             </div>
-            <div
-              className="card-body text-left"
-              style={{ fontFamily: 'Product Sans' }}
-            >
-              {messageBody}
-            </div>
+            <div className="card-body text-left">{messageBody}</div>
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ const Input = ({
         className={error ? 'form-control is-invalid' : ''}
         icon={icon}
         iconBrand={IconBrand}
-        placeHolder={placeHolder}
+        placeholder={placeHolder}
         outline
         required
       >

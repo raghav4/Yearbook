@@ -1,19 +1,25 @@
 import React, { useEffect, useState, useContext } from 'react';
-import io from 'socket.io-client';
-import { Link } from 'react-router-dom';
+import socketIOClient from 'socket.io-client';
+import { Pagination } from '@material-ui/lab';
 import MessageFeed from './messageFeed';
 import { Emoji } from '../../../../components';
 import { PrivateContext } from '../../../../contexts';
 import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
-import ModalBox from '../messages/modal';
+import { paginate } from '../../../../utils';
 
 const HomePage = () => {
   const [User, setUser] = useState('');
   const [Messages, setMessages] = useState([]);
+  const [totalMessages, setTotalMessages] = useState(0);
+  const [CurrentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setpostsPerPage] = useState(5);
   const { history } = useContext(PrivateContext);
 
   useEffect(() => {
+    /**
+     * * Centralised place to not re request data every time
+     */
     const fetchUserData = async () => {
       try {
         const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
@@ -24,12 +30,22 @@ const HomePage = () => {
       try {
         const { data } = await http.get(`${apiUrl}/${endPoints.messages.feed}`);
         setMessages(data);
-        console.log(data);
+        setTotalMessages(Math.ceil(data.length / 5));
+        // const socket = socketIOClient(apiUrl);
+        // socket.on('FromAPI', (data) => {
+        //   console.log(data);
+        //   fetchFeed();
+        //   // setResponse(data);
+        // });
       } catch (ex) {}
     };
     fetchUserData();
     fetchFeed();
   }, []);
+
+  const handlePage = (event, value) => {
+    setCurrentPage(value);
+  };
 
   return (
     <>
@@ -38,7 +54,7 @@ const HomePage = () => {
           Hello {User} <Emoji symbol="👋" />
         </h2>
         <h3 className="h3-responsive">Welcome to Yearbook</h3>
-        <div className="justify-content-center">
+        {/* <div className="justify-content-center">
           <ul className="text-center">
             <li>
               1. Do not forget to update your <Link to="/details">details</Link>.
@@ -60,14 +76,35 @@ const HomePage = () => {
               have written for you.
             </li>
           </ul>
-        </div>
-        {Messages.map((item) => (
+        </div> */}
+        {paginate(Messages, CurrentPage, postsPerPage).map((item) => (
           <MessageFeed
             sentBy={item.sentBy.credentials.name}
             sentTo={item.sendTo.credentials.name}
             messageBody={item.message}
+            key={item._id}
           />
         ))}
+
+        {Messages.length ? (
+          <div
+            style={{ display: 'flex' }}
+            className="my-4 text-center justify-content-center"
+          >
+            <Pagination
+              count={totalMessages}
+              color="primary"
+              variant="outlined"
+              shape="rounded"
+              boundaryCount={1}
+              showFirstButton
+              showLastButton
+              onChange={handlePage}
+            />
+          </div>
+        ) : (
+          <h4>See the Live Messages</h4>
+        )}
       </div>
     </>
   );

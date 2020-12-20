@@ -7,7 +7,9 @@
         "signup": "api/onboarding/user/signup"
       },
       "allUsers": "api/user/all",
-      "loggedInUser": "api/user/me"
+      "loggedInUser": "api/user/me",
+      "getClassStudents": "api/user/class/all",
+      "updateProfilePicture": "api/user/update/profile_picture"
     },
     "slamBook": {
       "getUserAnswers": "api/slambook/answers/self",

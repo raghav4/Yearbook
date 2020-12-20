@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "bootstrap-css-only": "^4.4.1",
     "browser-image-compression": "^1.0.11",
+    "bullet-train-client": "^0.2.1",
     "joi-browser": "^13.4.0",
     "jwt-decode": "^2.2.0",
     "mdbreact": "^4.26.0",

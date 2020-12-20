@@ -7,4 +7,13 @@ import HomePage from './home';
 import LogOut from './logout';
 import ResetPassword from './resetPassword';
 
-export { ListPolls, Profile, PeopleCards, UserInfo, SelfAnswers, HomePage, LogOut };
+export {
+  ListPolls,
+  Profile,
+  PeopleCards,
+  UserInfo,
+  SelfAnswers,
+  HomePage,
+  LogOut,
+  ResetPassword,
+};

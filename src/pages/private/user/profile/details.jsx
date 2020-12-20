@@ -4,8 +4,8 @@ import Swal from 'sweetalert2';
 import {
   DropPicture,
   NotifyAlert,
-  Input,
   TimerAlert,
+  Input,
   Emoji,
 } from '../../../../components';
 import { DetailsSchema } from '../../../../utils/schemas';
