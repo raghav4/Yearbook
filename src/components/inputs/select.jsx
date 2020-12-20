@@ -4,7 +4,10 @@ import propTypes from 'prop-types';
 const Select = ({ selectTitle, options, handleSelectInput }) => {
   return (
     <>
-      <select className="custom-select custom-select-md" onChange={handleSelectInput}>
+      <select
+        className="custom-select custom-select-md"
+        onChange={handleSelectInput}
+      >
         <option disabled value="" defaultValue>
           {selectTitle}
         </option>

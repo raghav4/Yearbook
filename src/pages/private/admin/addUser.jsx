@@ -1,65 +1,47 @@
-import React, { Component } from 'react';
-import { MDBCard, MDBCardBody, MDBCardHeader, MDBBtn, MDBInput, MDBContainer } from 'mdbreact';
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import Joi from 'joi-browser';
+import http from '../../../services/httpService';
+import { apiUrl } from '../../../config.json';
+import { EmailAccess } from '../../../utils/schemas';
 
-class AddUser extends Component {
-  state = {};
+const GrantUserAccess = () => {
+  const [Registeration, setRegisteration] = useState(false);
 
-  render() {
-    return (
-      <>
-        <div className="d-flex justify-content-center">
-          <div className="col-md-6 mb-3">
-            <MDBContainer>
-              <MDBCard style={{ width: 'auto', marginTop: '2rem' }}>
-                <MDBCardHeader color="elegant-color lighten-1 text-center">
-                  Add a Student
-                </MDBCardHeader>
-                <MDBCardBody>
-                  {/* <MDBCardTitle>Special title treatment</MDBCardTitle> */}
-                  {/* <MDBCardText> */}
-                  <div className="md-form form-group">
-                    <MDBInput label="Name" outline />
-                    <label htmlFor="inputAddress2MD"></label>
-                  </div>
-                  {/* <div className="md-form form-group">
-                    <MDBInput label="Department" outline />
-                    <label htmlFor="inputAddress2MD"></label>
-                  </div> */}
-                  <div className="md-form form-group">
-                    <select className="browser-default custom-select">
-                      <option disabled defaultValue>
-                        Department
-                      </option>
-                      <option value="1">CSE</option>
-                      <option value="2">IT</option>
-                      <option value="3">ECE</option>
-                      <option value="3">EEE</option>
-                      <option value="3">MAE</option>
-                    </select>
-                  </div>
-                  <div className="md-form form-group">
-                    <select className="browser-default custom-select">
-                      <option disabled defaultValue>
-                        Section
-                      </option>
-                      <option value="1">A</option>
-                      <option value="2">B</option>
-                      <option value="3">C</option>
-                    </select>
-                  </div>
-                  <div className="md-form form-group">
-                    <MDBInput label="Phone Number" outline />
-                    <label htmlFor="inputAddress2MD"></label>
-                  </div>
-                </MDBCardBody>
-                <MDBBtn color="default">Submit</MDBBtn>
-              </MDBCard>
-            </MDBContainer>
-          </div>
-        </div>
-      </>
-    );
-  }
-}
+  const registerUser = async (phoneNumber) => {
+    try {
+      const { data } = await http.post(`${apiUrl}/api/admin/user/grant`, {
+        phoneNumber,
+      });
+      Swal.fire('Done', 'Successfully granted access to the number', 'success');
+      setRegisteration(true);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 403) {
+        Swal.fire('Error', ex.response.data, 'error');
+        setRegisteration(false);
+      }
+    }
+  };
 
-export default AddUser;
+  const getInput = () => {
+    Swal.fire({
+      title: 'Enter the user number',
+      input: 'text',
+      showCancelButton: true,
+      confirmButtonText: 'Register',
+      showLoaderOnConfirm: true,
+      inputValidator: (value) => {
+        const { error } = Joi.validate({ phoneNumber: value }, EmailAccess());
+        if (error) {
+          return `${error.details[0].message}`;
+        }
+        Swal.close();
+        return registerUser(value);
+      },
+    });
+  };
+
+  return <>{getInput()}</>;
+};
+
+export default GrantUserAccess;

@@ -20,9 +20,30 @@ const LoginSchema = () => {
   };
 };
 
+const SignUpSchema = () => {
+  return {
+    name: Joi.string().min(5).label('Name').required(),
+    password: Joi.string()
+      .min(7)
+      .error(() => {
+        return {
+          message: 'Password should be atleast 7 characters long',
+        };
+      })
+      .required(),
+    department: Joi.string().min(2).max(3).required(),
+    section: Joi.string().length(1).required(),
+  };
+};
+
 const DetailsSchema = () => {
   return {
-    contactEmail: Joi.string().email().label('Contact Email'),
+    contactEmail: Joi.string()
+      .email()
+      .allow('')
+      .trim()
+      .strict()
+      .label('Contact Email'),
     facebook: Joi.string()
       .uri()
       .label('Facebook')
@@ -62,4 +83,17 @@ const DetailsSchema = () => {
   };
 };
 
-export { LoginSchema, DetailsSchema };
+const EmailAccess = () => {
+  return {
+    email: Joi.string()
+      .email()
+      .error(() => {
+        return {
+          message: 'Please enter a valid Email',
+        };
+      })
+      .required(),
+  };
+};
+
+export { LoginSchema, SignUpSchema, DetailsSchema, EmailAccess };

@@ -10,7 +10,9 @@ const LandingPage = () => {
           <div className="bg">
             <div
               className="bg-image"
-              style={{ backgroundImage: `url(https://i.imgur.com/LoiHMJo.jpg)` }}
+              style={{
+                backgroundImage: `url(https://i.imgur.com/LoiHMJo.jpg)`,
+              }}
             />
           </div>
           <div className=" header">
@@ -19,7 +21,10 @@ const LandingPage = () => {
                 <Link to="/" className="h4 h4-responsive text-white">
                   Yearbook
                 </Link>{' '}
-                <Link to="mailto:demo@demo.com" className="text-white h4 h4-responsive mr0">
+                <Link
+                  to="mailto:demo@demo.com"
+                  className="text-white h4 h4-responsive mr0"
+                >
                   Contact
                 </Link>
               </div>

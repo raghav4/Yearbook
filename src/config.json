@@ -1,0 +1,37 @@
+{
+  "apiUrl": "http://localhost:5000",
+  "endPoints": {
+    "user": {
+      "onboarding": {
+        "login": "api/onboarding/user/login",
+        "signup": "api/onboarding/user/signup"
+      },
+      "allUsers": "api/user/all",
+      "loggedInUser": "api/user/me",
+      "getClassStudents": "api/user/class/all",
+      "updateProfilePicture": "api/user/update/profile_picture"
+    },
+    "slamBook": {
+      "getUserAnswers": "api/slambook/answers/self",
+      "deleteAnswerById": "api/slambook/answer/delete",
+      "upsertAnswer": "api/slambook/answer/upsert",
+      "createQuestion": "api/slambook/question/new",
+      "allQuestions": "api/slambook/questions/all",
+      "getQuestionById": "api/slambook/question",
+      "deleteQuestionById": "api/slambook/question/delete"
+    },
+    "messages": {
+      "forLoggedInUser": "api/user/messages/self",
+      "feed": "api/user/messages/all"
+    }
+  },
+  "routes": {
+    "getPolls": "api/admin/polls",
+    "getClassStudents": "api/user/info/class/all",
+    "onboarding": {
+      "validateAccess": "/api/user/signup/validate",
+      "verifySignUpOTP": "/api/user/signup/verify",
+      "forgetPassword": "/api/user/passwordrecovery"
+    }
+  }
+}

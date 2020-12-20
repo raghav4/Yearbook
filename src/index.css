@@ -1,3 +1,17 @@
+@keyframes animate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}
+
 @media only screen and (min-width: 1440px) {
   body {
     font-family: 'Sofia Pro Medium' !important;
@@ -7,7 +21,6 @@
 @media only screen and (min-width: 1200px) {
   /* styles for wide screens */
 }
-
 
 @media only screen and (max-width: 768px) {
   body {
@@ -25,13 +38,20 @@ only screen and (min-resolution: 2dppx) {
   /* styles for Retina-type displays */
 }
 
-
 @font-face {
   font-family: 'Product Sans';
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'),
     url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'),
+    url(https://fonts.googleapis.com/css2?family=Inter&display=swap) format('woff');
 }
 
 @font-face {

@@ -1,97 +1,105 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import http from '../../../services/httpService';
+import { apiUrl } from '../../../config.json';
 import ListQuestions from './questions/listQuestion';
+import { NotifyAlert } from '../../../components';
 
-class ManagePolls extends Component {
-  // eslint-disable-next-line react/state-in-constructor
-  state = {
-    questions: [],
-    inputValue: '',
-    inputValidationAlert: {
-      apply: false,
-      message: '',
-    },
+const ManagePolls = () => {
+  const [questions, setQuestions] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [inputValidationAlert, setInputValidationAlert] = useState({
+    apply: false,
+    message: '',
+  });
+  // TODO: #36 Poll getting added after deleted token
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const { data } = await http.get(`${apiUrl}/api/admin/polls`);
+        setQuestions(data);
+      } catch (ex) {
+        // if (ex.response && ex.response.status === 404) {
+        // }
+      }
+    };
+    fetchQuestions();
+  }, []);
+
+  const handleChange = (input) => {
+    if (input !== '') {
+      setInputValidationAlert({ apply: false, message: '' });
+    }
+    setInputValue(input);
   };
 
-  async componentDidMount() {
-    const { data: questions } = await axios.get('https://yb-server.herokuapp.com/api/admin/polls');
-    // console.log(data);
-    this.setState({ questions });
-  }
-
-  handleChange = (e) => {
-    const newLocal = e.currentTarget;
-    this.setState({ inputValue: newLocal.value });
-  };
-
-  handleKeyPress = (e) => {
-    const code = e.keyCode || e.which;
-    if (code === 13) return this.handleAdd(e.currentTarget.value);
-  };
-
-  handleAdd = async (question) => {
+  const handleAdd = async () => {
     let updatedInputValidation = {
       apply: false,
       message: '',
     };
-    if (question.trim() === '') {
+    if (inputValue.trim() === '') {
       updatedInputValidation = {
         apply: true,
         message: 'Nothing to add',
       };
-      return this.setState({ inputValidationAlert: updatedInputValidation });
+      return setInputValidationAlert(updatedInputValidation);
     }
-    const questionObject = {
-      question,
-    };
+
+    const originalQuestions = questions;
+    // setQuestions([
+    //   { _id: 'fakeId', question: inputValue },
+    //   ...originalQuestions,
+    // ]);
     try {
-      const { data: questions } = await axios.post(
-        'https://yb-server.herokuapp.com/api/admin/polls',
-        questionObject,
-      );
-      this.setState({ questions });
-    } catch (err) {
-      console.error(err.response.data);
+      const { data } = await http.post(`${apiUrl}/api/admin/polls`, {
+        question: inputValue,
+      });
+      NotifyAlert('Successfully added the question', 'top');
+      setQuestions([data, ...questions]);
+    } catch (ex) {
+      // if (ex.response && ex.response.status === 400)
+      setQuestions(originalQuestions);
       updatedInputValidation = {
         apply: true,
-        message: err.response.data,
+        message: ex.response.data,
       };
-      return this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
     }
-    this.setState({ inputValidationAlert: updatedInputValidation, inputValue: '' });
+    setInputValidationAlert(updatedInputValidation);
   };
 
-  handleDelete = async (questionId) => {
+  const handleDelete = async (questionId) => {
+    const originalQuestions = questions;
+    setQuestions(questions.filter((q) => q._id !== questionId));
     try {
-      const { data: questions } = await axios.delete(
-        `https://yb-server.herokuapp.com/api/admin/polls/${questionId}`,
-      );
-      //const questions = this.state.questions.filter((q) => q.id !== questionId);
-      this.setState({ questions });
-    } catch (err) {
-      console.error(err.response.data);
+      await http.delete(`${apiUrl}/api/admin/polls/${questionId}`);
+      NotifyAlert('Successfully deleted the question', 'top');
+    } catch (ex) {
+      setQuestions(originalQuestions);
     }
   };
 
-  render() {
-    const { questions, inputValue, inputValidationAlert } = this.state;
-    return (
-      <>
-        <ListQuestions
-          buttonTitle="Add"
-          pageHeading="Polls Questions"
-          placeholder="Add a Poll Question"
-          questions={questions}
-          inputValue={inputValue}
-          inputValidationAlert={inputValidationAlert}
-          handleAdd={this.handleAdd}
-          onDelete={this.handleDelete}
-          handleKeyPress={this.handleKeyPress}
-          handleChange={this.handleChange}
-        />
-      </>
-    );
-  }
-}
+  const handleKeyPress = ({ keyCode }) => {
+    if (keyCode === 13) handleAdd();
+  };
+
+  return (
+    <>
+      <ListQuestions
+        buttonTitle="Add Poll"
+        buttonColor="deep-purple"
+        placeholder="Add a Poll"
+        pageHeading="Poll Questions 📊"
+        questions={questions}
+        handleAdd={handleAdd}
+        inputValue={inputValue}
+        onDelete={handleDelete}
+        handleChange={handleChange}
+        handleKeyPress={handleKeyPress}
+        inputValidationAlert={inputValidationAlert}
+      />
+    </>
+  );
+};
 
 export default ManagePolls;

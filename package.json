@@ -12,11 +12,14 @@
     "@testing-library/user-event": "^10.1.2",
     "axios": "^0.19.2",
     "bootstrap-css-only": "^4.4.1",
-    "form-data": "^3.0.0",
+    "browser-image-compression": "^1.0.11",
+    "bullet-train-client": "^0.2.1",
     "joi-browser": "^13.4.0",
-    "lodash": "^4.17.15",
+    "jwt-decode": "^2.2.0",
     "mdbreact": "^4.26.0",
+    "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
+    "raven-js": "^3.27.2",
     "react": "^16.13.1",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
@@ -26,6 +29,7 @@
     "react-pose-text": "^3.1.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.0",
     "sweetalert2": "^9.10.12",
     "url-prop-type": "^1.2.4"
@@ -34,7 +38,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "npx prettier --write '**/*.jsx'"
   },
   "eslintConfig": {
     "extends": "react-app"

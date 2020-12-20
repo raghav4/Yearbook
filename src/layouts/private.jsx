@@ -1,14 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Navbar from './private/navbar';
-import Footer from './private/footer';
+import { Navbar, Footer } from './private/user';
 
 const PrivateLayout = ({ children }) => {
   return (
     <>
       <Navbar />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

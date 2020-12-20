@@ -7,7 +7,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import logger from './services/logService';
 import * as serviceWorker from './serviceWorker';
+
+logger.init();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
