@@ -24,7 +24,7 @@ const Profile = () => {
         const { data } = await http.get(
           `${apiUrl}/${endPoints.slamBook.getUserAnswers}`,
         );
-        console.log(data);
+        // console.log(data);
         setAnswers(data);
         if (!data.length) setNoAnswers(true);
       } catch (ex) {}

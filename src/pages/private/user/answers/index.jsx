@@ -35,9 +35,9 @@ const SelfAnswers = () => {
   }, []);
 
   const getAnswer = (questionId) => {
-    console.log('Question ID is ', questionId);
+    // console.log('Question ID is ', questionId);
     const result = answeredQuestions.find((e) => e.questionId._id === questionId);
-    console.log('Answer result is ', result);
+    // console.log('Answer result is ', result);
     return result ? { answer: result.answer, _id: result._id } : {};
   };
 

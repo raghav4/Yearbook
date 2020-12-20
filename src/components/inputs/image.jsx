@@ -5,7 +5,7 @@ import imageCompression from 'browser-image-compression';
 import BackupIcon from '@material-ui/icons/Backup';
 import { useDropzone } from 'react-dropzone';
 import { http } from '../../services';
-import { apiUrl } from '../../config.json';
+import { apiUrl, endPoints } from '../../config.json';
 import { TimerAlert } from '../alerts';
 
 const DropPicture = ({ defaultPicture }) => {
@@ -43,11 +43,15 @@ const DropPicture = ({ defaultPicture }) => {
       try {
         const compressedFile = await imageCompression(acceptedFiles[0], options);
         formData.append('file', compressedFile);
-        const { data } = await http.post(`${apiUrl}/api/user/self/pic`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
+        const { data } = await http.post(
+          `${apiUrl}/${endPoints.user.updateProfilePicture}`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
           },
-        });
+        );
         setImage(data);
       } catch (ex) {
         if (

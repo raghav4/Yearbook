@@ -3,12 +3,11 @@ import propTypes from 'prop-types';
 import { Navbar, Footer } from './private/user';
 
 const PrivateLayout = ({ children }) => {
-  console.log('consoling children from private layouts', children);
   return (
     <>
       <Navbar />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

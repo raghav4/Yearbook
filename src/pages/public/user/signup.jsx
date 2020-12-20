@@ -298,7 +298,7 @@ const SignUp = () => {
           email,
         },
       );
-      console.log(data);
+      // console.log(data);
       handleVerification();
     } catch (ex) {}
   };
