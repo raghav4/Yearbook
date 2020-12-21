@@ -222,7 +222,7 @@ const SignUp = () => {
           };
 
           try {
-            await http.post(`${apiUrl}/api/user/signup/verify`, user);
+            await http.post(`${apiUrl}/api/onboarding/signup/verify`, user);
             setEmailVerified(true);
           } catch (ex) {
             TimerAlert('Error', 'Something Failed', 'error');
@@ -293,7 +293,7 @@ const SignUp = () => {
     const { onboarding } = routes;
     try {
       const { data } = await http.post(
-        'http://localhost:5000/api/user/signup/validate',
+        'http://localhost:5000/api/onboarding/signup/validate',
         {
           email,
         },
@@ -325,7 +325,7 @@ const SignUp = () => {
     };
     try {
       setLoading(true);
-      await http.post(`${apiUrl}/api/user/signup`, userObject);
+      await http.post(`${apiUrl}/api/onboarding/user/signup`, userObject);
       Swal.fire({
         icon: 'success',
         title: 'Registeration Successfull',
