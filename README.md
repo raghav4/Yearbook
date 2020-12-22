@@ -12,7 +12,10 @@
 [![license](https://img.shields.io/github/license/raghav4/yearbook)](https://github.com/raghav4/Yearbook/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](#)
 
-| There are some known issues which needs to be fixed, since the project is under development phase, if you find any issue please [raise it](https://github.com/raghav4/Yearbook/issues/new/choose). The backend of the Project can be found [here](https://github.com/raghav4/yearbook-backend)
+| There are some known issues which needs to be fixed, since the project is
+under development phase, if you find any issue please
+[raise it](https://github.com/raghav4/Yearbook/issues/new/choose). The backend
+of the Project can be found [here](https://github.com/raghav4/yearbook-backend)
 
 ## Prerequisites
 
@@ -39,7 +42,6 @@ to run this application properly.
 
 - Use `npm run prettier` to prettify your files according to `.prettierrc`.
 
-
 <!-- ## Motivation -->
 <!-- The project was(is) built for the students in their final year  -->
 
@@ -64,4 +66,3 @@ to run this application properly.
 
 - [ ] - Broken Routes/APIs
 - [ ] - Stale Code
-
