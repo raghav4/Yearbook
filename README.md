@@ -39,6 +39,7 @@ to run this application properly.
 
 - Use `npm run prettier` to prettify your files according to `.prettierrc`.
 
+
 <!-- ## Motivation -->
 <!-- The project was(is) built for the students in their final year  -->
 
@@ -63,3 +64,4 @@ to run this application properly.
 
 - [ ] - Broken Routes/APIs
 - [ ] - Stale Code
+
