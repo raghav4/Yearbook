@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^5.7.0",
     "@testing-library/react": "^10.0.4",
     "@testing-library/user-event": "^10.1.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap-css-only": "^4.4.1",
     "browser-image-compression": "^1.0.11",
     "bullet-train-client": "^0.2.1",
