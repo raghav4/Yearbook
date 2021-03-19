@@ -3,11 +3,11 @@
   "endPoints": {
     "user": {
       "onboarding": {
-        "login": "api/onboarding/user/login",
-        "signup": "api/onboarding/user/signup"
+        "login": "api/user/login",
+        "signup": "api/user/signup"
       },
       "allUsers": "api/user/all",
-      "loggedInUser": "api/user/me",
+      "loggedInUser": "api/user/info",
       "getClassStudents": "api/user/class/all",
       "updateProfilePicture": "api/user/update/profile_picture"
     },

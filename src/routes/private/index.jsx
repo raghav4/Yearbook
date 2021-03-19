@@ -33,6 +33,9 @@ const privateRoutes = () => {
     {
       path: '/answers',
       component: <SelfAnswers />,
+    },
+    {
+      path: '/questions',
       systemAdminComponent: <ManageQuestions />,
     },
     { path: '/reset', component: <ResetPassword /> },

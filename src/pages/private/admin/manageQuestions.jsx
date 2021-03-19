@@ -17,6 +17,7 @@ const ManageQuestions = () => {
     const fetchQuestions = async () => {
       try {
         const { data } = await http.get(`${apiUrl}/api/admin/questions`);
+        console.log(data)
         setQuestions(data);
         setNoQuestions(false);
       } catch (ex) {}
@@ -32,11 +33,13 @@ const ManageQuestions = () => {
   };
 
   const handleAdd = async () => {
+    const previousInputValue = inputValue;
+    setInputValue('');
     let updatedInputValidation = {
       apply: false,
       message: '',
     };
-    if (inputValue.trim() === '') {
+    if (previousInputValue.trim() === '') {
       updatedInputValidation = {
         apply: true,
         message: 'Nothing to add',
@@ -47,7 +50,7 @@ const ManageQuestions = () => {
     const originalQuestions = questions;
     try {
       const { data } = await http.post(`${apiUrl}/api/admin/questions`, {
-        question: inputValue,
+        question: previousInputValue,
       });
       NotifyAlert('Successfully added the question', 'top');
       setQuestions([data, ...questions]);

@@ -59,7 +59,7 @@ to run this application properly.
 ![user_polls](./src/assets/screenshots/user_polls.png)
 
 ### Admin
-
+![add_questions](./src/assests/../assets/screenshots/add_questions_admin.gif)
 ## Known Issues
 
 - [ ] - Broken Routes/APIs
