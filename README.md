@@ -47,13 +47,20 @@ to run this application properly.
 
 ## Screenshots
 
-### User
+## User
+
+<p float="left">
+  <img src="./src/assets/screenshots/sign_in.png" alt="sign in form" width="400" />
+  <img src="./src/assets/screenshots/reset_password.png" alt="reset password form" width="400" />
+</p>
 
 ![signup](./src/assets/screenshots/user_signup.png)
 ![home_feed](./src/assets/screenshots/user_feed.png)
+![no_data](./src/assets/screenshots/skeleton_cards.png)
 ![registered_users](./src/assets/screenshots/registered_users.png)
 ![message](./src/assets/screenshots/write_user_message.png)
 ![user_slam_book](src/assets/screenshots/slam_book_user.png)
+![profile](./src/assets/screenshots/user_profile_no_self_answers.png)
 ![profile](./src/assets/screenshots/user_profile.png)
 ![update_user_details](./src/assets/screenshots/update_user_details.png)
 ![user_polls](./src/assets/screenshots/user_polls.png)
