@@ -14,7 +14,7 @@
 
 @media only screen and (min-width: 1440px) {
   body {
-    font-family: 'Sofia Pro Medium' !important;
+    font-family: 'Product Sans' !important;
   }
 }
 
@@ -24,7 +24,7 @@
 
 @media only screen and (max-width: 768px) {
   body {
-    font-family: 'Sofia Pro Medium' !important;
+    font-family: 'Product Sans' !important;
   }
 }
 

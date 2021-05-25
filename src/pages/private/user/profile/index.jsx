@@ -54,7 +54,7 @@ const Profile = () => {
         <div className="row">
           <div className="col-sm-8 order-2 order-lg-1">
             <h4 className="h4-responsive text-center animated fadeIn slow">
-              Know Me Better 🔍
+              🔍 Know Me Better
             </h4>
 
             {NoAnswers ? (
@@ -82,7 +82,7 @@ const Profile = () => {
             )}
 
             <h4 className="h4-responsive text-center animated fadeIn slow">
-              Messages <Emoji label="✉️" symbol="✉️" />
+              <Emoji label="🖊" symbol="🖊" /> What others have written for you
             </h4>
             {messages.map((item, index) => (
               <Message
@@ -95,7 +95,7 @@ const Profile = () => {
             {MessagesStatus && (
               <p className="mx-3 my-3 text-muted text-center p-responsive">
                 Looks like nobody has written for you anything yet or you're early
-                here 😎why don't you <Link to="/write">start</Link> first?{' '}
+                here 😎 why don't you <Link to="/write">start</Link> first?{' '}
                 <Emoji label="smile" symbol="😀" />
               </p>
             )}

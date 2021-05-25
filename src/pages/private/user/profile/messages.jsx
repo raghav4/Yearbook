@@ -28,13 +28,13 @@ const Message = ({ person, message, index }) => {
     <>
       <div className={getClass()}>
         <div className="card-body text-dark">
-          <h6
-            className="card-title text-center h6-responsive mb-2"
-            // style={{ textDecoration: 'underline' }}
+          <h5
+            className="card-title h5-responsive mb-2"
+            style={{ fontWeight: 500 }}
           >
             {person}
-          </h6>
-          <p className="h7-responsive" style={{ fontFamily: 'Product Sans' }}>
+          </h5>
+          <p className="p-responsive" style={{ fontFamily: 'Product Sans' }}>
             {message}
           </p>
           <p>
