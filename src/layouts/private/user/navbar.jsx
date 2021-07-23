@@ -41,9 +41,9 @@ const Navbar = () => {
               <MDBNavItem>
                 <MDBNavLink to="/write">Writes</MDBNavLink>
               </MDBNavItem>
-              <MDBNavItem>
+              {/* <MDBNavItem>
                 <MDBNavLink to="/polls">Polls</MDBNavLink>
-              </MDBNavItem>
+              </MDBNavItem> */}
             </MDBNavbarNav>
             <MDBNavbarNav right>
               <MDBNavItem>

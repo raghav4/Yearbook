@@ -48,23 +48,23 @@ const UserInfo = () => {
       try {
         const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
         setCredentials({
-          name: data.credentials.name,
-          phoneNo: data.credentials.phoneNo,
-          email: data.credentials.email,
+          name: data.name,
+          phoneNo: data.socialHandles.phone,
+          email: data.socialHandles.email,
         });
         setDeptSection({
-          department: data.deptSection.department,
-          section: data.deptSection.section,
+          department: data.department,
+          section: data.section,
         });
         setInfo({
-          bio: data.info.bio,
-          profilePicture: data.info.profilePicture,
+          bio: data.bio,
+          profilePicture: data.profilePicture,
         });
         setSocialHandles({
-          contactEmail: data.socialHandles.contactEmail,
-          contactNo: data.socialHandles.contactNo,
+          contactEmail: data.socialHandles.email,
+          contactNo: data.socialHandles.phone,
           instagram: data.socialHandles.instagram,
-          whatsappNo: data.socialHandles.whatsappNo,
+          whatsappNo: data.socialHandles.whatsapp,
           facebook: data.socialHandles.facebook,
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
@@ -201,14 +201,14 @@ const UserInfo = () => {
                       isDisabled
                     />
 
-                    <Input
+                    {/* <Input
                       name="email"
                       label="Account Email"
                       value={credentials.email}
                       handleChange={handleChange}
                       icon="envelope"
                       isDisabled
-                    />
+                    /> */}
                     <Input
                       name="department"
                       label="Department"

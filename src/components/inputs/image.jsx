@@ -43,7 +43,7 @@ const DropPicture = ({ defaultPicture }) => {
       try {
         const compressedFile = await imageCompression(acceptedFiles[0], options);
         formData.append('file', compressedFile);
-        const { data } = await http.post(
+        const { data } = await http.patch(
           `${apiUrl}/${endPoints.user.updateProfilePicture}`,
           formData,
           {

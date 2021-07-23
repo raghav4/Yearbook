@@ -25,10 +25,10 @@ class PeopleCards extends Component {
     const { data: persons } = await http.get(`${apiUrl}/${endPoints.user.allUsers}`);
 
     let departments = persons.map((e) => {
-      return e.deptSection.department;
+      return e.department;
     });
     let sections = persons.map((e) => {
-      return e.deptSection.section;
+      return e.section;
     });
     departments.sort();
     departments = ['ALL', ...new Set(departments)];
@@ -51,7 +51,7 @@ class PeopleCards extends Component {
   filterPeople = (e) => {
     const people = this.state.persons.filter(
       (person) =>
-        person.credentials.name
+        person.name
           .toLowerCase()
           .search(e.target.value.trim().toLowerCase()) !== -1,
     );
@@ -65,7 +65,7 @@ class PeopleCards extends Component {
 
       return this.setState({
         people: persons.filter((e) => {
-          return e.deptSection.section === sectionSelect;
+          return e.section === sectionSelect;
         }),
         departmentSelect: input.value,
       });
@@ -75,11 +75,11 @@ class PeopleCards extends Component {
       people: persons.filter((e) => {
         if (sectionSelect !== 'ALL') {
           return (
-            e.deptSection.department === input.value &&
-            e.deptSection.section === sectionSelect
+            e.department === input.value &&
+            e.section === sectionSelect
           );
         }
-        return e.deptSection.department === input.value;
+        return e.department === input.value;
       }),
       departmentSelect: input.value,
     });
@@ -92,7 +92,7 @@ class PeopleCards extends Component {
 
       return this.setState({
         people: persons.filter((e) => {
-          return e.deptSection.department === departmentSelect;
+          return e.department === departmentSelect;
         }),
         sectionSelect: input.value,
       });
@@ -102,11 +102,11 @@ class PeopleCards extends Component {
       people: persons.filter((e) => {
         if (departmentSelect !== 'ALL') {
           return (
-            e.deptSection.section === input.value &&
-            e.deptSection.department === departmentSelect
+            e.section === input.value &&
+            e.department === departmentSelect
           );
         }
-        return e.deptSection.section === input.value;
+        return e.section === input.value;
       }),
       sectionSelect: input.value,
     });
@@ -162,9 +162,9 @@ class PeopleCards extends Component {
                 <UserCard
                   person={person}
                   key={person._id}
-                  personName={person.credentials.name}
-                  personImageUrl={person.info.profilePicture}
-                  personBio={person.info.bio}
+                  personName={person.name}
+                  personImageUrl={person.profilePicture}
+                  personBio={person.bio}
                   triggerModal={this.triggerModal}
                 />
               </div>

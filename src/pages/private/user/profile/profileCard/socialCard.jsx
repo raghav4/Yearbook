@@ -9,19 +9,17 @@ const PersonalCard = () => {
   const [Name, setName] = useState('');
   const [info, setInfo] = useState({ bio: '', profilePicture: '' });
   const [socialHandles, setSocialHandles] = useState({
-    contactEmail: '',
-    contactNo: '',
+    email: '',
+    phone: '',
     instagram: '',
-    whatsappNo: '',
     facebook: '',
     linkedin: '',
     snapchat: '',
   });
 
   const {
-    contactEmail,
-    contactNo,
-    whatsappNo,
+    email,
+    phone,
     instagram,
     linkedin,
     facebook,
@@ -32,20 +30,21 @@ const PersonalCard = () => {
     const fetchUserData = async () => {
       try {
         const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
-        setName(data.credentials.name);
+        setName(data.name);
         setInfo({
-          bio: data.info.bio,
-          profilePicture: data.info.profilePicture,
+          bio: data.bio,
+          profilePicture: data.profilePicture,
         });
         setSocialHandles({
-          contactEmail: data.socialHandles.contactEmail,
-          contactNo: data.socialHandles.contactNo,
+          email: data.socialHandles.email,
+          phone: data.socialHandles.phone,
           instagram: data.socialHandles.instagram,
-          whatsappNo: data.socialHandles.whatsappNo,
+          // whatsappNo: data.socialHandles.whatsappNo,
           facebook: data.socialHandles.facebook,
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
+        console.log('socialss', data)
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
           TimerAlert('Error', ex.response.data, 'error');
@@ -90,24 +89,24 @@ const PersonalCard = () => {
           <div>
             <Tooltip title="You can add more details from update details section">
               <div className="row">
-                {contactEmail && (
+                {email && (
                   <SocialHandle
-                    platform={contactEmail}
+                    platform={email}
                     iconClass="fas fa-lg fa-envelope"
                   />
                 )}
-                {contactNo && (
+                {phone && (
                   <SocialHandle
-                    platform={contactNo}
+                    platform={phone}
                     iconClass="fas fa-lg fa-phone-square-alt"
                   />
                 )}
-                {whatsappNo && (
+                {/* {whatsappNo && (
                   <SocialHandle
                     platform={whatsappNo}
                     iconClass="fab fa-lg fa-whatsapp"
                   />
-                )}
+                )} */}
                 {linkedin && (
                   <SocialHandle
                     platform={linkedin}

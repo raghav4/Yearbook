@@ -28,10 +28,10 @@ const AdminLogin = () => {
       TimerAlert('Success', data, 'success');
       history.push('/');
     } catch (ex) {
-      if (ex.response && ex.reponse.status && ex.response.status === 400) {
+      if (ex.response && ex.response.status && ex.response.status === 400) {
         TimerAlert('Error', ex.response.data, 'error');
       }
-      if (ex.reponse && ex.response.status && ex.response.status === 401) {
+      if (ex.response && ex.response.status && ex.response.status === 401) {
         TimerAlert('Error', 'Invalid Username or Password', 'error');
       }
       setLoading(false);

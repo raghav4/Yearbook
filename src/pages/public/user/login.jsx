@@ -10,9 +10,9 @@ import { apiUrl, endPoints } from '../../../config.json';
 import { http } from '../../../services';
 
 const UserLogin = () => {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [credentials, setCredentials] = useState({ userId: '', password: '' });
   const [validationErrors, setValidationErrors] = useState({
-    email: '',
+    userId: '',
     password: '',
   });
   const [Loading, setLoading] = useState(false);
@@ -65,9 +65,9 @@ const UserLogin = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     e.target.className += ' was-validated';
-    const errors = validateForm();
-    setValidationErrors(errors || {});
-    if (errors) return;
+    // const errors = validateForm();
+    // setValidationErrors(errors || {});
+    // if (errors) return;
     try {
       setLoading(true);
       const { headers } = await http.post(
@@ -109,12 +109,12 @@ const UserLogin = () => {
                     Sign In <Emoji symbol="🔐" />
                   </p>
                   <Input
-                    name="email"
-                    label="Email"
-                    value={credentials.email}
+                    name="userId"
+                    label="Roll No."
+                    value={credentials.userId}
                     handleChange={handleChange}
-                    error={validationErrors.email}
-                    feedback={validationErrors.email}
+                    error={validationErrors.userId}
+                    feedback={validationErrors.userId}
                   />
 
                   <Input

@@ -73,9 +73,9 @@ const Profile = () => {
                       className="card-title text-left h6-responsive mb-2"
                       style={{ textDecoration: 'underline' }}
                     >
-                      {index + 1}. {item.questionId.title}
+                      {index + 1}. {item.title}
                     </h6>
-                    <p className="card-text">{item.answer}</p>
+                    <p className="card-text">{item.content}</p>
                   </div>
                 ))}
               </div>

@@ -39,7 +39,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
       'secondary',
       'dark',
     ];
-    classes += badgeClass[person.deptSection.section.charCodeAt(0) - 65];
+    classes += badgeClass[person.section.charCodeAt(0) - 65];
     return classes;
   };
   const classes = useStyles();
@@ -61,7 +61,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
         </div>
         <div className="text-center">
           <span className={getBadgeClass()}>
-            {person.deptSection.department} - {person.deptSection.section}
+            {person.department} - {person.section}
           </span>
         </div>
         {personBio ? (
