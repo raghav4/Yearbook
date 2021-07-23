@@ -51,9 +51,7 @@ class PeopleCards extends Component {
   filterPeople = (e) => {
     const people = this.state.persons.filter(
       (person) =>
-        person.name
-          .toLowerCase()
-          .search(e.target.value.trim().toLowerCase()) !== -1,
+        person.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
     );
     this.setState({ people, NoSearchResults: !people.length });
   };
@@ -74,10 +72,7 @@ class PeopleCards extends Component {
     return this.setState({
       people: persons.filter((e) => {
         if (sectionSelect !== 'ALL') {
-          return (
-            e.department === input.value &&
-            e.section === sectionSelect
-          );
+          return e.department === input.value && e.section === sectionSelect;
         }
         return e.department === input.value;
       }),
@@ -101,10 +96,7 @@ class PeopleCards extends Component {
     return this.setState({
       people: persons.filter((e) => {
         if (departmentSelect !== 'ALL') {
-          return (
-            e.section === input.value &&
-            e.department === departmentSelect
-          );
+          return e.section === input.value && e.department === departmentSelect;
         }
         return e.section === input.value;
       }),
@@ -113,13 +105,8 @@ class PeopleCards extends Component {
   };
 
   render() {
-    const {
-      ProgressBar,
-      departments,
-      sections,
-      people,
-      NoSearchResults,
-    } = this.state;
+    const { ProgressBar, departments, sections, people, NoSearchResults } =
+      this.state;
 
     return (
       <>
