@@ -9,53 +9,26 @@ import {
   MDBModalFooter,
   MDBRating,
 } from 'mdbreact';
-import { apiUrl } from '../../../../config.json';
+import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
 import { NotifyAlert, TimerAlert } from '../../../../components';
 
-const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
-  const [ModalValue, setModalValue] = useState('');
-  const [basic] = useState([
-    {
-      tooltip: '1/5',
-    },
-    {
-      tooltip: '2/5',
-    },
-    {
-      tooltip: '3/5',
-    },
-    {
-      tooltip: '4/5',
-    },
-    {
-      tooltip: '5/5',
-    },
-  ]);
+const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue }) => {
+  const [ModalValue, setModalValue] = useState(() => modalValue);
 
   useEffect(() => {
-    const getUserMessage = async () => {
-      try {
-        const { data } = await http.get(`${apiUrl}/api/user/messages/${personId}`);
-        setModalValue(data.message);
-      } catch (ex) {
-        if (ex.response && ex.response.status === 404) {
-          // TimerAlert('Error', ex.response.data, 'error');
-        }
-      }
-    };
-    getUserMessage();
-  }, [personId]);
+    setModalValue(modalValue)
+  }, [modalValue])
 
   const handleSubmit = () => {
     const messageObject = {
-      message: ModalValue,
-      sendTo: personId,
+      content: ModalValue,
+      receiverId: personId,
     };
     const submitData = async () => {
       try {
         const { data } = await http.put(
-          `${apiUrl}/api/user/messages`,
+          `${apiUrl}/${endPoints.messages.new}`,
           messageObject,
         );
         setModalValue(data.message);
@@ -68,6 +41,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
     submitData();
   };
 
+  // TODO: Implement handle delete.
   const handleDelete = () => {};
 
   return (
@@ -91,12 +65,6 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
               onChange={(e) => setModalValue(e.target.value)}
               value={ModalValue}
             />
-          </div>
-          <p className="text-center" style={{ fontFamily: 'Inter' }}>
-            Rate your friendship
-          </p>
-          <div className="row d-flex justify-content-center mb-1">
-            <MDBRating data={basic} getValue={(e) => console.log(e)} />
           </div>
         </MDBModalBody>
         <MDBModalFooter>

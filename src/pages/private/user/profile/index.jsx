@@ -36,7 +36,9 @@ const Profile = () => {
           `${apiUrl}/${endPoints.messages.forLoggedInUser}`,
         );
         setMessages(data);
-        if (!data.length) setMessagesStatus(true);
+        if (!data.length) {
+          setMessagesStatus(true);
+        }
       } catch (ex) {}
     };
 
@@ -86,8 +88,8 @@ const Profile = () => {
             </h4>
             {messages.map((item, index) => (
               <Message
-                message={item.message}
-                person={item.sentBy}
+                message={item.content}
+                person={item.sender}
                 index={index}
                 key={item._id}
               />

@@ -21,8 +21,9 @@
       "deleteQuestionById": "api/slambook/question/delete"
     },
     "messages": {
-      "forLoggedInUser": "api/user/messages",
-      "feed": "api/user/messages/all"
+      "forLoggedInUser": "api/messages",
+      "feed": "api/messages/all",
+      "new": "api/message/new"
     }
   },
   "routes": {

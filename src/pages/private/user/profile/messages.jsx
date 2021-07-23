@@ -37,10 +37,10 @@ const Message = ({ person, message, index }) => {
           <p className="p-responsive" style={{ fontFamily: 'Product Sans' }}>
             {message}
           </p>
-          <p>
+          {/* <p>
             <Emoji label="🌟" symbol="🌟" />
             <small>{person} Rated your friendship 3.5/5</small>
-          </p>
+          </p> */}
         </div>
       </div>
     </>
