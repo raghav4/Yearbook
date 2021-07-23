@@ -78,7 +78,7 @@ const DropPicture = ({ defaultPicture }) => {
       <section className="container" style={customStyle}>
         <div {...getRootProps({ className: 'dropzone' })}>
           <input {...getInputProps()} />
-          <div className="text-center" style={{ fontFamily: 'Inter' }}>
+          <div className="text-center">
             <BackupIcon className="mb-1" fontSize="large" />
             <strong>
               <p className="text-center">Upload your profile picture</p>

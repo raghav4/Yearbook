@@ -9,7 +9,8 @@
       "allUsers": "api/users/all",
       "loggedInUser": "api/user",
       "getClassStudents": "api/users/class",
-      "updateProfilePicture": "api/user/update-profile-picture"
+      "updateProfilePicture": "api/user/update-profile-picture",
+      "updateDetails": "api/user/update"
     },
     "slamBook": {
       "getUserAnswers": "api/answers",

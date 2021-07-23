@@ -15,6 +15,7 @@ import { NotifyAlert, TimerAlert } from '../../../../components';
 
 const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue }) => {
   const [ModalValue, setModalValue] = useState(() => modalValue);
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
   useEffect(() => {
     setModalValue(modalValue)
@@ -53,11 +54,10 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
 
         <MDBModalBody>
           <div className="form-group">
-            <p className="text-center" style={{ fontFamily: 'Inter' }}>
+            <p className="text-center">
               Write a nice message for {personName} :)
             </p>
             <textarea
-              style={{ fontFamily: 'Inter' }}
               className="form-control"
               id={personId}
               rows="5"
@@ -68,6 +68,10 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
           </div>
         </MDBModalBody>
         <MDBModalFooter>
+          <span className="custom-control custom-checkbox">
+            <input type="checkbox" className="custom-control-input" id="defaultUnchecked" value={isAnonymous} onChange={() => setIsAnonymous(!isAnonymous)} />
+            <label className="custom-control-label" for="defaultUnchecked">Send Anonymously</label>
+          </span>
           <div>
             <button
               className="btn btn-danger btn-sm"

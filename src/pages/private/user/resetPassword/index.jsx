@@ -104,7 +104,6 @@ const ResetPassword = () => {
                   {/* {passwordErrors && (
                     <Alert
                       severity="error"
-                      style={{ fontFamily: 'Sofia Pro Medium' }}
                     >
                       {passwordErrors}
                     </Alert>

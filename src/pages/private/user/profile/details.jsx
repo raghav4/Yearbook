@@ -12,16 +12,13 @@ import { DetailsSchema } from '../../../../utils/schemas';
 import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
 
+// TODO: NO UNNECESSARY UPDATE TO DB.
 const UserInfo = () => {
-  const [credentials, setCredentials] = useState({
-    name: '',
-    email: '',
-  });
-  const [info, setInfo] = useState({ bio: '', profilePicture: '' });
-  const [deptSection, setDeptSection] = useState({
-    department: '',
-    section: '',
-  });
+  const [name, setName] = useState('');
+  const [bio, setBio] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
+  const [department, setDepartment] = useState('');
+  const [section, setSection] = useState('');
   const [ValidationErrors, setValidationErrors] = useState({
     bio: '',
     contactEmail: '',
@@ -32,10 +29,9 @@ const UserInfo = () => {
     snapchat: '',
   });
   const [socialHandles, setSocialHandles] = useState({
-    contactEmail: '',
-    contactNo: '',
+    email: '',
+    phone: '',
     instagram: '',
-    whatsappNo: '',
     facebook: '',
     linkedin: '',
     snapchat: '',
@@ -47,24 +43,15 @@ const UserInfo = () => {
     const fetchUserDetails = async () => {
       try {
         const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
-        setCredentials({
-          name: data.name,
-          phoneNo: data.socialHandles.phone,
-          email: data.socialHandles.email,
-        });
-        setDeptSection({
-          department: data.department,
-          section: data.section,
-        });
-        setInfo({
-          bio: data.bio,
-          profilePicture: data.profilePicture,
-        });
+        setName(data.name);
+        setDepartment(data.department);
+        setSection(data.section);
+        setBio(data.bio);
+        setProfilePicture(data.profilePicture);
         setSocialHandles({
-          contactEmail: data.socialHandles.email,
-          contactNo: data.socialHandles.phone,
+          email: data.socialHandles.email,
+          phone: data.socialHandles.phone,
           instagram: data.socialHandles.instagram,
-          whatsappNo: data.socialHandles.whatsapp,
           facebook: data.socialHandles.facebook,
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
@@ -118,11 +105,11 @@ const UserInfo = () => {
     // if (errors) return;
 
     const userObject = {
-      info: { bio: info.bio },
+      bio,
       socialHandles,
     };
     try {
-      await http.put(`${apiUrl}/api/user/self`, userObject);
+      await http.patch(`${apiUrl}/${endPoints.user.updateDetails}`, userObject);
       NotifyAlert('Successfully Updated Details');
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -131,45 +118,25 @@ const UserInfo = () => {
     }
   };
 
-  const handleChange = ({ currentTarget: input }) => {
-    setCredentials({
-      ...credentials,
-      [input.name]: input.value,
-    });
-  };
-
-  const handleChangeInfo = ({ currentTarget: input }) => {
-    if (input.name === 'bio') {
-      setInfo({ profilePicture: info.profilePicture, bio: input.value });
-    }
-  };
-
-  const handleChangeDeptSection = (e) => {
-    setDeptSection({
-      ...deptSection,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleSocialHandles = ({ currentTarget: input }) => {
-    const errors = { ...ValidationErrors };
+    // const errors = { ...ValidationErrors };
 
-    const errorMessage = validateInputFields(input);
-    if (errorMessage) {
-      errors[input.name] = errorMessage;
-    } else {
-      delete errors[input.name];
-    }
+    // const errorMessage = validateInputFields(input);
+    // if (errorMessage) {
+    //   errors[input.name] = errorMessage;
+    // } else {
+    //   delete errors[input.name];
+    // }
 
     setSocialHandles({
       ...socialHandles,
       [input.name]: input.value,
     });
 
-    setValidationErrors({
-      ...ValidationErrors,
-      [input.name]: errors[input.name],
-    });
+    // setValidationErrors({
+    //   ...ValidationErrors,
+    //   [input.name]: errors[input.name],
+    // });
   };
 
   return (
@@ -185,7 +152,7 @@ const UserInfo = () => {
           <form className="needs-validation" onSubmit={handleUpdate} noValidate>
             <div className="row">
               <div className="col-md-12">
-                <DropPicture defaultPicture={info.profilePicture} />
+                <DropPicture defaultPicture={profilePicture} />
               </div>
             </div>
             <div className="form-group">
@@ -195,33 +162,22 @@ const UserInfo = () => {
                     <Input
                       name="name"
                       label="Name"
-                      value={credentials.name}
-                      handleChange={handleChange}
+                      value={name}
                       icon="user"
                       isDisabled
                     />
-
-                    {/* <Input
-                      name="email"
-                      label="Account Email"
-                      value={credentials.email}
-                      handleChange={handleChange}
-                      icon="envelope"
-                      isDisabled
-                    /> */}
+                    
                     <Input
                       name="department"
                       label="Department"
-                      value={deptSection.department}
-                      handleChange={handleChangeDeptSection}
+                      value={department}
                       icon="user-graduate"
                       isDisabled
                     />
                     <Input
                       name="section"
                       label="Section"
-                      value={deptSection.section}
-                      handleChange={handleChangeDeptSection}
+                      value={section}
                       icon="users"
                       isDisabled
                     />
@@ -232,8 +188,8 @@ const UserInfo = () => {
                   <Input
                     name="bio"
                     label="Bio"
-                    value={info.bio}
-                    handleChange={handleChangeInfo}
+                    value={bio}
+                    handleChange={(e) => setBio(e.target.value)}
                     icon="address-card"
                   />
 
@@ -243,40 +199,30 @@ const UserInfo = () => {
                   <div className="row">
                     <div className="col">
                       <Input
-                        name="contactEmail"
+                        name="Email"
                         label="Email"
-                        value={socialHandles.contactEmail}
-                        handleChange={handleSocialHandles}
-                        error={ValidationErrors.contactEmail}
-                        feedback={ValidationErrors.contactEmail}
+                        value={socialHandles.email}
+                        handleChange={(e) => setSocialHandles({...socialHandles, email: e.target.value})}
+                        error={ValidationErrors.email}
+                        feedback={ValidationErrors.email}
                         icon="envelope-open"
                       />
 
                       <Input
                         name="contactNo"
                         label="Contact Number"
-                        value={socialHandles.contactNo}
-                        handleChange={handleSocialHandles}
-                        error={ValidationErrors.contactNo}
-                        feedback={ValidationErrors.contactNo}
+                        value={socialHandles.phone}
+                        handleChange={(e) => setSocialHandles({...socialHandles, phone: e.target.value})}
+                        error={ValidationErrors.phone}
+                        feedback={ValidationErrors.phone}
                         icon="phone-alt"
                       />
 
                       <Input
-                        name="whatsappNo"
-                        label="Whatsapp Number"
-                        value={socialHandles.whatsappNo}
-                        handleChange={handleSocialHandles}
-                        error={ValidationErrors.whatsappNo}
-                        feedback={ValidationErrors.whatsappNo}
-                        icon="whatsapp"
-                        IconBrand
-                      />
-                      <Input
                         name="facebook"
                         label="Facebook"
                         value={socialHandles.facebook}
-                        handleChange={handleSocialHandles}
+                        handleChange={(e) => setSocialHandles({...socialHandles, facebook: e.target.value})}
                         error={ValidationErrors.facebook}
                         feedback={ValidationErrors.facebook}
                         icon="facebook"
@@ -286,7 +232,7 @@ const UserInfo = () => {
                         name="linkedin"
                         label="LinkedIn"
                         value={socialHandles.linkedin}
-                        handleChange={handleSocialHandles}
+                        handleChange={(e) => setSocialHandles({...socialHandles, linkedin: e.target.value})}
                         error={ValidationErrors.linkedin}
                         feedback={ValidationErrors.linkedin}
                         icon="linkedin"
@@ -295,7 +241,7 @@ const UserInfo = () => {
                       <Input
                         name="instagram"
                         label="Instagram"
-                        value={socialHandles.instagram}
+                        handleChange={(e) => setSocialHandles({...socialHandles, instagram: e.target.value})}
                         handleChange={handleSocialHandles}
                         icon="instagram"
                         IconBrand
@@ -303,7 +249,7 @@ const UserInfo = () => {
                       <Input
                         name="snapchat"
                         label="Snapchat"
-                        value={socialHandles.snapchat}
+                        handleChange={(e) => setSocialHandles({...socialHandles, snapchat: e.target.value})}
                         handleChange={handleSocialHandles}
                         icon="snapchat-ghost"
                         IconBrand
