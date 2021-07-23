@@ -32,7 +32,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
   };
 
   const triggerModal = () => {
-    getUserMessage()
+    getUserMessage();
     setModalOpen(!modalOpen);
   };
 

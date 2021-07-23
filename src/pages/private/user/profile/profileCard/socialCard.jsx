@@ -17,14 +17,7 @@ const PersonalCard = () => {
     snapchat: '',
   });
 
-  const {
-    email,
-    phone,
-    instagram,
-    linkedin,
-    facebook,
-    snapchat,
-  } = socialHandles;
+  const { email, phone, instagram, linkedin, facebook, snapchat } = socialHandles;
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -44,7 +37,7 @@ const PersonalCard = () => {
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
-        console.log('socialss', data)
+        console.log('socialss', data);
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
           TimerAlert('Error', ex.response.data, 'error');
@@ -90,10 +83,7 @@ const PersonalCard = () => {
             <Tooltip title="You can add more details from update details section">
               <div className="row">
                 {email && (
-                  <SocialHandle
-                    platform={email}
-                    iconClass="fas fa-lg fa-envelope"
-                  />
+                  <SocialHandle platform={email} iconClass="fas fa-lg fa-envelope" />
                 )}
                 {phone && (
                   <SocialHandle

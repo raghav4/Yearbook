@@ -13,13 +13,19 @@ import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
 import { NotifyAlert, TimerAlert } from '../../../../components';
 
-const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue }) => {
+const ModalBox = ({
+  personId,
+  personName,
+  toggleOpen,
+  triggerModal,
+  modalValue,
+}) => {
   const [ModalValue, setModalValue] = useState(() => modalValue);
   const [isAnonymous, setIsAnonymous] = useState(false);
 
   useEffect(() => {
-    setModalValue(modalValue)
-  }, [modalValue])
+    setModalValue(modalValue);
+  }, [modalValue]);
 
   const handleSubmit = () => {
     const messageObject = {
@@ -54,9 +60,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
 
         <MDBModalBody>
           <div className="form-group">
-            <p className="text-center">
-              Write a nice message for {personName} :)
-            </p>
+            <p className="text-center">Write a nice message for {personName} :)</p>
             <textarea
               className="form-control"
               id={personId}
@@ -69,8 +73,16 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
         </MDBModalBody>
         <MDBModalFooter>
           <span className="custom-control custom-checkbox">
-            <input type="checkbox" className="custom-control-input" id="defaultUnchecked" value={isAnonymous} onChange={() => setIsAnonymous(!isAnonymous)} />
-            <label className="custom-control-label" for="defaultUnchecked">Send Anonymously</label>
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="defaultUnchecked"
+              value={isAnonymous}
+              onChange={() => setIsAnonymous(!isAnonymous)}
+            />
+            <label className="custom-control-label" for="defaultUnchecked">
+              Send Anonymously
+            </label>
           </span>
           <div>
             <button

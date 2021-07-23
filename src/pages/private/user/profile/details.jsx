@@ -166,7 +166,7 @@ const UserInfo = () => {
                       icon="user"
                       isDisabled
                     />
-                    
+
                     <Input
                       name="department"
                       label="Department"
@@ -202,7 +202,12 @@ const UserInfo = () => {
                         name="Email"
                         label="Email"
                         value={socialHandles.email}
-                        handleChange={(e) => setSocialHandles({...socialHandles, email: e.target.value})}
+                        handleChange={(e) =>
+                          setSocialHandles({
+                            ...socialHandles,
+                            email: e.target.value,
+                          })
+                        }
                         error={ValidationErrors.email}
                         feedback={ValidationErrors.email}
                         icon="envelope-open"
@@ -212,7 +217,12 @@ const UserInfo = () => {
                         name="contactNo"
                         label="Contact Number"
                         value={socialHandles.phone}
-                        handleChange={(e) => setSocialHandles({...socialHandles, phone: e.target.value})}
+                        handleChange={(e) =>
+                          setSocialHandles({
+                            ...socialHandles,
+                            phone: e.target.value,
+                          })
+                        }
                         error={ValidationErrors.phone}
                         feedback={ValidationErrors.phone}
                         icon="phone-alt"
@@ -222,7 +232,12 @@ const UserInfo = () => {
                         name="facebook"
                         label="Facebook"
                         value={socialHandles.facebook}
-                        handleChange={(e) => setSocialHandles({...socialHandles, facebook: e.target.value})}
+                        handleChange={(e) =>
+                          setSocialHandles({
+                            ...socialHandles,
+                            facebook: e.target.value,
+                          })
+                        }
                         error={ValidationErrors.facebook}
                         feedback={ValidationErrors.facebook}
                         icon="facebook"
@@ -232,7 +247,12 @@ const UserInfo = () => {
                         name="linkedin"
                         label="LinkedIn"
                         value={socialHandles.linkedin}
-                        handleChange={(e) => setSocialHandles({...socialHandles, linkedin: e.target.value})}
+                        handleChange={(e) =>
+                          setSocialHandles({
+                            ...socialHandles,
+                            linkedin: e.target.value,
+                          })
+                        }
                         error={ValidationErrors.linkedin}
                         feedback={ValidationErrors.linkedin}
                         icon="linkedin"
@@ -241,7 +261,12 @@ const UserInfo = () => {
                       <Input
                         name="instagram"
                         label="Instagram"
-                        handleChange={(e) => setSocialHandles({...socialHandles, instagram: e.target.value})}
+                        handleChange={(e) =>
+                          setSocialHandles({
+                            ...socialHandles,
+                            instagram: e.target.value,
+                          })
+                        }
                         handleChange={handleSocialHandles}
                         icon="instagram"
                         IconBrand
@@ -249,7 +274,12 @@ const UserInfo = () => {
                       <Input
                         name="snapchat"
                         label="Snapchat"
-                        handleChange={(e) => setSocialHandles({...socialHandles, snapchat: e.target.value})}
+                        handleChange={(e) =>
+                          setSocialHandles({
+                            ...socialHandles,
+                            snapchat: e.target.value,
+                          })
+                        }
                         handleChange={handleSocialHandles}
                         icon="snapchat-ghost"
                         IconBrand

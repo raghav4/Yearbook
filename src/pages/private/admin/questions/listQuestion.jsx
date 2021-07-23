@@ -36,9 +36,7 @@ const ListQuestions = ({
                   onKeyDown={handleKeyPress}
                 />
                 {inputValidationAlert.apply && (
-                  <Alert severity="error">
-                    {inputValidationAlert.message}
-                  </Alert>
+                  <Alert severity="error">{inputValidationAlert.message}</Alert>
                 )}
               </div>
               <div className="float-left">

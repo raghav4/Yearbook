@@ -28,10 +28,7 @@ const Message = ({ person, message, index }) => {
     <>
       <div className={getClass()}>
         <div className="card-body text-dark">
-          <h5
-            className="card-title h5-responsive mb-2"
-            style={{ fontWeight: 500 }}
-          >
+          <h5 className="card-title h5-responsive mb-2" style={{ fontWeight: 500 }}>
             {person}
           </h5>
           <p className="p-responsive" style={{ fontFamily: 'Product Sans' }}>
