@@ -43,7 +43,7 @@ const DropPicture = ({ defaultPicture }) => {
       try {
         const compressedFile = await imageCompression(acceptedFiles[0], options);
         formData.append('file', compressedFile);
-        const { data } = await http.post(
+        const { data } = await http.patch(
           `${apiUrl}/${endPoints.user.updateProfilePicture}`,
           formData,
           {
@@ -78,7 +78,7 @@ const DropPicture = ({ defaultPicture }) => {
       <section className="container" style={customStyle}>
         <div {...getRootProps({ className: 'dropzone' })}>
           <input {...getInputProps()} />
-          <div className="text-center" style={{ fontFamily: 'Inter' }}>
+          <div className="text-center">
             <BackupIcon className="mb-1" fontSize="large" />
             <strong>
               <p className="text-center">Upload your profile picture</p>

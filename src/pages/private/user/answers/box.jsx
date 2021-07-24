@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import SplitText from 'react-pose-text';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -12,6 +12,10 @@ import http from '../../../../services/httpService';
 
 const AnswerBox = ({ question, questionId, answer, answerId }) => {
   const [CurrentAnswer, setCurrentAnswer] = useState(answer);
+
+  useEffect(() => {
+    setCurrentAnswer(answer);
+  }, [answer]);
 
   const charPoses = {
     exit: { opacity: 0, y: 20 },

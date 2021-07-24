@@ -12,19 +12,19 @@ import {
   ManagePolls,
   EmailNotifications,
   ResetPassword,
+  ModerateMessages,
 } from '../../pages';
 
 const privateRoutes = () => {
   const routes = [
-    { path: '/write', component: <PeopleCards /> },
+    { path: '/write-message', component: <PeopleCards /> },
     {
       path: '/profile',
       component: <Profile />,
     },
     {
-      path: '/polls',
-      component: <ListPolls />,
-      systemAdminComponent: <ManagePolls />,
+      path: '/moderation',
+      component: <ModerateMessages />,
     },
     {
       path: '/details',
@@ -38,7 +38,7 @@ const privateRoutes = () => {
       path: '/questions',
       systemAdminComponent: <ManageQuestions />,
     },
-    { path: '/reset', component: <ResetPassword /> },
+    { path: '/update-password', component: <ResetPassword /> },
     { path: '/add-user', systemAdminComponent: <GrantUserAccess /> },
     { path: '/email', systemAdminComponent: <EmailNotifications /> },
     { path: '/logout', component: <LogOut /> },

@@ -6,6 +6,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import propTypes from 'prop-types';
 import urlPropType from 'url-prop-type';
 import ModalBox from './modal';
+import { http } from '../../../../services';
+import { apiUrl, endPoints } from '../../../../config.json';
 
 const useStyles = makeStyles(() => ({
   media: {
@@ -14,17 +16,32 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const UserCard = ({ person, personName, personBio, personImageUrl }) => {
+const UserCard = ({
+  person,
+  personName,
+  personBio,
+  personImageUrl,
+  isModalOpen,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalValue, setModalValue] = useState('');
+  const [isAnonymousMessage, setIsAnonymousMessage] = useState(false);
 
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      // const { data } = await axios.put('http://localhost:5000/api/user/self', userObject);
-    };
-    fetchUserDetails();
-  }, []);
+  const getUserMessage = async () => {
+    try {
+      const { data } = await http.get(`${apiUrl}/api/message/${person._id}`);
+      setModalValue(data.content);
+      setIsAnonymousMessage(data.isAnonymous);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        // TimerAlert('Error', ex.response.data, 'error');
+      }
+    }
+  };
 
   const triggerModal = () => {
+    getUserMessage();
+    isModalOpen(!modalOpen);
     setModalOpen(!modalOpen);
   };
 
@@ -39,7 +56,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
       'secondary',
       'dark',
     ];
-    classes += badgeClass[person.deptSection.section.charCodeAt(0) - 65];
+    classes += badgeClass[person.section.charCodeAt(0) - 65];
     return classes;
   };
   const classes = useStyles();
@@ -55,13 +72,13 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
               style={{ borderRadius: '8px' }}
               className={`${classes.media} animated fadeIn slow`}
               image={personImageUrl}
-              title="Paella dish"
+              title={personName}
             />
           )) || <Skeleton variant="rect" width={360} height={150} />}
         </div>
         <div className="text-center">
           <span className={getBadgeClass()}>
-            {person.deptSection.department} - {person.deptSection.section}
+            {person.department} - {person.section}
           </span>
         </div>
         {personBio ? (
@@ -81,9 +98,10 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
           // handleSubmit={handleSubmit}
           triggerModal={triggerModal} // Reverse the State of the Modal
           toggleOpen={modalOpen} // Opens the modal
-          // modalValue={modalValue} // The value of the modal text area
+          modalValue={modalValue} // The value of the modal text area
           personName={personName} // Name of the person for whom the modal is opened
           personId={person._id} // Person object
+          isAnonymousMessage={isAnonymousMessage}
         />
       </div>
     </>

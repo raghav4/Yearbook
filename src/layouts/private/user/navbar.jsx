@@ -39,10 +39,10 @@ const Navbar = () => {
                 <MDBNavLink to="/">Home</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="/write">Writes</MDBNavLink>
+                <MDBNavLink to="/write-message">Write Message</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="/polls">Polls</MDBNavLink>
+                <MDBNavLink to="/moderation">Moderation</MDBNavLink>
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>
@@ -59,7 +59,7 @@ const Navbar = () => {
                       <NavLink to="/answers">Self Answers</NavLink>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <NavLink to="/reset">Reset Password</NavLink>
+                      <NavLink to="/update-password">Update Password</NavLink>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>

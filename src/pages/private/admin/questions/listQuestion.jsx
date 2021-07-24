@@ -36,9 +36,7 @@ const ListQuestions = ({
                   onKeyDown={handleKeyPress}
                 />
                 {inputValidationAlert.apply && (
-                  <Alert severity="error" style={{ fontFamily: 'Sofia Pro Medium' }}>
-                    {inputValidationAlert.message}
-                  </Alert>
+                  <Alert severity="error">{inputValidationAlert.message}</Alert>
                 )}
               </div>
               <div className="float-left">
@@ -63,7 +61,7 @@ const ListQuestions = ({
             <Question
               key={item._id}
               onDelete={onDelete}
-              question={item.question}
+              question={item.title}
               id={item._id}
             />
           </div>

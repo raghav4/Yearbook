@@ -2,62 +2,50 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import {
   MDBContainer,
-  MDBBtn,
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-  MDBRating,
 } from 'mdbreact';
-import { apiUrl } from '../../../../config.json';
+import toast, { Toaster } from 'react-hot-toast';
+import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
 import { NotifyAlert, TimerAlert } from '../../../../components';
 
-const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
-  const [ModalValue, setModalValue] = useState('');
-  const [basic] = useState([
-    {
-      tooltip: '1/5',
-    },
-    {
-      tooltip: '2/5',
-    },
-    {
-      tooltip: '3/5',
-    },
-    {
-      tooltip: '4/5',
-    },
-    {
-      tooltip: '5/5',
-    },
-  ]);
+const ModalBox = ({
+  personId,
+  personName,
+  toggleOpen,
+  triggerModal,
+  modalValue,
+  isAnonymousMessage,
+}) => {
+  const [ModalValue, setModalValue] = useState(() => modalValue);
+  const [isAnonymous, setIsAnonymous] = useState(() => isAnonymousMessage);
+
+  console.log('isAnonymousMessage...', isAnonymousMessage);
 
   useEffect(() => {
-    const getUserMessage = async () => {
-      try {
-        const { data } = await http.get(`${apiUrl}/api/user/messages/${personId}`);
-        setModalValue(data.message);
-      } catch (ex) {
-        if (ex.response && ex.response.status === 404) {
-          // TimerAlert('Error', ex.response.data, 'error');
-        }
-      }
-    };
-    getUserMessage();
-  }, [personId]);
+    setModalValue(modalValue);
+  }, [modalValue]);
+
+  // useEffect(() =>  {
+  //   setIsAnonymous();
+  // }, [isAnonymous])
 
   const handleSubmit = () => {
     const messageObject = {
-      message: ModalValue,
-      sendTo: personId,
+      content: ModalValue,
+      receiverId: personId,
+      isAnonymous,
     };
     const submitData = async () => {
       try {
         const { data } = await http.put(
-          `${apiUrl}/api/user/messages`,
+          `${apiUrl}/${endPoints.messages.new}`,
           messageObject,
         );
+        console.log('data...', data);
         setModalValue(data.message);
         TimerAlert('Message sent successfully');
         triggerModal(personId);
@@ -68,10 +56,12 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
     submitData();
   };
 
+  // TODO: Implement handle delete.
   const handleDelete = () => {};
 
   return (
     <MDBContainer>
+      <Toaster />
       <MDBModal isOpen={toggleOpen} centered>
         <MDBModalHeader toggle={() => triggerModal(personId)}>
           {`You're here for : ${personName}`}
@@ -79,27 +69,30 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal }) => {
 
         <MDBModalBody>
           <div className="form-group">
-            <p className="text-center" style={{ fontFamily: 'Inter' }}>
-              Write a nice message for {personName} :)
-            </p>
+            <p className="text-center">Write a nice message for {personName} :)</p>
             <textarea
-              style={{ fontFamily: 'Inter' }}
               className="form-control"
               id={personId}
               rows="5"
-              placeholder={`Put up Whatever you've for ${personName}, your memories together, etc`}
+              placeholder={`Put up whatever you've for ${personName}, first impression, your memories, etc 🤗\nAnd yes, please be kind? :)`}
               onChange={(e) => setModalValue(e.target.value)}
               value={ModalValue}
             />
           </div>
-          <p className="text-center" style={{ fontFamily: 'Inter' }}>
-            Rate your friendship
-          </p>
-          <div className="row d-flex justify-content-center mb-1">
-            <MDBRating data={basic} getValue={(e) => console.log(e)} />
-          </div>
         </MDBModalBody>
         <MDBModalFooter>
+          <span className="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="defaultUnchecked"
+              value={isAnonymous}
+              onChange={() => setIsAnonymous(!isAnonymous)}
+            />
+            <label className="custom-control-label" htmlFor="defaultUnchecked">
+              Send Anonymously
+            </label>
+          </span>
           <div>
             <button
               className="btn btn-danger btn-sm"

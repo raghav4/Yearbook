@@ -7,45 +7,42 @@ import { TimerAlert } from '../../../../../components';
 
 const PersonalCard = () => {
   const [Name, setName] = useState('');
-  const [info, setInfo] = useState({ bio: '', profilePicture: '' });
+  const [info, setInfo] = useState({
+    bio: '',
+    profilePicture: 'https://i.imgur.com/rHE3Y91.png',
+  });
+  const [department, setDepartment] = useState('');
+  const [section, setSection] = useState('');
   const [socialHandles, setSocialHandles] = useState({
-    contactEmail: '',
-    contactNo: '',
+    email: '',
+    phone: '',
     instagram: '',
-    whatsappNo: '',
     facebook: '',
     linkedin: '',
     snapchat: '',
   });
 
-  const {
-    contactEmail,
-    contactNo,
-    whatsappNo,
-    instagram,
-    linkedin,
-    facebook,
-    snapchat,
-  } = socialHandles;
+  const { email, phone, instagram, linkedin, facebook, snapchat } = socialHandles;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const { data } = await http.get(`${apiUrl}/${endPoints.user.loggedInUser}`);
-        setName(data.credentials.name);
+        setName(data.name);
         setInfo({
-          bio: data.info.bio,
-          profilePicture: data.info.profilePicture,
+          bio: data.bio,
+          profilePicture: data.profilePicture,
         });
         setSocialHandles({
-          contactEmail: data.socialHandles.contactEmail,
-          contactNo: data.socialHandles.contactNo,
+          email: data.socialHandles.email,
+          phone: data.socialHandles.phone,
           instagram: data.socialHandles.instagram,
-          whatsappNo: data.socialHandles.whatsappNo,
           facebook: data.socialHandles.facebook,
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
+        setDepartment(data.department);
+        setSection(data.section);
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
           TimerAlert('Error', ex.response.data, 'error');
@@ -54,6 +51,21 @@ const PersonalCard = () => {
     };
     fetchUserData();
   }, []);
+
+  const getBadgeClass = () => {
+    let classes = 'badge badge-';
+    const badgeClass = [
+      'primary',
+      'success',
+      'danger',
+      'default',
+      'info',
+      'secondary',
+      'dark',
+    ];
+    classes += badgeClass[section.charCodeAt(0) - 65];
+    return classes;
+  };
 
   return (
     <>
@@ -72,7 +84,7 @@ const PersonalCard = () => {
           <img
             className="card-img-top img-fluid hoverable animated fadeIn slow"
             src={info.profilePicture}
-            alt="ProfilePicture"
+            alt="Profile Picture"
             style={{ borderRadius: '5%' }}
           />
         </Tooltip>
@@ -82,7 +94,9 @@ const PersonalCard = () => {
             <p>{Name}</p>
           </h4>
           <h6 className="h6-responsive text-center">
-            <span className="badge badge-primary">CSE - B</span>
+            <span className={getBadgeClass()}>
+              {department} - {section}
+            </span>
           </h6>
           <p className="card-text text-center">{info.bio}</p>
           <hr />
@@ -90,24 +104,21 @@ const PersonalCard = () => {
           <div>
             <Tooltip title="You can add more details from update details section">
               <div className="row">
-                {contactEmail && (
-                  <SocialHandle
-                    platform={contactEmail}
-                    iconClass="fas fa-lg fa-envelope"
-                  />
+                {email && (
+                  <SocialHandle platform={email} iconClass="fas fa-lg fa-envelope" />
                 )}
-                {contactNo && (
+                {phone && (
                   <SocialHandle
-                    platform={contactNo}
+                    platform={phone}
                     iconClass="fas fa-lg fa-phone-square-alt"
                   />
                 )}
-                {whatsappNo && (
+                {/* {whatsappNo && (
                   <SocialHandle
                     platform={whatsappNo}
                     iconClass="fab fa-lg fa-whatsapp"
                   />
-                )}
+                )} */}
                 {linkedin && (
                   <SocialHandle
                     platform={linkedin}

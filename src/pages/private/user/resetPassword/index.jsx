@@ -1,52 +1,55 @@
 import React, { useState } from 'react';
-import { Alert } from '@material-ui/lab';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { Input, Emoji, TimerAlert } from '../../../../components';
 import { apiUrl } from '../../../../config.json';
 import { http } from '../../../../services';
 
 const ResetPassword = () => {
-  const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   const [confirmNewPassword, setconfirmNewPassword] = useState('');
-  const [newPassword, setnewPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [Loading, setLoading] = useState(false);
   const [passwordErrors, setPasswordErrors] = useState('');
   const [serverError, setServerErrors] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [inputType, setInputType] = useState('password');
 
   const disabledButton = () => {
     return newPassword !== confirmNewPassword;
   };
 
   const handlePasswordChange = ({ currentTarget: input }) => {
-    setPassword(input.value);
+    setCurrentPassword(input.value);
   };
 
-  const handleNewPwsdChange = ({ currentTarget: input }) => {
-    setnewPassword(input.value);
-  };
+  // const handleNewPwsdChange = ({ currentTarget: input }) => {
+  //   setnewPassword(input.value);
+  // };
 
-  const handleConfirmNewPswdChange = ({ currentTarget: input }) => {
-    if (input.value !== newPassword) {
-      setPasswordErrors('New Password do not matches');
-    } else {
-      setPasswordErrors('');
-    }
-    setconfirmNewPassword(input.value);
-  };
+  // const handleConfirmNewPswdChange = ({ currentTarget: input }) => {
+  //   if (input.value !== newPassword) {
+  //     setPasswordErrors('New Password do not matches');
+  //   } else {
+  //     setPasswordErrors('');
+  //   }
+  //   setconfirmNewPassword(input.value);
+  // };
 
   const submitHandler = async (e) => {
     setLoading(true);
     e.preventDefault();
     try {
-      const { data } = await http.post(`${apiUrl}/api/user/self/reset`, {
-        password,
-        newPassword,
-      });
-      setServerErrors('');
-      setPassword('');
-      setconfirmNewPassword('');
-      setnewPassword('');
-      TimerAlert(' ', data, 'success');
+      // const { data } = await http.post(`${apiUrl}/api/user/self/reset`, {
+      //   password,
+      //   newPassword,
+      // });
+      // setServerErrors('');
+      // setCurrentPassword('');
+      // setconfirmNewPassword('');
+      // setnewPassword('');
+      // TimerAlert(' ', data, 'success');
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         setServerErrors(ex.response.data);
@@ -60,8 +63,12 @@ const ResetPassword = () => {
 
   return (
     <>
+      <p className="text-center mx-5 mt-5">
+        If you haven't updated your temporary (initial) password yet, please update
+        it.
+      </p>
       <div className="d-flex justify-content-center mt-5">
-        <div className="jumbotron col-md-3 mx-5 my-5" style={{ borderRadius: '5%' }}>
+        <div className="jumbotron col-md-3 mx-5 my-3" style={{ borderRadius: '5%' }}>
           <MDBContainer>
             <MDBRow>
               <MDBCol>
@@ -71,14 +78,42 @@ const ResetPassword = () => {
                   noValidate
                 >
                   <p className="h5 text-center mb-4">
-                    Reset your password <Emoji label="🤔" symbol="🤔" />
+                    <Emoji label="🔑" symbol="🔑" /> Update your password
                   </p>
+                  <div className="text-center custom-control custom-switch">
+                    <input
+                      type="checkbox"
+                      className="custom-control-input"
+                      id="customSwitches"
+                      value={showPassword}
+                      onClick={() => {
+                        setShowPassword(!showPassword);
+                        setInputType(showPassword ? 'password' : 'text');
+                      }}
+                    />
+                    <label className="custom-control-label" htmlFor="customSwitches">
+                      Show Password{' '}
+                      {showPassword ? (
+                        <img
+                          src="https://tabler-icons.io/static/tabler-icons/icons-png/eye-off.png"
+                          height="20"
+                          width="20"
+                        />
+                      ) : (
+                        <img
+                          src="https://tabler-icons.io/static/tabler-icons/icons-png/eye.png"
+                          height="20"
+                          width="20"
+                        />
+                      )}
+                    </label>
+                  </div>
                   <Input
                     name="password"
-                    label="Password"
-                    value={password}
-                    type="password"
-                    handleChange={handlePasswordChange}
+                    label="Current Password"
+                    value={currentPassword}
+                    type={inputType}
+                    handleChange={(e) => setCurrentPassword(e.target.value)}
                     error={serverError}
                     feedback={serverError}
                   />
@@ -87,24 +122,23 @@ const ResetPassword = () => {
                     name="newPassword"
                     label="New Password"
                     value={newPassword}
-                    handleChange={handleNewPwsdChange}
-                    type="password"
+                    handleChange={(e) => setNewPassword(e.target.value)}
+                    type={inputType}
                   />
 
-                  <Input
+                  {/* <Input
                     name="confirmNewPassword"
                     label="Confirm New Password"
                     value={confirmNewPassword}
                     handleChange={handleConfirmNewPswdChange}
                     error={passwordErrors}
                     feedback={passwordErrors}
-                    type="password"
-                  />
+                    type={inputType}
+                  /> */}
 
                   {/* {passwordErrors && (
                     <Alert
                       severity="error"
-                      style={{ fontFamily: 'Sofia Pro Medium' }}
                     >
                       {passwordErrors}
                     </Alert>

@@ -2,11 +2,10 @@ import Joi from 'joi-browser';
 
 const LoginSchema = () => {
   return {
-    email: Joi.string()
-      .email()
+    userId: Joi.number()
       .error(() => {
         return {
-          message: 'Please enter a valid Email ID',
+          message: 'Please enter a valid enrollment number',
         };
       })
       .required(),
@@ -27,7 +26,7 @@ const SignUpSchema = () => {
       .min(7)
       .error(() => {
         return {
-          message: 'Password should be atleast 7 characters long',
+          message: 'Password should be at least 7 characters long',
         };
       })
       .required(),

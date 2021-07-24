@@ -18,27 +18,22 @@ class PeopleCards extends Component {
     sections: [],
     persons: [],
     people: [],
+    isModalOpen: false,
   };
 
   // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
     const { data: persons } = await http.get(`${apiUrl}/${endPoints.user.allUsers}`);
-
-    let departments = persons.map((e) => {
-      return e.deptSection.department;
-    });
-    let sections = persons.map((e) => {
-      return e.deptSection.section;
-    });
-    departments.sort();
-    departments = ['ALL', ...new Set(departments)];
-    sections.sort();
-    sections = ['ALL', ...new Set(sections)];
+    const departments = ['ALL', ...new Set(persons.map((e) => e.department).sort())];
+    const sections = ['ALL', ...new Set(persons.map((e) => e.section).sort())];
     this.setState({
       persons,
       sections,
       departments,
-      people: persons,
+      people:
+        persons && persons.length > 0
+          ? persons.sort((a, b) => a.userId - b.userId)
+          : persons,
       ProgressBar: !this.state.ProgressBar,
     });
   }
@@ -51,9 +46,7 @@ class PeopleCards extends Component {
   filterPeople = (e) => {
     const people = this.state.persons.filter(
       (person) =>
-        person.credentials.name
-          .toLowerCase()
-          .search(e.target.value.trim().toLowerCase()) !== -1,
+        person.name.toLowerCase().search(e.target.value.trim().toLowerCase()) !== -1,
     );
     this.setState({ people, NoSearchResults: !people.length });
   };
@@ -65,7 +58,7 @@ class PeopleCards extends Component {
 
       return this.setState({
         people: persons.filter((e) => {
-          return e.deptSection.section === sectionSelect;
+          return e.section === sectionSelect;
         }),
         departmentSelect: input.value,
       });
@@ -74,12 +67,9 @@ class PeopleCards extends Component {
     return this.setState({
       people: persons.filter((e) => {
         if (sectionSelect !== 'ALL') {
-          return (
-            e.deptSection.department === input.value &&
-            e.deptSection.section === sectionSelect
-          );
+          return e.department === input.value && e.section === sectionSelect;
         }
-        return e.deptSection.department === input.value;
+        return e.department === input.value;
       }),
       departmentSelect: input.value,
     });
@@ -92,7 +82,7 @@ class PeopleCards extends Component {
 
       return this.setState({
         people: persons.filter((e) => {
-          return e.deptSection.department === departmentSelect;
+          return e.department === departmentSelect;
         }),
         sectionSelect: input.value,
       });
@@ -101,25 +91,21 @@ class PeopleCards extends Component {
     return this.setState({
       people: persons.filter((e) => {
         if (departmentSelect !== 'ALL') {
-          return (
-            e.deptSection.section === input.value &&
-            e.deptSection.department === departmentSelect
-          );
+          return e.section === input.value && e.department === departmentSelect;
         }
-        return e.deptSection.section === input.value;
+        return e.section === input.value;
       }),
       sectionSelect: input.value,
     });
   };
 
+  handleModalOpen = (isModalOpen) => {
+    this.setState({ ...this.state, isModalOpen });
+  };
+
   render() {
-    const {
-      ProgressBar,
-      departments,
-      sections,
-      people,
-      NoSearchResults,
-    } = this.state;
+    const { ProgressBar, departments, sections, people, NoSearchResults } =
+      this.state;
 
     return (
       <>
@@ -162,10 +148,11 @@ class PeopleCards extends Component {
                 <UserCard
                   person={person}
                   key={person._id}
-                  personName={person.credentials.name}
-                  personImageUrl={person.info.profilePicture}
-                  personBio={person.info.bio}
+                  personName={person.name}
+                  personImageUrl={person.profilePicture}
+                  personBio={person.bio}
                   triggerModal={this.triggerModal}
+                  isModalOpen={this.handleModalOpen}
                 />
               </div>
             </FlipMove>
