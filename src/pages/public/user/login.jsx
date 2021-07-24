@@ -80,7 +80,8 @@ const UserLogin = () => {
         path: '/',
         expires,
       });
-      history.push('/');
+      // history.push('/');
+      window.location.href = '/'
       TimerAlert('', 'Welcome to the Yearbook', 'success');
     } catch (ex) {
       if (
@@ -110,7 +111,7 @@ const UserLogin = () => {
                   </p>
                   <Input
                     name="userId"
-                    label="Roll No."
+                    label="User Id"
                     value={credentials.userId}
                     handleChange={handleChange}
                     error={validationErrors.userId}
@@ -140,13 +141,13 @@ const UserLogin = () => {
                       )}
                     </MDBBtn>
                   </div>
-                  <p className="text-center mt-3 mr-2">
+                  {/* <p className="text-center mt-3 mr-2">
                     Not a member?{'  '}
                     <Link to="/signup">Register</Link>
                     <br />
                     Forgot Password?{'  '}
                     <Link to="/reset">Reset Password</Link>
-                  </p>
+                  </p> */}
                 </form>
               </MDBCol>
             </MDBRow>

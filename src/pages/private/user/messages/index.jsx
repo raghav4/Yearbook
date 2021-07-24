@@ -18,27 +18,19 @@ class PeopleCards extends Component {
     sections: [],
     persons: [],
     people: [],
+    isModalOpen: false,
   };
 
   // eslint-disable-next-line react/sort-comp
   async componentDidMount() {
     const { data: persons } = await http.get(`${apiUrl}/${endPoints.user.allUsers}`);
-
-    let departments = persons.map((e) => {
-      return e.department;
-    });
-    let sections = persons.map((e) => {
-      return e.section;
-    });
-    departments.sort();
-    departments = ['ALL', ...new Set(departments)];
-    sections.sort();
-    sections = ['ALL', ...new Set(sections)];
+    const departments = ['ALL', ...new Set(persons.map((e) => e.department).sort())];
+    const sections = ['ALL', ...new Set(persons.map((e) => e.section).sort())];
     this.setState({
       persons,
       sections,
       departments,
-      people: persons,
+      people: persons && persons.length > 0 ? persons.sort((a, b) => a.userId - b.userId) : persons,
       ProgressBar: !this.state.ProgressBar,
     });
   }
@@ -112,6 +104,10 @@ class PeopleCards extends Component {
     });
   };
 
+  handleModalOpen = (isModalOpen) => {
+    this.setState({ ...this.state, isModalOpen })
+  }
+
   render() {
     const {
       ProgressBar,
@@ -166,6 +162,7 @@ class PeopleCards extends Component {
                   personImageUrl={person.profilePicture}
                   personBio={person.bio}
                   triggerModal={this.triggerModal}
+                  isModalOpen={this.handleModalOpen}
                 />
               </div>
             </FlipMove>

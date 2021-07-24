@@ -39,12 +39,10 @@ const PersonalCard = () => {
           email: data.socialHandles.email,
           phone: data.socialHandles.phone,
           instagram: data.socialHandles.instagram,
-          // whatsappNo: data.socialHandles.whatsappNo,
           facebook: data.socialHandles.facebook,
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
-        console.log('socialss', data)
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
           TimerAlert('Error', ex.response.data, 'error');

@@ -2,29 +2,35 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import {
   MDBContainer,
-  MDBBtn,
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-  MDBRating,
 } from 'mdbreact';
+import toast, { Toaster } from 'react-hot-toast';
 import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
 import { NotifyAlert, TimerAlert } from '../../../../components';
 
-const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue }) => {
+const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue, isAnonymousMessage }) => {
   const [ModalValue, setModalValue] = useState(() => modalValue);
-  const [isAnonymous, setIsAnonymous] = useState(false);
+  const [isAnonymous, setIsAnonymous] = useState(() => isAnonymousMessage);
+
+  console.log('isAnonymousMessage...', isAnonymousMessage)
 
   useEffect(() => {
     setModalValue(modalValue)
   }, [modalValue])
 
+  // useEffect(() =>  {
+  //   setIsAnonymous();
+  // }, [isAnonymous])
+
   const handleSubmit = () => {
     const messageObject = {
       content: ModalValue,
       receiverId: personId,
+      isAnonymous,
     };
     const submitData = async () => {
       try {
@@ -32,6 +38,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
           `${apiUrl}/${endPoints.messages.new}`,
           messageObject,
         );
+        console.log('data...', data)
         setModalValue(data.message);
         TimerAlert('Message sent successfully');
         triggerModal(personId);
@@ -47,6 +54,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
 
   return (
     <MDBContainer>
+      <Toaster />
       <MDBModal isOpen={toggleOpen} centered>
         <MDBModalHeader toggle={() => triggerModal(personId)}>
           {`You're here for : ${personName}`}
@@ -61,7 +69,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
               className="form-control"
               id={personId}
               rows="5"
-              placeholder={`Put up Whatever you've for ${personName}, your memories together, etc`}
+              placeholder={`Put up whatever you've for ${personName}, first impression, your memories, etc 🤗\nAnd yes, please be kind? :)`}
               onChange={(e) => setModalValue(e.target.value)}
               value={ModalValue}
             />
@@ -70,7 +78,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue 
         <MDBModalFooter>
           <span className="custom-control custom-checkbox">
             <input type="checkbox" className="custom-control-input" id="defaultUnchecked" value={isAnonymous} onChange={() => setIsAnonymous(!isAnonymous)} />
-            <label className="custom-control-label" for="defaultUnchecked">Send Anonymously</label>
+            <label className="custom-control-label" htmlFor="defaultUnchecked">Send Anonymously</label>
           </span>
           <div>
             <button

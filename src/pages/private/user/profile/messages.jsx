@@ -1,11 +1,5 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Rating, { IconContainerProps } from '@material-ui/lab/Rating';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { Emoji } from '../../../../components';
 
 const Message = ({ person, message, index }) => {
   const getClass = () => {
@@ -28,19 +22,15 @@ const Message = ({ person, message, index }) => {
     <>
       <div className={getClass()}>
         <div className="card-body text-dark">
-          <h5
-            className="card-title h5-responsive mb-2"
-            style={{ fontWeight: 500 }}
-          >
-            {person}
-          </h5>
           <p className="p-responsive" style={{ fontFamily: 'Product Sans' }}>
             {message}
           </p>
-          {/* <p>
-            <Emoji label="🌟" symbol="🌟" />
-            <small>{person} Rated your friendship 3.5/5</small>
-          </p> */}
+          <p
+            className="text-right my-2"
+            style={{ fontWeight: 500, fontStyle: 'italic', color: '#535c68' }}
+          >
+            -{person}
+          </p>
         </div>
       </div>
     </>

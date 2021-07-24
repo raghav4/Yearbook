@@ -63,7 +63,7 @@ const ListQuestions = ({
             <Question
               key={item._id}
               onDelete={onDelete}
-              question={item.question}
+              question={item.title}
               id={item._id}
             />
           </div>

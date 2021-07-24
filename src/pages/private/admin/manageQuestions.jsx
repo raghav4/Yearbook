@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import http from '../../../services/httpService';
-import { apiUrl, routes } from '../../../config.json';
+import { apiUrl, endPoints } from '../../../config.json';
 import ListQuestions from './questions/listQuestion';
 import { NotifyAlert } from '../../../components';
 
@@ -16,8 +16,7 @@ const ManageQuestions = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/api/admin/questions`);
-        console.log(data)
+        const { data } = await http.get(`${apiUrl}/${endPoints.slamBook.allQuestions}`);
         setQuestions(data);
         setNoQuestions(false);
       } catch (ex) {}
@@ -47,10 +46,10 @@ const ManageQuestions = () => {
       return setInputValidationAlert(updatedInputValidation);
     }
 
-    const originalQuestions = questions;
+    const originalQuestions = [...questions];
     try {
-      const { data } = await http.post(`${apiUrl}/api/admin/questions`, {
-        question: previousInputValue,
+      const { data } = await http.post(`${apiUrl}/${endPoints.slamBook.createQuestion}`, {
+        title: previousInputValue,
       });
       NotifyAlert('Successfully added the question', 'top');
       setQuestions([data, ...questions]);

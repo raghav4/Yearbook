@@ -11,7 +11,7 @@ const SelfAnswers = () => {
   const [totalQuestions, setTotalQuestions] = useState(0); // Total Number of Questions
   const [CurrentPage, setCurrentPage] = useState(1); // The current pagination page
   // eslint-disable-next-line no-unused-vars
-  const [postsPerPage, setpostsPerPage] = useState(1); // No. of posts per page
+  const [postsPerPage, setPostsPerPage] = useState(1); // No. of posts per page
 
   useEffect(() => {
     document.title = 'Self Questions';
@@ -35,10 +35,8 @@ const SelfAnswers = () => {
   }, []);
 
   const getAnswer = (questionId) => {
-    // console.log('Question ID is ', questionId);
-    const result = answeredQuestions.find((e) => e.questionId._id === questionId);
-    // console.log('Answer result is ', result);
-    return result ? { answer: result.answer, _id: result._id } : {};
+    const result = answeredQuestions.find((e) => e.titleId === questionId);
+    return result ? { content: result.content, _id: result._id } : {};
   };
 
   const getTotalAnswersClass = () => {
@@ -75,7 +73,7 @@ const SelfAnswers = () => {
           <AnswerBox
             question={item.title}
             questionId={item._id}
-            answer={getAnswer(item._id).answer}
+            answer={getAnswer(item._id).content}
             answerId={getAnswer(item._id)._id}
             key={item._id}
           />

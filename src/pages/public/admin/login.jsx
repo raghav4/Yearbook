@@ -20,7 +20,7 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const { data, headers } = await http.post(`${apiUrl}/api/admin/auth`, {
+      const { data, headers } = await http.post(`${apiUrl}/api/admin/login`, {
         username,
         password,
       });

@@ -1,5 +1,5 @@
 {
-  "apiUrl": "http://localhost:5000",
+  "apiUrl": "https://yb-server.herokuapp.com",
   "endPoints": {
     "user": {
       "onboarding": {
@@ -14,17 +14,19 @@
     },
     "slamBook": {
       "getUserAnswers": "api/answers",
-      "deleteAnswerById": "api/slambook/answer/delete",
-      "upsertAnswer": "api/slambook/answer/upsert",
-      "createQuestion": "api/slambook/question/new",
-      "allQuestions": "api/slambook/questions/all",
-      "getQuestionById": "api/slambook/question",
-      "deleteQuestionById": "api/slambook/question/delete"
+      "deleteAnswerById": "api/answer/delete",
+      "upsertAnswer": "api/answer/upsert",
+      "createQuestion": "api/question/new",
+      "allQuestions": "api/questions/all",
+      "getQuestionById": "api/question",
+      "deleteQuestionById": "api/question/delete"
     },
     "messages": {
       "forLoggedInUser": "api/messages",
       "feed": "api/messages/all",
-      "new": "api/message/new"
+      "new": "api/message/new",
+      "delete": "api/message/delete",
+      "deleteByMessageId": "api/message/delete-by-id"
     }
   },
   "routes": {

@@ -16,14 +16,16 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const UserCard = ({ person, personName, personBio, personImageUrl }) => {
+const UserCard = ({ person, personName, personBio, personImageUrl, isModalOpen }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalValue, setModalValue] = useState('');
+  const [isAnonymousMessage, setIsAnonymousMessage] = useState(false);
 
   const getUserMessage = async () => {
     try {
       const { data } = await http.get(`${apiUrl}/api/message/${person._id}`);
       setModalValue(data.content);
+      setIsAnonymousMessage(data.isAnonymous);
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         // TimerAlert('Error', ex.response.data, 'error');
@@ -33,6 +35,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
 
   const triggerModal = () => {
     getUserMessage()
+    isModalOpen(!modalOpen);
     setModalOpen(!modalOpen);
   };
 
@@ -63,7 +66,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
               style={{ borderRadius: '8px' }}
               className={`${classes.media} animated fadeIn slow`}
               image={personImageUrl}
-              title="Paella dish"
+              title={personName}
             />
           )) || <Skeleton variant="rect" width={360} height={150} />}
         </div>
@@ -92,6 +95,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl }) => {
           modalValue={modalValue} // The value of the modal text area
           personName={personName} // Name of the person for whom the modal is opened
           personId={person._id} // Person object
+          isAnonymousMessage={isAnonymousMessage}
         />
       </div>
     </>

@@ -6,6 +6,7 @@ import SelfAnswers from './answers';
 import HomePage from './home';
 import LogOut from './logout';
 import ResetPassword from './resetPassword';
+import ModerateMessages from './moderation';
 
 export {
   ListPolls,
@@ -16,4 +17,5 @@ export {
   HomePage,
   LogOut,
   ResetPassword,
+  ModerateMessages
 };
