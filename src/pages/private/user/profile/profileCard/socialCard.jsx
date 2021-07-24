@@ -8,6 +8,8 @@ import { TimerAlert } from '../../../../../components';
 const PersonalCard = () => {
   const [Name, setName] = useState('');
   const [info, setInfo] = useState({ bio: '', profilePicture: '' });
+  const [department, setDepartment] = useState('');
+  const [section, setSection] = useState('');
   const [socialHandles, setSocialHandles] = useState({
     email: '',
     phone: '',
@@ -43,6 +45,8 @@ const PersonalCard = () => {
           linkedin: data.socialHandles.linkedin,
           snapchat: data.socialHandles.snapchat,
         });
+        setDepartment(data.department);
+        setSection(data.section);
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
           TimerAlert('Error', ex.response.data, 'error');
@@ -51,6 +55,21 @@ const PersonalCard = () => {
     };
     fetchUserData();
   }, []);
+
+  const getBadgeClass = () => {
+    let classes = 'badge badge-';
+    const badgeClass = [
+      'primary',
+      'success',
+      'danger',
+      'default',
+      'info',
+      'secondary',
+      'dark',
+    ];
+    classes += badgeClass[section.charCodeAt(0) - 65];
+    return classes;
+  };
 
   return (
     <>
@@ -79,7 +98,9 @@ const PersonalCard = () => {
             <p>{Name}</p>
           </h4>
           <h6 className="h6-responsive text-center">
-            <span className="badge badge-primary">CSE - B</span>
+            <span className={getBadgeClass()}>
+              {department} - {section}
+            </span>
           </h6>
           <p className="card-text text-center">{info.bio}</p>
           <hr />

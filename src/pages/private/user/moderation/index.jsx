@@ -18,10 +18,16 @@ const ModerateMessages = () => {
     const handleDelete = async(messageId) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this message?\nYou wont be able to revert this later.');
         if (confirmDelete) {
-            const filteredMessages = messages.filter(message => message._id !== messageId);
-            setMessages([...filteredMessages]);
-            toast.success('Successfully Deleted Message');
-            // const { data } = await http.delete(`${apiUrl}/${endPoints.messages.deleteByMessageId}/${messageId}`);
+            const messagesArr = [...messages];
+            try {
+                const filteredMessages = messages.filter(message => message._id !== messageId);
+                setMessages([...filteredMessages]);
+                toast.success('Successfully Deleted Message');
+                await http.delete(`${apiUrl}/${endPoints.messages.deleteByMessageId}/${messageId}`);
+            } catch (ex) {
+                setMessages(messagesArr);
+                toast.error('Oops, please try again later!')
+            }
         }
     };
 
