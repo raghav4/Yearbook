@@ -17,16 +17,11 @@ import {
 
 const privateRoutes = () => {
   const routes = [
-    { path: '/write', component: <PeopleCards /> },
+    { path: '/write-message', component: <PeopleCards /> },
     {
       path: '/profile',
       component: <Profile />,
     },
-    // {
-    //   path: '/polls',
-    //   component: <ListPolls />,
-    //   systemAdminComponent: <ManagePolls />,
-    // },
     {
       path: '/moderation',
       component: <ModerateMessages />,

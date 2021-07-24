@@ -39,7 +39,7 @@ const Navbar = () => {
                 <MDBNavLink to="/">Home</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="/write">Writes</MDBNavLink>
+                <MDBNavLink to="/write-message">Write Message</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="/moderation">Moderation</MDBNavLink>
