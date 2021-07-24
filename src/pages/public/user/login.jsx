@@ -81,7 +81,7 @@ const UserLogin = () => {
         expires,
       });
       // history.push('/');
-      window.location.href = '/'
+      window.location.href = '/';
       TimerAlert('', 'Welcome to the Yearbook', 'success');
     } catch (ex) {
       if (

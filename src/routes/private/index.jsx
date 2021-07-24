@@ -12,7 +12,7 @@ import {
   ManagePolls,
   EmailNotifications,
   ResetPassword,
-  ModerateMessages
+  ModerateMessages,
 } from '../../pages';
 
 const privateRoutes = () => {

@@ -63,7 +63,10 @@ const ResetPassword = () => {
 
   return (
     <>
-      <p className="text-center mx-5 mt-5">If you haven't updated your temporary (initial) password yet, please update it.</p>
+      <p className="text-center mx-5 mt-5">
+        If you haven't updated your temporary (initial) password yet, please update
+        it.
+      </p>
       <div className="d-flex justify-content-center mt-5">
         <div className="jumbotron col-md-3 mx-5 my-3" style={{ borderRadius: '5%' }}>
           <MDBContainer>
@@ -77,19 +80,32 @@ const ResetPassword = () => {
                   <p className="h5 text-center mb-4">
                     <Emoji label="🔑" symbol="🔑" /> Update your password
                   </p>
-                  <div className='text-center custom-control custom-switch'>
+                  <div className="text-center custom-control custom-switch">
                     <input
-                      type='checkbox'
-                      className='custom-control-input'
-                      id='customSwitches'
+                      type="checkbox"
+                      className="custom-control-input"
+                      id="customSwitches"
                       value={showPassword}
                       onClick={() => {
-                        setShowPassword(!showPassword)
-                        setInputType(showPassword ? 'password' : 'text')
+                        setShowPassword(!showPassword);
+                        setInputType(showPassword ? 'password' : 'text');
                       }}
                     />
-                    <label className='custom-control-label' htmlFor='customSwitches'>
-                      Show Password {showPassword ? <img src="https://tabler-icons.io/static/tabler-icons/icons-png/eye-off.png" height="20" width="20" /> : <img src="https://tabler-icons.io/static/tabler-icons/icons-png/eye.png" height="20" width="20" / >}
+                    <label className="custom-control-label" htmlFor="customSwitches">
+                      Show Password{' '}
+                      {showPassword ? (
+                        <img
+                          src="https://tabler-icons.io/static/tabler-icons/icons-png/eye-off.png"
+                          height="20"
+                          width="20"
+                        />
+                      ) : (
+                        <img
+                          src="https://tabler-icons.io/static/tabler-icons/icons-png/eye.png"
+                          height="20"
+                          width="20"
+                        />
+                      )}
                     </label>
                   </div>
                   <Input

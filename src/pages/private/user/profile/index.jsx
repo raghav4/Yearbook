@@ -85,9 +85,19 @@ const Profile = () => {
 
             <h4 className="h4-responsive text-center animated fadeIn slow">
               {/* <Emoji label="👩‍🎓" symbol="👩‍🎓" /> <Emoji label="👨🏻‍🎓" symbol="👨🏻‍🎓" />  */}
-              <img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/woman-student_1f469-200d-1f393.png" height="35" width="35" alt="Female Student" />
+              <img
+                src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/woman-student_1f469-200d-1f393.png"
+                height="35"
+                width="35"
+                alt="Female Student"
+              />
               What others have written for you
-              <img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/man-student_1f468-200d-1f393.png" height="35" width="35" alt="Male Student" />
+              <img
+                src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/man-student_1f468-200d-1f393.png"
+                height="35"
+                width="35"
+                alt="Male Student"
+              />
             </h4>
             {messages.map((item, index) => (
               <Message

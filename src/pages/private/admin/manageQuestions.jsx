@@ -16,7 +16,9 @@ const ManageQuestions = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const { data } = await http.get(`${apiUrl}/${endPoints.slamBook.allQuestions}`);
+        const { data } = await http.get(
+          `${apiUrl}/${endPoints.slamBook.allQuestions}`,
+        );
         setQuestions(data);
         setNoQuestions(false);
       } catch (ex) {}
@@ -48,9 +50,12 @@ const ManageQuestions = () => {
 
     const originalQuestions = [...questions];
     try {
-      const { data } = await http.post(`${apiUrl}/${endPoints.slamBook.createQuestion}`, {
-        title: previousInputValue,
-      });
+      const { data } = await http.post(
+        `${apiUrl}/${endPoints.slamBook.createQuestion}`,
+        {
+          title: previousInputValue,
+        },
+      );
       NotifyAlert('Successfully added the question', 'top');
       setQuestions([data, ...questions]);
       setNoQuestions(false);
