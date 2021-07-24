@@ -7,7 +7,7 @@ import { TimerAlert } from '../../../../../components';
 
 const PersonalCard = () => {
   const [Name, setName] = useState('');
-  const [info, setInfo] = useState({ bio: '', profilePicture: '' });
+  const [info, setInfo] = useState({ bio: '', profilePicture: 'https://i.imgur.com/rHE3Y91.png' });
   const [department, setDepartment] = useState('');
   const [section, setSection] = useState('');
   const [socialHandles, setSocialHandles] = useState({
@@ -88,7 +88,7 @@ const PersonalCard = () => {
           <img
             className="card-img-top img-fluid hoverable animated fadeIn slow"
             src={info.profilePicture}
-            alt="ProfilePicture"
+            alt="Profile Picture"
             style={{ borderRadius: '5%' }}
           />
         </Tooltip>
