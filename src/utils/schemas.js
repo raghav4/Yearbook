@@ -2,8 +2,7 @@ import Joi from 'joi-browser';
 
 const LoginSchema = () => {
   return {
-    userId: Joi
-      .number()
+    userId: Joi.number()
       .error(() => {
         return {
           message: 'Please enter a valid enrollment number',

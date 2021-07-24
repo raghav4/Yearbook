@@ -7,7 +7,10 @@ import { TimerAlert } from '../../../../../components';
 
 const PersonalCard = () => {
   const [Name, setName] = useState('');
-  const [info, setInfo] = useState({ bio: '', profilePicture: 'https://i.imgur.com/rHE3Y91.png' });
+  const [info, setInfo] = useState({
+    bio: '',
+    profilePicture: 'https://i.imgur.com/rHE3Y91.png',
+  });
   const [department, setDepartment] = useState('');
   const [section, setSection] = useState('');
   const [socialHandles, setSocialHandles] = useState({
@@ -19,14 +22,7 @@ const PersonalCard = () => {
     snapchat: '',
   });
 
-  const {
-    email,
-    phone,
-    instagram,
-    linkedin,
-    facebook,
-    snapchat,
-  } = socialHandles;
+  const { email, phone, instagram, linkedin, facebook, snapchat } = socialHandles;
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -109,10 +105,7 @@ const PersonalCard = () => {
             <Tooltip title="You can add more details from update details section">
               <div className="row">
                 {email && (
-                  <SocialHandle
-                    platform={email}
-                    iconClass="fas fa-lg fa-envelope"
-                  />
+                  <SocialHandle platform={email} iconClass="fas fa-lg fa-envelope" />
                 )}
                 {phone && (
                   <SocialHandle

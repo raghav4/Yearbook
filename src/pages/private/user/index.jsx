@@ -17,5 +17,5 @@ export {
   HomePage,
   LogOut,
   ResetPassword,
-  ModerateMessages
+  ModerateMessages,
 };

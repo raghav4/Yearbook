@@ -12,15 +12,22 @@ import { apiUrl, endPoints } from '../../../../config.json';
 import http from '../../../../services/httpService';
 import { NotifyAlert, TimerAlert } from '../../../../components';
 
-const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue, isAnonymousMessage }) => {
+const ModalBox = ({
+  personId,
+  personName,
+  toggleOpen,
+  triggerModal,
+  modalValue,
+  isAnonymousMessage,
+}) => {
   const [ModalValue, setModalValue] = useState(() => modalValue);
   const [isAnonymous, setIsAnonymous] = useState(() => isAnonymousMessage);
 
-  console.log('isAnonymousMessage...', isAnonymousMessage)
+  console.log('isAnonymousMessage...', isAnonymousMessage);
 
   useEffect(() => {
-    setModalValue(modalValue)
-  }, [modalValue])
+    setModalValue(modalValue);
+  }, [modalValue]);
 
   // useEffect(() =>  {
   //   setIsAnonymous();
@@ -38,7 +45,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue,
           `${apiUrl}/${endPoints.messages.new}`,
           messageObject,
         );
-        console.log('data...', data)
+        console.log('data...', data);
         setModalValue(data.message);
         TimerAlert('Message sent successfully');
         triggerModal(personId);
@@ -62,9 +69,7 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue,
 
         <MDBModalBody>
           <div className="form-group">
-            <p className="text-center">
-              Write a nice message for {personName} :)
-            </p>
+            <p className="text-center">Write a nice message for {personName} :)</p>
             <textarea
               className="form-control"
               id={personId}
@@ -77,8 +82,16 @@ const ModalBox = ({ personId, personName, toggleOpen, triggerModal,  modalValue,
         </MDBModalBody>
         <MDBModalFooter>
           <span className="custom-control custom-checkbox">
-            <input type="checkbox" className="custom-control-input" id="defaultUnchecked" value={isAnonymous} onChange={() => setIsAnonymous(!isAnonymous)} />
-            <label className="custom-control-label" htmlFor="defaultUnchecked">Send Anonymously</label>
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="defaultUnchecked"
+              value={isAnonymous}
+              onChange={() => setIsAnonymous(!isAnonymous)}
+            />
+            <label className="custom-control-label" htmlFor="defaultUnchecked">
+              Send Anonymously
+            </label>
           </span>
           <div>
             <button

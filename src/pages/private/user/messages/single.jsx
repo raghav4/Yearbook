@@ -16,7 +16,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const UserCard = ({ person, personName, personBio, personImageUrl, isModalOpen }) => {
+const UserCard = ({
+  person,
+  personName,
+  personBio,
+  personImageUrl,
+  isModalOpen,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalValue, setModalValue] = useState('');
   const [isAnonymousMessage, setIsAnonymousMessage] = useState(false);
@@ -34,7 +40,7 @@ const UserCard = ({ person, personName, personBio, personImageUrl, isModalOpen }
   };
 
   const triggerModal = () => {
-    getUserMessage()
+    getUserMessage();
     isModalOpen(!modalOpen);
     setModalOpen(!modalOpen);
   };
